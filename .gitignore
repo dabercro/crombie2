@@ -15,3 +15,6 @@ configure
 depcomp
 install-sh
 missing
+
+# You better know this one
+*~

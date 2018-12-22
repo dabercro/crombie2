@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <list>
 
 /**
    Defines a few types that are frequently used

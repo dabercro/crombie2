@@ -3,10 +3,20 @@
 #include <functional>
 
 #include "crombie2/FileSystem.h"
+#include "crombie2/Parse.h"
 #include "crombie2/ConfigModel.h"
 
 
-void crombie2::ConfigModel::load_tag (const std::string& tag) {
+using namespace crombie2;
+
+
+void ConfigModel::load (const std::string& file_name) {
+  std::ifstream input {file_name};
+  read(Parse::parse(input));
+}
+
+
+void ConfigModel::load_tag (const std::string& tag) {
 
   std::string file_name;
 
@@ -19,10 +29,10 @@ void crombie2::ConfigModel::load_tag (const std::string& tag) {
 }
 
 
-void crombie2::ConfigModel::save (const std::string& file_name) {
+void ConfigModel::save (const std::string& file_name) {
 
   // Make the directory for the output
-  crombie2::FileSystem::mkdirs(crombie2::FileSystem::dirname(file_name));
+  FileSystem::mkdirs(FileSystem::dirname(file_name));
 
   std::ofstream output {file_name};
 
@@ -32,7 +42,7 @@ void crombie2::ConfigModel::save (const std::string& file_name) {
 }
 
 
-std::string crombie2::ConfigModel::save () {
+std::string ConfigModel::save () {
 
   auto hash_val = hash();
 
@@ -49,12 +59,12 @@ std::string crombie2::ConfigModel::save () {
 }
 
 
-void crombie2::ConfigModel::save_tag (const std::string& tag) {
+void ConfigModel::save_tag (const std::string& tag) {
 
   auto tag_file_name = config_directory + "/" + get_name() + "/tags/" + tag;
 
   // Make output directory, just in case
-  crombie2::FileSystem::mkdirs(crombie2::FileSystem::dirname(tag_file_name));
+  FileSystem::mkdirs(FileSystem::dirname(tag_file_name));
 
   std::ofstream output {tag_file_name};
   output << save() << std::endl;
@@ -62,7 +72,7 @@ void crombie2::ConfigModel::save_tag (const std::string& tag) {
 }
 
 
-std::string crombie2::ConfigModel::hash () {
+std::string ConfigModel::hash () {
 
   // We'll hold the hash output (long) here to convert to string
   std::stringstream converter;
@@ -84,9 +94,9 @@ std::string crombie2::ConfigModel::hash () {
 }
 
 
-void crombie2::ConfigModel::set_config_dir (const std::string& dir) {
+void ConfigModel::set_config_dir (const std::string& dir) {
   config_directory = dir;
 }
 
 
-std::string crombie2::ConfigModel::config_directory { std::string(getenv("HOME")) + "/.crombie2" };
+std::string ConfigModel::config_directory { Misc::env("HOME") + "/.crombie2" };

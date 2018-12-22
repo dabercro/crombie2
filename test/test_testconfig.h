@@ -1,6 +1,6 @@
-#include "crombie2/ConfigModel.h"
-
 #include <fstream>
+
+#include "crombie2/ConfigModel.h"
 
 namespace crombie2 {
   class TestConfig : public ConfigModel {
@@ -11,9 +11,8 @@ namespace crombie2 {
 
     std::string get_name () override { return "test"; }
 
-    void load (const std::string& file_name) override {
-      std::ifstream input {file_name};
-      input >> info;
+    void read (const Types::strings& config) override {
+      info = config.front();
     }
 
     std::string get () { return info; }
@@ -34,7 +33,7 @@ namespace crombie2 {
 
 TEST_CASE("TestConfig object") {
 
-  crombie2::ConfigModel::set_config_dir("test/testconfig");
+  test_dir("testconfig");
 
   crombie2::TestConfig one {"test"};
   crombie2::TestConfig two {"aa"};

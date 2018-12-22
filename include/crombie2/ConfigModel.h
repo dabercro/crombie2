@@ -5,6 +5,8 @@
 #include <list>
 #include <string>
 
+#include "crombie2/Types.h"
+
 namespace crombie2 {
   class ConfigModel {
 
@@ -18,7 +20,7 @@ namespace crombie2 {
        Loads the configuration from a file
        @param file_name Name of the file that holds the configuration
     */
-    virtual void load (const std::string& file_name) = 0;
+    void load (const std::string& file_name);
 
 
     /**
@@ -57,6 +59,13 @@ namespace crombie2 {
 
 
   protected:
+
+    /**
+       Loads the configuration from a bunch of strings
+       @param config Configuration file after being parsed
+    */
+    virtual void read (const Types::strings& config) = 0;
+
 
     /// Creates a string version of the configuration
     virtual std::list<std::string> serialize () = 0;
