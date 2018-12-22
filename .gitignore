@@ -1,0 +1,17 @@
+# Don't need resulting test files 
+test/*/*
+build/*
+
+# Don't save output in bin directory
+bin/*
+
+# Don't need .deps
+*/.deps
+
+# Don't save any generated files for now
+*m4*
+Makefile.in
+configure
+depcomp
+install-sh
+missing
