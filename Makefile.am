@@ -1,30 +1,30 @@
 bindir = $(srcdir)/bin
-testsrcs = \
-	$(srcdir)/src/FileSystem.cpp \
-	$(srcdir)/src/Parse.cpp \
-	$(srcdir)/src/Configurable.cpp \
-	$(srcdir)/src/ConfigModel.cpp \
-	$(srcdir)/src/Cut.cpp \
-	$(srcdir)/src/Misc.cpp
 
 allsrcs = \
+	$(srcdir)/src/ConfigModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
 	$(srcdir)/src/ConfigTable.cpp \
+	$(srcdir)/src/Configurable.cpp \
 	$(srcdir)/src/Controller.cpp \
+	$(srcdir)/src/Cut.cpp \
+	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
-	$(srcdir)/src/UpdateBox.cpp \
-	$(srcdir)/src/main.cpp
+	$(srcdir)/src/Misc.cpp \
+	$(srcdir)/src/Parse.cpp \
+	$(srcdir)/src/PlotModel.cpp \
+	$(srcdir)/src/UpdateBox.cpp
 
 AUTOMAKE_OPTIONS = subdir-objects
 
 bin_PROGRAMS = crombie2 crombie2catch
 
-crombie2_SOURCES = $(testsrcs) $(allsrcs)
+crombie2_SOURCES = $(allsrcs) \
+	$(srcdir)/src/main.cpp
 
-crombie2catch_SOURCES = $(testsrcs) \
+crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_parser.cpp \
 	$(srcdir)/test/test_configurable.cpp \
 	$(srcdir)/test/test_testconfig.cpp \

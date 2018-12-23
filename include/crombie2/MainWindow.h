@@ -20,9 +20,18 @@ namespace crombie2 {
     Gtk::Notebook book {};
 
     ConfigPage globals {"Globals"};
+    ConfigPage files {"Files"};
+    ConfigPage plots {"Plots"};
     ConfigPage selections {"Selections"};
+    ConfigPage uncertainties {"Uncertainties"};
 
-    MainController maincontrol {globals};
+    MainController maincontrol {
+      globals,
+      files,
+      plots,
+      selections,
+      uncertainties
+    };
 
   };
 }
