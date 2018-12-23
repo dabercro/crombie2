@@ -7,9 +7,9 @@
 #include <regex>
 #include <iterator>
 
-#include "crombie/Debug.h"
-#include "crombie/Misc.h"
-#include "crombie/Parse.h"
+#include <crombie/Debug.h>
+#include <crombie/Misc.h>
+#include <crombie/Parse.h>
 
 namespace crombie {
   namespace Selection {

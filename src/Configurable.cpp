@@ -1,4 +1,4 @@
-#include "crombie2/Configurable.h"
+#include <crombie2/Configurable.h>
 
 
 // Explicitly set these, because they're simple and because I don't know how to handle spaces

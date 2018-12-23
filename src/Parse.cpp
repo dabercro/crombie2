@@ -3,8 +3,8 @@
 #include <list>
 #include <vector>
 
-#include "crombie2/Misc.h"
-#include "crombie2/Parse.h"
+#include <crombie2/Misc.h>
+#include <crombie2/Parse.h>
 
 
 using namespace crombie2;

@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "crombie2/Configurable.h"
+#include <crombie2/Configurable.h>
 
 namespace crombie2 {
 

@@ -8,7 +8,7 @@
 #include <list>
 #include <tuple>
 
-#include "crombie2/Types.h"
+#include <crombie2/Types.h>
 
 #include "TH1D.h"
 

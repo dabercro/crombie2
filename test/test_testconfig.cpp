@@ -1,6 +1,10 @@
+#include <catch.hpp>
+
 #include <fstream>
 
-#include "crombie2/ConfigModel.h"
+#include <crombie2/ConfigModel.h>
+
+#include "setdir.h"
 
 namespace crombie2 {
   class TestConfig : public ConfigModel {

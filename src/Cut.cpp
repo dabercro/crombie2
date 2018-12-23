@@ -1,6 +1,6 @@
 #include <regex>
 
-#include "crombie2/Cut.h"
+#include <crombie2/Cut.h>
 
 using namespace crombie2;
 

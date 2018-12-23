@@ -3,7 +3,7 @@
 
 #include <istream>
 
-#include "crombie2/Types.h"
+#include <crombie2/Types.h>
 
 namespace crombie2 {
   namespace Parse {

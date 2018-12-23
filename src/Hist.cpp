@@ -6,7 +6,7 @@
 
 #include "TH1D.h"
 
-#include "crombie2/Hist.h"
+#include <crombie2/Hist.h>
 
 
 using namespace crombie2;

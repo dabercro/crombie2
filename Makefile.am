@@ -7,12 +7,23 @@ allsrcs = \
 	$(srcdir)/src/Configurable.cpp \
 	$(srcdir)/src/Misc.cpp
 
+guisrcs = \
+	$(srcdir)/src/UpdateBox.cpp \
+	$(srcdir)/src/ConfigPage.cpp \
+	$(srcdir)/src/MainWindow.cpp \
+	$(srcdir)/src/main.cpp
+
 AUTOMAKE_OPTIONS = subdir-objects
 
-bin_PROGRAMS = testgui testcrombie2
+bin_PROGRAMS = crombie2 crombie2catch
 
-testgui_SOURCES = $(srcdir)/src/helloworld.cpp $(srcdir)/src/main.cpp
-testcrombie2_SOURCES = $(allsrcs) $(srcdir)/test/main.cpp
+crombie2_SOURCES = $(guisrcs)
+
+crombie2catch_SOURCES = $(allsrcs) \
+	$(srcdir)/test/test_parser.cpp \
+	$(srcdir)/test/test_configurable.cpp \
+	$(srcdir)/test/test_testconfig.cpp \
+	$(srcdir)/test/main.cpp
 
 AM_CPPFLAGS = @GTK_CFLAGS@ -I$(srcdir)/include -std=c++17 \
 	`root-config --cflags | sed s/-std=c++11//`

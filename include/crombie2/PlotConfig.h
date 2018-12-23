@@ -6,7 +6,7 @@
 #include <fstream>
 #include <regex>
 
-#include "crombie2/ConfigModel.h"
+#include <crombie2/ConfigModel.h>
 
 namespace crombie2 {
   class PlotConfig : ConfigModel {

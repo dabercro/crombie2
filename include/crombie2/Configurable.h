@@ -5,7 +5,7 @@
 #include <sstream>
 #include <functional>
 
-#include "crombie2/GuiConfigurable.h"
+#include <crombie2/GuiConfigurable.h>
 
 namespace crombie2 {
 

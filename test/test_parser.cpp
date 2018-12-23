@@ -1,9 +1,11 @@
+#include <catch.hpp>
+
 #include <iostream>
 #include <sstream>
 
-#include "crombie2/Types.h"
-#include "crombie2/Misc.h"
-#include "crombie2/Parse.h"
+#include <crombie2/Types.h>
+#include <crombie2/Misc.h>
+#include <crombie2/Parse.h>
 
 namespace {
   crombie2::Types::strings parse (const std::initializer_list<std::string>& input) {
