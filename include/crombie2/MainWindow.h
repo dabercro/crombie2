@@ -6,6 +6,7 @@
 #include <gtkmm/window.h>
 
 #include <crombie2/ConfigPage.h>
+#include <crombie2/MainController.h>
 
 namespace crombie2 {
   class MainWindow : public Gtk::Window {
@@ -18,7 +19,11 @@ namespace crombie2 {
 
     Gtk::Notebook book {};
 
+    ConfigPage globals {"Globals"};
     ConfigPage selections {"Selections"};
+
+    MainController maincontrol {globals};
+
   };
 }
 

@@ -4,9 +4,6 @@
 #include <string>
 
 #include <gtkmm/box.h>
-#include <gtkmm/label.h>
-
-#include <crombie2/UpdateBox.h>
 
 
 namespace crombie2 {
@@ -14,12 +11,11 @@ namespace crombie2 {
   public:
     ConfigPage (const std::string& label);
 
-    /// Get the label object
+    /// Get the label
     const std::string& get_label ();
 
   private:
     const std::string label;
-    UpdateBox updatebox {};
 
   };
 }

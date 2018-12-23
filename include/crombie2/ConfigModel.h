@@ -11,6 +11,8 @@ namespace crombie2 {
   class ConfigModel {
 
   public:
+    ConfigModel (const std::string& file_name = "");
+
 
     /// Get the class name of the configuration object
     virtual std::string get_name () = 0;

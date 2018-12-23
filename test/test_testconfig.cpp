@@ -15,20 +15,18 @@ namespace crombie2 {
 
     std::string get_name () override { return "test"; }
 
+    std::string get () { return info; }
+
+  private:
+
     void read (const Types::strings& config) override {
       info = config.front();
     }
-
-    std::string get () { return info; }
-
-  protected:
 
     std::list<std::string> serialize () override {
       std::list<std::string> output = {{info}};
       return output;
     }
-
-  private:
 
     std::string info;
 

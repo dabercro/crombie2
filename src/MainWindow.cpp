@@ -6,6 +6,7 @@ MainWindow::MainWindow ()
 {
   add(book);
   book.show();
+  add_page(globals);
   add_page(selections);
 }
 

@@ -8,6 +8,9 @@ bin/*
 # Don't need .deps
 */.deps
 
+# Don't save generated doxygen pages
+docs/*/*
+
 # Don't save any generated files for now
 *m4*
 Makefile.in

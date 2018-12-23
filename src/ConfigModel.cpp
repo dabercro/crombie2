@@ -10,6 +10,12 @@
 using namespace crombie2;
 
 
+ConfigModel::ConfigModel (const std::string& file_name) {
+  if (file_name.size())
+    load(file_name);
+}
+
+
 void ConfigModel::load (const std::string& file_name) {
   std::ifstream input {file_name};
   read(Parse::parse(input));

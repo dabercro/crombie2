@@ -1,15 +1,19 @@
 bindir = $(srcdir)/bin
 allsrcs = \
-	$(srcdir)/src/ConfigModel.cpp \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/Parse.cpp \
-	$(srcdir)/src/Cut.cpp \
 	$(srcdir)/src/Configurable.cpp \
+	$(srcdir)/src/ConfigModel.cpp \
+	$(srcdir)/src/GlobalModel.cpp \
+	$(srcdir)/src/Cut.cpp \
 	$(srcdir)/src/Misc.cpp
 
 guisrcs = \
 	$(srcdir)/src/UpdateBox.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
+	$(srcdir)/src/Controller.cpp \
+	$(srcdir)/src/GlobalController.cpp \
+	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/main.cpp
 
@@ -17,7 +21,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 bin_PROGRAMS = crombie2 crombie2catch
 
-crombie2_SOURCES = $(guisrcs)
+crombie2_SOURCES = $(guisrcs) $(allsrcs)
 
 crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_parser.cpp \
