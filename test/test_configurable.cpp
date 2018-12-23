@@ -1,4 +1,4 @@
-#include <catch.hpp>
+#include "catch.hpp"
 
 #include <crombie2/Configurable.h>
 #include <crombie2/Cut.h>
