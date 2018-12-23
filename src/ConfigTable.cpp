@@ -16,6 +16,8 @@ const std::vector<GuiConfigurable*>& ConfigTable::get_confs () const {
 
 void ConfigTable::draw (Controller& controller, Gtk::Box& page) {
 
+  table.set_border_width(10);
+
   page.pack_start(box, Gtk::PACK_SHRINK);
   box.pack_start(table, Gtk::PACK_SHRINK);
   box.show();

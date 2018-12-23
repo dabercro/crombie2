@@ -5,6 +5,7 @@ using namespace crombie2;
 MainWindow::MainWindow ()
 {
   set_default_size(1200, 800);
+  set_border_width(10);
 
   add(book);
   book.show();

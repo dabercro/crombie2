@@ -5,7 +5,10 @@ using namespace crombie2;
 
 
 ConfigPage::ConfigPage (const std::string& label) :
-  label {label} {
+  label {label}
+{
+  set_border_width(10);
+
   add(scrolled);
   scrolled.show();
   scrolled.add(internalbox);

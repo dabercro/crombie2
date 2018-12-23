@@ -16,6 +16,8 @@ PlotController::PlotController (ConfigPage& page, PlotModel& model) :
   buttonbox.pack_start(addbutton, Gtk::PACK_EXPAND_PADDING);
   page.pack_start(buttonbox, Gtk::PACK_SHRINK);
 
+  addbutton.set_border_width(10);
+
   buttonbox.show();
   addbutton.show();
   addbutton.signal_clicked().
@@ -43,4 +45,3 @@ void PlotController::on_add_plot() {
   auto& plot = plotmodel.add_plot();
   add_table(plot.table);
 }
-
