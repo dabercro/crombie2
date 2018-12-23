@@ -17,8 +17,12 @@ ConfigModel::ConfigModel (const std::string& file_name) {
 
 
 void ConfigModel::load (const std::string& file_name) {
-  std::ifstream input {file_name};
-  read(Parse::parse(input));
+
+  if (FileSystem::exists(file_name)) {
+    std::ifstream input {file_name};
+    read(Parse::parse(input));
+  }
+
 }
 
 
@@ -28,22 +32,26 @@ void ConfigModel::load_tag (const std::string& tag) {
 
   std::string tag_file_name = config_directory + "/" + get_name() + "/tags/" + tag;
 
-  std::ifstream input {tag_file_name};
-  input >> file_name;
-  load(file_name);
+  if (FileSystem::exists(tag_file_name)) {
+    std::ifstream input {tag_file_name};
+    input >> file_name;
+    load(file_name);
+  }
 
 }
 
 
 void ConfigModel::save (const std::string& file_name) {
 
-  // Make the directory for the output
-  FileSystem::mkdirs(FileSystem::dirname(file_name));
+  if (not FileSystem::exists(file_name)) {
+    // Make the directory for the output
+    FileSystem::mkdirs(FileSystem::dirname(file_name));
 
-  std::ofstream output {file_name};
+    std::ofstream output {file_name};
 
-  for (auto& line : serialize())
-    output << line << std::endl;
+    for (auto& line : serialize())
+      output << line << std::endl;
+  }
 
 }
 

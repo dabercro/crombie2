@@ -9,6 +9,8 @@ namespace crombie2 {
   */
   class GuiConfigurable {
   public:
+    virtual ~GuiConfigurable () {}
+
     /// Get the label
     virtual std::string label () = 0;
 

@@ -9,7 +9,7 @@
 #include <crombie2/ConfigModel.h>
 
 namespace crombie2 {
-  class PlotConfig : ConfigModel {
+  class PlotConfig : public ConfigModel {
 
     /// All of the information needed to make a plot
     class Plot {
