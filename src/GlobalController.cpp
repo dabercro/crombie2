@@ -9,7 +9,7 @@ GlobalController::GlobalController (ConfigPage& page, GlobalModel& model) :
 {
 
   model.load_tag(last_tag);
-  model.configs.draw(*this, page);
+  model.configs.draw(*this, page.box());
   add_update();
 
 }

@@ -3,20 +3,24 @@
 
 #include <crombie2/ConfigPage.h>
 #include <crombie2/GlobalController.h>
+#include <crombie2/PlotController.h>
 
 
 namespace crombie2 {
   class MainController {
   public:
     MainController (ConfigPage& globalpage,
-                    ConfigPage& filespage,
-                    ConfigPage& plotspage,
-                    ConfigPage& selectionspage,
-                    ConfigPage& uncpage);
+                    ConfigPage& filepage,
+                    ConfigPage& plotpage,
+                    ConfigPage& selectionpage,
+                    ConfigPage& uncertaintypage);
 
   private:
     GlobalModel globalmodel {};
     GlobalController globalcontrol;
+
+    PlotModel plotmodel {};
+    PlotController plotcontrol;
 
   };
 }

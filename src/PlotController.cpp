@@ -1,0 +1,46 @@
+#include <crombie2/PlotController.h>
+
+
+using namespace crombie2;
+
+
+PlotController::PlotController (ConfigPage& page, PlotModel& model) :
+  Controller {page, model},
+  plotmodel {model}
+{
+  model.load_tag(last_tag);
+
+  for (auto& plot : model.plots)
+    add_table(plot.table);
+
+  buttonbox.pack_start(addbutton, Gtk::PACK_EXPAND_PADDING);
+  page.pack_start(buttonbox, Gtk::PACK_SHRINK);
+
+  buttonbox.show();
+  addbutton.show();
+  addbutton.signal_clicked().
+    connect(sigc::mem_fun(*this, &PlotController::on_add_plot));
+
+  add_update();
+}
+
+
+void PlotController::add_table (ConfigTable& table) {
+
+  if (((plotted++) % 5) == 0) {
+    boxes.emplace_back();
+    page.box().pack_start(boxes.back(), Gtk::PACK_SHRINK);
+    boxes.back().show();
+  }
+
+  auto& box = boxes.back();
+
+  table.draw(*this, box);
+}
+
+
+void PlotController::on_add_plot() {
+  auto& plot = plotmodel.add_plot();
+  add_table(plot.table);
+}
+

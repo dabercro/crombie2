@@ -48,14 +48,17 @@ namespace crombie2 {
 
     static const std::string last_tag;
 
+  protected:
+
+    ConfigPage& page;
+
   private:
+
+    ConfigModel& model;
 
     void on_update ();
 
     UpdateBox updatebox {};
-
-    ConfigPage& page;
-    ConfigModel& model;
 
     std::list<ConfigRef> configurables {};
 

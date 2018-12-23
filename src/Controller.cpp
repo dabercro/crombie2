@@ -25,17 +25,12 @@ Controller::Controller (ConfigPage& page, ConfigModel& model) :
 {}
 
 
-ConfigPage& Controller::get_page () {
-  return page;
-}
-
-
 void Controller::add_update () {
 
   updatebox.update().signal_clicked().
     connect(sigc::mem_fun(*this, &Controller::on_update));
 
-  page.add(updatebox);
+  page.pack_start(updatebox, Gtk::PACK_SHRINK);
   updatebox.show();
 
 }

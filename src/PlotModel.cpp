@@ -40,13 +40,16 @@ void PlotModel::read (const Types::strings& config) {
 std::list<std::string> PlotModel::serialize () {
   std::list<std::string> output {};
   for (auto& plot : plots) {
+    if (not plot.name.get().size())
+      continue;
+
     std::string line =
       std::string("'") +
       plot.name.get() + "', " +
       plot.nbins.get() + ", " +
       plot.min.get() + ", " +
-      plot.max.get() + ", " +
-      plot.label.get();
+      plot.max.get() + ", '" +
+      plot.label.get() + "'";
     if (plot.data_var.get().size() and plot.mc_var.get().size())
       line += std::string(", '") +
         plot.data_var.get() + "', '" +

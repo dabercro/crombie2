@@ -14,6 +14,7 @@ allsrcs = \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
+	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
 	$(srcdir)/src/UpdateBox.cpp
 
