@@ -19,6 +19,8 @@ PlotModel::Plot& PlotModel::add_plot () {
 
 
 void PlotModel::read (const Types::strings& config) {
+  plots.clear();
+
   std::regex expr {"'([^']+)',\\s*(\\d+),\\s*(-?[\\d\\.]+),\\s*(-?[\\d\\.]+),\\s*'([^']+)'(,\\s*'([^']+)',\\s*'([^']+)')?"};
   std::smatch matches;
 

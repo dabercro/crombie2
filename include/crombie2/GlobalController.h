@@ -11,6 +11,12 @@ namespace crombie2 {
   public:
     GlobalController (ConfigPage& page, GlobalModel& model);
 
+  protected:
+    void redraw () override;
+
+  private:
+    GlobalModel& globalmodel;
+
   };
 }
 

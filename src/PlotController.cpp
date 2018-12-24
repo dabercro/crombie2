@@ -8,10 +8,6 @@ PlotController::PlotController (ConfigPage& page, PlotModel& model) :
   Controller {page, model},
   plotmodel {model}
 {
-  model.load_tag(last_tag);
-
-  for (auto& plot : model.plots)
-    add_table(plot.table);
 
   buttonbox.pack_start(addbutton, Gtk::PACK_EXPAND_PADDING);
   page.pack_start(buttonbox, Gtk::PACK_SHRINK);
@@ -23,7 +19,17 @@ PlotController::PlotController (ConfigPage& page, PlotModel& model) :
   addbutton.signal_clicked().
     connect(sigc::mem_fun(*this, &PlotController::on_add_plot));
 
-  add_update();
+  redraw();
+
+}
+
+void PlotController::redraw () {
+
+  plotted = 0;
+
+  for (auto& plot : plotmodel.plots)
+    add_table(plot.table);
+
 }
 
 
@@ -38,10 +44,13 @@ void PlotController::add_table (ConfigTable& table) {
   auto& box = boxes.back();
 
   table.draw(*this, box);
+
 }
 
 
 void PlotController::on_add_plot() {
+
   auto& plot = plotmodel.add_plot();
   add_table(plot.table);
+
 }

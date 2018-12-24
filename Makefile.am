@@ -15,8 +15,7 @@ allsrcs = \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/PlotController.cpp \
-	$(srcdir)/src/PlotModel.cpp \
-	$(srcdir)/src/UpdateBox.cpp
+	$(srcdir)/src/PlotModel.cpp
 
 AUTOMAKE_OPTIONS = subdir-objects
 

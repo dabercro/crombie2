@@ -5,11 +5,17 @@ using namespace crombie2;
 
 
 GlobalController::GlobalController (ConfigPage& page, GlobalModel& model) :
-  Controller {page, model}
+  Controller {page, model},
+  globalmodel {model}
 {
 
-  model.load_tag(last_tag);
-  model.configs.draw(*this, page.box());
-  add_update();
+  globalmodel.configs.draw(*this, page.box());
+
+}
+
+
+void GlobalController::redraw () {
+
+  globalmodel.configs.redraw(*this);
 
 }

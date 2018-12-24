@@ -4,13 +4,13 @@
 #include <list>
 
 #include <gtkmm/box.h>
+#include <gtkmm/button.h>
 #include <gtkmm/entry.h>
 #include <gtkmm/label.h>
 
 #include <crombie2/ConfigModel.h>
 #include <crombie2/ConfigPage.h>
 #include <crombie2/GuiConfigurable.h>
-#include <crombie2/UpdateBox.h>
 
 namespace crombie2 {
   class Controller {
@@ -34,9 +34,6 @@ namespace crombie2 {
     /// Get a reference back to the page for something else to draw on
     ConfigPage& get_page ();
 
-    /// Add the update button
-    void add_update ();
-
     /// Register a configurable to be updated with the update button
     ConfigRef& register_configurable (GuiConfigurable& config);
 
@@ -46,19 +43,28 @@ namespace crombie2 {
     /// Take configurable out
     void unregister_configurable (GuiConfigurable& config);
 
-    static const std::string last_tag;
-
   protected:
 
     ConfigPage& page;
 
+    virtual void redraw () = 0;
+
   private:
+
+    static const std::string last_tag;
 
     ConfigModel& model;
 
     void on_update ();
+    void on_save ();
+    void on_load ();
 
-    UpdateBox updatebox {};
+    Gtk::HBox updatebox {};
+
+    Gtk::Button updatebutton {"Update"};
+    Gtk::Button savebutton {"Save Tag"};
+    Gtk::Button loadbutton {"Load Tag"};
+    Gtk::Entry tagentry {};
 
     std::list<ConfigRef> configurables {};
 

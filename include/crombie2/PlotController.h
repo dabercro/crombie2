@@ -3,6 +3,7 @@
 
 #include <gtkmm/box.h>
 #include <gtkmm/button.h>
+#include <gtkmm/buttonbox.h>
 
 #include <crombie2/ConfigPage.h>
 #include <crombie2/Controller.h>
@@ -13,6 +14,9 @@ namespace crombie2 {
 
   public:
     PlotController (ConfigPage& page, PlotModel& model);
+
+  protected:
+    void redraw () override;
 
   private:
     void add_table (ConfigTable& table);

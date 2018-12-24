@@ -18,6 +18,8 @@ namespace crombie2 {
 
     void draw (Controller& control, Gtk::Box& page);
 
+    void redraw (Controller& control);
+
   private:
     const std::vector<GuiConfigurable*> confs;
     Gtk::VBox box {};
