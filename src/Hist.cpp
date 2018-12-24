@@ -2,9 +2,7 @@
 #include <cmath>
 #include <exception>
 #include <limits>
-#include <list>
 
-#include "TH1D.h"
 
 #include <crombie2/Hist.h>
 

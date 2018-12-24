@@ -1,13 +1,9 @@
 #ifndef CROMBIE2_CONFIGTABLE_H
 #define CROMBIE2_CONFIGTABLE_H
 
-#include <vector>
-
-#include <gtkmm/box.h>
 #include <gtkmm/table.h>
 
 #include <crombie2/Controller.h>
-#include <crombie2/GuiConfigurable.h>
 
 namespace crombie2 {
   class ConfigTable {

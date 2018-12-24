@@ -1,7 +1,6 @@
 #ifndef CROMBIE2_CONFIGURABLE_H
 #define CROMBIE2_CONFIGURABLE_H
 
-#include <string>
 #include <sstream>
 #include <functional>
 

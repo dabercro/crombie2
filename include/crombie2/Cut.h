@@ -1,8 +1,6 @@
 #ifndef CROMBIE2_CUT_H
 #define CROMBIE2_CUT_H
 
-#include <string>
-
 #include <crombie2/Configurable.h>
 
 namespace crombie2 {

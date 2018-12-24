@@ -3,7 +3,6 @@
 
 #include <cstdlib>
 #include <list>
-#include <string>
 
 #include <crombie2/Types.h>
 

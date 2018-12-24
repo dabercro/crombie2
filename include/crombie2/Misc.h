@@ -1,9 +1,6 @@
 #ifndef CROMBIE2_MISC_H
 #define CROMBIE2_MISC_H
 
-#include <string>
-#include <vector>
-
 #include <crombie2/Types.h>
 
 namespace crombie2 {

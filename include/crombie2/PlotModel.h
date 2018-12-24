@@ -2,7 +2,6 @@
 #define CROMBIE2_PLOTMODEL_H
 
 
-#include <crombie2/ConfigModel.h>
 #include <crombie2/ConfigTable.h>
 #include <crombie2/Configurable.h>
 

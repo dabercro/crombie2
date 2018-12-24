@@ -2,13 +2,8 @@
 #define CROMBIE2_GLOBALMODEL_H
 
 
-#include <string>
-#include <vector>
-
-#include <crombie2/ConfigModel.h>
 #include <crombie2/ConfigTable.h>
 #include <crombie2/Configurable.h>
-#include <crombie2/GuiConfigurable.h>
 
 
 namespace crombie2 {

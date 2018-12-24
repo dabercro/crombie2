@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <crombie2/ConfigTable.h>
 
 

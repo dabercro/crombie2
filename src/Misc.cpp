@@ -1,12 +1,9 @@
-#include <iostream>
-#include <string>
 #include <sstream>
 #include <iterator>
 #include <cstdlib>
 #include <memory>
 #include <stdexcept>
 #include <array>
-#include <vector>
 
 #include <crombie2/Misc.h>
 

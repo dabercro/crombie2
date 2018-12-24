@@ -1,9 +1,6 @@
 #ifndef CROMBIE2_CONTROLLER_H
 #define CROMBIE2_CONTROLLER_H
 
-#include <list>
-
-#include <gtkmm/box.h>
 #include <gtkmm/button.h>
 #include <gtkmm/entry.h>
 #include <gtkmm/label.h>

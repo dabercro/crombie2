@@ -1,12 +1,8 @@
 #ifndef CROMBIE2_PLOTCONTROLLER_H
 #define CROMBIE2_PLOTCONTROLLER_H
 
-#include <gtkmm/box.h>
-#include <gtkmm/button.h>
 #include <gtkmm/buttonbox.h>
 
-#include <crombie2/ConfigPage.h>
-#include <crombie2/Controller.h>
 #include <crombie2/PlotModel.h>
 
 namespace crombie2 {

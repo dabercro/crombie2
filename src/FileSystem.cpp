@@ -2,14 +2,11 @@
 #include <string>
 #include <cstdlib>
 #include <cstring>
-#include <vector>
-#include <string>
 #include <dirent.h>
 #include <sys/stat.h>
 #include <libgen.h>
 
 
-#include <crombie2/Misc.h>
 #include <crombie2/FileSystem.h>
 
 

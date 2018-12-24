@@ -1,7 +1,6 @@
 #ifndef CROMBIE2_MAINCONTROLLER_H
 #define CROMBIE2_MAINCONTROLLER_H
 
-#include <crombie2/ConfigPage.h>
 #include <crombie2/GlobalController.h>
 #include <crombie2/PlotController.h>
 
