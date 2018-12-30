@@ -30,6 +30,8 @@ void ConfigTable::draw (Controller& controller, Gtk::Box& page) {
 
 void ConfigTable::redraw (Controller& controller) {
 
+  table.resize(static_cast<guint>(confs.size()), 2);
+
   for (unsigned row = 0; row != confs.size(); row++) {
     auto* config = confs[row];
     auto& info = controller.register_configurable(*config);
@@ -40,4 +42,9 @@ void ConfigTable::redraw (Controller& controller) {
     info.entry.show();
   }
 
+}
+
+
+void ConfigTable::add_conf (GuiConfigurable* conf) {
+  confs.push_back(conf);
 }

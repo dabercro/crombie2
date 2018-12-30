@@ -6,6 +6,7 @@ template<> void crombie2::Configurable<std::string>::set (const std::string& inp
   value = input;
 }
 
-template<> std::string crombie2::Configurable<std::string>::get () {
+
+template<> std::string crombie2::Configurable<std::string>::get () const {
   return value;
 }

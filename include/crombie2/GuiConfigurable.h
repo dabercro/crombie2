@@ -12,10 +12,10 @@ namespace crombie2 {
     virtual ~GuiConfigurable () {}
 
     /// Get the label
-    virtual std::string label () = 0;
+    virtual std::string label () const = 0;
 
     /// Get the value of the configurable
-    virtual std::string get () = 0;
+    virtual std::string get () const = 0;
 
     /// Set the value of the configurable, using a string
     virtual void set (const std::string& input) = 0;

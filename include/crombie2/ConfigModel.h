@@ -15,7 +15,7 @@ namespace crombie2 {
 
 
     /// Get the class name of the configuration object
-    virtual std::string get_name () = 0;
+    virtual std::string get_name () const = 0;
 
 
     /**
@@ -70,7 +70,7 @@ namespace crombie2 {
 
 
     /// Creates a string version of the configuration
-    virtual std::list<std::string> serialize () = 0;
+    virtual std::list<std::string> serialize () const = 0;
 
 
   private:

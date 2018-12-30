@@ -13,7 +13,7 @@ namespace crombie2 {
 
     TestConfig (std::string info = "") : info {info} {}
 
-    std::string get_name () override { return "test"; }
+    std::string get_name () const override { return "test"; }
 
     std::string get () { return info; }
 
@@ -23,7 +23,7 @@ namespace crombie2 {
       info = config.front();
     }
 
-    std::list<std::string> serialize () override {
+    std::list<std::string> serialize () const override {
       std::list<std::string> output = {{info}};
       return output;
     }

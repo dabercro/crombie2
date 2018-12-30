@@ -4,7 +4,7 @@
 using namespace crombie2;
 
 
-std::string GlobalModel::get_name () {
+std::string GlobalModel::get_name () const {
   return "globals";
 }
 
@@ -16,7 +16,7 @@ void GlobalModel::read (const Types::strings& config) {
 }
 
 
-std::list<std::string> GlobalModel::serialize () {
+std::list<std::string> GlobalModel::serialize () const {
   std::list<std::string> output {};
   for (auto* configurable : configs.get_confs())
     output.push_back(configurable->get());

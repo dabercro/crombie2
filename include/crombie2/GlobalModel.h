@@ -11,7 +11,7 @@ namespace crombie2 {
   class GlobalModel : public ConfigModel {
   public:
 
-    std::string get_name () override;
+    std::string get_name () const override;
 
     /// Input directory for files
     Configurable<std::string> inputdir {"Input directory", "."};
@@ -52,7 +52,7 @@ namespace crombie2 {
 
     void read (const Types::strings& config) override;
 
-    std::list<std::string> serialize () override;
+    std::list<std::string> serialize () const override;
 
   };
 

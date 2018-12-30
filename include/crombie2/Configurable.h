@@ -19,21 +19,13 @@ namespace crombie2 {
        @param value The value of the configurable
     */
     Configurable(const std::string& label, const C& value) :
-      relabel{[label] (const C&) {return label;}}, value{value} {}
+      name{label}, value{value} {}
 
-    /**
-       Create a configurable with a dynamic label
-       @param relabel The function that takes the value as input and makes a label
-       @param value The value of the configurable
-    */
-    Configurable(const labelfunc& relabel, const C& value) :
-      relabel{relabel}, value{value} {}
-
-    std::string label () override {
-      return relabel(value);
+    std::string label () const override {
+      return name;
     }
 
-    std::string get () override {
+    std::string get () const override {
       std::string o;
       std::stringstream ss;
       ss << value;
@@ -48,7 +40,7 @@ namespace crombie2 {
     }
 
   private:
-    const labelfunc relabel;
+    std::string name;
     C value;
 
   };

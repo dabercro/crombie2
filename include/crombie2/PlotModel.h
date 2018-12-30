@@ -10,7 +10,7 @@ namespace crombie2 {
   class PlotModel : public ConfigModel {
   public:
 
-    std::string get_name () override;
+    std::string get_name () const override;
 
     class Plot {
     public:
@@ -34,7 +34,7 @@ namespace crombie2 {
 
     void read (const Types::strings& config) override;
 
-    std::list<std::string> serialize () override;
+    std::list<std::string> serialize () const override;
 
   };
 }

@@ -17,17 +17,20 @@ TEST_CASE("Configurables") {
   intconf.set("523");
   REQUIRE(intconf.get() == "523");
 
-  crombie2::Configurable<std::string> relabel ([] (auto& s) {return s;}, "hello");
-  REQUIRE(relabel.label() == "hello");
-  relabel.set("world");
-  REQUIRE(relabel.label() == "world");
-
 }
 
 TEST_CASE("Cut") {
-  crombie2::Cut cut {"jetpt < 60"};
+  crombie2::Cut cut {"'jetpt < 60'"};
 
-  REQUIRE(cut.get() == "jetpt < 60");
+  REQUIRE(cut.get() == "'jetpt < 60'");
+  REQUIRE(cut.cut() == "jetpt < 60");
   REQUIRE(cut.label() == "jetpt");
+  REQUIRE(cut.is_literal() == true);
+
+  cut.set("subexpr");
+
+  REQUIRE(cut.is_literal() == false);
+  REQUIRE(cut.get() == "subexpr");
+  REQUIRE(cut.label() == "SUB");
 
 }

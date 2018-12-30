@@ -7,6 +7,8 @@ allsrcs = \
 	$(srcdir)/src/Configurable.cpp \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/Cut.cpp \
+	$(srcdir)/src/CutModel.cpp \
+	$(srcdir)/src/CutString.cpp \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \

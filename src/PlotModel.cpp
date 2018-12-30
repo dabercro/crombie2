@@ -6,7 +6,7 @@
 using namespace crombie2;
 
 
-std::string PlotModel::get_name () {
+std::string PlotModel::get_name () const {
   return "plots";
 }
 
@@ -39,7 +39,7 @@ void PlotModel::read (const Types::strings& config) {
 }
 
 
-std::list<std::string> PlotModel::serialize () {
+std::list<std::string> PlotModel::serialize () const {
   std::list<std::string> output {};
   for (auto& plot : plots) {
     if (not plot.name.get().size())

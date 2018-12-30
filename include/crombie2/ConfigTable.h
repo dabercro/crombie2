@@ -16,8 +16,14 @@ namespace crombie2 {
 
     void redraw (Controller& control);
 
+    /**
+       Add a configurable to the end of the table.
+       @param conf A pointer to the configurable to display
+    */
+    void add_conf (GuiConfigurable* conf);
+
   private:
-    const std::vector<GuiConfigurable*> confs;
+    std::vector<GuiConfigurable*> confs;
     Gtk::VBox box {};
     Gtk::Table table {};
 
