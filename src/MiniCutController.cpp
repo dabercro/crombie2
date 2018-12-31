@@ -36,4 +36,17 @@ void MiniCutController::draw (Gtk::Box& page) {
   cutlist.show();
   addbutton.show();
 
+  addbutton.signal_clicked().
+    connect(sigc::mem_fun(*this, &MiniCutController::on_add_cut));
+
+}
+
+
+void MiniCutController::on_add_cut () {
+
+  auto& cut = cutstring.add_cut();
+
+  cuttable.add_conf(&cut);
+  cuttable.redraw(controller);
+
 }

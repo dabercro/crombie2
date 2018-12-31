@@ -40,6 +40,8 @@ namespace crombie2 {
     /// Take configurable out
     void unregister_configurable (GuiConfigurable& config);
 
+    void on_update ();
+
   protected:
 
     ConfigPage& page;
@@ -52,7 +54,6 @@ namespace crombie2 {
 
     ConfigModel& model;
 
-    void on_update ();
     void on_save ();
     void on_load ();
 

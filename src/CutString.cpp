@@ -22,6 +22,7 @@ std::list<Cut>& CutString::get_cuts () {
 
 }
 
+
 const std::list<Cut>& CutString::get_cuts () const {
 
   return cuts;

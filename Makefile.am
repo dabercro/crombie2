@@ -29,9 +29,10 @@ crombie2_SOURCES = $(allsrcs) \
 	$(srcdir)/src/main.cpp
 
 crombie2catch_SOURCES = $(allsrcs) \
-	$(srcdir)/test/test_parser.cpp \
 	$(srcdir)/test/test_configurable.cpp \
+	$(srcdir)/test/test_parser.cpp \
 	$(srcdir)/test/test_testconfig.cpp \
+	$(srcdir)/test/utils.cpp \
 	$(srcdir)/test/main.cpp
 
 AM_CPPFLAGS = @GTK_CFLAGS@ -I$(srcdir)/include -std=c++17 \

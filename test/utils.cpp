@@ -1,10 +1,5 @@
-#ifndef SETDIR_H
-#define SETDIR_H
-
-#include <crombie2/ConfigModel.h>
+#include "utils.h"
 
 void test_dir (const std::string& dir) {
   crombie2::ConfigModel::set_config_dir(std::string(getenv("HOME")) + "/.crombie2/test/" + dir);
 }
-
-#endif

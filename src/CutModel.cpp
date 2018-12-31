@@ -53,7 +53,7 @@ CutString& CutModel::add_cutstring (const std::string& label, const std::string&
 
   }
 
-  throw std::runtime_error{"Tried to add duplicate cut label."};
+   throw std::runtime_error{"Tried to add duplicate cut label."};
 
 }
 
@@ -68,8 +68,10 @@ std::list<std::string> CutModel::serialize () const {
       " " + cutstring.joiner.get() + " ";
 
     for (auto& cut : cutstring.get_cuts()) {
-      line += cut.get();
-      output.push_back(line);
+      if (cut.get().size()) {
+        line += cut.get();
+        output.push_back(line);
+      }
       line = "    ";
     }
   }

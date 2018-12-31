@@ -92,12 +92,15 @@ const std::string Controller::last_tag = "latest";
 
 
 void Controller::on_update () {
+
   for (auto& configref : configurables) {
     configref.config.set(configref.entry.get_chars(0, -1));
     configref.entry.set_text(configref.config.get());
   }
 
   model.save_tag(last_tag);
+  redraw();
+
 }
 
 
@@ -105,6 +108,7 @@ void Controller::on_save () {
 
   on_update();
   model.save_tag(tagentry.get_chars(0, -1));
+  redraw();
 
 }
 

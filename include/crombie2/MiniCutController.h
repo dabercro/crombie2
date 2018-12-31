@@ -19,6 +19,8 @@ namespace crombie2 {
     ConfigTable labeltable;
     ConfigTable cuttable;
 
+    void on_add_cut ();
+
     Gtk::HBox box {};
     Gtk::VBox cutlist {};
     Gtk::Button addbutton {"Add Cut"};
