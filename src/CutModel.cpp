@@ -77,10 +77,11 @@ std::list<std::string> CutModel::serialize () const {
   }
 
   for (auto& selection : selections) {
-    output.push_back(std::string(": ") +
-                     selection.cut.get() + " " +
-                     selection.data_weight.get() + " " +
-                     selection.mc_weight.get());
+    if (selection.cut.get().size())
+      output.push_back(std::string(": ") +
+                       selection.cut.get() + " " +
+                       selection.data_weight.get() + " " +
+                       selection.mc_weight.get());
   }
 
   return output;

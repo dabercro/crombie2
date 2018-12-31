@@ -99,7 +99,6 @@ void Controller::on_update () {
   }
 
   model.save_tag(last_tag);
-  redraw();
 
 }
 
@@ -108,7 +107,6 @@ void Controller::on_save () {
 
   on_update();
   model.save_tag(tagentry.get_chars(0, -1));
-  redraw();
 
 }
 

@@ -26,7 +26,8 @@ CutController::CutController (ConfigPage& page, CutModel& model) :
   addselectionbutton.signal_clicked().
     connect(sigc::mem_fun(*this, &CutController::on_add_selection));
 
-  page.pack_end(selectionbox, Gtk::PACK_SHRINK);
+  page.box().pack_end(selectionbox, Gtk::PACK_SHRINK);
+  selectionbox.show();
 
   // Draws the stuff loaded by the Controller constructor
   redraw();
@@ -43,7 +44,7 @@ void CutController::redraw () {
     add_cut(cutmodel.get_cutstring(cut));
 
   for (auto& selection : cutmodel.selections)
-    selection.table.redraw(*this);
+    selection.table.draw(*this, selectionbox);
 
 }
 
@@ -70,5 +71,8 @@ void CutController::on_add_cut () {
 
 
 void CutController::on_add_selection () {
+
+  auto& selection = cutmodel.selections.emplace_back("", "", "");
+  selection.table.draw(*this, selectionbox);
 
 }

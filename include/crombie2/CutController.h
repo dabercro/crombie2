@@ -30,7 +30,7 @@ namespace crombie2 {
     Gtk::HBox buttonbox {};
     Gtk::Entry labelentry {};
     Gtk::Button addcutbutton {"Add Cut String"};
-    Gtk::Button addselectionbutton {"Define Selection"};
+    Gtk::Button addselectionbutton {"Add Selection"};
 
     std::list<MiniCutController> minicontrollers {};
 
