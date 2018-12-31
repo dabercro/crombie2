@@ -13,24 +13,47 @@ std::string CutModel::get_name () const {
 
 void CutModel::read (const Types::strings& config) {
 
-  std::regex expr{"^(\\S*)\\s*([^\\s\\']*)\\s+(.+)$"};
+  selections.clear();
+  cutstrings.clear();
+  cutlabels.clear();
+
+  // This is used to select lines that describe a cut at the end
+  std::regex selectionline{"^:\\s+(\\w+)\\s+(\\w+)\\s+(\\w+)\\s*$"};
+  // This is used to read all other (non-empty) lines
+  std::regex expr{"^(\\S*)\\s*([^\\s\\']*)\\s+(\\S.+)$"};
+
   std::smatch matches;
 
   CutString* last_cutstring {};
 
   for (auto& line : config) {
-    if (std::regex_search(line, matches, expr)) {
-      if (matches[1].length()) {
-        // Add a cutstring into the map and get a pointer to it
-        last_cutstring = &(std::get<0>(
-          cutstrings.insert(std::make_pair(std::string(matches[1]),
-                                           CutString(matches[1], matches[2]))))->second);
-        cutlabels.push_back(last_cutstring->name.get());
-      }
+    if (std::regex_search(line, matches, selectionline))
+      selections.emplace_back(matches[1], matches[2], matches[3]);
 
-      last_cutstring->add_cut().set(matches[2]);
+    else if (std::regex_search(line, matches, expr)) {
+      // Add a cutstring into the map and get a pointer to it
+      if (matches[1].length())
+        last_cutstring = &add_cutstring(matches[1], matches[2]);
+
+      last_cutstring->add_cut().set(matches[3]);
     }
   }
+
+}
+
+
+CutString& CutModel::add_cutstring (const std::string& label, const std::string& joiner) {
+
+  auto inserted = cutstrings.insert(std::make_pair(label, CutString(label, joiner)));
+  if (std::get<1>(inserted)) {
+
+    auto& output = std::get<0>(inserted)->second;
+    cutlabels.push_back(output.name.get());
+    return output;
+
+  }
+
+  throw std::runtime_error{"Tried to add duplicate cut label."};
 
 }
 
@@ -47,8 +70,15 @@ std::list<std::string> CutModel::serialize () const {
     for (auto& cut : cutstring.get_cuts()) {
       line += cut.get();
       output.push_back(line);
-      line = "";
+      line = "    ";
     }
+  }
+
+  for (auto& selection : selections) {
+    output.push_back(std::string(": ") +
+                     selection.cut.get() + " " +
+                     selection.data_weight.get() + " " +
+                     selection.mc_weight.get());
   }
 
   return output;
@@ -81,6 +111,12 @@ const std::list<std::string>& CutModel::get_labels () const {
 }
 
 
-const CutString& CutModel::get_cutstring (const std::string& label) const {
+CutString& CutModel::get_cutstring (const std::string& label) {
   return cutstrings.at(label);
 }
+
+
+CutModel::Selection::Selection (const std::string& cut, const std::string& data, const std::string& mc) :
+  cut {"Cut", cut},
+  data_weight {"Data Weight", data},
+  mc_weight {"MC Weight", mc} {}

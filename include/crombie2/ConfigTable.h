@@ -23,6 +23,8 @@ namespace crombie2 {
     void add_conf (GuiConfigurable* conf);
 
   private:
+    guint size () const;
+
     std::vector<GuiConfigurable*> confs;
     Gtk::VBox box {};
     Gtk::Table table {};

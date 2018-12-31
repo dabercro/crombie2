@@ -26,6 +26,7 @@ PlotController::PlotController (ConfigPage& page, PlotModel& model) :
 void PlotController::redraw () {
 
   plotted = 0;
+  boxes.clear();
 
   for (auto& plot : plotmodel.plots)
     add_table(plot.table);

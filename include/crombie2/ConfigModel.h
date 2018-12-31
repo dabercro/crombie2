@@ -1,7 +1,6 @@
 #ifndef CROMBIE2_CONFIG_MODEL_H
 #define CROMBIE2_CONFIG_MODEL_H
 
-#include <cstdlib>
 #include <list>
 
 #include <crombie2/Types.h>

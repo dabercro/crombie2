@@ -1,6 +1,7 @@
 #ifndef CROMBIE2_MAINCONTROLLER_H
 #define CROMBIE2_MAINCONTROLLER_H
 
+#include <crombie2/CutController.h>
 #include <crombie2/GlobalController.h>
 #include <crombie2/PlotController.h>
 
@@ -15,6 +16,9 @@ namespace crombie2 {
                     ConfigPage& uncertaintypage);
 
   private:
+    CutModel cutmodel {};
+    CutController cutcontrol;
+
     GlobalModel globalmodel {};
     GlobalController globalcontrol;
 

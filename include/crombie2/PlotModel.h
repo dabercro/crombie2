@@ -12,6 +12,10 @@ namespace crombie2 {
 
     std::string get_name () const override;
 
+    /**
+       A simple structure of information needed to make a plot.
+       Each line from a Plot config file corresponds to a plot
+    */
     class Plot {
     public:
       Configurable<std::string> name {"Variable", ""};

@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <crombie2/ConfigTable.h>
 
 
@@ -6,11 +8,18 @@ using namespace crombie2;
 
 ConfigTable::ConfigTable (const std::initializer_list<GuiConfigurable*>& configs) :
   confs {configs},
-  table {static_cast<guint>(configs.size()), 2} {}
+  table {size(), 2}
+{
+
+  table.set_spacings(10);
+
+}
 
 
 const std::vector<GuiConfigurable*>& ConfigTable::get_confs () const {
+
   return confs;
+
 }
 
 
@@ -30,7 +39,7 @@ void ConfigTable::draw (Controller& controller, Gtk::Box& page) {
 
 void ConfigTable::redraw (Controller& controller) {
 
-  table.resize(static_cast<guint>(confs.size()), 2);
+  table.resize(size(), 2);
 
   for (unsigned row = 0; row != confs.size(); row++) {
     auto* config = confs[row];
@@ -47,4 +56,11 @@ void ConfigTable::redraw (Controller& controller) {
 
 void ConfigTable::add_conf (GuiConfigurable* conf) {
   confs.push_back(conf);
+}
+
+
+guint ConfigTable::size () const {
+
+  return static_cast<guint>(std::max(confs.size(), 1ul));
+
 }

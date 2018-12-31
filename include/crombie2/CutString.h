@@ -21,6 +21,7 @@ namespace crombie2 {
     Cut& add_cut ();
 
     /// Get the list of cuts to loop over
+    std::list<Cut>& get_cuts ();
     const std::list<Cut>& get_cuts () const;
 
     /// The name of the cut, which is configurable

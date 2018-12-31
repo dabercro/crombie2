@@ -16,6 +16,12 @@ Cut& CutString::add_cut () {
 }
 
 
+std::list<Cut>& CutString::get_cuts () {
+
+  return cuts;
+
+}
+
 const std::list<Cut>& CutString::get_cuts () const {
 
   return cuts;

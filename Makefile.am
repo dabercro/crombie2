@@ -7,6 +7,7 @@ allsrcs = \
 	$(srcdir)/src/Configurable.cpp \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/Cut.cpp \
+	$(srcdir)/src/CutController.cpp \
 	$(srcdir)/src/CutModel.cpp \
 	$(srcdir)/src/CutString.cpp \
 	$(srcdir)/src/FileSystem.cpp \
@@ -14,6 +15,7 @@ allsrcs = \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
+	$(srcdir)/src/MiniCutController.cpp \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/PlotController.cpp \

@@ -2,7 +2,7 @@
 #define CROMBIE2_CUTMODEL_H
 
 
-#include <crombie2/ConfigModel.h>
+#include <crombie2/ConfigTable.h>
 #include <crombie2/CutString.h>
 
 
@@ -13,6 +13,8 @@ namespace crombie2 {
 
     std::string get_name () const override;
 
+    CutString& add_cutstring (const std::string& label, const std::string& joiner = "&&");
+
     /// Expands a cutstring for viewing
     std::string expand (const std::string& cutlabel) const;
 
@@ -20,7 +22,20 @@ namespace crombie2 {
     const std::list<std::string>& get_labels () const;
 
     /// Returns a cut based on it's label
-    const CutString& get_cutstring (const std::string& label) const;
+    CutString& get_cutstring (const std::string& label);
+
+    class Selection {
+    public:
+      Selection (const std::string& cut, const std::string& data, const std::string& mc);
+      Configurable<std::string> cut;
+      Configurable<std::string> data_weight;
+      Configurable<std::string> mc_weight;
+      ConfigTable table {
+        &cut, &data_weight, &mc_weight
+      };
+    };
+
+    std::list<Selection> selections {};
 
   private:
 
