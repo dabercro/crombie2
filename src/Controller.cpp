@@ -7,7 +7,7 @@ using namespace crombie2;
 
 
 Controller::ConfigRef::ConfigRef (GuiConfigurable& config, const std::string& label) :
-  config {config}, label {label, Gtk::ALIGN_START} {}
+  config {config}, label {label, Gtk::ALIGN_TOP} {}
 
 
 void Controller::ConfigRef::show () {
