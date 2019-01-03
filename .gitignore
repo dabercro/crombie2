@@ -13,8 +13,6 @@ docs/*/*
 
 # Don't save any generated files for now
 *m4*
-Makefile.in
-configure
 depcomp
 install-sh
 missing
