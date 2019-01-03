@@ -5,7 +5,7 @@ using namespace crombie2;
 
 
 ConfigRef::ConfigRef (GuiConfigurable& config, const std::string& label) :
-  config {config}, label {label, Gtk::ALIGN_START} {}
+  config {config}, label {label, Gtk::ALIGN_TOP} {}
 
 
 void ConfigRef::show () {
