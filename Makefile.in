@@ -103,15 +103,16 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
-	src/ConfigTable.$(OBJEXT) src/Configurable.$(OBJEXT) \
+	src/ConfigRef.$(OBJEXT) src/Configurable.$(OBJEXT) \
 	src/Controller.$(OBJEXT) src/Cut.$(OBJEXT) \
 	src/CutController.$(OBJEXT) src/CutModel.$(OBJEXT) \
-	src/CutString.$(OBJEXT) src/FileSystem.$(OBJEXT) \
-	src/GlobalController.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
-	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
-	src/MiniCutController.$(OBJEXT) src/Misc.$(OBJEXT) \
-	src/Parse.$(OBJEXT) src/PlotController.$(OBJEXT) \
-	src/PlotModel.$(OBJEXT)
+	src/CutString.$(OBJEXT) src/FileModel.$(OBJEXT) \
+	src/FileSystem.$(OBJEXT) src/GlobalController.$(OBJEXT) \
+	src/GlobalModel.$(OBJEXT) src/MainController.$(OBJEXT) \
+	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
+	src/Misc.$(OBJEXT) src/Parse.$(OBJEXT) \
+	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
+	src/Selection.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
@@ -137,15 +138,16 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
-	src/$(DEPDIR)/ConfigPage.Po src/$(DEPDIR)/ConfigTable.Po \
+	src/$(DEPDIR)/ConfigPage.Po src/$(DEPDIR)/ConfigRef.Po \
 	src/$(DEPDIR)/Configurable.Po src/$(DEPDIR)/Controller.Po \
 	src/$(DEPDIR)/Cut.Po src/$(DEPDIR)/CutController.Po \
 	src/$(DEPDIR)/CutModel.Po src/$(DEPDIR)/CutString.Po \
-	src/$(DEPDIR)/FileSystem.Po src/$(DEPDIR)/GlobalController.Po \
-	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/MainController.Po \
-	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
-	src/$(DEPDIR)/Misc.Po src/$(DEPDIR)/Parse.Po \
-	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
+	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
+	src/$(DEPDIR)/GlobalController.Po src/$(DEPDIR)/GlobalModel.Po \
+	src/$(DEPDIR)/MainController.Po src/$(DEPDIR)/MainWindow.Po \
+	src/$(DEPDIR)/MiniCutController.Po src/$(DEPDIR)/Misc.Po \
+	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/PlotController.Po \
+	src/$(DEPDIR)/PlotModel.Po src/$(DEPDIR)/Selection.Po \
 	src/$(DEPDIR)/main.Po test/$(DEPDIR)/main.Po \
 	test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_parser.Po \
@@ -302,13 +304,14 @@ top_srcdir = @top_srcdir@
 allsrcs = \
 	$(srcdir)/src/ConfigModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
-	$(srcdir)/src/ConfigTable.cpp \
+	$(srcdir)/src/ConfigRef.cpp \
 	$(srcdir)/src/Configurable.cpp \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/Cut.cpp \
 	$(srcdir)/src/CutController.cpp \
 	$(srcdir)/src/CutModel.cpp \
 	$(srcdir)/src/CutString.cpp \
+	$(srcdir)/src/FileModel.cpp \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
@@ -318,7 +321,8 @@ allsrcs = \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/PlotController.cpp \
-	$(srcdir)/src/PlotModel.cpp
+	$(srcdir)/src/PlotModel.cpp \
+	$(srcdir)/src/Selection.cpp
 
 AUTOMAKE_OPTIONS = subdir-objects
 crombie2_SOURCES = $(allsrcs) \
@@ -426,7 +430,7 @@ src/ConfigModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/ConfigPage.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/ConfigTable.$(OBJEXT): src/$(am__dirstamp) \
+src/ConfigRef.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Configurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -438,6 +442,8 @@ src/CutController.$(OBJEXT): src/$(am__dirstamp) \
 src/CutModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/CutString.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/FileModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/FileSystem.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -456,6 +462,8 @@ src/Parse.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/PlotController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/PlotModel.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/Selection.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/main.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 
@@ -493,13 +501,14 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigPage.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigTable.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigRef.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Configurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Controller.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Cut.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutString.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileSystem.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalModel.Po@am__quote@ # am--include-marker
@@ -510,6 +519,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Parse.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotModel.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Selection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/main.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/main.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_configurable.Po@am__quote@ # am--include-marker
@@ -813,13 +823,14 @@ distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 		-rm -f src/$(DEPDIR)/ConfigModel.Po
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
-	-rm -f src/$(DEPDIR)/ConfigTable.Po
+	-rm -f src/$(DEPDIR)/ConfigRef.Po
 	-rm -f src/$(DEPDIR)/Configurable.Po
 	-rm -f src/$(DEPDIR)/Controller.Po
 	-rm -f src/$(DEPDIR)/Cut.Po
 	-rm -f src/$(DEPDIR)/CutController.Po
 	-rm -f src/$(DEPDIR)/CutModel.Po
 	-rm -f src/$(DEPDIR)/CutString.Po
+	-rm -f src/$(DEPDIR)/FileModel.Po
 	-rm -f src/$(DEPDIR)/FileSystem.Po
 	-rm -f src/$(DEPDIR)/GlobalController.Po
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
@@ -830,6 +841,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/Parse.Po
 	-rm -f src/$(DEPDIR)/PlotController.Po
 	-rm -f src/$(DEPDIR)/PlotModel.Po
+	-rm -f src/$(DEPDIR)/Selection.Po
 	-rm -f src/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/test_configurable.Po
@@ -885,13 +897,14 @@ maintainer-clean: maintainer-clean-am
 	-rm -rf $(top_srcdir)/autom4te.cache
 		-rm -f src/$(DEPDIR)/ConfigModel.Po
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
-	-rm -f src/$(DEPDIR)/ConfigTable.Po
+	-rm -f src/$(DEPDIR)/ConfigRef.Po
 	-rm -f src/$(DEPDIR)/Configurable.Po
 	-rm -f src/$(DEPDIR)/Controller.Po
 	-rm -f src/$(DEPDIR)/Cut.Po
 	-rm -f src/$(DEPDIR)/CutController.Po
 	-rm -f src/$(DEPDIR)/CutModel.Po
 	-rm -f src/$(DEPDIR)/CutString.Po
+	-rm -f src/$(DEPDIR)/FileModel.Po
 	-rm -f src/$(DEPDIR)/FileSystem.Po
 	-rm -f src/$(DEPDIR)/GlobalController.Po
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
@@ -902,6 +915,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/Parse.Po
 	-rm -f src/$(DEPDIR)/PlotController.Po
 	-rm -f src/$(DEPDIR)/PlotModel.Po
+	-rm -f src/$(DEPDIR)/Selection.Po
 	-rm -f src/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/test_configurable.Po
