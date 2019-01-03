@@ -34,7 +34,7 @@ void PlotController::redraw () {
 }
 
 
-void PlotController::add_table (ConfigTable& table) {
+void PlotController::add_table (ConfigTable<>& table) {
 
   if (((plotted++) % 5) == 0) {
     boxes.emplace_back();

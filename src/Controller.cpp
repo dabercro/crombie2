@@ -6,19 +6,6 @@
 using namespace crombie2;
 
 
-Controller::ConfigRef::ConfigRef (GuiConfigurable& config, const std::string& label) :
-  config {config}, label {label, Gtk::ALIGN_START} {}
-
-
-void Controller::ConfigRef::show () {
-
-  box.show();
-  label.show();
-  entry.show();
-
-}
-
-
 Controller::Controller (ConfigPage& page, ConfigModel& model) :
   page {page},
   model {model}
@@ -48,7 +35,7 @@ Controller::Controller (ConfigPage& page, ConfigModel& model) :
 }
 
 
-Controller::ConfigRef& Controller::register_configurable (GuiConfigurable& config) {
+ConfigRef& Controller::register_configurable (GuiConfigurable& config) {
 
   configurables.emplace_back(config, config.label());
   return configurables.back();

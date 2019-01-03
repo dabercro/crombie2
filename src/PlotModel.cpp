@@ -11,7 +11,7 @@ std::string PlotModel::get_name () const {
 }
 
 
-PlotModel::Plot& PlotModel::add_plot () {
+Plot& PlotModel::add_plot () {
   plots.emplace_back();
   return plots.back();
 }

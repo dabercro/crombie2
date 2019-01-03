@@ -16,8 +16,8 @@ namespace crombie2 {
   private:
     Controller& controller;
     CutString& cutstring;
-    ConfigTable labeltable;
-    ConfigTable cuttable;
+    ConfigTable<> labeltable;
+    ConfigTable<> cuttable;
 
     void on_add_cut ();
 

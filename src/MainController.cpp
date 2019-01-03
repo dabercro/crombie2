@@ -10,5 +10,6 @@ MainController::MainController (ConfigPage& globalpage,
                                 ConfigPage& selectionpage,
                                 ConfigPage& uncertaintypage) :
   cutcontrol {selectionpage, cutmodel},
+  filecontrol {filepage, filemodel},
   globalcontrol {globalpage, globalmodel},
   plotcontrol {plotpage, plotmodel} {}

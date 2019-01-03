@@ -2,8 +2,8 @@
 #define CROMBIE2_CUTMODEL_H
 
 
-#include <crombie2/ConfigTable.h>
 #include <crombie2/CutString.h>
+#include <crombie2/Selection.h>
 
 
 namespace crombie2 {
@@ -23,17 +23,6 @@ namespace crombie2 {
 
     /// Returns a cut based on it's label
     CutString& get_cutstring (const std::string& label);
-
-    class Selection {
-    public:
-      Selection (const std::string& cut, const std::string& data, const std::string& mc);
-      Configurable<std::string> cut;
-      Configurable<std::string> data_weight;
-      Configurable<std::string> mc_weight;
-      ConfigTable table {
-        &cut, &data_weight, &mc_weight
-      };
-    };
 
     std::list<Selection> selections {};
 

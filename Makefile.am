@@ -3,13 +3,14 @@ bindir = $(srcdir)/bin
 allsrcs = \
 	$(srcdir)/src/ConfigModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
-	$(srcdir)/src/ConfigTable.cpp \
+	$(srcdir)/src/ConfigRef.cpp \
 	$(srcdir)/src/Configurable.cpp \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/Cut.cpp \
 	$(srcdir)/src/CutController.cpp \
 	$(srcdir)/src/CutModel.cpp \
 	$(srcdir)/src/CutString.cpp \
+	$(srcdir)/src/FileModel.cpp \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
@@ -19,7 +20,8 @@ allsrcs = \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/PlotController.cpp \
-	$(srcdir)/src/PlotModel.cpp
+	$(srcdir)/src/PlotModel.cpp \
+	$(srcdir)/src/Selection.cpp
 
 AUTOMAKE_OPTIONS = subdir-objects
 

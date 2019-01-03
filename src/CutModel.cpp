@@ -117,9 +117,3 @@ const std::list<std::string>& CutModel::get_labels () const {
 CutString& CutModel::get_cutstring (const std::string& label) {
   return cutstrings.at(label);
 }
-
-
-CutModel::Selection::Selection (const std::string& cut, const std::string& data, const std::string& mc) :
-  cut {"Cut", cut},
-  data_weight {"Data Weight", data},
-  mc_weight {"MC Weight", mc} {}

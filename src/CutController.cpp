@@ -51,7 +51,7 @@ void CutController::redraw () {
 
 void CutController::add_cut (CutString& cutstring) {
 
-  if (((numcuts++) % 3) == 0) {
+  if (((numcuts++) % 1) == 0) {
     cutboxes.emplace_back();
     page.box().pack_start(cutboxes.back(), Gtk::PACK_SHRINK);
     cutboxes.back().show();

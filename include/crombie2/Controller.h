@@ -2,26 +2,14 @@
 #define CROMBIE2_CONTROLLER_H
 
 #include <gtkmm/button.h>
-#include <gtkmm/entry.h>
-#include <gtkmm/label.h>
 
 #include <crombie2/ConfigModel.h>
 #include <crombie2/ConfigPage.h>
-#include <crombie2/GuiConfigurable.h>
+#include <crombie2/ConfigRef.h>
 
 namespace crombie2 {
   class Controller {
   public:
-
-    class ConfigRef {
-    public:
-      ConfigRef (GuiConfigurable& config, const std::string& label);
-      GuiConfigurable& config;
-      Gtk::Label label;
-      Gtk::Entry entry {};
-      Gtk::HBox box {};
-      void show ();
-    };
 
     /// Hold a reference to the page to draw on
     Controller (ConfigPage& page, ConfigModel& model);
