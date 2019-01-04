@@ -9,9 +9,6 @@
 namespace crombie2 {
 
   template<typename C> class Configurable : public GuiConfigurable {
-
-    using labelfunc = std::function<std::string(const C&)>;
-
   public:
     /**
        Create a configurable with a static label
@@ -42,6 +39,30 @@ namespace crombie2 {
   private:
     std::string name;
     C value;
+
+  };
+
+
+  template<> class Configurable<std::string> : public GuiConfigurable {
+  public:
+    Configurable(const std::string& label, const std::string& value) :
+      name{label}, value{value} {}
+
+    std::string label () const override {
+      return name;
+    }
+
+    std::string get () const override {
+      return value;
+    }
+
+    void set (const std::string& input) override {
+      value = input;
+    }
+
+  private:
+    std::string name;
+    std::string value;
 
   };
 

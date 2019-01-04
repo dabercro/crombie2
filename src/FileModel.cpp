@@ -20,13 +20,15 @@ FileGroup& FileModel::add_files (FileGroup::FileType type) {
 
 
 void FileModel::read (const Types::strings& config) {
+  filegroups.clear();
+
   FileGroup::FileType current_type {FileGroup::FileType::DATA};
 
   // Not pointing to a legend entry list in the beginning
   std::list<LegendEntry>* current_entries {nullptr};
   std::list<FileEntry>* current_files {nullptr};
 
-  std::regex legend_expr {"\\s*(.+);\\s*(.+);\\s*(.+);\\s*(\\d+)"};
+  std::regex legend_expr {"\\s*([^;]+);\\s*([^;]+);\\s*([^;]+);\\s*(\\d+)"};
   std::regex file_expr {"\\s*(\\S+)\\s+\\{([\\d\\.]+)\\}"};
   std::smatch matches;
 
