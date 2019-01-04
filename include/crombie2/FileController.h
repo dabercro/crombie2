@@ -5,6 +5,7 @@
 #include <gtkmm/buttonbox.h>
 
 #include <crombie2/FileModel.h>
+#include <crombie2/MiniFileController.h>
 
 
 namespace crombie2 {
@@ -24,6 +25,8 @@ namespace crombie2 {
     std::list<Gtk::HBox> boxes {};
     Gtk::HButtonBox buttonbox {};
     Gtk::Button addbutton {"Add File Group"};
+
+    std::list<MiniFileController> minicontrollers {};
 
   };
 }

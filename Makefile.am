@@ -18,6 +18,7 @@ allsrcs = \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \
+	$(srcdir)/src/MiniFileController.cpp \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/PlotController.cpp \

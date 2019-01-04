@@ -110,7 +110,8 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
 	src/GlobalController.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
 	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
-	src/MiniCutController.$(OBJEXT) src/Misc.$(OBJEXT) \
+	src/MiniCutController.$(OBJEXT) \
+	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
 	src/Parse.$(OBJEXT) src/PlotController.$(OBJEXT) \
 	src/PlotModel.$(OBJEXT) src/Selection.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
@@ -146,10 +147,11 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/FileSystem.Po src/$(DEPDIR)/GlobalController.Po \
 	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/MainController.Po \
 	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
-	src/$(DEPDIR)/Misc.Po src/$(DEPDIR)/Parse.Po \
-	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
-	src/$(DEPDIR)/Selection.Po src/$(DEPDIR)/main.Po \
-	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
+	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
+	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/PlotController.Po \
+	src/$(DEPDIR)/PlotModel.Po src/$(DEPDIR)/Selection.Po \
+	src/$(DEPDIR)/main.Po test/$(DEPDIR)/main.Po \
+	test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_parser.Po \
 	test/$(DEPDIR)/test_testconfig.Po test/$(DEPDIR)/utils.Po
 am__mv = mv -f
@@ -319,6 +321,7 @@ allsrcs = \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \
+	$(srcdir)/src/MiniFileController.cpp \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/PlotController.cpp \
@@ -460,6 +463,8 @@ src/MainWindow.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MiniCutController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/MiniFileController.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/Misc.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/Parse.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/PlotController.$(OBJEXT): src/$(am__dirstamp) \
@@ -519,6 +524,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainWindow.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniCutController.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniFileController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Misc.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Parse.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotController.Po@am__quote@ # am--include-marker
@@ -842,6 +848,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
 	-rm -f src/$(DEPDIR)/MiniCutController.Po
+	-rm -f src/$(DEPDIR)/MiniFileController.Po
 	-rm -f src/$(DEPDIR)/Misc.Po
 	-rm -f src/$(DEPDIR)/Parse.Po
 	-rm -f src/$(DEPDIR)/PlotController.Po
@@ -917,6 +924,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
 	-rm -f src/$(DEPDIR)/MiniCutController.Po
+	-rm -f src/$(DEPDIR)/MiniFileController.Po
 	-rm -f src/$(DEPDIR)/Misc.Po
 	-rm -f src/$(DEPDIR)/Parse.Po
 	-rm -f src/$(DEPDIR)/PlotController.Po
