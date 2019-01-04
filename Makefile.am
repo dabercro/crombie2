@@ -10,6 +10,7 @@ allsrcs = \
 	$(srcdir)/src/CutController.cpp \
 	$(srcdir)/src/CutModel.cpp \
 	$(srcdir)/src/CutString.cpp \
+	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileModel.cpp \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \

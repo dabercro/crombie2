@@ -8,11 +8,14 @@
 
 namespace crombie2 {
   class FileEntry {
+  public:
+
     Configurable<std::string> name {"File Name", ""};
     Configurable<double> xs {"Cross Section", 0};
     ConfigTable<Gtk::HBox> table {
       &name, &xs
     };
+
   };
 }
 

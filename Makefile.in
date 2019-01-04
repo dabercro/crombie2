@@ -106,13 +106,13 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/ConfigRef.$(OBJEXT) src/Configurable.$(OBJEXT) \
 	src/Controller.$(OBJEXT) src/Cut.$(OBJEXT) \
 	src/CutController.$(OBJEXT) src/CutModel.$(OBJEXT) \
-	src/CutString.$(OBJEXT) src/FileModel.$(OBJEXT) \
-	src/FileSystem.$(OBJEXT) src/GlobalController.$(OBJEXT) \
-	src/GlobalModel.$(OBJEXT) src/MainController.$(OBJEXT) \
-	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
-	src/Misc.$(OBJEXT) src/Parse.$(OBJEXT) \
-	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
-	src/Selection.$(OBJEXT)
+	src/CutString.$(OBJEXT) src/FileController.$(OBJEXT) \
+	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
+	src/GlobalController.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
+	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
+	src/MiniCutController.$(OBJEXT) src/Misc.$(OBJEXT) \
+	src/Parse.$(OBJEXT) src/PlotController.$(OBJEXT) \
+	src/PlotModel.$(OBJEXT) src/Selection.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
@@ -142,14 +142,14 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/Configurable.Po src/$(DEPDIR)/Controller.Po \
 	src/$(DEPDIR)/Cut.Po src/$(DEPDIR)/CutController.Po \
 	src/$(DEPDIR)/CutModel.Po src/$(DEPDIR)/CutString.Po \
-	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
-	src/$(DEPDIR)/GlobalController.Po src/$(DEPDIR)/GlobalModel.Po \
-	src/$(DEPDIR)/MainController.Po src/$(DEPDIR)/MainWindow.Po \
-	src/$(DEPDIR)/MiniCutController.Po src/$(DEPDIR)/Misc.Po \
-	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/PlotController.Po \
-	src/$(DEPDIR)/PlotModel.Po src/$(DEPDIR)/Selection.Po \
-	src/$(DEPDIR)/main.Po test/$(DEPDIR)/main.Po \
-	test/$(DEPDIR)/test_configurable.Po \
+	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileModel.Po \
+	src/$(DEPDIR)/FileSystem.Po src/$(DEPDIR)/GlobalController.Po \
+	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/MainController.Po \
+	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
+	src/$(DEPDIR)/Misc.Po src/$(DEPDIR)/Parse.Po \
+	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
+	src/$(DEPDIR)/Selection.Po src/$(DEPDIR)/main.Po \
+	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_parser.Po \
 	test/$(DEPDIR)/test_testconfig.Po test/$(DEPDIR)/utils.Po
 am__mv = mv -f
@@ -311,6 +311,7 @@ allsrcs = \
 	$(srcdir)/src/CutController.cpp \
 	$(srcdir)/src/CutModel.cpp \
 	$(srcdir)/src/CutString.cpp \
+	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileModel.cpp \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
@@ -443,6 +444,8 @@ src/CutModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/CutString.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/FileController.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/FileModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/FileSystem.$(OBJEXT): src/$(am__dirstamp) \
@@ -508,6 +511,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutString.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileSystem.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalController.Po@am__quote@ # am--include-marker
@@ -830,6 +834,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/CutController.Po
 	-rm -f src/$(DEPDIR)/CutModel.Po
 	-rm -f src/$(DEPDIR)/CutString.Po
+	-rm -f src/$(DEPDIR)/FileController.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po
 	-rm -f src/$(DEPDIR)/FileSystem.Po
 	-rm -f src/$(DEPDIR)/GlobalController.Po
@@ -904,6 +909,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/CutController.Po
 	-rm -f src/$(DEPDIR)/CutModel.Po
 	-rm -f src/$(DEPDIR)/CutString.Po
+	-rm -f src/$(DEPDIR)/FileController.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po
 	-rm -f src/$(DEPDIR)/FileSystem.Po
 	-rm -f src/$(DEPDIR)/GlobalController.Po

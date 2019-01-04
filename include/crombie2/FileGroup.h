@@ -9,8 +9,17 @@
 namespace crombie2 {
   class FileGroup {
   public:
+    enum class FileType {
+      DATA,
+      MC,
+      SIGNAL
+    };
+
+    FileType type {FileType::DATA};
+
     std::list<LegendEntry> entries {};
     std::list<FileEntry> files {};
+
   };
 }
 
