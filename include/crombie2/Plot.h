@@ -16,7 +16,7 @@ namespace crombie2 {
     Configurable<std::string> label {"X Label", "[GeV]"};
     Configurable<std::string> data_var {"Data Variable", ""};
     Configurable<std::string> mc_var {"MC Variable", ""};
-    ConfigTable<> table {
+    ConfigTable table {
       &name, &nbins, &min, &max, &label, &data_var, &mc_var
     };
   };

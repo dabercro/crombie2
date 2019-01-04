@@ -14,7 +14,7 @@ namespace crombie2 {
     Configurable<std::string> cut;
     Configurable<std::string> data_weight;
     Configurable<std::string> mc_weight;
-    ConfigTable<> table {
+    ConfigTable table {
       &cut, &data_weight, &mc_weight
     };
   };

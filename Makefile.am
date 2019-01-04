@@ -4,6 +4,7 @@ allsrcs = \
 	$(srcdir)/src/ConfigModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
 	$(srcdir)/src/ConfigRef.cpp \
+	$(srcdir)/src/ConfigTable.cpp \
 	$(srcdir)/src/Configurable.cpp \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/Cut.cpp \

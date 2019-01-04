@@ -25,6 +25,11 @@ FileController::FileController (ConfigPage& page, FileModel& model) :
 
 void FileController::redraw () {
 
+  minicontrollers.clear();
+
+  for (auto& group : filemodel.filegroups)
+    minicontrollers.emplace_back(*this, group, page.box());
+
 }
 
 

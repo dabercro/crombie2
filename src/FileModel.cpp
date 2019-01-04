@@ -76,15 +76,20 @@ std::list<std::string> FileModel::serialize () const {
     output.emplace_back(type_to_str.at(filegroup.type));
     output.emplace_back();
 
-    for (auto& legend : filegroup.entries)
-      output.emplace_back(legend.datacard.get() + "; " +
-                          legend.legend.get() + "; " +
-                          legend.cut.get() + "; " +
-                          legend.style.get());
+    for (auto& legend : filegroup.entries) {
+      if (legend.datacard.get().size())
+        output.emplace_back(legend.datacard.get() + "; " +
+                            legend.legend.get() + "; " +
+                            legend.cut.get() + "; " +
+                            legend.style.get());
+    }
+    
     output.emplace_back();
 
-    for (auto& file : filegroup.files)
-      output.emplace_back(file.name.get() + " {" + file.xs.get() + "}");
+    for (auto& file : filegroup.files) {
+      if (file.name.get().size())
+        output.emplace_back(file.name.get() + " {" + file.xs.get() + "}");
+    }
 
   }
 

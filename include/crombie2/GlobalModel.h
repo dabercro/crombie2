@@ -36,7 +36,7 @@ namespace crombie2 {
 
     Configurable<double> maxratio {"Ratio Maximum", 2.0};
 
-    ConfigTable<> configs {
+    ConfigTable configs {
       &inputdir,
       &nthreads,
       &tree,

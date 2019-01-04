@@ -12,9 +12,9 @@ namespace crombie2 {
 
     Configurable<std::string> name {"File Name", ""};
     Configurable<double> xs {"Cross Section", 0};
-    ConfigTable<Gtk::HBox> table {
+    ConfigTable table {{
       &name, &xs
-    };
+    }, true};
 
   };
 }
