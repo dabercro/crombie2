@@ -39,6 +39,7 @@ void CutController::redraw () {
 
   numcuts = 0;
   cutboxes.clear();
+  minicontrollers.clear();
 
   for (auto& cut : cutmodel.get_labels())
     add_cut(cutmodel.get_cutstring(cut));

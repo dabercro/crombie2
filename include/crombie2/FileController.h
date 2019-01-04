@@ -22,7 +22,6 @@ namespace crombie2 {
 
     FileModel& filemodel;
 
-    std::list<Gtk::HBox> boxes {};
     Gtk::HButtonBox buttonbox {};
     Gtk::Button addbutton {"Add File Group"};
 
