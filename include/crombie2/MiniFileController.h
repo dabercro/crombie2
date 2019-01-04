@@ -34,8 +34,10 @@ namespace crombie2 {
     Gtk::VBox filelist {};
     Gtk::HButtonBox addlegendbox {};
     Gtk::HButtonBox addfilebox {};
-    Gtk::Button addentrybutton {"Add File"};
+    Gtk::Button addentrybutton {"Add Entry"};
     Gtk::Button addfilebutton {"Add File"};
+
+    void setup_radio (Gtk::RadioButton& button, FileGroup::FileType type);
 
   };
 }

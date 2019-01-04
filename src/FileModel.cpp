@@ -50,6 +50,8 @@ void FileModel::read (const Types::strings& config) {
       if (not current_files)
         throw std::logic_error{"Input file makes no sense"};
 
+      current_entries = nullptr;
+
       auto& file = current_files->emplace_back();
       file.name.set(matches[1]);
       file.xs.set(matches[2]);

@@ -40,31 +40,12 @@ MiniFileController::MiniFileController(Controller& controller, FileGroup& filegr
 
   radiobox.show();
 
-  radiobox.pack_start(databutton);
-  radiobox.pack_start(mcbutton);
-  radiobox.pack_start(signalbutton);
-
-  databutton.show();
-  mcbutton.show();
-  signalbutton.show();
+  setup_radio(databutton, FileGroup::FileType::DATA);
+  setup_radio(mcbutton, FileGroup::FileType::MC);
+  setup_radio(signalbutton, FileGroup::FileType::SIGNAL);
 
   fill(filegroup.entries, legendlist, addentrybutton, addlegendbox, &MiniFileController::on_add_entry);
   fill(filegroup.files, filelist, addfilebutton, addfilebox, &MiniFileController::on_add_file);
-
-  switch(filegroup.type) {
-  case FileGroup::FileType::DATA:
-    databutton.set_active();
-    break;
-  case FileGroup::FileType::MC:
-    mcbutton.set_active();
-    break;
-  case FileGroup::FileType::SIGNAL:
-    signalbutton.set_active();
-    break;
-  }
-
-  databutton.signal_group_changed().
-    connect(sigc::mem_fun(*this, &MiniFileController::on_type_changed));
 
 }
 
@@ -91,5 +72,19 @@ void MiniFileController::on_type_changed () {
     filegroup.type = FileGroup::FileType::MC;
   else if (signalbutton.get_active())
     filegroup.type = FileGroup::FileType::SIGNAL;
+
+}
+
+
+void MiniFileController::setup_radio (Gtk::RadioButton& button, FileGroup::FileType type) {
+
+  radiobox.pack_start(button);
+  button.show();
+
+  if (type == filegroup.type)
+    button.set_active();
+
+  button.signal_clicked().
+    connect(sigc::mem_fun(*this, &MiniFileController::on_type_changed));
 
 }
