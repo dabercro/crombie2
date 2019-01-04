@@ -104,13 +104,13 @@ PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/ConfigRef.$(OBJEXT) src/ConfigTable.$(OBJEXT) \
-	src/Configurable.$(OBJEXT) src/Controller.$(OBJEXT) \
-	src/Cut.$(OBJEXT) src/CutController.$(OBJEXT) \
-	src/CutModel.$(OBJEXT) src/CutString.$(OBJEXT) \
-	src/FileController.$(OBJEXT) src/FileModel.$(OBJEXT) \
-	src/FileSystem.$(OBJEXT) src/GlobalController.$(OBJEXT) \
-	src/GlobalModel.$(OBJEXT) src/MainController.$(OBJEXT) \
-	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
+	src/Controller.$(OBJEXT) src/Cut.$(OBJEXT) \
+	src/CutController.$(OBJEXT) src/CutModel.$(OBJEXT) \
+	src/CutString.$(OBJEXT) src/FileController.$(OBJEXT) \
+	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
+	src/GlobalController.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
+	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
+	src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
 	src/Parse.$(OBJEXT) src/PlotController.$(OBJEXT) \
 	src/PlotModel.$(OBJEXT) src/Selection.$(OBJEXT)
@@ -140,14 +140,13 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/ConfigPage.Po src/$(DEPDIR)/ConfigRef.Po \
-	src/$(DEPDIR)/ConfigTable.Po src/$(DEPDIR)/Configurable.Po \
-	src/$(DEPDIR)/Controller.Po src/$(DEPDIR)/Cut.Po \
-	src/$(DEPDIR)/CutController.Po src/$(DEPDIR)/CutModel.Po \
-	src/$(DEPDIR)/CutString.Po src/$(DEPDIR)/FileController.Po \
-	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
-	src/$(DEPDIR)/GlobalController.Po src/$(DEPDIR)/GlobalModel.Po \
-	src/$(DEPDIR)/MainController.Po src/$(DEPDIR)/MainWindow.Po \
-	src/$(DEPDIR)/MiniCutController.Po \
+	src/$(DEPDIR)/ConfigTable.Po src/$(DEPDIR)/Controller.Po \
+	src/$(DEPDIR)/Cut.Po src/$(DEPDIR)/CutController.Po \
+	src/$(DEPDIR)/CutModel.Po src/$(DEPDIR)/CutString.Po \
+	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileModel.Po \
+	src/$(DEPDIR)/FileSystem.Po src/$(DEPDIR)/GlobalController.Po \
+	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/MainController.Po \
+	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
 	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
 	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/PlotController.Po \
 	src/$(DEPDIR)/PlotModel.Po src/$(DEPDIR)/Selection.Po \
@@ -309,7 +308,6 @@ allsrcs = \
 	$(srcdir)/src/ConfigPage.cpp \
 	$(srcdir)/src/ConfigRef.cpp \
 	$(srcdir)/src/ConfigTable.cpp \
-	$(srcdir)/src/Configurable.cpp \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/Cut.cpp \
 	$(srcdir)/src/CutController.cpp \
@@ -440,8 +438,6 @@ src/ConfigRef.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/ConfigTable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/Configurable.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/Controller.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Cut.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
@@ -515,7 +511,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigPage.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigRef.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigTable.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Configurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Controller.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Cut.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutController.Po@am__quote@ # am--include-marker
@@ -840,7 +835,6 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
 	-rm -f src/$(DEPDIR)/ConfigRef.Po
 	-rm -f src/$(DEPDIR)/ConfigTable.Po
-	-rm -f src/$(DEPDIR)/Configurable.Po
 	-rm -f src/$(DEPDIR)/Controller.Po
 	-rm -f src/$(DEPDIR)/Cut.Po
 	-rm -f src/$(DEPDIR)/CutController.Po
@@ -917,7 +911,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
 	-rm -f src/$(DEPDIR)/ConfigRef.Po
 	-rm -f src/$(DEPDIR)/ConfigTable.Po
-	-rm -f src/$(DEPDIR)/Configurable.Po
 	-rm -f src/$(DEPDIR)/Controller.Po
 	-rm -f src/$(DEPDIR)/Cut.Po
 	-rm -f src/$(DEPDIR)/CutController.Po
