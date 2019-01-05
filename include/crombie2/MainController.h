@@ -14,7 +14,8 @@ namespace crombie2 {
                     ConfigPage& filepage,
                     ConfigPage& plotpage,
                     ConfigPage& selectionpage,
-                    ConfigPage& uncertaintypage);
+                    ConfigPage& uncertaintypage,
+                    ConfigPage& jobpage);
 
   private:
     CutModel cutmodel {};
@@ -28,6 +29,12 @@ namespace crombie2 {
 
     PlotModel plotmodel {};
     PlotController plotcontrol;
+
+    ConfigPage& jobpage;
+
+    void on_submit_job ();
+
+    Gtk::Button button {"Submit"};
 
   };
 }

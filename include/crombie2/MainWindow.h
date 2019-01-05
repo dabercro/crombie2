@@ -23,13 +23,15 @@ namespace crombie2 {
     ConfigPage plots {"Plots"};
     ConfigPage selections {"Selections"};
     ConfigPage uncertainties {"Uncertainties"};
+    ConfigPage jobpage {"Jobs"};
 
     MainController maincontrol {
       globals,
       files,
       plots,
       selections,
-      uncertainties
+      uncertainties,
+      jobpage
     };
 
   };

@@ -14,6 +14,7 @@ MainWindow::MainWindow ()
   add_page(plots);
   add_page(selections);
   add_page(uncertainties);
+  add_page(jobpage);
 }
 
 

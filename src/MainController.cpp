@@ -8,8 +8,13 @@ MainController::MainController (ConfigPage& globalpage,
                                 ConfigPage& filepage,
                                 ConfigPage& plotpage,
                                 ConfigPage& selectionpage,
-                                ConfigPage& uncertaintypage) :
+                                ConfigPage& uncertaintypage,
+                                ConfigPage& jobpage) :
   cutcontrol {selectionpage, cutmodel},
   filecontrol {filepage, filemodel},
   globalcontrol {globalpage, globalmodel},
-  plotcontrol {plotpage, plotmodel} {}
+  plotcontrol {plotpage, plotmodel},
+  jobpage {jobpage}
+{
+
+}

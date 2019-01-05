@@ -15,6 +15,7 @@ allsrcs = \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
+	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \
@@ -23,7 +24,8 @@ allsrcs = \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
-	$(srcdir)/src/Selection.cpp
+	$(srcdir)/src/Selection.cpp \
+	$(srcdir)/src/Tree.cpp
 
 AUTOMAKE_OPTIONS = subdir-objects
 

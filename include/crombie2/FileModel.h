@@ -2,7 +2,6 @@
 #define CROMBIE2_FILEMODEL_H
 
 
-#include <crombie2/ConfigModel.h>
 #include <crombie2/FileGroup.h>
 
 
