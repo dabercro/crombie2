@@ -8,7 +8,7 @@
 namespace crombie2 {
   class Analyzer {
   public:
-    virtual ~Analyzer ();
+    virtual ~Analyzer () {}
 
     virtual void make_requests (Tree& tree) = 0;
 

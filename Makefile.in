@@ -109,6 +109,7 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/CutString.$(OBJEXT) src/FileController.$(OBJEXT) \
 	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
 	src/GlobalController.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
+	src/Hist.$(OBJEXT) src/HistAnalyzer.$(OBJEXT) \
 	src/Job.$(OBJEXT) src/MainController.$(OBJEXT) \
 	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
@@ -146,7 +147,8 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/CutModel.Po src/$(DEPDIR)/CutString.Po \
 	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileModel.Po \
 	src/$(DEPDIR)/FileSystem.Po src/$(DEPDIR)/GlobalController.Po \
-	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/Job.Po \
+	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/Hist.Po \
+	src/$(DEPDIR)/HistAnalyzer.Po src/$(DEPDIR)/Job.Po \
 	src/$(DEPDIR)/MainController.Po src/$(DEPDIR)/MainWindow.Po \
 	src/$(DEPDIR)/MiniCutController.Po \
 	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
@@ -320,6 +322,8 @@ allsrcs = \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
+	$(srcdir)/src/Hist.cpp \
+	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
@@ -461,6 +465,9 @@ src/GlobalController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/GlobalModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/Hist.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/HistAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/Job.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/MainController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -527,6 +534,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileSystem.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalModel.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Hist.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Job.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainWindow.Po@am__quote@ # am--include-marker
@@ -853,6 +862,8 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/FileSystem.Po
 	-rm -f src/$(DEPDIR)/GlobalController.Po
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
+	-rm -f src/$(DEPDIR)/Hist.Po
+	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
@@ -931,6 +942,8 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/FileSystem.Po
 	-rm -f src/$(DEPDIR)/GlobalController.Po
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
+	-rm -f src/$(DEPDIR)/Hist.Po
+	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po

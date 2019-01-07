@@ -22,7 +22,6 @@ namespace crombie2 {
 
     /**
        Get a bare pointer to a TObject inside of this file.
-       @param C is the type of pointer you would like to get
        @param name is the name of the object, searched for with TFile::Get
     */
     template<typename C> C* get(const std::string& name) {

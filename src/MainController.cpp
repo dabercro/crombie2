@@ -13,8 +13,22 @@ MainController::MainController (ConfigPage& globalpage,
   cutcontrol {selectionpage, cutmodel},
   filecontrol {filepage, filemodel},
   globalcontrol {globalpage, globalmodel},
-  plotcontrol {plotpage, plotmodel},
-  jobpage {jobpage}
+  plotcontrol {plotpage, plotmodel}
 {
+
+  button.set_border_width(10);
+
+  jobpage.pack_end(submitbox, Gtk::PACK_SHRINK);
+  submitbox.pack_start(button, Gtk::PACK_SHRINK);
+  button.signal_clicked().
+    connect(sigc::mem_fun(*this, &MainController::on_submit_job));
+
+  submitbox.show();
+  button.show();
+
+}
+
+
+void MainController::on_submit_job () {
 
 }

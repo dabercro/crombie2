@@ -15,6 +15,8 @@ allsrcs = \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
+	$(srcdir)/src/Hist.cpp \
+	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
