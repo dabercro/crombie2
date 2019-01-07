@@ -5,6 +5,11 @@
 using namespace crombie2;
 
 
+FileEntry::FileEntry (const FileEntry& other) :
+  name {other.name},
+  xs {other.xs} {}
+
+
 const Types::strings& FileEntry::files (const GlobalModel& globalmodel) {
 
   if (last_global == globalmodel.inputdir.get())

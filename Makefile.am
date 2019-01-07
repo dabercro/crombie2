@@ -29,6 +29,7 @@ allsrcs = \
 	$(srcdir)/src/Plot.cpp \
 	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
+	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
 	$(srcdir)/src/Tree.cpp
 

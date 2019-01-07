@@ -10,6 +10,8 @@
 namespace crombie2 {
   class FileEntry {
   public:
+    FileEntry () = default;
+    FileEntry (const FileEntry& other);
 
     Configurable<std::string> name {"File Name", ""};
     Configurable<double> xs {"Cross Section", 0};

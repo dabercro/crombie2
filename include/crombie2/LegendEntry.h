@@ -7,6 +7,9 @@
 namespace crombie2 {
   class LegendEntry {
   public:
+    LegendEntry () = default;
+    LegendEntry (const LegendEntry& other) :
+    datacard {other.datacard}, legend {other.legend}, cut {other.cut}, style {other.style} {}
 
     Configurable<std::string> datacard {"Datacard Entry", ""};
     Configurable<std::string> legend {"Legend Entry", ""};

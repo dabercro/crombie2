@@ -4,6 +4,13 @@
 using namespace crombie2;
 
 
+GlobalModel::GlobalModel (const GlobalModel& other) {
+  auto iter = other.configs.get_confs().begin();
+  for (auto* configurable : configs.get_confs())
+    configurable->set((*iter++)->get());
+}
+
+
 std::string GlobalModel::get_name () const {
   return "globals";
 }

@@ -8,6 +8,9 @@
 namespace crombie2 {
   class Plot {
   public:
+    Plot () = default;
+    Plot (const Plot& other);
+
     Configurable<std::string> name {"Variable", ""};
     Configurable<unsigned> nbins {"Number of Bins", 20};
     Configurable<double> min {"X Min", 0};

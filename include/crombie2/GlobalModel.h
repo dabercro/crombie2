@@ -10,6 +10,8 @@ namespace crombie2 {
 
   class GlobalModel : public ConfigModel {
   public:
+    GlobalModel () = default;
+    GlobalModel (const GlobalModel& other);
 
     std::string get_name () const override;
 

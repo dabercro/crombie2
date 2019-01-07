@@ -116,7 +116,8 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
 	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) \
 	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
-	src/Selection.$(OBJEXT) src/Tree.$(OBJEXT)
+	src/Runner.$(OBJEXT) src/Selection.$(OBJEXT) \
+	src/Tree.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
@@ -156,9 +157,9 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
 	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/Plot.Po \
 	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
-	src/$(DEPDIR)/Selection.Po src/$(DEPDIR)/Tree.Po \
-	src/$(DEPDIR)/main.Po test/$(DEPDIR)/main.Po \
-	test/$(DEPDIR)/test_configurable.Po \
+	src/$(DEPDIR)/Runner.Po src/$(DEPDIR)/Selection.Po \
+	src/$(DEPDIR)/Tree.Po src/$(DEPDIR)/main.Po \
+	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_fileentry.Po test/$(DEPDIR)/test_parser.Po \
 	test/$(DEPDIR)/test_testconfig.Po test/$(DEPDIR)/utils.Po
 am__mv = mv -f
@@ -334,6 +335,7 @@ allsrcs = \
 	$(srcdir)/src/Plot.cpp \
 	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
+	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
 	$(srcdir)/src/Tree.cpp
 
@@ -490,6 +492,8 @@ src/PlotController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/PlotModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/Runner.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/Selection.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Tree.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
@@ -557,6 +561,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Plot.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotModel.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Runner.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Selection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Tree.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/main.Po@am__quote@ # am--include-marker
@@ -889,6 +894,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/Plot.Po
 	-rm -f src/$(DEPDIR)/PlotController.Po
 	-rm -f src/$(DEPDIR)/PlotModel.Po
+	-rm -f src/$(DEPDIR)/Runner.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
 	-rm -f src/$(DEPDIR)/Tree.Po
 	-rm -f src/$(DEPDIR)/main.Po
@@ -973,6 +979,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/Plot.Po
 	-rm -f src/$(DEPDIR)/PlotController.Po
 	-rm -f src/$(DEPDIR)/PlotModel.Po
+	-rm -f src/$(DEPDIR)/Runner.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
 	-rm -f src/$(DEPDIR)/Tree.Po
 	-rm -f src/$(DEPDIR)/main.Po

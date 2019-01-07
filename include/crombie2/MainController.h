@@ -1,11 +1,12 @@
 #ifndef CROMBIE2_MAINCONTROLLER_H
 #define CROMBIE2_MAINCONTROLLER_H
 
+
 #include <crombie2/CutController.h>
 #include <crombie2/FileController.h>
 #include <crombie2/GlobalController.h>
-#include <crombie2/Job.h>
 #include <crombie2/PlotController.h>
+#include <crombie2/Runner.h>
 
 
 namespace crombie2 {
@@ -35,10 +36,11 @@ namespace crombie2 {
 
     void on_submit_job ();
 
+    std::list<Gtk::ProgressBar> progresses {};
+    std::list<Runner> runners {};
+
     Gtk::HButtonBox submitbox {};
     Gtk::Button button {"Submit"};
-
-    void run();
 
   };
 }

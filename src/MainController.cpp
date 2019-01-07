@@ -1,7 +1,3 @@
-#include <unistd.h>
-
-#include <gtkmm/progressbar.h>
-
 #include <crombie2/HistAnalyzerMaster.h>
 #include <crombie2/MainController.h>
 
@@ -37,51 +33,24 @@ MainController::MainController (ConfigPage& globalpage,
 
 void MainController::on_submit_job () {
 
-  run();
-
-}
-
-
-void MainController::run() {
-
   auto num_files = filemodel.num_files(globalmodel);
 
   if (not num_files)
     return;
 
-  Gtk::ProgressBar progress {};
+  auto& progress = progresses.emplace_back();
 
-  jobpage.box().pack_start (progress);
+  jobpage.box().pack_start (progress, Gtk::PACK_SHRINK);
   progress.show();
-  progress.set_text("Setting up");
+  progress.set_text(std::string("Setting up ") +
+                    std::to_string(num_files) + " files");
 
-  std::vector<Job> jobs;
-  jobs.reserve(num_files);
-
-  // Create all of the jobs
-
-  for (auto& group : filemodel.filegroups) {
-    for (auto& entry : group.files) {
-      for (auto& name : entry.files(globalmodel)) {
-        jobs.emplace_back(globalmodel, group, entry, name);
-      }
-    }
-  }
-
-  // Create histograms
-  HistAnalyzerMaster histanalyzers {jobs, plotmodel, cutmodel};
-
-  // Run jobs
-  double done {0};
-
-  for (auto& job : jobs) {
-    progress.set_fraction(done/num_files);
-    progress.set_text(job.get_file_name());
-    done += 1;
-    usleep(100000);
-  }
-
-  // Output histograms stuff
-  histanalyzers.output(globalmodel);
+  runners.emplace_back(num_files,
+                       cutmodel,
+                       filemodel,
+                       globalmodel,
+                       plotmodel,
+                       progress);
 
 }
+
