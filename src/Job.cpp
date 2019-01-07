@@ -4,7 +4,12 @@
 using namespace crombie2;
 
 
-Job::Job (const GlobalModel& globalmodel, const std::string& file_name) :
+Job::Job (const GlobalModel& globalmodel,
+         FileGroup& group,
+         FileEntry& entry,
+          const std::string& file_name) :
+  group {group},
+  entry {entry},
   tree {file_name, globalmodel.tree.get()} {}
 
 
@@ -23,4 +28,14 @@ void Job::run () {
       analyzer->notify();
   }
 
+}
+
+
+const FileGroup& Job::get_group () const {
+  return group;
+}
+
+
+const FileEntry& Job::get_entry () const {
+  return entry;
 }

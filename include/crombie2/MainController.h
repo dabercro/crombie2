@@ -4,6 +4,7 @@
 #include <crombie2/CutController.h>
 #include <crombie2/FileController.h>
 #include <crombie2/GlobalController.h>
+#include <crombie2/Job.h>
 #include <crombie2/PlotController.h>
 
 

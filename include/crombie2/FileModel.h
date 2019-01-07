@@ -15,6 +15,8 @@ namespace crombie2 {
 
     std::list<FileGroup> filegroups {};
 
+    unsigned num_files ();
+
   private:
 
     void read (const Types::strings& config) override;

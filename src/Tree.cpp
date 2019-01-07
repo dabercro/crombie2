@@ -1,17 +1,10 @@
-#include <mutex>
 #include <regex>
 
+#include <crombie2/Misc.h>
 #include <crombie2/Tree.h>
 
 
 using namespace crombie2;
-
-
-namespace {
-
-  std::mutex rootlock;
-
-}
 
 
 Tree::Tree (const std::string& infile, const std::string& treename) :
@@ -58,10 +51,10 @@ double& Tree::request (const std::string& expr) {
   if (i_form != forms.end())
     return i_form->second.first;
 
-  // Put the formula in
-  rootlock.lock();
+  // Put the formula in, in a thread-safe way
+  Misc::lock();
   TTreeFormula* form = new TTreeFormula(expr.data(), expr.data(), tree);
-  rootlock.unlock();
+  Misc::unlock();
 
   auto output = forms.insert({expr, std::make_pair(0.0, form)});
 

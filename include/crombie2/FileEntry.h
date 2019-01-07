@@ -4,6 +4,7 @@
 
 #include <crombie2/ConfigTable.h>
 #include <crombie2/Configurable.h>
+#include <crombie2/Types.h>
 
 
 namespace crombie2 {
@@ -15,6 +16,11 @@ namespace crombie2 {
     ConfigTable table {{
       &name, &xs
     }, true};
+
+    const Types::strings& files ();
+
+  private:
+    Types::strings files_cache {};
 
   };
 }

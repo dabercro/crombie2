@@ -19,6 +19,19 @@ FileGroup& FileModel::add_files (FileGroup::FileType type) {
 }
 
 
+unsigned FileModel::num_files () {
+
+  unsigned output {0};
+  for (auto& group : filegroups) {
+    for (auto& entry : group.files)
+      output += entry.files().size();
+
+  }
+  return output;
+
+}
+
+
 void FileModel::read (const Types::strings& config) {
   filegroups.clear();
 

@@ -4,19 +4,20 @@
 using namespace crombie2;
 
 
-HistAnalyzer::HistAnalyzer (const std::string& cut, const std::string& expr,
-                            const std::string& weight, const std::list<LegendEntry>& subs,
-                            const std::string& label, unsigned numbins, double min, double max) :
-  cutstr {cut},
-  exprstr {expr},
-  weightstr {weight}
+HistAnalyzer::HistAnalyzer (const FileGroup& group, const Plot& plot, const Selection& selection) :
+  cutstr {selection.cut},
+  exprstr {plot.expr(group.type)},
+  weightstr {group.type == FileGroup::FileType::DATA
+      ? selection.data_weight
+      : selection.mc_weight}
 {
 
+  auto& subs = group.entries;
   hists.reserve(subs.size());
 
   for (auto& entry : subs) {
-    substrs.emplace_back(entry.cut.get());
-    hists.emplace_back(label, numbins, min, max);
+    substrs.emplace_back(entry.cut);
+    hists.emplace_back(plot.label, plot.nbins, plot.min, plot.max);
   }
 
 }

@@ -36,6 +36,8 @@ namespace crombie2 {
       ss >> value;
     }
 
+    operator C() const { return value; }
+
   private:
     std::string name;
     C value;
@@ -59,6 +61,8 @@ namespace crombie2 {
     void set (const std::string& input) override {
       value = input;
     }
+
+    operator std::string() const { return value; }
 
   private:
     std::string name;

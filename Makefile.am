@@ -11,12 +11,14 @@ allsrcs = \
 	$(srcdir)/src/CutModel.cpp \
 	$(srcdir)/src/CutString.cpp \
 	$(srcdir)/src/FileController.cpp \
+	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/Hist.cpp \
 	$(srcdir)/src/HistAnalyzer.cpp \
+	$(srcdir)/src/HistAnalyzerMaster.cpp \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
@@ -24,6 +26,7 @@ allsrcs = \
 	$(srcdir)/src/MiniFileController.cpp \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
+	$(srcdir)/src/Plot.cpp \
 	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
 	$(srcdir)/src/Selection.cpp \

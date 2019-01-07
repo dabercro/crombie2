@@ -4,6 +4,7 @@
 
 #include <crombie2/ConfigTable.h>
 #include <crombie2/Configurable.h>
+#include <crombie2/FileGroup.h>
 
 
 namespace crombie2 {
@@ -19,6 +20,9 @@ namespace crombie2 {
     ConfigTable table {
       &name, &nbins, &min, &max, &label, &data_var, &mc_var
     };
+
+    std::string expr (FileGroup::FileType type) const;
+
   };
 
 }

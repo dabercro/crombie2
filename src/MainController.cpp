@@ -1,3 +1,4 @@
+#include <crombie2/HistAnalyzerMaster.h>
 #include <crombie2/MainController.h>
 
 
@@ -30,5 +31,21 @@ MainController::MainController (ConfigPage& globalpage,
 
 
 void MainController::on_submit_job () {
+
+  std::vector<Job> jobs;
+  jobs.reserve(filemodel.num_files());
+
+  // Create all of the jobs
+
+  for (auto& group : filemodel.filegroups) {
+    for (auto& entry : group.files) {
+      for (auto& name : entry.files()) {
+        jobs.emplace_back(globalmodel, group, entry, name);
+      }
+    }
+  }
+
+  // Create histograms
+  HistAnalyzerMaster histanalyzers {jobs, plotmodel, cutmodel};
 
 }

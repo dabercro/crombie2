@@ -107,15 +107,16 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/Controller.$(OBJEXT) src/Cut.$(OBJEXT) \
 	src/CutController.$(OBJEXT) src/CutModel.$(OBJEXT) \
 	src/CutString.$(OBJEXT) src/FileController.$(OBJEXT) \
-	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
-	src/GlobalController.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
-	src/Hist.$(OBJEXT) src/HistAnalyzer.$(OBJEXT) \
+	src/FileEntry.$(OBJEXT) src/FileModel.$(OBJEXT) \
+	src/FileSystem.$(OBJEXT) src/GlobalController.$(OBJEXT) \
+	src/GlobalModel.$(OBJEXT) src/Hist.$(OBJEXT) \
+	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
 	src/Job.$(OBJEXT) src/MainController.$(OBJEXT) \
 	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
-	src/Parse.$(OBJEXT) src/PlotController.$(OBJEXT) \
-	src/PlotModel.$(OBJEXT) src/Selection.$(OBJEXT) \
-	src/Tree.$(OBJEXT)
+	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) \
+	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
+	src/Selection.$(OBJEXT) src/Tree.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
@@ -145,17 +146,19 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/ConfigTable.Po src/$(DEPDIR)/Controller.Po \
 	src/$(DEPDIR)/Cut.Po src/$(DEPDIR)/CutController.Po \
 	src/$(DEPDIR)/CutModel.Po src/$(DEPDIR)/CutString.Po \
-	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileModel.Po \
-	src/$(DEPDIR)/FileSystem.Po src/$(DEPDIR)/GlobalController.Po \
-	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/Hist.Po \
-	src/$(DEPDIR)/HistAnalyzer.Po src/$(DEPDIR)/Job.Po \
+	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileEntry.Po \
+	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
+	src/$(DEPDIR)/GlobalController.Po src/$(DEPDIR)/GlobalModel.Po \
+	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalyzer.Po \
+	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/Job.Po \
 	src/$(DEPDIR)/MainController.Po src/$(DEPDIR)/MainWindow.Po \
 	src/$(DEPDIR)/MiniCutController.Po \
 	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
-	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/PlotController.Po \
-	src/$(DEPDIR)/PlotModel.Po src/$(DEPDIR)/Selection.Po \
-	src/$(DEPDIR)/Tree.Po src/$(DEPDIR)/main.Po \
-	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
+	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/Plot.Po \
+	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
+	src/$(DEPDIR)/Selection.Po src/$(DEPDIR)/Tree.Po \
+	src/$(DEPDIR)/main.Po test/$(DEPDIR)/main.Po \
+	test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_parser.Po \
 	test/$(DEPDIR)/test_testconfig.Po test/$(DEPDIR)/utils.Po
 am__mv = mv -f
@@ -236,8 +239,6 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EXEEXT = @EXEEXT@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -258,9 +259,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -318,12 +316,14 @@ allsrcs = \
 	$(srcdir)/src/CutModel.cpp \
 	$(srcdir)/src/CutString.cpp \
 	$(srcdir)/src/FileController.cpp \
+	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/Hist.cpp \
 	$(srcdir)/src/HistAnalyzer.cpp \
+	$(srcdir)/src/HistAnalyzerMaster.cpp \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
@@ -331,6 +331,7 @@ allsrcs = \
 	$(srcdir)/src/MiniFileController.cpp \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
+	$(srcdir)/src/Plot.cpp \
 	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
 	$(srcdir)/src/Selection.cpp \
@@ -457,6 +458,8 @@ src/CutString.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/FileController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/FileEntry.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/FileModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/FileSystem.$(OBJEXT): src/$(am__dirstamp) \
@@ -467,6 +470,8 @@ src/GlobalModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Hist.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/HistAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/HistAnalyzerMaster.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Job.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/MainController.$(OBJEXT): src/$(am__dirstamp) \
@@ -479,6 +484,7 @@ src/MiniFileController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Misc.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/Parse.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/Plot.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/PlotController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/PlotModel.$(OBJEXT): src/$(am__dirstamp) \
@@ -530,12 +536,14 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutString.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileController.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileEntry.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileSystem.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Hist.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzer.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzerMaster.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Job.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainWindow.Po@am__quote@ # am--include-marker
@@ -543,6 +551,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniFileController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Misc.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Parse.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Plot.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Selection.Po@am__quote@ # am--include-marker
@@ -858,12 +867,14 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/CutModel.Po
 	-rm -f src/$(DEPDIR)/CutString.Po
 	-rm -f src/$(DEPDIR)/FileController.Po
+	-rm -f src/$(DEPDIR)/FileEntry.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po
 	-rm -f src/$(DEPDIR)/FileSystem.Po
 	-rm -f src/$(DEPDIR)/GlobalController.Po
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
 	-rm -f src/$(DEPDIR)/Hist.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
+	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
@@ -871,6 +882,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/MiniFileController.Po
 	-rm -f src/$(DEPDIR)/Misc.Po
 	-rm -f src/$(DEPDIR)/Parse.Po
+	-rm -f src/$(DEPDIR)/Plot.Po
 	-rm -f src/$(DEPDIR)/PlotController.Po
 	-rm -f src/$(DEPDIR)/PlotModel.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
@@ -938,12 +950,14 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/CutModel.Po
 	-rm -f src/$(DEPDIR)/CutString.Po
 	-rm -f src/$(DEPDIR)/FileController.Po
+	-rm -f src/$(DEPDIR)/FileEntry.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po
 	-rm -f src/$(DEPDIR)/FileSystem.Po
 	-rm -f src/$(DEPDIR)/GlobalController.Po
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
 	-rm -f src/$(DEPDIR)/Hist.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
+	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
@@ -951,6 +965,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/MiniFileController.Po
 	-rm -f src/$(DEPDIR)/Misc.Po
 	-rm -f src/$(DEPDIR)/Parse.Po
+	-rm -f src/$(DEPDIR)/Plot.Po
 	-rm -f src/$(DEPDIR)/PlotController.Po
 	-rm -f src/$(DEPDIR)/PlotModel.Po
 	-rm -f src/$(DEPDIR)/Selection.Po

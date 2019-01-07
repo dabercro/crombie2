@@ -3,17 +3,18 @@
 
 
 #include <crombie2/Analyzer.h>
+#include <crombie2/FileGroup.h>
 #include <crombie2/Hist.h>
 #include <crombie2/HistRefs.h>
 #include <crombie2/LegendEntry.h>
+#include <crombie2/Plot.h>
+#include <crombie2/Selection.h>
 
 
 namespace crombie2 {
   class HistAnalyzer : public Analyzer {
   public:
-    HistAnalyzer (const std::string& cut, const std::string& expr,
-                  const std::string& weight, const std::list<LegendEntry>& subs,
-                  const std::string& label, unsigned numbins, double min, double max);
+    HistAnalyzer (const FileGroup& group, const Plot& plot, const Selection& selection);
 
     void make_requests (Tree& tree) override;
 
@@ -25,7 +26,7 @@ namespace crombie2 {
     const std::string cutstr;
     const std::string exprstr;
     const std::string weightstr;
-    std::vector<const std::string> substrs {};
+    std::vector<std::string> substrs {};
 
     std::list<HistRefs> refs {};
 

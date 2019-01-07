@@ -33,6 +33,10 @@ namespace crombie2 {
       return output;
     }
 
+    void lock ();
+
+    void unlock ();
+
   }
 }
 
