@@ -3,10 +3,8 @@
 
 
 #include <crombie2/Analyzer.h>
-#include <crombie2/FileGroup.h>
 #include <crombie2/Hist.h>
 #include <crombie2/HistRefs.h>
-#include <crombie2/LegendEntry.h>
 #include <crombie2/Plot.h>
 #include <crombie2/Selection.h>
 

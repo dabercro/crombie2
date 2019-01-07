@@ -4,7 +4,6 @@
 
 #include <crombie2/ConfigTable.h>
 #include <crombie2/Configurable.h>
-#include <crombie2/Types.h>
 
 
 namespace crombie2 {
