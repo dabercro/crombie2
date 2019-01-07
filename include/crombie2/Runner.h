@@ -6,7 +6,6 @@
 
 #include <crombie2/CutModel.h>
 #include <crombie2/FileModel.h>
-#include <crombie2/GlobalModel.h>
 #include <crombie2/PlotModel.h>
 
 

@@ -3,9 +3,7 @@
 
 
 #include <crombie2/Analyzer.h>
-#include <crombie2/FileEntry.h>
 #include <crombie2/FileGroup.h>
-#include <crombie2/GlobalModel.h>
 
 
 namespace crombie2 {

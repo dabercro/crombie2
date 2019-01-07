@@ -2,8 +2,6 @@
 #define CROMBIE2_FILEENTRY_H
 
 
-#include <crombie2/ConfigTable.h>
-#include <crombie2/Configurable.h>
 #include <crombie2/GlobalModel.h>
 
 

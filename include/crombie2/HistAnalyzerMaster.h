@@ -2,8 +2,6 @@
 #define CROMBIE2_HISTANALYZERMASTER_H
 
 
-#include <crombie2/CutModel.h>
-#include <crombie2/GlobalModel.h>
 #include <crombie2/HistAnalyzer.h>
 #include <crombie2/Job.h>
 #include <crombie2/PlotModel.h>
