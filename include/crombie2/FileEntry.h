@@ -4,6 +4,7 @@
 
 #include <crombie2/ConfigTable.h>
 #include <crombie2/Configurable.h>
+#include <crombie2/GlobalModel.h>
 
 
 namespace crombie2 {
@@ -16,9 +17,10 @@ namespace crombie2 {
       &name, &xs
     }, true};
 
-    const Types::strings& files ();
+    const Types::strings& files (const GlobalModel& globalmodel);
 
   private:
+    std::string last_global {};
     Types::strings files_cache {};
 
   };

@@ -39,9 +39,6 @@ namespace crombie2 {
 
     Types::map<std::pair<double, TTreeFormula*>> forms {};
 
-    /// Holds all of the branches that need to be read
-    std::set<std::string> needed;
-
   };
 }
 

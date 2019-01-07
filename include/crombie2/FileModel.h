@@ -15,7 +15,7 @@ namespace crombie2 {
 
     std::list<FileGroup> filegroups {};
 
-    unsigned num_files ();
+    unsigned num_files (const GlobalModel& globalmodel);
 
   private:
 

@@ -31,10 +31,14 @@ namespace crombie2 {
     PlotModel plotmodel {};
     PlotController plotcontrol;
 
+    ConfigPage& jobpage;
+
     void on_submit_job ();
 
     Gtk::HButtonBox submitbox {};
     Gtk::Button button {"Submit"};
+
+    void run();
 
   };
 }

@@ -3,6 +3,6 @@
 
 #include <crombie2/ConfigModel.h>
 
-void test_dir (const std::string& dir);
+std::string test_dir (const std::string& dir);
 
 #endif

@@ -22,6 +22,7 @@ namespace crombie2 {
     void on_add_cut ();
 
     Gtk::HBox box {};
+    Gtk::VBox labellist {};
     Gtk::VBox cutlist {};
     Gtk::Button addbutton {"Add Cut"};
 

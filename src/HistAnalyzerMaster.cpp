@@ -12,8 +12,12 @@ HistAnalyzerMaster::HistAnalyzerMaster (std::vector<Job>& jobs, const PlotModel&
     const auto& group = job.get_group();
     for (auto& plot : plotmodel.plots) {
       for (auto& selection : cutmodel.selections)
-        job.add_analyzer(&histanalyzers.emplace_back(group, plot, selection));
+        job.add_analyzer(&histanalyzers.emplace_back(group, plot, selection, cutmodel));
     }
   }
+
+}
+
+void HistAnalyzerMaster::output (GlobalModel& globalmodel) {
 
 }

@@ -25,14 +25,16 @@ void MiniCutController::draw (Gtk::Box& page) {
 
   page.pack_start(box, Gtk::PACK_SHRINK);
 
-  labeltable.draw(controller, box);
+  labeltable.draw(controller, labellist);
   cuttable.draw(controller, cutlist);
 
+  box.pack_start(labellist, Gtk::PACK_SHRINK);
   box.pack_start(cutlist, Gtk::PACK_SHRINK);
   cutlist.pack_end(addbutton, Gtk::PACK_SHRINK);
   addbutton.set_border_width(10);
 
   box.show();
+  labellist.show();
   cutlist.show();
   addbutton.show();
 

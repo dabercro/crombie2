@@ -3,16 +3,16 @@
 
 
 #include <crombie2/Analyzer.h>
+#include <crombie2/CutModel.h>
 #include <crombie2/Hist.h>
 #include <crombie2/HistRefs.h>
 #include <crombie2/Plot.h>
-#include <crombie2/Selection.h>
 
 
 namespace crombie2 {
   class HistAnalyzer : public Analyzer {
   public:
-    HistAnalyzer (const FileGroup& group, const Plot& plot, const Selection& selection);
+    HistAnalyzer (const FileGroup& group, const Plot& plot, const Selection& selection, const CutModel& cutmodel);
 
     void make_requests (Tree& tree) override;
 

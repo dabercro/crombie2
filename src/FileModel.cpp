@@ -19,12 +19,12 @@ FileGroup& FileModel::add_files (FileGroup::FileType type) {
 }
 
 
-unsigned FileModel::num_files () {
+unsigned FileModel::num_files (const GlobalModel& globalmodel) {
 
   unsigned output {0};
   for (auto& group : filegroups) {
     for (auto& entry : group.files)
-      output += entry.files().size();
+      output += entry.files(globalmodel).size();
 
   }
   return output;

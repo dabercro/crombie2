@@ -4,12 +4,12 @@
 using namespace crombie2;
 
 
-HistAnalyzer::HistAnalyzer (const FileGroup& group, const Plot& plot, const Selection& selection) :
-  cutstr {selection.cut},
+HistAnalyzer::HistAnalyzer (const FileGroup& group, const Plot& plot, const Selection& selection, const CutModel& cutmodel) :
+  cutstr {cutmodel.expand(selection.cut)},
   exprstr {plot.expr(group.type)},
-  weightstr {group.type == FileGroup::FileType::DATA
-      ? selection.data_weight
-      : selection.mc_weight}
+  weightstr {cutmodel.expand(group.type == FileGroup::FileType::DATA
+                             ? selection.data_weight
+                             : selection.mc_weight)}
 {
 
   auto& subs = group.entries;
