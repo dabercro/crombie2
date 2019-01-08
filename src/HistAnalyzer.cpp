@@ -4,15 +4,17 @@
 using namespace crombie2;
 
 
-HistAnalyzer::HistAnalyzer (const FileGroup& group, const Plot& plot, const Selection& selection, const CutModel& cutmodel) :
+HistAnalyzer::HistAnalyzer (const Job& job, const Plot& plot, const Selection& selection, const CutModel& cutmodel) :
+  job {job},
+  plot {plot},
+  selection {selection},
   cutstr {cutmodel.expand(selection.cut)},
-  exprstr {plot.expr(group.type)},
-  weightstr {cutmodel.expand(group.type == FileGroup::FileType::DATA
+  weightstr {cutmodel.expand(job.get_group().type == FileGroup::FileType::DATA
                              ? selection.data_weight
                              : selection.mc_weight)}
 {
 
-  auto& subs = group.entries;
+  auto& subs = job.get_group().entries;
   hists.reserve(subs.size());
 
   for (auto& entry : subs) {
@@ -27,7 +29,7 @@ void HistAnalyzer::make_requests (Tree& tree) {
 
   for (auto& substr : substrs)
     refs.emplace_back(tree.request(cutstr),
-                      tree.request(exprstr),
+                      tree.request(plot.expr(job.get_group().type)),
                       tree.request(weightstr),
                       tree.request(substr));
 

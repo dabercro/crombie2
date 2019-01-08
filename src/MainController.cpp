@@ -1,6 +1,7 @@
 #include <thread>
 
 #include <crombie2/MainController.h>
+#include <crombie2/Misc.h>
 #include <crombie2/Runner.h>
 
 
@@ -21,6 +22,19 @@ MainController::MainController (ConfigPage& globalpage,
 {
 
   button.set_border_width(10);
+
+  jobpage.pack_start(histsbox, Gtk::PACK_SHRINK);
+
+  histsbox.pack_start(dohists, Gtk::PACK_SHRINK);
+  histsbox.pack_start(histslabel, Gtk::PACK_SHRINK);
+  histsbox.pack_start(histoutput);
+  histsbox.show();
+
+  dohists.show();
+  histslabel.show();
+
+  histoutput.set_text(Misc::shell("echo -n $HOME/public_html/plots/$(date +%y%m%d)"));
+  histoutput.show();
 
   jobpage.pack_end(submitbox, Gtk::PACK_SHRINK);
   submitbox.pack_start(button, Gtk::PACK_SHRINK);
@@ -53,7 +67,10 @@ void MainController::on_submit_job () {
 
 void MainController::run (unsigned num_files, Progress& progress) {
 
-  Runner runner {num_files, cutmodel, filemodel, globalmodel, plotmodel, progress};
-  runner.run();
+  Runner runner {
+    num_files, cutmodel, filemodel,
+    globalmodel, plotmodel, progress
+  };
+  runner.run(dohists.get_active() ? histoutput.get_text() : "");
 
 }

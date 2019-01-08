@@ -22,7 +22,7 @@ namespace crombie2 {
             const PlotModel& plotmodel,
             Progress& progress);
 
-    void run();
+    void run(const std::string& histoutputdir);
 
   private:
     unsigned num_files;

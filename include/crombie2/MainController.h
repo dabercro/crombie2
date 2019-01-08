@@ -41,6 +41,11 @@ namespace crombie2 {
 
     std::list<Progress> progresses {};
 
+    Gtk::HBox histsbox {};
+    Gtk::CheckButton dohists {};
+    Gtk::Label histslabel {"Plot output directory"};
+    Gtk::Entry histoutput {};
+
     Gtk::HButtonBox submitbox {};
     Gtk::Button button {"Submit"};
 

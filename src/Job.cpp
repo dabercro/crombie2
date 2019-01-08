@@ -25,6 +25,9 @@ void Job::add_analyzer (Analyzer* analyzer) {
 
 void Job::run () {
 
+  if (not analyzers.size())
+    return;
+
   Tree tree {file_name, globalmodel.tree.get()};
 
   for (auto* analyzer : analyzers)

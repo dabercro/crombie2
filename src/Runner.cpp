@@ -27,7 +27,7 @@ Runner::Runner (unsigned num_files,
 }
 
 
-void Runner::run () {
+void Runner::run (const std::string& histoutputdir) {
 
   // Create all of the jobs
 
@@ -41,7 +41,7 @@ void Runner::run () {
   }
 
   // Create histograms
-  HistAnalyzerMaster histanalyzers {jobs, plotmodel, cutmodel};
+  HistAnalyzerMaster histanalyzers {histoutputdir, jobs, plotmodel, cutmodel};
 
   // Run jobs
   unsigned nthreads {globalmodel.nthreads};
@@ -57,7 +57,7 @@ void Runner::run () {
   progress.set_progress("Done", 1.0);
 
   // Output histograms stuff
-  histanalyzers.output(globalmodel);
+  histanalyzers.output();
 
 }
 
