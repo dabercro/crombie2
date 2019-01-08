@@ -1,10 +1,10 @@
 #include <fstream>
 #include <sstream>
-#include <functional>
 
-#include <crombie2/FileSystem.h>
-#include <crombie2/Parse.h>
 #include <crombie2/ConfigModel.h>
+#include <crombie2/FileSystem.h>
+#include <crombie2/Misc.h>
+#include <crombie2/Parse.h>
 
 
 using namespace crombie2;

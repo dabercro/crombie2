@@ -1,6 +1,8 @@
 #include <crombie2/CutController.h>
 
+
 using namespace crombie2;
+
 
 CutController::CutController (ConfigPage& page, CutModel& model) :
   Controller {page, model},

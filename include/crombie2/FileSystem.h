@@ -1,7 +1,7 @@
 #ifndef CROMBIE2_FILESYSTEM_H
 #define CROMBIE2_FILESYSTEM_H
 
-#include <crombie2/Misc.h>
+#include <crombie2/Types.h>
 
 namespace crombie2 {
   namespace FileSystem {

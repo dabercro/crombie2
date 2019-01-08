@@ -2,8 +2,6 @@
 #define CROMBIE2_FILECONTROLLER_H
 
 
-#include <gtkmm/buttonbox.h>
-
 #include <crombie2/FileModel.h>
 #include <crombie2/MiniFileController.h>
 

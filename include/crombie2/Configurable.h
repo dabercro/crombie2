@@ -2,7 +2,6 @@
 #define CROMBIE2_CONFIGURABLE_H
 
 #include <sstream>
-#include <functional>
 
 #include <crombie2/GuiConfigurable.h>
 

@@ -1,10 +1,9 @@
 #include <array>
 #include <cstdlib>
+#include <exception>
 #include <iterator>
-#include <memory>
 #include <mutex>
 #include <sstream>
-#include <stdexcept>
 
 #include <crombie2/Misc.h>
 

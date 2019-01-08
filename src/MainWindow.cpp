@@ -1,6 +1,8 @@
 #include <crombie2/MainWindow.h>
 
+
 using namespace crombie2;
+
 
 MainWindow::MainWindow ()
 {
