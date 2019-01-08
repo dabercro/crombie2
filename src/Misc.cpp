@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <exception>
 #include <iterator>
+#include <memory>
 #include <mutex>
 #include <sstream>
 

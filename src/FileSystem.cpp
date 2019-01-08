@@ -1,5 +1,6 @@
-#include <iostream>
+#include <cstring>
 #include <dirent.h>
+#include <iostream>
 #include <sys/stat.h>
 
 
@@ -101,8 +102,8 @@ void FileSystem::mkdirs(const std::string& path) {
   if (addslash.back() != '/')
     addslash += '/';
 
-  strncpy(path_array, addslash.data(), sizeof(path_array) - 1);
-  auto num_chars = strlen(path_array);
+  std::strcpy(path_array, addslash.data());
+  auto num_chars = std::strlen(path_array);
 
   for (unsigned i_char = 1; i_char < num_chars; i_char++) {
 
