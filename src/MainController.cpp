@@ -1,4 +1,7 @@
+#include <thread>
+
 #include <crombie2/MainController.h>
+#include <crombie2/Runner.h>
 
 
 using namespace crombie2;
@@ -37,19 +40,20 @@ void MainController::on_submit_job () {
   if (not num_files)
     return;
 
-  auto& progress = progresses.emplace_back();
+  auto& progress = progresses.emplace_back(jobpage.box());
 
-  jobpage.box().pack_start (progress, Gtk::PACK_SHRINK);
-  progress.show();
-  progress.set_text(std::string("Setting up ") +
-                    std::to_string(num_files) + " files");
+  progress.set_progress(std::string("Setting up ") +
+                        std::to_string(num_files) + " files");
 
-  runners.emplace_back(num_files,
-                       cutmodel,
-                       filemodel,
-                       globalmodel,
-                       plotmodel,
-                       progress);
+  std::thread thread {[num_files, &progress, this] () { run(num_files, progress); }};
+  thread.detach();
 
 }
 
+
+void MainController::run (unsigned num_files, Progress& progress) {
+
+  Runner runner {num_files, cutmodel, filemodel, globalmodel, plotmodel, progress};
+  runner.run();
+
+}

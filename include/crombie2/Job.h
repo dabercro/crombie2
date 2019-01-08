@@ -22,8 +22,7 @@ namespace crombie2 {
 
     const std::string& get_file_name () const;
 
-    /// Used for priority setting of jobs
-    bool operator< (const Job& other);
+    const unsigned long size;
 
   private:
 
@@ -32,11 +31,10 @@ namespace crombie2 {
     FileEntry& entry;
     const std::string file_name;
 
-    const unsigned long size;
-
     std::vector<Analyzer*> analyzers;
 
   };
+
 }
 
 

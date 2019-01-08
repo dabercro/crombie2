@@ -2,14 +2,17 @@
 #define CROMBIE2_RUNNER_H
 
 
-#include <gtkmm/progressbar.h>
+#include <queue>
 
 #include <crombie2/CutModel.h>
 #include <crombie2/FileModel.h>
+#include <crombie2/JobSorter.h>
 #include <crombie2/PlotModel.h>
+#include <crombie2/Progress.h>
 
 
 namespace crombie2 {
+
   class Runner {
   public:
     Runner (unsigned num_files,
@@ -17,7 +20,7 @@ namespace crombie2 {
             const FileModel& filemodel,
             const GlobalModel& globalmodel,
             const PlotModel& plotmodel,
-            Gtk::ProgressBar& progress);
+            Progress& progress);
 
     void run();
 
@@ -28,7 +31,14 @@ namespace crombie2 {
     GlobalModel globalmodel;
     PlotModel plotmodel;
 
-    Gtk::ProgressBar& progress;
+    Progress& progress;
+
+    std::vector<Job> jobs {};
+    std::priority_queue<JobSorter> queue {};
+
+    unsigned done {0};
+
+    void run_thread ();
 
   };
 }

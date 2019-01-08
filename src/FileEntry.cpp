@@ -10,7 +10,7 @@ FileEntry::FileEntry (const FileEntry& other) :
   xs {other.xs} {}
 
 
-const Types::strings& FileEntry::files (const GlobalModel& globalmodel) {
+Types::strings& FileEntry::files (const GlobalModel& globalmodel) {
 
   if (last_global == globalmodel.inputdir.get())
     return files_cache;

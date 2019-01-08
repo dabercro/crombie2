@@ -13,7 +13,7 @@ Job::Job (const GlobalModel& globalmodel,
   group {group},
   entry {entry},
   file_name {globalmodel.inputdir.get() + "/" + entry.name.get() + "/" + file},
-  size {FileSystem::get_size(file_name)} {}
+  size {FileSystem::get_size(globalmodel.inputdir.get() + "/" + entry.name.get() + "/" + file)} {}
 
 
 void Job::add_analyzer (Analyzer* analyzer) {
@@ -50,9 +50,4 @@ const FileEntry& Job::get_entry () const {
 
 const std::string& Job::get_file_name () const {
   return file_name;
-}
-
-
-bool Job::operator< (const Job& other) {
-  return size < other.size;
 }

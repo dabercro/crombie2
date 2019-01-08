@@ -1,3 +1,6 @@
+#include <mutex>
+#include <thread>
+
 #include <crombie2/HistAnalyzerMaster.h>
 #include <crombie2/Runner.h>
 
@@ -10,27 +13,29 @@ Runner::Runner (unsigned num_files,
                 const FileModel& filemodel,
                 const GlobalModel& globalmodel,
                 const PlotModel& plotmodel,
-                Gtk::ProgressBar& progress) :
+                Progress& progress) :
   num_files {num_files},
   cutmodel {cutmodel},
   filemodel {filemodel},
   globalmodel {globalmodel},
   plotmodel {plotmodel},
-  progress {progress} {}
+  progress {progress}
+{
+
+  jobs.reserve (num_files);
+
+}
 
 
-
-void Runner::run() {
-
-  std::vector<Job> jobs;
-  jobs.reserve(num_files);
+void Runner::run () {
 
   // Create all of the jobs
 
   for (auto& group : filemodel.filegroups) {
     for (auto& entry : group.files) {
       for (auto& name : entry.files(globalmodel)) {
-        jobs.emplace_back(globalmodel, group, entry, name);
+        queue.emplace(jobs.emplace_back(globalmodel, group,
+                                        entry, name));
       }
     }
   }
@@ -39,15 +44,52 @@ void Runner::run() {
   HistAnalyzerMaster histanalyzers {jobs, plotmodel, cutmodel};
 
   // Run jobs
-  double done {0};
+  unsigned nthreads {globalmodel.nthreads};
+  std::vector<std::thread> threads {};
+  threads.reserve(nthreads);
 
-  for (auto& job : jobs) {
-    progress.set_fraction(done/num_files);
-    progress.set_text(job.get_file_name());
-    done += 1;
-  }
+  for (unsigned i_thread = 0; i_thread < nthreads; ++i_thread)
+    threads.emplace_back([this] () { run_thread(); });
+
+  for (auto& thread : threads)
+    thread.join();
+
+  progress.set_progress("Done", 1.0);
 
   // Output histograms stuff
   histanalyzers.output(globalmodel);
+
+}
+
+
+namespace {
+
+  std::mutex job_lock {};
+
+}
+
+
+void Runner::run_thread () {
+
+  Job* job {nullptr};
+
+  while (true) {
+
+    job_lock.lock();
+
+    if (queue.empty()) {
+      job_lock.unlock();
+      break;
+    }
+
+    job = queue.top().job;
+    progress.set_progress(job->get_file_name(), double(done++)/num_files);
+    queue.pop();
+
+    job_lock.unlock();
+
+    job->run();
+
+  }
 
 }

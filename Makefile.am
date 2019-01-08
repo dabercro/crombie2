@@ -20,6 +20,7 @@ allsrcs = \
 	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/HistAnalyzerMaster.cpp \
 	$(srcdir)/src/Job.cpp \
+	$(srcdir)/src/JobSorter.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \
@@ -29,6 +30,7 @@ allsrcs = \
 	$(srcdir)/src/Plot.cpp \
 	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
+	$(srcdir)/src/Progress.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
 	$(srcdir)/src/Tree.cpp

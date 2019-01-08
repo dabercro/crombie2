@@ -2,8 +2,12 @@
 
 #include <crombie2/MainWindow.h>
 
+#include "TROOT.h"
+
 int main (int argc, char *argv[])
 {
+  ROOT::EnableThreadSafety();
+
   Gtk::Main kit(argc, argv);
 
   crombie2::MainWindow window;

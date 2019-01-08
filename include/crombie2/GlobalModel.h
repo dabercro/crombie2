@@ -19,7 +19,7 @@ namespace crombie2 {
     Configurable<std::string> inputdir {"Input directory", "."};
 
     /// The number of threads to do all jobs
-    Configurable<int> nthreads {"Number Threads", 1};
+    Configurable<unsigned> nthreads {"Number Threads", 1};
 
     /// The name of the tree to read events from
     Configurable<std::string> tree {"Tree", "events"};

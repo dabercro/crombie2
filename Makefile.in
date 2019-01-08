@@ -111,13 +111,14 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/FileSystem.$(OBJEXT) src/GlobalController.$(OBJEXT) \
 	src/GlobalModel.$(OBJEXT) src/Hist.$(OBJEXT) \
 	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
-	src/Job.$(OBJEXT) src/MainController.$(OBJEXT) \
-	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
+	src/Job.$(OBJEXT) src/JobSorter.$(OBJEXT) \
+	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
+	src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
 	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) \
 	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
-	src/Runner.$(OBJEXT) src/Selection.$(OBJEXT) \
-	src/Tree.$(OBJEXT)
+	src/Progress.$(OBJEXT) src/Runner.$(OBJEXT) \
+	src/Selection.$(OBJEXT) src/Tree.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
@@ -152,14 +153,15 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/GlobalController.Po src/$(DEPDIR)/GlobalModel.Po \
 	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalyzer.Po \
 	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/Job.Po \
-	src/$(DEPDIR)/MainController.Po src/$(DEPDIR)/MainWindow.Po \
-	src/$(DEPDIR)/MiniCutController.Po \
+	src/$(DEPDIR)/JobSorter.Po src/$(DEPDIR)/MainController.Po \
+	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
 	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
 	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/Plot.Po \
 	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
-	src/$(DEPDIR)/Runner.Po src/$(DEPDIR)/Selection.Po \
-	src/$(DEPDIR)/Tree.Po src/$(DEPDIR)/main.Po \
-	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
+	src/$(DEPDIR)/Progress.Po src/$(DEPDIR)/Runner.Po \
+	src/$(DEPDIR)/Selection.Po src/$(DEPDIR)/Tree.Po \
+	src/$(DEPDIR)/main.Po test/$(DEPDIR)/main.Po \
+	test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_fileentry.Po test/$(DEPDIR)/test_parser.Po \
 	test/$(DEPDIR)/test_testconfig.Po test/$(DEPDIR)/utils.Po
 am__mv = mv -f
@@ -326,6 +328,7 @@ allsrcs = \
 	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/HistAnalyzerMaster.cpp \
 	$(srcdir)/src/Job.cpp \
+	$(srcdir)/src/JobSorter.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \
@@ -335,6 +338,7 @@ allsrcs = \
 	$(srcdir)/src/Plot.cpp \
 	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
+	$(srcdir)/src/Progress.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
 	$(srcdir)/src/Tree.cpp
@@ -477,6 +481,8 @@ src/HistAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
 src/HistAnalyzerMaster.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Job.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/JobSorter.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/MainController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MainWindow.$(OBJEXT): src/$(am__dirstamp) \
@@ -491,6 +497,8 @@ src/Plot.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/PlotController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/PlotModel.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/Progress.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Runner.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -552,6 +560,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzerMaster.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Job.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JobSorter.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainWindow.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniCutController.Po@am__quote@ # am--include-marker
@@ -561,6 +570,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Plot.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotModel.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Progress.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Runner.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Selection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Tree.Po@am__quote@ # am--include-marker
@@ -885,6 +895,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
 	-rm -f src/$(DEPDIR)/Job.Po
+	-rm -f src/$(DEPDIR)/JobSorter.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
 	-rm -f src/$(DEPDIR)/MiniCutController.Po
@@ -894,6 +905,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/Plot.Po
 	-rm -f src/$(DEPDIR)/PlotController.Po
 	-rm -f src/$(DEPDIR)/PlotModel.Po
+	-rm -f src/$(DEPDIR)/Progress.Po
 	-rm -f src/$(DEPDIR)/Runner.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
 	-rm -f src/$(DEPDIR)/Tree.Po
@@ -970,6 +982,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
 	-rm -f src/$(DEPDIR)/Job.Po
+	-rm -f src/$(DEPDIR)/JobSorter.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
 	-rm -f src/$(DEPDIR)/MiniCutController.Po
@@ -979,6 +992,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/Plot.Po
 	-rm -f src/$(DEPDIR)/PlotController.Po
 	-rm -f src/$(DEPDIR)/PlotModel.Po
+	-rm -f src/$(DEPDIR)/Progress.Po
 	-rm -f src/$(DEPDIR)/Runner.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
 	-rm -f src/$(DEPDIR)/Tree.Po

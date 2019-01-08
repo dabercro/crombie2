@@ -17,7 +17,7 @@ namespace crombie2 {
       &name, &xs
     }, true};
 
-    const Types::strings& files (const GlobalModel& globalmodel);
+    Types::strings& files (const GlobalModel& globalmodel);
 
   private:
     std::string last_global {};
