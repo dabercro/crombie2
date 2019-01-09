@@ -111,9 +111,10 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/FileSystem.$(OBJEXT) src/GlobalController.$(OBJEXT) \
 	src/GlobalModel.$(OBJEXT) src/Hist.$(OBJEXT) \
 	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
-	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
-	src/JobSorter.$(OBJEXT) src/MainController.$(OBJEXT) \
-	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
+	src/HistModel.$(OBJEXT) src/HistSplit.$(OBJEXT) \
+	src/Job.$(OBJEXT) src/JobSorter.$(OBJEXT) \
+	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
+	src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
 	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) \
 	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
@@ -152,10 +153,10 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
 	src/$(DEPDIR)/GlobalController.Po src/$(DEPDIR)/GlobalModel.Po \
 	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalyzer.Po \
-	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistSplit.Po \
-	src/$(DEPDIR)/Job.Po src/$(DEPDIR)/JobSorter.Po \
-	src/$(DEPDIR)/MainController.Po src/$(DEPDIR)/MainWindow.Po \
-	src/$(DEPDIR)/MiniCutController.Po \
+	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistModel.Po \
+	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/Job.Po \
+	src/$(DEPDIR)/JobSorter.Po src/$(DEPDIR)/MainController.Po \
+	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
 	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
 	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/Plot.Po \
 	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
@@ -328,6 +329,7 @@ allsrcs = \
 	$(srcdir)/src/Hist.cpp \
 	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/HistAnalyzerMaster.cpp \
+	$(srcdir)/src/HistModel.cpp \
 	$(srcdir)/src/HistSplit.cpp \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/JobSorter.cpp \
@@ -482,6 +484,8 @@ src/HistAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/HistAnalyzerMaster.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/HistModel.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/HistSplit.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Job.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
@@ -563,6 +567,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Hist.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzerMaster.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistSplit.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Job.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JobSorter.Po@am__quote@ # am--include-marker
@@ -899,6 +904,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/Hist.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
+	-rm -f src/$(DEPDIR)/HistModel.Po
 	-rm -f src/$(DEPDIR)/HistSplit.Po
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/JobSorter.Po
@@ -987,6 +993,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/Hist.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
+	-rm -f src/$(DEPDIR)/HistModel.Po
 	-rm -f src/$(DEPDIR)/HistSplit.Po
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/JobSorter.Po

@@ -2,7 +2,6 @@
 
 #include <crombie2/FileSystem.h>
 #include <crombie2/HistAnalyzerMaster.h>
-#include <crombie2/HistSplit.h>
 
 #include "TCanvas.h"
 #include "THStack.h"
@@ -24,19 +23,19 @@ HistAnalyzerMaster::HistAnalyzerMaster (const std::string& outputdir, std::vecto
   if (not outputdir.size())
     return;
 
-  histanalyzers.reserve(jobs.size() * plotmodel.plots.size() * cutmodel.selections.size());
-
   for (auto& job : jobs) {
     auto& entry = job.get_entry();
     if (xs.insert({entry.name, entry.xs}).second) {
+      types.insert({entry.name, job.get_group().type});
       for (auto& legend : job.get_group().entries)
         styles.insert({legend.legend, legend.style});
     }
 
     for (auto& plot : plotmodel.plots) {
       for (auto& selection : cutmodel.selections) {
-        auto& analyzer = histanalyzers.emplace_back(job, plot, selection, cutmodel);
-        job.add_analyzer(&analyzer);
+        auto output_file = selection.cut.get() + "_" + plot.name.get();
+        histmodels[output_file].
+          insert({job.get_entry().name.get(), {job, globalmodel, plot, cutmodel, selection}});
       }
     }
   }
@@ -51,17 +50,8 @@ void HistAnalyzerMaster::output () {
   // Map to output file and to input file
   Types::map<Types::map<HistSplit>> hists;
 
-  for (auto& analyzer : histanalyzers) {
-    auto& output_map = hists[analyzer.get_output_file()];
-
-    // Get the HistSplit that we want
-    auto ins_result = output_map.insert({analyzer.get_input_file(), {analyzer.get_group()}});
-    // Add to it
-    ins_result.first->second.add(analyzer.get_result());
-  }
-
   // Now make each output
-  for (auto& key_output : hists) {
+  for (auto& key_output : histmodels) {
     // Merge them using legend entries
     Types::map<Hist> datahists;
     Types::map<Hist> mchists;
@@ -69,9 +59,11 @@ void HistAnalyzerMaster::output () {
 
     // Scale all of the histograms
     for (auto& key_input : key_output.second) {
-      auto& histsplit = key_input.second;
+      auto& histmodel = key_input.second;
 
-      if (histsplit.type != FileGroup::FileType::DATA)
+      auto histsplit = histmodel.get_histsplit();
+
+      if (types.at(key_input.first) != FileGroup::FileType::DATA)
         histsplit.scale(globalmodel.luminosity, xs[key_input.first]);
 
       auto& outmap = histsplit.type == FileGroup::FileType::MC
@@ -263,6 +255,9 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   if (bottom) {
     pad2.SetTopMargin(0.025);
     pad2.SetBottomMargin(0.4);
+    pad2.SetGridy(1);
+    pad2.Draw();
+
     pad2.cd();
 
     auto bkg_ratio = bkg_hist.ratio(bkg_hist);
@@ -295,10 +290,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     styled(signal_hist.ratio(bkg_hist).roothist(), FileGroup::FileType::SIGNAL, 2)->Draw("hist,same");
     styled(data_ratio.roothist(), FileGroup::FileType::DATA, 1)->Draw("PE,same");
 
-    pad2.SetGridy(1);
-
     canv.cd();
-    pad2.Draw();
   }
 
   pad1.cd();
