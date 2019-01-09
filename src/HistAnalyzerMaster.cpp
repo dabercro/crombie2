@@ -94,7 +94,7 @@ void HistAnalyzerMaster::output () {
 
 namespace {
 
-  void add_to (auto& target, auto& input) {
+  void add_to (Hist& target, Types::map<Hist>& input) {
 
     for (auto& hist : input)
       target.add(hist.second);
@@ -102,7 +102,7 @@ namespace {
   }
 
 
-  auto sorted_vec (auto& hists) {
+  std::vector<std::pair<std::string, TH1D*>> sorted_vec (Types::map<Hist>& hists) {
     std::vector<std::pair<std::string, TH1D*>> sortvec {};
     sortvec.reserve(hists.size());
 
