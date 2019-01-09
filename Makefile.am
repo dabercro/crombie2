@@ -19,6 +19,7 @@ allsrcs = \
 	$(srcdir)/src/Hist.cpp \
 	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/HistAnalyzerMaster.cpp \
+	$(srcdir)/src/HistSplit.cpp \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/JobSorter.cpp \
 	$(srcdir)/src/MainController.cpp \

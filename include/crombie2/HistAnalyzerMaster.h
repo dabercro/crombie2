@@ -13,7 +13,8 @@ namespace crombie2 {
     HistAnalyzerMaster (const std::string& outputdir,
                         std::vector<Job>& jobs,
                         const PlotModel& plotmodel,
-                        const CutModel& cutmodel);
+                        const CutModel& cutmodel,
+                        const GlobalModel& globalmodel);
 
     void output ();
 
@@ -21,6 +22,19 @@ namespace crombie2 {
     const std::string outputdir;
 
     std::vector<HistAnalyzer> histanalyzers {};
+
+    /// Maps the input file name to cross sections
+    Types::map<double> xs {};
+    const GlobalModel& globalmodel;
+
+    /// Maps the legend entry to styles
+    Types::map<short> styles {};
+
+    /// Does the sorting and drawing for each individual plot
+    void draw_plot(const std::string& output,
+                   Types::map<Hist>& data,
+                   Types::map<Hist>& mc,
+                   Types::map<Hist>& signal);
 
   };
 }

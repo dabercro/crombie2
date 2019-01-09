@@ -3,8 +3,11 @@
 
 // I really don't like ROOT's global hash tables and confusing lifetimes
 // Here, I make a simple data structure that can make a histogram
+// Try to use this and only get the TH1D object at the end
 
 #include <list>
+#include <string>
+#include <vector>
 
 #include "TH1D.h"
 
@@ -12,6 +15,7 @@ namespace crombie2 {
 
   class Hist {
   public:
+
     /**
        Constructor of custom Hist class
        @param label Is the label to go on the x-axis
@@ -24,17 +28,21 @@ namespace crombie2 {
     */
     Hist(const std::string label = "",
          unsigned nbins = 0, double min = 0, double max = 0,
-         bool w2 = true, double total_events = 0)
-      : label{label}, nbins{nbins}, min{min}, max{max},
-        contents(nbins + 2), sumw2((nbins + 2) * w2),
-        total{total_events} {}
+         bool w2 = true, double total_events = 0);
+
 
     /// Fills this histogram with some value and weight
     void fill (double val, double weight = 1.0);
 
+
+    /// Adds another histogram's bin contents to this Hist
     void add  (const Hist& other);
+
+
     /// Scale this histogram by a direct scale factor
     void scale (const double scale);
+
+
     /**
        Scale this histogram to a luminosity and cross section. 
        The result will be invalid if this scale function is called
@@ -42,8 +50,10 @@ namespace crombie2 {
     */
     void scale (const double lumi, const double xs);
 
+
     /// Returns a Hist that is a ratio between this and another Hist
     Hist ratio (const Hist& other) const;
+
 
     /**
        Returns a pointer to a histogram that is owned by global list.
@@ -52,10 +62,28 @@ namespace crombie2 {
     */
     TH1D* roothist ();
 
-    /// Sets the value of the total number of events, throws exception if total is already set.                                                                                                  
+
+    /// Sets the value of the total number of events, throws exception if total is already set
     void set_total (double newtotal);
 
+
+    /// Gives the total number of events in the histogram
+    double integral (bool include_under_over = true);
+
+    /// Get the maximum value including uncertainties (for plotting)
+    double max_w_unc () const;
+
+    /// Get the minimum value including uncertainties, but not less than 0.0 (for plotting)
+    double min_w_unc (const bool includezeros = true) const;
+
+    /**
+       Get the maximum bin and the total number of bins.
+       Does not include overflow bins.
+    */
+    std::pair<unsigned, unsigned> get_maxbin_outof () const;
+
   private:
+
     std::string label {};
     unsigned nbins {};
     double min {};
@@ -69,6 +97,7 @@ namespace crombie2 {
     std::list<TH1D> histstore {};
 
     double get_unc (unsigned bin) const;         ///< Find the full uncertainty from uncs hists and sumw2
+
   };
 
 }

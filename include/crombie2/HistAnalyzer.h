@@ -20,11 +20,17 @@ namespace crombie2 {
 
     std::vector<Hist>& get_result ();
 
+    std::string get_output_file () const;
+
+    std::string get_input_file () const;
+
+    const FileGroup& get_group () const;
+
+  private:
+
     const Job& job;
     const Plot& plot;
     const Selection& selection;
-
-  private:
 
     const std::string cutstr;
     const std::string weightstr;

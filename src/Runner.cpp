@@ -1,3 +1,4 @@
+#include <chrono>
 #include <mutex>
 #include <thread>
 
@@ -29,6 +30,8 @@ Runner::Runner (unsigned num_files,
 
 void Runner::run (const std::string& histoutputdir) {
 
+  auto start = std::chrono::steady_clock::now();
+
   // Create all of the jobs
 
   for (auto& group : filemodel.filegroups) {
@@ -41,7 +44,7 @@ void Runner::run (const std::string& histoutputdir) {
   }
 
   // Create histograms
-  HistAnalyzerMaster histanalyzers {histoutputdir, jobs, plotmodel, cutmodel};
+  HistAnalyzerMaster histanalyzers {histoutputdir, jobs, plotmodel, cutmodel, globalmodel};
 
   // Run jobs
   unsigned nthreads {globalmodel.nthreads};
@@ -54,10 +57,15 @@ void Runner::run (const std::string& histoutputdir) {
   for (auto& thread : threads)
     thread.join();
 
-  progress.set_progress("Done", 1.0);
+  progress.set_progress("Processing Output", 1.0);
 
   // Output histograms stuff
   histanalyzers.output();
+
+  auto end = std::chrono::steady_clock::now();
+  std::chrono::duration<double> diff = end - start;
+
+  progress.set_progress(std::string("Finished in ") + std::to_string(diff.count()) + " s", 1.0);
 
 }
 

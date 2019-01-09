@@ -13,10 +13,14 @@ namespace crombie2 {
 
     void add (std::vector<Hist> adding);
 
-    std::vector<Hist>& get_hists ();
+    void scale (double lumi, double xs);
+
+    std::vector<std::pair<std::string, Hist>>& get_hists ();
+
+    const FileGroup::FileType type;
 
   private:
-    std::vector<Hist> hists {};
+    std::vector<std::pair<std::string, Hist>> hists {};
     
   };
 }
