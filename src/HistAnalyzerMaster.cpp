@@ -34,8 +34,11 @@ HistAnalyzerMaster::HistAnalyzerMaster (const std::string& outputdir, std::vecto
     for (auto& plot : plotmodel.plots) {
       for (auto& selection : cutmodel.selections) {
         auto output_file = selection.cut.get() + "_" + plot.name.get();
+
         histmodels[output_file].
-          insert({job.get_entry().name.get(), {job, globalmodel, plot, cutmodel, selection}});
+          insert({job.get_entry().name.get(),
+                  {job, globalmodel, plot, cutmodel, selection}}).
+          first->second.add_job(job);
       }
     }
   }
@@ -63,12 +66,14 @@ void HistAnalyzerMaster::output () {
 
       auto histsplit = histmodel.get_histsplit();
 
-      if (types.at(key_input.first) != FileGroup::FileType::DATA)
-        histsplit.scale(globalmodel.luminosity, xs[key_input.first]);
+      auto type = types.at(key_input.first);
 
-      auto& outmap = histsplit.type == FileGroup::FileType::MC
+      if (type != FileGroup::FileType::DATA)
+        histsplit.scale(globalmodel.luminosity, xs.at(key_input.first));
+
+      auto& outmap = type == FileGroup::FileType::MC
         ? mchists
-        : (histsplit.type == FileGroup::FileType::DATA
+        : (type == FileGroup::FileType::DATA
            ? datahists
            : signalhists);
 

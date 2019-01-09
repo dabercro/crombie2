@@ -11,9 +11,9 @@ using namespace crombie2;
 
 Hist::Hist(const std::string label,
            unsigned nbins, double min, double max,
-           bool w2, double total_events) :
+           double total_events) :
   label{label}, nbins{nbins}, min{min}, max{max},
-  contents(nbins + 2), sumw2((nbins + 2) * w2),
+  contents(nbins + 2), sumw2((nbins + 2)),
   total{total_events} {}
 
 
@@ -165,5 +165,39 @@ std::pair<unsigned, unsigned> Hist::get_maxbin_outof () const {
     }
   }
   return std::make_pair(maxbin, std::max(nbins, 1u));
+
+}
+
+
+void Hist::set_contents (const std::vector<double>& newcont,
+                         const std::vector<double>& neww2) {
+
+  if (newcont.size() != neww2.size() or
+      newcont.size() != contents.size())
+    throw std::logic_error {"Assigning the wrong sized contents to histogram"};
+
+  contents = newcont;
+  sumw2 = neww2;
+
+}
+
+
+double Hist::get_total () const {
+
+  return total;
+
+}
+
+
+const std::vector<double>& Hist::get_contents () const {
+
+  return contents;
+
+}
+
+
+const std::vector<double>& Hist::get_errors () const {
+
+  return sumw2;
 
 }

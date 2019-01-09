@@ -54,7 +54,7 @@ void HistAnalyzer::notify () {
 }
 
 
-std::vector<Hist>& HistAnalyzer::get_result () {
+const std::vector<Hist>& HistAnalyzer::get_result () const {
 
   return hists;
 

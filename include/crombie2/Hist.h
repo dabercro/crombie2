@@ -23,12 +23,11 @@ namespace crombie2 {
               There is also one overflow and one underflow bin stored internally.
        @param min The minimum value shown on the x-axis
        @param max The maximum value on the x-axis
-       @param w2 If true, store the squared sum of weights, otherwise don't bother
        @param total_events Is the total weight of events in the file(s) filling this histogram
     */
     Hist(const std::string label = "",
          unsigned nbins = 0, double min = 0, double max = 0,
-         bool w2 = true, double total_events = 0);
+         double total_events = 0);
 
 
     /// Fills this histogram with some value and weight
@@ -81,6 +80,13 @@ namespace crombie2 {
        Does not include overflow bins.
     */
     std::pair<unsigned, unsigned> get_maxbin_outof () const;
+
+    void set_contents (const std::vector<double>& newcont,
+                       const std::vector<double>& neww2);
+
+    double get_total () const;
+    const std::vector<double>& get_contents () const;
+    const std::vector<double>& get_errors () const;
 
   private:
 

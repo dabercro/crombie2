@@ -18,7 +18,7 @@ namespace crombie2 {
 
     void notify () override;
 
-    std::vector<Hist>& get_result ();
+    const std::vector<Hist>& get_result () const;
 
     std::string get_output_file () const;
 

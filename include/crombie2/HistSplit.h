@@ -9,19 +9,18 @@
 namespace crombie2 {
   class HistSplit {
   public:
-    HistSplit(const FileGroup& group);
+    HistSplit(const std::vector<std::string>& entries);
 
-    void add (std::vector<Hist> adding);
+    void add (const std::vector<Hist>& adding);
 
     void scale (double lumi, double xs);
 
+    /// First part of each element is the legend entry
     std::vector<std::pair<std::string, Hist>>& get_hists ();
-
-    const FileGroup::FileType type;
 
   private:
     std::vector<std::pair<std::string, Hist>> hists {};
-    
+
   };
 }
 
