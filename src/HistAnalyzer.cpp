@@ -4,14 +4,16 @@
 using namespace crombie2;
 
 
-HistAnalyzer::HistAnalyzer (const Job& job, const Plot& plot, const Selection& selection, const CutModel& cutmodel) :
+HistAnalyzer::HistAnalyzer (const Job& job, const Plot& plot, const Selection& selection,
+                            const CutModel& cutmodel, const GlobalModel& globalmodel) :
   job {job},
   plot {plot},
   selection {selection},
   cutstr {cutmodel.expand(selection.cut)},
   weightstr {cutmodel.expand(job.get_group().type == FileGroup::FileType::DATA
                              ? selection.data_weight
-                             : selection.mc_weight)}
+                             : selection.mc_weight)},
+  total_str {globalmodel.normhist}
 {
 
   auto& subs = job.get_group().entries;
@@ -26,6 +28,11 @@ HistAnalyzer::HistAnalyzer (const Job& job, const Plot& plot, const Selection& s
 
 
 void HistAnalyzer::make_requests (Tree& tree) {
+
+  auto total = tree.get<TH1>(total_str)->GetBinContent(1);
+
+  for (auto& hist : hists)
+    hist.set_total(total);
 
   for (auto& substr : substrs)
     refs.emplace_back(tree.request(cutstr),

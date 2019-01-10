@@ -33,7 +33,7 @@ MainController::MainController (ConfigPage& globalpage,
   dohists.show();
   histslabel.show();
 
-  histoutput.set_text(Misc::shell("echo -n $HOME/public_html/plots/$(date +%y%m%d)"));
+  histoutput.set_text(Misc::shell("printf $(date +%y%m%d)"));
   histoutput.show();
 
   jobpage.pack_end(submitbox, Gtk::PACK_SHRINK);

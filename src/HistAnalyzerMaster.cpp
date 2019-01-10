@@ -12,10 +12,10 @@
 using namespace crombie2;
 
 
-HistAnalyzerMaster::HistAnalyzerMaster (const std::string& outputdir, std::vector<Job>& jobs,
+HistAnalyzerMaster::HistAnalyzerMaster (const std::string& outdir, std::vector<Job>& jobs,
                                         const PlotModel& plotmodel, const CutModel& cutmodel,
                                         const GlobalModel& globalmodel) :
-  outputdir {outputdir},
+  outputdir {outdir.size() ? globalmodel.outplotdir.get() + "/" + outdir : ""},
   globalmodel {globalmodel}
 {
 
@@ -260,9 +260,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   if (bottom) {
     pad2.SetTopMargin(0.025);
     pad2.SetBottomMargin(0.4);
-    pad2.SetGridy(1);
     pad2.Draw();
-
     pad2.cd();
 
     auto bkg_ratio = bkg_hist.ratio(bkg_hist);
@@ -294,6 +292,9 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     // All of the signals should be drawn separately...
     styled(signal_hist.ratio(bkg_hist).roothist(), FileGroup::FileType::SIGNAL, 2)->Draw("hist,same");
     styled(data_ratio.roothist(), FileGroup::FileType::DATA, 1)->Draw("PE,same");
+
+    pad2.SetGridy(1);
+    pad2.Draw();
 
     canv.cd();
   }

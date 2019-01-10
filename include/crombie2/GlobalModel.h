@@ -38,6 +38,8 @@ namespace crombie2 {
 
     Configurable<double> maxratio {"Ratio Maximum", 2.0};
 
+    Configurable<std::string> outplotdir {"Plot Output", ""};
+
     ConfigTable configs {
       &inputdir,
       &nthreads,
@@ -47,7 +49,8 @@ namespace crombie2 {
       &runnum,
       &luminum,
       &minratio,
-      &maxratio
+      &maxratio,
+      &outplotdir
     };
 
   private:

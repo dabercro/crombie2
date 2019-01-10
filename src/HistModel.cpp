@@ -10,7 +10,7 @@ using namespace crombie2;
 
 HistModel::HistModel (Job& job, const GlobalModel& globalmodel,
                       const Plot& plot, const CutModel& cutmodel, const Selection& selection) :
-  analyzer_prototype {job, plot, selection, cutmodel},
+  analyzer_prototype {job, plot, selection, cutmodel, globalmodel},
   inputdir {globalmodel.inputdir},
   inputfile {job.get_entry().name},
   nbins {plot.nbins},
