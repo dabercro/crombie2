@@ -90,11 +90,6 @@ HistSplit HistModel::get_histsplit () const {
     // Dump the cache
     std::ofstream file {cache_file};
 
-    file << label << std::endl
-         << nbins << std::endl
-         << min << std::endl
-         << max << std::endl;
-
     for (auto& hist_pair : output.get_hists()) {
 
       auto& hist = hist_pair.second;
@@ -107,19 +102,36 @@ HistSplit HistModel::get_histsplit () const {
     }
   }
   else {
-  /*
-    Members of Hist to read
+    std::vector<Hist> hists {};
 
-    std::string label {};
-    unsigned nbins {};
-    double min {};
-    double max {};
+    std::ifstream file {cache_file};
 
-    double total {};
+    for (unsigned i_hist = 0; i_hist < substrs.size(); ++i_hist) {
 
-    std::vector<double> contents {};
-    std::vector<double> sumw2 {};
-  */
+      double total {};
+
+      std::vector<double> contents {};
+      std::vector<double> sumw2 {};
+
+      file >> total;
+
+      for (unsigned i_bin = 0; i_bin < nbins + 2; ++i_bin) {
+        double bin_content {};
+        double bin_w2 {};
+
+        file >> bin_content >> bin_w2;
+
+        contents.push_back(bin_content);
+        sumw2.push_back(bin_w2);
+      }
+
+      hists.emplace_back(label, nbins, min, max, total).
+        set_contents(contents, sumw2);
+
+    }
+
+    output.add(hists);
+
   }
 
   return output;
