@@ -126,6 +126,9 @@ Types::strings FileSystem::list(std::string directory) {
   if (is_xrd(directory))
     return xrd_list(directory);
 
+  if (not exists(directory))
+    throw std::runtime_error {directory + " does not seem to exist."};
+
   Types::strings output;
 
   auto* indir = opendir(directory.data());
