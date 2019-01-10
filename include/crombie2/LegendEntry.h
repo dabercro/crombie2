@@ -14,7 +14,7 @@ namespace crombie2 {
     Configurable<std::string> datacard {"Datacard Entry", ""};
     Configurable<std::string> legend {"Legend Entry", ""};
     Configurable<std::string> cut {"Cut", "1"};
-    Configurable<short> style {"Plot Style", 0};
+    Configurable<short> style {"Plot Style", 1};
     ConfigTable table {{
       &datacard, &legend, &cut, &style
     }, true};
