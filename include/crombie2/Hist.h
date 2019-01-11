@@ -100,7 +100,7 @@ namespace crombie2 {
 
     double total {};                             ///< Stores the total weights of files filling this
 
-    std::list<TH1D> histstore {};
+    static std::list<TH1D> histstore;
 
     double get_unc (unsigned bin) const;         ///< Find the full uncertainty from uncs hists and sumw2
 

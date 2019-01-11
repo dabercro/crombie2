@@ -260,7 +260,6 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   if (bottom) {
     pad2.SetTopMargin(0.025);
     pad2.SetBottomMargin(0.4);
-    pad2.Draw();
     pad2.cd();
 
     auto bkg_ratio = bkg_hist.ratio(bkg_hist);
@@ -294,9 +293,10 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     styled(data_ratio.roothist(), FileGroup::FileType::DATA, 1)->Draw("PE,same");
 
     pad2.SetGridy(1);
-    pad2.Draw();
 
     canv.cd();
+    pad2.Draw();
+
   }
 
   pad1.cd();

@@ -201,3 +201,6 @@ const std::vector<double>& Hist::get_errors () const {
   return sumw2;
 
 }
+
+
+std::list<TH1D> Hist::histstore {};
