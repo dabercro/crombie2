@@ -57,7 +57,6 @@ namespace crombie2 {
     /**
        Returns a pointer to a histogram that is owned by global list.
        This list will handle the deletion when the program is done running.
-       Not thread-safe.
     */
     TH1D* roothist ();
 

@@ -4,6 +4,7 @@
 
 
 #include <crombie2/Hist.h>
+#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
@@ -69,7 +70,9 @@ TH1D* Hist::roothist() {
 
   static unsigned plot = 0;
   auto title = std::string(";") + label + ";Events";
+  Misc::lock();
   histstore.emplace_back(std::to_string(plot++).data(), title.data(), static_cast<int>(nbins), min, max);
+  Misc::unlock();
   auto& hist = histstore.back();
   for (unsigned ibin = 0; ibin < contents.size(); ++ibin) {
     hist.SetBinContent(ibin, contents[ibin]);
