@@ -16,6 +16,7 @@ allsrcs = \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
+	$(srcdir)/src/GuiConfigurable.cpp \
 	$(srcdir)/src/Hist.cpp \
 	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/HistAnalyzerMaster.cpp \
@@ -35,6 +36,7 @@ allsrcs = \
 	$(srcdir)/src/Progress.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
+	$(srcdir)/src/TextConfigurable.cpp \
 	$(srcdir)/src/Tree.cpp
 
 AUTOMAKE_OPTIONS = subdir-objects

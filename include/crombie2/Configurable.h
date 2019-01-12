@@ -3,11 +3,11 @@
 
 #include <sstream>
 
-#include <crombie2/GuiConfigurable.h>
+#include <crombie2/TextConfigurable.h>
 
 namespace crombie2 {
 
-  template<typename C> class Configurable : public GuiConfigurable {
+  template<typename C> class Configurable : public TextConfigurable {
   public:
     /**
        Create a configurable with a static label
@@ -44,7 +44,7 @@ namespace crombie2 {
   };
 
 
-  template<> class Configurable<std::string> : public GuiConfigurable {
+  template<> class Configurable<std::string> : public TextConfigurable {
   public:
     Configurable(const std::string& label, const std::string& value) :
       name{label}, value{value} {}

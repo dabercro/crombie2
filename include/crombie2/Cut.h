@@ -1,7 +1,9 @@
 #ifndef CROMBIE2_CUT_H
 #define CROMBIE2_CUT_H
 
-#include <crombie2/GuiConfigurable.h>
+
+#include <crombie2/TextConfigurable.h>
+
 
 namespace crombie2 {
 
@@ -9,7 +11,7 @@ namespace crombie2 {
      A Cut is just a configurable string with a default relabel,
      which is based on the LHS of the cut.
   */
-  class Cut : public GuiConfigurable {
+  class Cut : public TextConfigurable {
   public:
     Cut (const std::string& cut);
 

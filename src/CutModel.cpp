@@ -64,6 +64,9 @@ std::list<std::string> CutModel::serialize () const {
 
   for (auto& label : cutlabels) {
     const auto& cutstring = cutstrings.at(label);
+    if (not cutstring.name.get().size())
+      continue;
+
     std::string line = cutstring.name.get() +
       " " + cutstring.joiner.get() + " ";
 

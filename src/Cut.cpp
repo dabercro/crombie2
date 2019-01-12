@@ -5,7 +5,9 @@
 using namespace crombie2;
 
 Cut::Cut (const std::string& cut) {
+
   set(cut);
+
 }
 
 
