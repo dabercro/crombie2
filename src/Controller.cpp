@@ -35,55 +35,10 @@ Controller::Controller (ConfigPage& page, ConfigModel& model) :
 }
 
 
-ConfigRef& Controller::register_configurable (GuiConfigurable& config) {
-
-  configurables.emplace_back(config, config.label());
-  return configurables.back();
-
-}
-
-
-void Controller::register_configurable (GuiConfigurable& config, Gtk::Box& box) {
-
-  auto& todraw = register_configurable(config);
-
-  box.pack_start(todraw.box);
-
-  todraw.box.pack_start(todraw.label);
-  todraw.box.pack_start(todraw.entry);
-
-  todraw.entry.set_text(config.get());
-
-  todraw.show();
-
-}
-
-
-void Controller::unregister_configurable (GuiConfigurable& config) {
-
-  auto iter = configurables.begin();
-
-  while (iter != configurables.end()) {
-    if (&config == &(iter->config)) {
-      configurables.erase(iter);
-      return;
-    }
-  }
-
-  throw std::logic_error{"Asked to remove a configurable that doesn't seem to exist"};
-
-}
-
-
 const std::string Controller::last_tag = "latest";
 
 
 void Controller::on_update () {
-
-  for (auto& configref : configurables) {
-    configref.config.set(configref.entry.get_chars(0, -1));
-    configref.entry.set_text(configref.config.get());
-  }
 
   model.save_tag(last_tag);
 
@@ -101,7 +56,6 @@ void Controller::on_save () {
 void Controller::on_load () {
 
   model.load_tag(tagentry.get_chars(0, -1));
-  configurables.clear();
   redraw();
   on_update();
 

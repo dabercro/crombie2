@@ -103,18 +103,18 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
-	src/ConfigRef.$(OBJEXT) src/ConfigTable.$(OBJEXT) \
-	src/Controller.$(OBJEXT) src/Cut.$(OBJEXT) \
-	src/CutController.$(OBJEXT) src/CutModel.$(OBJEXT) \
-	src/CutString.$(OBJEXT) src/FileController.$(OBJEXT) \
-	src/FileEntry.$(OBJEXT) src/FileModel.$(OBJEXT) \
-	src/FileSystem.$(OBJEXT) src/GlobalController.$(OBJEXT) \
-	src/GlobalModel.$(OBJEXT) src/GuiConfigurable.$(OBJEXT) \
-	src/Hist.$(OBJEXT) src/HistAnalyzer.$(OBJEXT) \
-	src/HistAnalyzerMaster.$(OBJEXT) src/HistModel.$(OBJEXT) \
-	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
-	src/JobSorter.$(OBJEXT) src/MainController.$(OBJEXT) \
-	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
+	src/ConfigTable.$(OBJEXT) src/Controller.$(OBJEXT) \
+	src/Cut.$(OBJEXT) src/CutController.$(OBJEXT) \
+	src/CutModel.$(OBJEXT) src/CutString.$(OBJEXT) \
+	src/FileController.$(OBJEXT) src/FileEntry.$(OBJEXT) \
+	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
+	src/GlobalController.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
+	src/GuiConfigurable.$(OBJEXT) src/Hist.$(OBJEXT) \
+	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
+	src/HistModel.$(OBJEXT) src/HistSplit.$(OBJEXT) \
+	src/Job.$(OBJEXT) src/JobSorter.$(OBJEXT) \
+	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
+	src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
 	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) \
 	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
@@ -146,15 +146,14 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
-	src/$(DEPDIR)/ConfigPage.Po src/$(DEPDIR)/ConfigRef.Po \
-	src/$(DEPDIR)/ConfigTable.Po src/$(DEPDIR)/Controller.Po \
-	src/$(DEPDIR)/Cut.Po src/$(DEPDIR)/CutController.Po \
-	src/$(DEPDIR)/CutModel.Po src/$(DEPDIR)/CutString.Po \
-	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileEntry.Po \
-	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
-	src/$(DEPDIR)/GlobalController.Po src/$(DEPDIR)/GlobalModel.Po \
-	src/$(DEPDIR)/GuiConfigurable.Po src/$(DEPDIR)/Hist.Po \
-	src/$(DEPDIR)/HistAnalyzer.Po \
+	src/$(DEPDIR)/ConfigPage.Po src/$(DEPDIR)/ConfigTable.Po \
+	src/$(DEPDIR)/Controller.Po src/$(DEPDIR)/Cut.Po \
+	src/$(DEPDIR)/CutController.Po src/$(DEPDIR)/CutModel.Po \
+	src/$(DEPDIR)/CutString.Po src/$(DEPDIR)/FileController.Po \
+	src/$(DEPDIR)/FileEntry.Po src/$(DEPDIR)/FileModel.Po \
+	src/$(DEPDIR)/FileSystem.Po src/$(DEPDIR)/GlobalController.Po \
+	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/GuiConfigurable.Po \
+	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalyzer.Po \
 	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistModel.Po \
 	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/Job.Po \
 	src/$(DEPDIR)/JobSorter.Po src/$(DEPDIR)/MainController.Po \
@@ -320,7 +319,6 @@ top_srcdir = @top_srcdir@
 allsrcs = \
 	$(srcdir)/src/ConfigModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
-	$(srcdir)/src/ConfigRef.cpp \
 	$(srcdir)/src/ConfigTable.cpp \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/Cut.cpp \
@@ -463,8 +461,6 @@ src/ConfigModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/ConfigPage.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/ConfigRef.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/ConfigTable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Controller.$(OBJEXT): src/$(am__dirstamp) \
@@ -564,7 +560,6 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigPage.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigRef.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigTable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Controller.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Cut.Po@am__quote@ # am--include-marker
@@ -903,7 +898,6 @@ distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 		-rm -f src/$(DEPDIR)/ConfigModel.Po
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
-	-rm -f src/$(DEPDIR)/ConfigRef.Po
 	-rm -f src/$(DEPDIR)/ConfigTable.Po
 	-rm -f src/$(DEPDIR)/Controller.Po
 	-rm -f src/$(DEPDIR)/Cut.Po
@@ -994,7 +988,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -rf $(top_srcdir)/autom4te.cache
 		-rm -f src/$(DEPDIR)/ConfigModel.Po
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
-	-rm -f src/$(DEPDIR)/ConfigRef.Po
 	-rm -f src/$(DEPDIR)/ConfigTable.Po
 	-rm -f src/$(DEPDIR)/Controller.Po
 	-rm -f src/$(DEPDIR)/Cut.Po
