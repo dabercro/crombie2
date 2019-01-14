@@ -2,6 +2,7 @@
 #define CROMBIE2_CONFIGURABLE_H
 
 #include <sstream>
+#include <type_traits>
 
 #include <crombie2/TextConfigurable.h>
 
@@ -14,7 +15,7 @@ namespace crombie2 {
        @param label The label for this configurable
        @param value The value of the configurable
     */
-    Configurable(const std::string& label, const C& value) :
+    Configurable (const std::string& label, const C& value) :
       name{label}, value{value} {}
 
     std::string label () const override {
@@ -22,50 +23,29 @@ namespace crombie2 {
     }
 
     std::string get () const override {
-      std::string o;
+      if constexpr (std::is_same<C, std::string>::value)
+        return value;
+
       std::stringstream ss;
       ss << value;
-      ss >> o;
-      return o;
+      return ss.str();
     }
 
     void set (const std::string& input) override {
-      std::stringstream ss;
-      ss << input;
-      ss >> value;
+      if constexpr (std::is_same<C, std::string>::value)
+        value = input;
+      else {
+        std::stringstream ss;
+        ss.str(input);
+        ss >> value;
+      }
     }
 
-    operator C() const { return value; }
+    operator C () const { return value; }
 
   private:
     std::string name;
     C value;
-
-  };
-
-
-  template<> class Configurable<std::string> : public TextConfigurable {
-  public:
-    Configurable(const std::string& label, const std::string& value) :
-      name{label}, value{value} {}
-
-    std::string label () const override {
-      return name;
-    }
-
-    std::string get () const override {
-      return value;
-    }
-
-    void set (const std::string& input) override {
-      value = input;
-    }
-
-    operator std::string() const { return value; }
-
-  private:
-    std::string name;
-    std::string value;
 
   };
 
