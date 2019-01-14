@@ -23,7 +23,7 @@ TEST_CASE("Parser") {
 
   REQUIRE(parse({"! Comment only"}) == parse({}));
 
-  REQUIRE(parse({"`printf 'Simple shell'`", "`echo -n 'Complex' | perl -ae 'print <>; print \" shell\"'`"}) ==
+  REQUIRE(parse({"`printf 'Simple shell'`", "`perl -e 'print \"Complex shell\"'`"}) ==
           parse({"Simple shell", "Complex shell"}));
 
   REQUIRE(parse({"$ = 1 ; a b", "@ = 2 ;@ c d"}) ==
