@@ -6,6 +6,7 @@
 
 #include <crombie2/Configurable.h>
 #include <crombie2/Cut.h>
+#include <crombie2/JoinerConfigurable.h>
 
 
 namespace crombie2 {
@@ -28,7 +29,7 @@ namespace crombie2 {
     Configurable<std::string> name;
 
     /// The string that joins the list of Cut values.
-    Configurable<std::string> joiner;
+    JoinerConfigurable joiner;
 
   private:
     /// A list of cuts, to prevent reallocation

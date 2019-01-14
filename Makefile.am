@@ -23,6 +23,7 @@ allsrcs = \
 	$(srcdir)/src/HistSplit.cpp \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/JobSorter.cpp \
+	$(srcdir)/src/JoinerConfigurable.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \

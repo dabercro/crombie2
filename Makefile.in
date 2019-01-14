@@ -113,8 +113,8 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
 	src/HistModel.$(OBJEXT) src/HistSplit.$(OBJEXT) \
 	src/Job.$(OBJEXT) src/JobSorter.$(OBJEXT) \
-	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
-	src/MiniCutController.$(OBJEXT) \
+	src/JoinerConfigurable.$(OBJEXT) src/MainController.$(OBJEXT) \
+	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
 	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) \
 	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
@@ -156,8 +156,9 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalyzer.Po \
 	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistModel.Po \
 	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/Job.Po \
-	src/$(DEPDIR)/JobSorter.Po src/$(DEPDIR)/MainController.Po \
-	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
+	src/$(DEPDIR)/JobSorter.Po src/$(DEPDIR)/JoinerConfigurable.Po \
+	src/$(DEPDIR)/MainController.Po src/$(DEPDIR)/MainWindow.Po \
+	src/$(DEPDIR)/MiniCutController.Po \
 	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
 	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/Plot.Po \
 	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
@@ -245,8 +246,6 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EXEEXT = @EXEEXT@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -267,9 +266,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -339,6 +335,7 @@ allsrcs = \
 	$(srcdir)/src/HistSplit.cpp \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/JobSorter.cpp \
+	$(srcdir)/src/JoinerConfigurable.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \
@@ -498,6 +495,8 @@ src/HistSplit.$(OBJEXT): src/$(am__dirstamp) \
 src/Job.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/JobSorter.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/JoinerConfigurable.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/MainController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MainWindow.$(OBJEXT): src/$(am__dirstamp) \
@@ -580,6 +579,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistSplit.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Job.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JobSorter.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JoinerConfigurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainWindow.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniCutController.Po@am__quote@ # am--include-marker
@@ -918,6 +918,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/HistSplit.Po
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/JobSorter.Po
+	-rm -f src/$(DEPDIR)/JoinerConfigurable.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
 	-rm -f src/$(DEPDIR)/MiniCutController.Po
@@ -1008,6 +1009,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/HistSplit.Po
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/JobSorter.Po
+	-rm -f src/$(DEPDIR)/JoinerConfigurable.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
 	-rm -f src/$(DEPDIR)/MiniCutController.Po

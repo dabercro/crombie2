@@ -5,7 +5,7 @@ using namespace crombie2;
 
 
 CutString::CutString (const std::string& name, const std::string& joiner) :
-  name {"Name", name}, joiner {"Join With", joiner}, cuts {} {}
+  name {"Name", name}, joiner {joiner}, cuts {} {}
 
 
 Cut& CutString::add_cut () {
