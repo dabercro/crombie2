@@ -113,7 +113,7 @@ std::string CutModel::expand (const std::string& cutlabel) const {
   }
   catch (const std::exception& e) {
     Error::Exception(e, cutlabel + " does not seem to be in the map");
-    return "1";
+    throw e;
   }
 
   return output;
@@ -122,10 +122,32 @@ std::string CutModel::expand (const std::string& cutlabel) const {
 
 
 const std::list<std::string>& CutModel::get_labels () const {
+
   return cutlabels;
+
 }
 
 
 CutString& CutModel::get_cutstring (const std::string& label) {
+
   return cutstrings.at(label);
+
+}
+
+
+bool CutModel::is_valid () const {
+
+  try {
+    for (auto& selection : selections) {
+      expand(selection.cut);
+      expand(selection.data_weight);
+      expand(selection.mc_weight);
+    }
+  }
+  catch (const std::exception& e) {
+    return false;
+  }
+
+  return true;
+
 }

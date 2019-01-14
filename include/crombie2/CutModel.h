@@ -26,6 +26,8 @@ namespace crombie2 {
 
     std::list<Selection> selections {};
 
+    bool is_valid () const override;
+
   private:
 
     void read (const Types::strings& config) override;

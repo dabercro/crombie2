@@ -14,9 +14,6 @@ namespace crombie2 {
   class MainWindow : public Gtk::Window {
 
   public:
-    /// Get a reference to the main window of the program
-    static MainWindow& get ();
-
     MainWindow ();
 
   private:
@@ -40,8 +37,6 @@ namespace crombie2 {
       uncertainties,
       jobpage
     };
-
-    static std::unique_ptr<MainWindow> main;
 
   };
 }

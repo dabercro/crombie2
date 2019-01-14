@@ -26,18 +26,3 @@ void MainWindow::add_page (ConfigPage& page) {
   book.append_page(page, page.get_label());
   page.show();
 }
-
-
-std::unique_ptr<MainWindow> MainWindow::main {nullptr};
-
-
-MainWindow& MainWindow::get () {
-
-  Misc::lock();
-  if (not main)
-    main = std::make_unique<MainWindow>();
-  Misc::unlock();
-
-  return *main;
-
-}

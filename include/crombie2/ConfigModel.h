@@ -59,6 +59,8 @@ namespace crombie2 {
     static void set_config_dir (const std::string& dir);
 
 
+    virtual bool is_valid () const;
+
   protected:
 
     /**

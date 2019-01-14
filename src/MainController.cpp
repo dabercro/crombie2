@@ -59,8 +59,12 @@ void MainController::on_submit_job () {
   progress.set_progress(std::string("Setting up ") +
                         std::to_string(num_files) + " files");
 
-  std::thread thread {[num_files, &progress, this] () { run(num_files, progress); }};
-  thread.detach();
+  if (cutmodel.is_valid()) {
+
+    std::thread thread {[num_files, &progress, this] () { run(num_files, progress); }};
+    thread.detach();
+
+  }
 
 }
 
