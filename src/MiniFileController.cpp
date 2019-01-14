@@ -7,15 +7,20 @@ using namespace crombie2;
 MiniFileController::MiniFileController(Controller& controller, FileGroup& filegroup, Gtk::Box& page) :
   controller {controller},
   filegroup {filegroup},
-  page {page},
   databutton {"DATA"},
   radiogroup {databutton.get_group()},
   mcbutton {radiogroup, "MC"},
   signalbutton {radiogroup, "SIGNAL"}
 {
 
+  page.pack_start(frame, Gtk::PACK_SHRINK);
+  frame.add(inframe);
+
+  frame.show();
+  inframe.show();
+
   auto fill = [&] (auto& confs, auto& box, auto& button, auto& buttonbox, auto func) {
-    page.pack_start(box, Gtk::PACK_SHRINK);
+    inframe.pack_start(box, Gtk::PACK_SHRINK);
     box.show();
 
     if (not confs.size())
@@ -36,7 +41,7 @@ MiniFileController::MiniFileController(Controller& controller, FileGroup& filegr
       connect(sigc::mem_fun(*this, func));
   };
 
-  page.pack_start(radiobox, Gtk::PACK_SHRINK);
+  inframe.pack_start(radiobox, Gtk::PACK_SHRINK);
 
   radiobox.show();
 
