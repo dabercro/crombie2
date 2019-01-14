@@ -97,13 +97,9 @@ std::string ConfigModel::hash () {
     buffer += line + '\n';
 
   // Dump the hash into the converter
-  converter << std::hash<std::string>()(buffer);
+  converter << std::hex << std::hash<std::string>()(buffer);
 
-  // Put back into string
-  std::string output;
-  converter >> output;
-
-  return output;
+  return converter.str();
 
 }
 
