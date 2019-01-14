@@ -65,6 +65,8 @@ void MainController::on_submit_job () {
     thread.detach();
 
   }
+  else
+    progress.set_progress(std::string("Aborted"));
 
 }
 

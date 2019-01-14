@@ -27,7 +27,7 @@ std::string Cut::label () const {
 
 std::string Cut::get () const {
 
-  if (is_literal()) {
+  if (is_literal() and value.size()) {
     return std::string("'") + value + "'";
   }
   return value;
@@ -37,7 +37,13 @@ std::string Cut::get () const {
 
 void Cut::set (const std::string& input) {
 
-  literal = (input[0] == '\'');
+  if (input.size() == 0) {
+    literal = true;
+    value = "";
+    return;
+  }
+
+  literal = input[0] == '\'';
 
   value = literal
     ? input.substr(1, input.size() - 2)

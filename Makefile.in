@@ -126,9 +126,10 @@ am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
 am_crombie2catch_OBJECTS = $(am__objects_1) \
-	test/test_configurable.$(OBJEXT) test/test_fileentry.$(OBJEXT) \
-	test/test_parser.$(OBJEXT) test/test_testconfig.$(OBJEXT) \
-	test/utils.$(OBJEXT) test/main.$(OBJEXT)
+	test/test_configurable.$(OBJEXT) test/test_cutstring.$(OBJEXT) \
+	test/test_fileentry.$(OBJEXT) test/test_parser.$(OBJEXT) \
+	test/test_testconfig.$(OBJEXT) test/utils.$(OBJEXT) \
+	test/main.$(OBJEXT)
 crombie2catch_OBJECTS = $(am_crombie2catch_OBJECTS)
 crombie2catch_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -168,6 +169,7 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/Selection.Po src/$(DEPDIR)/TextConfigurable.Po \
 	src/$(DEPDIR)/Tree.Po src/$(DEPDIR)/main.Po \
 	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
+	test/$(DEPDIR)/test_cutstring.Po \
 	test/$(DEPDIR)/test_fileentry.Po test/$(DEPDIR)/test_parser.Po \
 	test/$(DEPDIR)/test_testconfig.Po test/$(DEPDIR)/utils.Po
 am__mv = mv -f
@@ -360,6 +362,7 @@ crombie2_SOURCES = $(allsrcs) \
 
 crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_configurable.cpp \
+	$(srcdir)/test/test_cutstring.cpp \
 	$(srcdir)/test/test_fileentry.cpp \
 	$(srcdir)/test/test_parser.cpp \
 	$(srcdir)/test/test_testconfig.cpp \
@@ -538,6 +541,8 @@ test/$(DEPDIR)/$(am__dirstamp):
 	@: > test/$(DEPDIR)/$(am__dirstamp)
 test/test_configurable.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
+test/test_cutstring.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
 test/test_fileentry.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_parser.$(OBJEXT): test/$(am__dirstamp) \
@@ -602,6 +607,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/main.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/main.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_configurable.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_cutstring.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_fileentry.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_parser.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_testconfig.Po@am__quote@ # am--include-marker
@@ -942,6 +948,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/test_configurable.Po
+	-rm -f test/$(DEPDIR)/test_cutstring.Po
 	-rm -f test/$(DEPDIR)/test_fileentry.Po
 	-rm -f test/$(DEPDIR)/test_parser.Po
 	-rm -f test/$(DEPDIR)/test_testconfig.Po
@@ -1034,6 +1041,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/test_configurable.Po
+	-rm -f test/$(DEPDIR)/test_cutstring.Po
 	-rm -f test/$(DEPDIR)/test_fileentry.Po
 	-rm -f test/$(DEPDIR)/test_parser.Po
 	-rm -f test/$(DEPDIR)/test_testconfig.Po

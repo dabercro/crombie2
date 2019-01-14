@@ -95,26 +95,31 @@ std::list<std::string> CutModel::serialize () const {
 
 std::string CutModel::expand (const std::string& cutlabel) const {
 
-  std::string output {};
+  bool negate = cutlabel.size() and cutlabel[0] == '!';
+
+  std::string output {negate ? "!(" : "("};
+  std::string label {cutlabel.data() + negate};
 
   try {
-    const CutString& cutstring = cutstrings.at(cutlabel);
+    const CutString& cutstring = cutstrings.at(label);
 
     const std::string& joiner = cutstring.joiner.get();
 
     for (auto& cut : cutstring.get_cuts()) {
-      if (output.size())
+      if (output.back() != '(')
         output += std::string(" ") + joiner + " ";
       output += cut.is_literal()
         ? cut.cut()
-        : std::string("(") + expand(cut.get()) + ")";
+        : expand(cut.get());
     }
 
   }
   catch (const std::exception& e) {
-    Error::Exception(e, cutlabel + " does not seem to be in the map");
+    Error::Exception(e, label + " does not seem to be in the map");
     throw e;
   }
+
+  output += ")";
 
   return output;
 
