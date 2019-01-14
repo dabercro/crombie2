@@ -75,6 +75,9 @@ std::string ConfigModel::save () {
 
 void ConfigModel::save_tag (const std::string& tag) {
 
+  if (not is_valid())
+    return;
+
   auto tag_file_name = config_directory + "/" + get_name() + "/tags/" + tag;
 
   // Make output directory, just in case

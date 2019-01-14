@@ -100,23 +100,26 @@ std::string CutModel::expand (const std::string& cutlabel) const {
   std::string output {negate ? "!(" : "("};
   std::string label {cutlabel.data() + negate};
 
+  const CutString* cutstring {nullptr};
   try {
-    const CutString& cutstring = cutstrings.at(label);
-
-    const std::string& joiner = cutstring.joiner.get();
-
-    for (auto& cut : cutstring.get_cuts()) {
-      if (output.back() != '(')
-        output += std::string(" ") + joiner + " ";
-      output += cut.is_literal()
-        ? cut.cut()
-        : expand(cut.get());
-    }
-
+    cutstring = &cutstrings.at(label);
   }
+  // This is to catch the cutstrings.at(label)
   catch (const std::exception& e) {
-    Error::Exception(e, label + " does not seem to be in the map");
+    Error::Exception(e, std::string("Key \"") + label + "\" does not seem to be in the map");
     throw e;
+  }
+
+  const std::string& joiner = cutstring->joiner.get();
+
+  for (auto& cut : cutstring->get_cuts()) {
+    auto to_add = cut.is_literal()
+      ? cut.cut()
+      : expand(cut.get());
+
+    if (output.back() != '(')
+      output += std::string(" ") + joiner + " ";
+    output += to_add;
   }
 
   output += ")";
