@@ -1,10 +1,13 @@
 #ifndef CROMBIE2_CONFIGTABLE_H
 #define CROMBIE2_CONFIGTABLE_H
 
+
+#include <gtkmm/frame.h>
 #include <gtkmm/table.h>
 
 #include <crombie2/Controller.h>
 #include <crombie2/GuiConfigurable.h>
+
 
 namespace crombie2 {
   class ConfigTable {
@@ -27,6 +30,7 @@ namespace crombie2 {
     guint size () const;
 
     std::vector<GuiConfigurable*> confs;
+    Gtk::Frame frame {};
     Gtk::Table table;
 
     const bool horizontal;

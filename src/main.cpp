@@ -1,5 +1,7 @@
 #include <gtkmm/main.h>
 
+#include <X11/Xlib.h>
+
 #include <crombie2/MainWindow.h>
 
 
@@ -24,12 +26,13 @@ int main (int argc, char *argv[])
 
   gErrorIgnoreLevel = kWarning;
 
+  XInitThreads();
+
   // Gtk initializtion
   Gtk::Main kit(argc, argv);
 
-  crombie2::MainWindow window;
-  //Shows the window and returns when it is closed.
-  Gtk::Main::run(window);
+  // Shows the window and returns when it is closed.
+  Gtk::Main::run(crombie2::MainWindow::get());
 
   return 0;
 }

@@ -14,6 +14,7 @@ namespace crombie2 {
   */
   class GuiConfigurable {
   public:
+    GuiConfigurable ();
     virtual ~GuiConfigurable () {}
 
     /// Get the label

@@ -12,6 +12,8 @@ ConfigPage::ConfigPage (const std::string& label) :
   add(scrolled);
   scrolled.show();
   scrolled.add(internalbox);
+
+  internalbox.set_border_width(15);
   internalbox.show();
 }
 

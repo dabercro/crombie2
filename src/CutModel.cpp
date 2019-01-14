@@ -1,6 +1,7 @@
 #include <regex>
 
 #include <crombie2/CutModel.h>
+#include <crombie2/Error.h>
 
 
 using namespace crombie2;
@@ -96,15 +97,23 @@ std::string CutModel::expand (const std::string& cutlabel) const {
 
   std::string output {};
 
-  const CutString& cutstring = cutstrings.at(cutlabel);
-  const std::string& joiner = cutstring.joiner.get();
+  try {
+    const CutString& cutstring = cutstrings.at(cutlabel);
 
-  for (auto& cut : cutstring.get_cuts()) {
-    if (output.size())
-      output += std::string(" ") + joiner + " ";
-    output += cut.is_literal()
-      ? cut.cut()
-      : expand(cut.get());
+    const std::string& joiner = cutstring.joiner.get();
+
+    for (auto& cut : cutstring.get_cuts()) {
+      if (output.size())
+        output += std::string(" ") + joiner + " ";
+      output += cut.is_literal()
+        ? cut.cut()
+        : std::string("(") + expand(cut.get()) + ")";
+    }
+
+  }
+  catch (const std::exception& e) {
+    Error::Exception(e, cutlabel + " does not seem to be in the map");
+    return "1";
   }
 
   return output;

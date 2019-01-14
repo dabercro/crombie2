@@ -3,6 +3,11 @@
 
 using namespace crombie2;
 
+GuiConfigurable::GuiConfigurable () {
+
+  label_obj.set_alignment(Gtk::ALIGN_LEFT, Gtk::ALIGN_CENTER);
+
+}
 
 Gtk::Label& GuiConfigurable::get_label () {
 

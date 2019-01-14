@@ -2,18 +2,25 @@
 #define CROMBIE2_MAINWINDOW_H
 
 
+#include <memory>
+
 #include <gtkmm/notebook.h>
 #include <gtkmm/window.h>
 
 #include <crombie2/MainController.h>
 
+
 namespace crombie2 {
   class MainWindow : public Gtk::Window {
 
   public:
+    /// Get a reference to the main window of the program
+    static MainWindow& get ();
+
     MainWindow ();
 
   private:
+
     void add_page (ConfigPage& page);
 
     Gtk::Notebook book {};
@@ -33,6 +40,8 @@ namespace crombie2 {
       uncertainties,
       jobpage
     };
+
+    static std::unique_ptr<MainWindow> main;
 
   };
 }
