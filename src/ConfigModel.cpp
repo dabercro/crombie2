@@ -112,6 +112,13 @@ void ConfigModel::set_config_dir (const std::string& dir) {
 }
 
 
+const std::string& ConfigModel::get_config_dir () {
+
+  return config_directory;
+
+}
+  
+
 std::string ConfigModel::config_directory { Misc::env("HOME") + "/.crombie2" };
 
 

@@ -1,6 +1,7 @@
 #include <exception>
 
 #include <crombie2/Controller.h>
+#include <crombie2/FileSystem.h>
 
 
 using namespace crombie2;
@@ -10,6 +11,8 @@ Controller::Controller (ConfigPage& page, ConfigModel& model) :
   page {page},
   model {model}
 {
+
+  update_entries();
 
   model.load_tag(last_tag);
 
@@ -48,15 +51,28 @@ void Controller::on_update () {
 void Controller::on_save () {
 
   on_update();
-  model.save_tag(tagentry.get_chars(0, -1));
+  model.save_tag(tagentry.get_entry()->get_text());
+  update_entries();
 
 }
 
 
 void Controller::on_load () {
 
-  model.load_tag(tagentry.get_chars(0, -1));
+  model.load_tag(tagentry.get_active_text());
   redraw();
   on_update();
+
+}
+
+
+void Controller::update_entries () {
+
+  tagentry.remove_all();
+
+  for (auto& file :
+         FileSystem::list(ConfigModel::get_config_dir() + "/" + model.get_name() + "/tags"))
+    if (file != last_tag)
+      tagentry.append_text(file);
 
 }
