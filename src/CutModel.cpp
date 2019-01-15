@@ -54,7 +54,8 @@ CutString& CutModel::add_cutstring (const std::string& label, const std::string&
 
   }
 
-   throw std::runtime_error{"Tried to add duplicate cut label."};
+  Error::Exception(std::runtime_error{"Tried to add duplicate cut label."},
+                   "Tried to add duplicate cut label \"" + label + "\"");
 
 }
 
@@ -100,11 +101,12 @@ std::string CutModel::expand (const std::string& cutlabel) const {
   std::string output {negate ? "!(" : "("};
   std::string label {cutlabel.data() + negate};
 
+  // We use a pointer here to escape the try-block scope
+  // There should be no way to be invalid without throwing an exception
   const CutString* cutstring {nullptr};
   try {
     cutstring = &cutstrings.at(label);
   }
-  // This is to catch the cutstrings.at(label)
   catch (const std::exception& e) {
     Error::Exception(e, std::string("Key \"") + label + "\" does not seem to be in the map");
     throw e;
@@ -113,13 +115,11 @@ std::string CutModel::expand (const std::string& cutlabel) const {
   const std::string& joiner = cutstring->joiner.get();
 
   for (auto& cut : cutstring->get_cuts()) {
-    auto to_add = cut.is_literal()
-      ? cut.cut()
-      : expand(cut.get());
-
     if (output.back() != '(')
       output += std::string(" ") + joiner + " ";
-    output += to_add;
+    output += cut.is_literal()
+      ? cut.cut()
+      : expand(cut.get());
   }
 
   output += ")";
