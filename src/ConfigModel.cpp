@@ -43,7 +43,7 @@ void ConfigModel::load_tag (const std::string& tag) {
 
 void ConfigModel::save (const std::string& file_name) {
 
-  if (is_valid() and not FileSystem::exists(file_name)) {
+  if (not FileSystem::exists(file_name)) {
     // Make the directory for the output
     FileSystem::mkdirs(FileSystem::dirname(file_name));
 
