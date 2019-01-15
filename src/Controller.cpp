@@ -68,7 +68,7 @@ void Controller::on_load () {
 
 void Controller::update_entries () {
 
-  tagentry.remove_all();
+  tagentry.clear_items();
 
   for (auto& file :
          FileSystem::list(ConfigModel::get_config_dir() + "/" + model.get_name() + "/tags"))

@@ -3,7 +3,7 @@
 
 
 #include <gtkmm/button.h>
-#include <gtkmm/comboboxtext.h>
+#include <gtkmm/comboboxentrytext.h>
 
 #include <crombie2/ConfigModel.h>
 #include <crombie2/ConfigPage.h>
@@ -50,7 +50,7 @@ namespace crombie2 {
     Gtk::Button updatebutton {"Update"};
     Gtk::Button savebutton {"Save Tag"};
     Gtk::Button loadbutton {"Load Tag"};
-    Gtk::ComboBoxText tagentry {true};
+    Gtk::ComboBoxEntryText tagentry {};
 
   };
 }
