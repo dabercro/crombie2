@@ -54,8 +54,10 @@ CutString& CutModel::add_cutstring (const std::string& label, const std::string&
 
   }
 
-  Error::Exception(std::runtime_error{"Tried to add duplicate cut label."},
-                   "Tried to add duplicate cut label \"" + label + "\"");
+  std::runtime_error e {"Tried to add duplicate cut label."};
+  Error::Exception(e, "Tried to add duplicate cut label \"" + label + "\"");
+
+  throw e;
 
 }
 
