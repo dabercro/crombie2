@@ -14,9 +14,11 @@ using namespace crombie2;
 
 HistAnalyzerMaster::HistAnalyzerMaster (const std::string& outdir, std::vector<Job>& jobs,
                                         const PlotModel& plotmodel, const CutModel& cutmodel,
-                                        const GlobalModel& globalmodel) :
-  outputdir {outdir.size() ? globalmodel.outplotdir.get() + "/" + outdir : ""},
-  globalmodel {globalmodel}
+                                        const GlobalModel& globalmodel,
+                                        const PlotStyleModel& plotstylemodel) :
+  outputdir {outdir.size() ? plotstylemodel.outplotdir.get() + "/" + outdir : ""},
+  globalmodel {globalmodel},
+  plotstylemodel {plotstylemodel}
 {
 
   // If no output directory, we are not going to make hist analyzers
@@ -284,8 +286,8 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     bhist->SetFillStyle(3001);
     bhist->SetFillColor(kGray);
 
-    bhist->SetMinimum(std::max(std::min(bkg_ratio.min_w_unc(), data_ratio.min_w_unc(false)), double(globalmodel.minratio)));
-    bhist->SetMaximum(std::min(std::max(bkg_ratio.max_w_unc(), data_ratio.max_w_unc()), double(globalmodel.maxratio)));
+    bhist->SetMinimum(std::max(std::min(bkg_ratio.min_w_unc(), data_ratio.min_w_unc(false)), double(plotstylemodel.minratio)));
+    bhist->SetMaximum(std::min(std::max(bkg_ratio.max_w_unc(), data_ratio.max_w_unc()), double(plotstylemodel.maxratio)));
     bhist->Draw("e2");
 
     // All of the signals should be drawn separately...

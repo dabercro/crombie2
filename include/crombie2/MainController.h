@@ -8,6 +8,7 @@
 #include <crombie2/FileController.h>
 #include <crombie2/GlobalModel.h>
 #include <crombie2/PlotController.h>
+#include <crombie2/PlotStyleModel.h>
 #include <crombie2/Progress.h>
 #include <crombie2/SimpleController.h>
 
@@ -16,6 +17,7 @@ namespace crombie2 {
   class MainController {
   public:
     MainController (ConfigPage& globalpage,
+                    ConfigPage& plotstylepage,
                     ConfigPage& filepage,
                     ConfigPage& plotpage,
                     ConfigPage& selectionpage,
@@ -23,17 +25,20 @@ namespace crombie2 {
                     ConfigPage& jobpage);
 
   private:
-    CutModel cutmodel {};
-    CutController cutcontrol;
+    GlobalModel globalmodel {};
+    SimpleController globalcontrol;
+
+    PlotStyleModel plotstylemodel {};
+    SimpleController plotstylecontrol;
 
     FileModel filemodel {};
     FileController filecontrol;
 
-    GlobalModel globalmodel {};
-    SimpleController globalcontrol;
-
     PlotModel plotmodel {};
     PlotController plotcontrol;
+
+    CutModel cutmodel {};
+    CutController cutcontrol;
 
     ConfigPage& jobpage;
 

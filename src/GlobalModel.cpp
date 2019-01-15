@@ -12,10 +12,7 @@ GlobalModel::GlobalModel () :
     &luminosity,
     &normhist,
     &runnum,
-    &luminum,
-    &minratio,
-    &maxratio,
-    &outplotdir
+    &luminum
   } {}
 
 

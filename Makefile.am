@@ -33,6 +33,7 @@ allsrcs = \
 	$(srcdir)/src/Plot.cpp \
 	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
+	$(srcdir)/src/PlotStyleModel.cpp \
 	$(srcdir)/src/Progress.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \

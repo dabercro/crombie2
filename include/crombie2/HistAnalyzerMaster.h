@@ -4,6 +4,7 @@
 
 #include <crombie2/HistModel.h>
 #include <crombie2/PlotModel.h>
+#include <crombie2/PlotStyleModel.h>
 
 
 namespace crombie2 {
@@ -13,7 +14,8 @@ namespace crombie2 {
                         std::vector<Job>& jobs,
                         const PlotModel& plotmodel,
                         const CutModel& cutmodel,
-                        const GlobalModel& globalmodel);
+                        const GlobalModel& globalmodel,
+                        const PlotStyleModel& plotstylemodel);
 
     void output ();
 
@@ -26,6 +28,7 @@ namespace crombie2 {
     /// Maps the input file name to cross sections
     Types::map<double> xs {};
     const GlobalModel& globalmodel;
+    const PlotStyleModel& plotstylemodel;
 
     /// Maps the input file name to type
     Types::map<FileGroup::FileType> types {};

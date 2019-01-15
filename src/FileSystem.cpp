@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 
 
+#include <crombie2/Error.h>
 #include <crombie2/FileSystem.h>
 #include <crombie2/Misc.h>
 
@@ -126,10 +127,12 @@ Types::strings FileSystem::list(std::string directory) {
   if (is_xrd(directory))
     return xrd_list(directory);
 
-  if (not exists(directory))
-    throw std::runtime_error {directory + " does not seem to exist."};
+  Types::strings output {};
 
-  Types::strings output;
+  if (not exists(directory)) {
+    Error::Exception(std::runtime_error {directory + " does not seem to exist."});
+    return output;
+  }
 
   auto* indir = opendir(directory.data());
   while (auto* dir_ent = readdir(indir)) {

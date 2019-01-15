@@ -20,6 +20,7 @@ namespace crombie2 {
             const FileModel& filemodel,
             const GlobalModel& globalmodel,
             const PlotModel& plotmodel,
+            const PlotStyleModel& plotstylemodel,
             Progress& progress);
 
     void run(const std::string& histoutputdir);
@@ -30,6 +31,7 @@ namespace crombie2 {
     FileModel filemodel;
     GlobalModel globalmodel;
     PlotModel plotmodel;
+    PlotStyleModel plotstylemodel;
 
     Progress& progress;
 

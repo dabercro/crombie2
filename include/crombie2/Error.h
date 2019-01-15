@@ -13,7 +13,7 @@ namespace crombie2 {
        Displays an exception message.
        The calling function should handle the exception.
     */
-    void Exception (const std::exception& exception, const std::string& secondary);
+    void Exception (const std::exception& exception, const std::string& secondary = "");
 
   }
 }

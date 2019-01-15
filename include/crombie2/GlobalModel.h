@@ -8,7 +8,7 @@
 
 namespace crombie2 {
   /**
-     @brief A ConfigModel for miscellaneous variables
+     @brief A SimpleModel for variables that are used in multiple Analyzer types
   */
   class GlobalModel : public SimpleModel {
   public:
@@ -35,12 +35,6 @@ namespace crombie2 {
     Configurable<std::string> runnum {"Run Expression", "runNumber"};
 
     Configurable<std::string> luminum {"Lumi Expression", "lumiNumber"};
-
-    Configurable<double> minratio {"Ratio Minimum", 0.0};
-
-    Configurable<double> maxratio {"Ratio Maximum", 2.0};
-
-    Configurable<std::string> outplotdir {"Plot Output", ""};
 
   };
 

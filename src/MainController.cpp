@@ -9,15 +9,17 @@ using namespace crombie2;
 
 
 MainController::MainController (ConfigPage& globalpage,
+                                ConfigPage& plotstylepage,
                                 ConfigPage& filepage,
                                 ConfigPage& plotpage,
                                 ConfigPage& selectionpage,
                                 ConfigPage& uncertaintypage,
                                 ConfigPage& jobpage) :
-  cutcontrol {selectionpage, cutmodel},
-  filecontrol {filepage, filemodel},
   globalcontrol {globalpage, globalmodel},
+  plotstylecontrol {plotstylepage, plotstylemodel},
+  filecontrol {filepage, filemodel},
   plotcontrol {plotpage, plotmodel},
+  cutcontrol {selectionpage, cutmodel},
   jobpage {jobpage}
 {
 
@@ -75,7 +77,7 @@ void MainController::run (unsigned num_files, Progress& progress) {
 
   Runner runner {
     num_files, cutmodel, filemodel,
-    globalmodel, plotmodel, progress
+    globalmodel, plotmodel, plotstylemodel, progress
   };
   runner.run(dohists.get_active() ? histoutput.get_text() : "");
 

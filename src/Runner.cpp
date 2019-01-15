@@ -14,12 +14,14 @@ Runner::Runner (unsigned num_files,
                 const FileModel& filemodel,
                 const GlobalModel& globalmodel,
                 const PlotModel& plotmodel,
+                const PlotStyleModel& plotstylemodel,
                 Progress& progress) :
   num_files {num_files},
   cutmodel {cutmodel},
   filemodel {filemodel},
   globalmodel {globalmodel},
   plotmodel {plotmodel},
+  plotstylemodel {plotstylemodel},
   progress {progress}
 {
 
@@ -44,7 +46,9 @@ void Runner::run (const std::string& histoutputdir) {
   }
 
   // Create histograms
-  HistAnalyzerMaster histanalyzers {histoutputdir, jobs, plotmodel, cutmodel, globalmodel};
+  HistAnalyzerMaster histanalyzers {
+    histoutputdir, jobs, plotmodel, cutmodel, globalmodel, plotstylemodel
+  };
 
   // Run jobs
   unsigned nthreads {globalmodel.nthreads};
