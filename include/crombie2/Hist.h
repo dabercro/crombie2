@@ -25,7 +25,7 @@ namespace crombie2 {
        @param max The maximum value on the x-axis
        @param total_events Is the total weight of events in the file(s) filling this histogram
     */
-    Hist(const std::string label = "",
+    Hist(const std::string& label = "",
          unsigned nbins = 0, double min = 0, double max = 0,
          double total_events = 0);
 

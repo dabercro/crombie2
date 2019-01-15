@@ -8,8 +8,7 @@
 namespace crombie2 {
 
   /**
-     A Cut is just a configurable string with a default relabel,
-     which is based on the LHS of the cut.
+     @brief A TextConfigurable that can either be a literal value or a key for the CutString
   */
   class Cut : public TextConfigurable {
   public:

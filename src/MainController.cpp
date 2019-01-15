@@ -49,7 +49,7 @@ MainController::MainController (ConfigPage& globalpage,
 
 void MainController::on_submit_job () {
 
-  auto num_files = filemodel.num_files(globalmodel);
+  auto num_files = filemodel.num_files(globalmodel.inputdir);
 
   if (not num_files)
     return;

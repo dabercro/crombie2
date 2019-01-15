@@ -2,10 +2,15 @@
 #define CROMBIE2_FILEENTRY_H
 
 
-#include <crombie2/GlobalModel.h>
+#include <crombie2/ConfigTable.h>
+#include <crombie2/Configurable.h>
+#include <crombie2/Types.h>
 
 
 namespace crombie2 {
+  /**
+     @brief Part of the FileModel that lists a specific directory or file containing a physics process
+  */
   class FileEntry {
   public:
     FileEntry () = default;
@@ -17,7 +22,10 @@ namespace crombie2 {
       &name, &xs
     }, true};
 
-    Types::strings& files (const GlobalModel& globalmodel);
+    /**
+       Get the full list of files
+    */
+    Types::strings& files (const std::string& inputdir);
 
   private:
     std::string last_global {};

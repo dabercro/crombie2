@@ -2,10 +2,14 @@
 #define CROMBIE2_PLOTMODEL_H
 
 
+#include <crombie2/ConfigModel.h>
 #include <crombie2/Plot.h>
 
 
 namespace crombie2 {
+  /**
+     @brief The ConfigModel that handles a list of plots to make
+  */
   class PlotModel : public ConfigModel {
   public:
 

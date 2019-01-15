@@ -9,7 +9,7 @@ namespace crombie2 {
 
   class JobSorter {
   public:
-    JobSorter (Job& job);
+    explicit JobSorter (Job& job);
     Job* job;
   };
 

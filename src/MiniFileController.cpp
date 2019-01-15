@@ -4,8 +4,7 @@
 using namespace crombie2;
 
 
-MiniFileController::MiniFileController(Controller& controller, FileGroup& filegroup, Gtk::Box& page) :
-  controller {controller},
+MiniFileController::MiniFileController(FileGroup& filegroup, Gtk::Box& page) :
   filegroup {filegroup},
   databutton {"DATA"},
   radiogroup {databutton.get_group()},
@@ -27,7 +26,7 @@ MiniFileController::MiniFileController(Controller& controller, FileGroup& filegr
       confs.emplace_back();
 
     for (auto& entry : confs)
-      entry.table.draw(controller, box);
+      entry.table.draw(box);
 
     button.set_border_width(10);
 
@@ -57,14 +56,14 @@ MiniFileController::MiniFileController(Controller& controller, FileGroup& filegr
 
 void MiniFileController::on_add_entry () {
 
-  filegroup.entries.emplace_back().table.draw(controller, legendlist);
+  filegroup.entries.emplace_back().table.draw(legendlist);
 
 }
 
 
 void MiniFileController::on_add_file () {
 
-  filegroup.files.emplace_back().table.draw(controller, filelist);
+  filegroup.files.emplace_back().table.draw(filelist);
 
 }
 

@@ -11,7 +11,8 @@
 
 namespace crombie2 {
   /**
-     A container for a combination of cuts.
+     @brief A container for a combination of cuts.
+
      These cuts are expanded by the CutModel.
   */
   class CutString {

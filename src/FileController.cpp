@@ -30,13 +30,13 @@ void FileController::redraw () {
   minicontrollers.clear();
 
   for (auto& group : filemodel.filegroups)
-    minicontrollers.emplace_back(*this, group, page.box());
+    minicontrollers.emplace_back(group, page.box());
 
 }
 
 
 void FileController::on_add_group () {
 
-  minicontrollers.emplace_back(*this, filemodel.add_files(), page.box());
+  minicontrollers.emplace_back(filemodel.add_files(), page.box());
 
 }

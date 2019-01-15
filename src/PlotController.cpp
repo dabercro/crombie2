@@ -44,7 +44,7 @@ void PlotController::add_table (ConfigTable& table) {
 
   auto& box = boxes.back();
 
-  table.draw(*this, box);
+  table.draw(box);
 
 }
 

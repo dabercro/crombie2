@@ -107,7 +107,7 @@ std::string CutModel::expand (const std::string& cutlabel) const {
   // This is to catch the cutstrings.at(label)
   catch (const std::exception& e) {
     Error::Exception(e, std::string("Key \"") + label + "\" does not seem to be in the map");
-    throw e;
+    throw;
   }
 
   const std::string& joiner = cutstring->joiner.get();

@@ -13,7 +13,7 @@ namespace crombie2 {
   */
   class JoinerConfigurable : public GuiConfigurable {
   public:
-    JoinerConfigurable (const std::string& value);
+    explicit JoinerConfigurable (const std::string& value);
 
     JoinerConfigurable (const JoinerConfigurable& other);
 

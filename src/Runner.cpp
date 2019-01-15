@@ -36,7 +36,7 @@ void Runner::run (const std::string& histoutputdir) {
 
   for (auto& group : filemodel.filegroups) {
     for (auto& entry : group.files) {
-      for (auto& name : entry.files(globalmodel)) {
+      for (auto& name : entry.files(globalmodel.inputdir)) {
         queue.emplace(jobs.emplace_back(globalmodel, group,
                                         entry, name));
       }
@@ -79,8 +79,6 @@ namespace {
 
 void Runner::run_thread () {
 
-  Job* job {nullptr};
-
   while (true) {
 
     job_lock.lock();
@@ -90,7 +88,7 @@ void Runner::run_thread () {
       break;
     }
 
-    job = queue.top().job;
+    Job* job = queue.top().job;
     progress.set_progress(job->get_file_name(), double(done++)/num_files);
     queue.pop();
 

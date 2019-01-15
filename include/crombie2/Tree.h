@@ -11,6 +11,9 @@
 
 
 namespace crombie2 {
+  /**
+     @brief Reads a TTree from a .root file and tracks desired formula results
+  */
   class Tree {
   public:
     Tree (const std::string& infile, const std::string& treename);

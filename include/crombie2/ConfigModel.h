@@ -6,11 +6,14 @@
 #include <crombie2/Types.h>
 
 namespace crombie2 {
+  /**
+     @brief Abstract class that each saveable object should implement
+  */
   class ConfigModel {
 
   public:
     ConfigModel (const std::string& file_name = "");
-    virtual ~ConfigModel () {}
+    virtual ~ConfigModel () = default;
 
 
     /// Get the class name of the configuration object

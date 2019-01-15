@@ -1,11 +1,15 @@
 #ifndef CROMBIE2_CUTCONTROLLER_H
 #define CROMBIE2_CUTCONTROLLER_H
 
+#include <crombie2/Controller.h>
 #include <crombie2/CutModel.h>
 #include <crombie2/MiniCutController.h>
 
 
 namespace crombie2 {
+  /**
+     @brief Handles the interaction between the GUI and the CutModel
+  */
   class CutController : public Controller {
   public:
     CutController (ConfigPage& page, CutModel& model);

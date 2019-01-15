@@ -8,6 +8,9 @@
 
 namespace crombie2 {
 
+  /**
+     @brief A TextConfigurable that can hold most types of data via templating
+  */
   template<typename C> class Configurable : public TextConfigurable {
   public:
     /**

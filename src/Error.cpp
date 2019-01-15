@@ -1,5 +1,4 @@
 #include <crombie2/Error.h>
-#include <crombie2/MainWindow.h>
 
 #include <gtkmm/messagedialog.h>
 

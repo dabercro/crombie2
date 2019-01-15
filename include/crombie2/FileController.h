@@ -2,11 +2,15 @@
 #define CROMBIE2_FILECONTROLLER_H
 
 
+#include <crombie2/Controller.h>
 #include <crombie2/FileModel.h>
 #include <crombie2/MiniFileController.h>
 
 
 namespace crombie2 {
+  /**
+     @brief Handles the interaction between the GUI and the FileModel
+  */
   class FileController : public Controller {
 
   public:

@@ -10,7 +10,7 @@
 
 namespace crombie2 {
   /**
-     An interface that can be used by the GUI
+     @brief An interface that can be used by the GUI
   */
   class GuiConfigurable {
   public:
@@ -26,9 +26,10 @@ namespace crombie2 {
     /// Set the value of the configurable, using a string
     virtual void set (const std::string& input) = 0;
 
-    /// Get the widget used to draw and update this
+    /// Get the widget used to draw and update this object's values
     virtual Gtk::Widget& get_widget () = 0;
 
+    /// Get the label object
     Gtk::Label& get_label ();
 
   private:

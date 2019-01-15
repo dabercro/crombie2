@@ -7,14 +7,16 @@
 
 
 namespace crombie2 {
+  /**
+     @brief Handles the GUI interaction for each CutString that is part of the CutModel
+  */
   class MiniCutController {
   public:
-    MiniCutController(Controller& controller, CutString& cutstring);
+    explicit MiniCutController(CutString& cutstring);
 
     void draw (Gtk::Box& page);
 
   private:
-    Controller& controller;
     CutString& cutstring;
     ConfigTable labeltable;
     ConfigTable cuttable;

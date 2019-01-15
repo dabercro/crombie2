@@ -2,11 +2,15 @@
 #define CROMBIE2_CUTMODEL_H
 
 
+#include <crombie2/ConfigModel.h>
 #include <crombie2/CutString.h>
 #include <crombie2/Selection.h>
 
 
 namespace crombie2 {
+  /**
+     @brief The ConfigModel for the selections for analysis
+  */
   class CutModel : public ConfigModel {
 
   public:

@@ -19,12 +19,12 @@ FileGroup& FileModel::add_files (FileGroup::FileType type) {
 }
 
 
-unsigned FileModel::num_files (const GlobalModel& globalmodel) {
+unsigned FileModel::num_files (const std::string& inputdir) {
 
   unsigned output {0};
   for (auto& group : filegroups) {
     for (auto& entry : group.files)
-      output += entry.files(globalmodel).size();
+      output += entry.files(inputdir).size();
 
   }
   return output;
@@ -87,8 +87,6 @@ std::list<std::string> FileModel::serialize () const {
   std::list<std::string> output {};
 
   for (auto& filegroup : filegroups) {
-    if (output.size())
-      output.emplace_back();
 
     output.emplace_back(type_to_str.at(filegroup.type));
     output.emplace_back();
@@ -100,7 +98,7 @@ std::list<std::string> FileModel::serialize () const {
                             legend.cut.get() + "; " +
                             legend.style.get());
     }
-    
+
     output.emplace_back();
 
     for (auto& file : filegroup.files) {
@@ -108,7 +106,11 @@ std::list<std::string> FileModel::serialize () const {
         output.emplace_back(file.name.get() + " {" + file.xs.get() + "}");
     }
 
+    output.emplace_back();
+
   }
+
+  output.pop_back();
 
   return output;
 

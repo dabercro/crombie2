@@ -47,7 +47,7 @@ void CutController::redraw () {
     add_cut(cutmodel.get_cutstring(cut));
 
   for (auto& selection : cutmodel.selections)
-    selection.table.draw(*this, selectionbox);
+    selection.table.draw(selectionbox);
 
 }
 
@@ -60,7 +60,7 @@ void CutController::add_cut (CutString& cutstring) {
     cutboxes.back().show();
   }
 
-  minicontrollers.emplace_back(*this, cutstring);
+  minicontrollers.emplace_back(cutstring);
   minicontrollers.back().draw(cutboxes.back());
 
 }
@@ -76,6 +76,6 @@ void CutController::on_add_cut () {
 void CutController::on_add_selection () {
 
   auto& selection = cutmodel.selections.emplace_back("", "", "");
-  selection.table.draw(*this, selectionbox);
+  selection.table.draw(selectionbox);
 
 }

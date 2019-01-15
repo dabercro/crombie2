@@ -4,8 +4,8 @@
 using namespace crombie2;
 
 
-MiniCutController::MiniCutController(Controller& controller, CutString& cutstring) :
-  controller {controller}, cutstring {cutstring},
+MiniCutController::MiniCutController(CutString& cutstring) :
+  cutstring {cutstring},
   labeltable{&(cutstring.name), &(cutstring.joiner)},
   cuttable {}
 {
@@ -25,8 +25,8 @@ void MiniCutController::draw (Gtk::Box& page) {
 
   page.pack_start(box, Gtk::PACK_SHRINK);
 
-  labeltable.draw(controller, labellist);
-  cuttable.draw(controller, cutlist);
+  labeltable.draw(labellist);
+  cuttable.draw(cutlist);
 
   box.pack_start(labellist, Gtk::PACK_SHRINK);
   box.pack_start(cutlist, Gtk::PACK_SHRINK);
@@ -49,6 +49,6 @@ void MiniCutController::on_add_cut () {
   auto& cut = cutstring.add_cut();
 
   cuttable.add_conf(&cut);
-  cuttable.redraw(controller);
+  cuttable.redraw();
 
 }

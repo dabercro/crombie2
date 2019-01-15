@@ -10,7 +10,7 @@
 namespace crombie2 {
   class Progress {
   public:
-    Progress (Gtk::Box& page);
+    explicit Progress (Gtk::Box& page);
 
     void set_progress (const std::string& text, double frac = 0);
 

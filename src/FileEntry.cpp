@@ -10,12 +10,12 @@ FileEntry::FileEntry (const FileEntry& other) :
   xs {other.xs} {}
 
 
-Types::strings& FileEntry::files (const GlobalModel& globalmodel) {
+Types::strings& FileEntry::files (const std::string& inputdir) {
 
-  if (last_global == globalmodel.inputdir.get())
+  if (last_global == inputdir)
     return files_cache;
 
-  last_global = globalmodel.inputdir;
+  last_global = inputdir;
 
   auto entry = name.get();
 

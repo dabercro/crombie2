@@ -24,7 +24,7 @@ const std::vector<GuiConfigurable*>& ConfigTable::get_confs () const {
 }
 
 
-void ConfigTable::draw (Controller& control, Gtk::Box& page) {
+void ConfigTable::draw (Gtk::Box& page) {
 
   if (horizontal)
     page.pack_start(table, Gtk::PACK_SHRINK);
@@ -36,12 +36,12 @@ void ConfigTable::draw (Controller& control, Gtk::Box& page) {
 
   table.show();
 
-  redraw(control);
+  redraw();
 
 }
 
 
-void ConfigTable::redraw (Controller& control) {
+void ConfigTable::redraw () {
 
   table.hide_all();
 

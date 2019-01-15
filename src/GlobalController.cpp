@@ -9,13 +9,13 @@ GlobalController::GlobalController (ConfigPage& page, GlobalModel& model) :
   globalmodel {model}
 {
 
-  globalmodel.configs.draw(*this, page.box());
+  globalmodel.configs.draw(page.box());
 
 }
 
 
 void GlobalController::redraw () {
 
-  globalmodel.configs.redraw(*this);
+  globalmodel.configs.redraw();
 
 }

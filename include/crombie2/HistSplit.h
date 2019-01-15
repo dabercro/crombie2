@@ -9,7 +9,7 @@
 namespace crombie2 {
   class HistSplit {
   public:
-    HistSplit(const std::vector<std::string>& entries);
+    explicit HistSplit(const std::vector<std::string>& entries);
 
     void add (const std::vector<Hist>& adding);
 

@@ -3,9 +3,13 @@
 
 #include <gtkmm/buttonbox.h>
 
+#include <crombie2/Controller.h>
 #include <crombie2/PlotModel.h>
 
 namespace crombie2 {
+  /**
+     @brief Handles the interactions between the GUI and the PlotModel object
+  */
   class PlotController : public Controller {
 
   public:

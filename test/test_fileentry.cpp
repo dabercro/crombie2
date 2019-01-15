@@ -37,7 +37,7 @@ TEST_CASE("Test File Entries") {
 
   for (auto& basedir : dirnames) {
     entry.name.set(basedir);
-    REQUIRE(entry.files(model).size() == rootfiles.size());
+    REQUIRE(entry.files(model.inputdir).size() == rootfiles.size());
   }
 
 }

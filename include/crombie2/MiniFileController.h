@@ -3,19 +3,20 @@
 
 
 #include <gtkmm/buttonbox.h>
-#include <gtkmm/frame.h>
 #include <gtkmm/radiobutton.h>
 
 #include <crombie2/FileGroup.h>
 
 
 namespace crombie2 {
+  /**
+     @brief Handles each the GUI interactions for a single FileGroup
+  */
   class MiniFileController {
   public:
-    MiniFileController(Controller& controller, FileGroup& filegroup, Gtk::Box& page);
+    MiniFileController(FileGroup& filegroup, Gtk::Box& page);
 
   private:
-    Controller& controller;
     FileGroup& filegroup;
     ConfigTable entrytable {};
     ConfigTable filetable {};

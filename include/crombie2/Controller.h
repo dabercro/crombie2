@@ -10,12 +10,17 @@
 
 
 namespace crombie2 {
+  /**
+     @brief An abstract class to handle the relation between the GUI and a ConfigModel.
+
+     Provides the user (via the ConfigPage) with buttons to save and load every underlying model.
+  */
   class Controller {
   public:
 
     /// Hold a reference to the page to draw on
     Controller (ConfigPage& page, ConfigModel& model);
-    virtual ~Controller () {}
+    virtual ~Controller () = default;
 
 
     /// Get a reference back to the page for something else to draw on

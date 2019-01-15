@@ -10,7 +10,7 @@
 using namespace crombie2;
 
 
-Hist::Hist(const std::string label,
+Hist::Hist(const std::string& label,
            unsigned nbins, double min, double max,
            double total_events) :
   label{label}, nbins{nbins}, min{min}, max{max},

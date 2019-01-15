@@ -2,12 +2,15 @@
 #define CROMBIE2_GLOBALMODEL_H
 
 
+#include <crombie2/ConfigModel.h>
 #include <crombie2/ConfigTable.h>
 #include <crombie2/Configurable.h>
 
 
 namespace crombie2 {
-
+  /**
+     @brief A ConfigModel for miscellaneous variables
+  */
   class GlobalModel : public ConfigModel {
   public:
     GlobalModel () = default;
