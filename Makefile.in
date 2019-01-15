@@ -108,19 +108,19 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/CutModel.$(OBJEXT) src/CutString.$(OBJEXT) \
 	src/Error.$(OBJEXT) src/FileController.$(OBJEXT) \
 	src/FileEntry.$(OBJEXT) src/FileModel.$(OBJEXT) \
-	src/FileSystem.$(OBJEXT) src/GlobalController.$(OBJEXT) \
-	src/GlobalModel.$(OBJEXT) src/GuiConfigurable.$(OBJEXT) \
-	src/Hist.$(OBJEXT) src/HistAnalyzer.$(OBJEXT) \
-	src/HistAnalyzerMaster.$(OBJEXT) src/HistModel.$(OBJEXT) \
-	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
-	src/JobSorter.$(OBJEXT) src/JoinerConfigurable.$(OBJEXT) \
-	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
-	src/MiniCutController.$(OBJEXT) \
+	src/FileSystem.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
+	src/GuiConfigurable.$(OBJEXT) src/Hist.$(OBJEXT) \
+	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
+	src/HistModel.$(OBJEXT) src/HistSplit.$(OBJEXT) \
+	src/Job.$(OBJEXT) src/JobSorter.$(OBJEXT) \
+	src/JoinerConfigurable.$(OBJEXT) src/MainController.$(OBJEXT) \
+	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
 	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) \
 	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
 	src/Progress.$(OBJEXT) src/Runner.$(OBJEXT) \
-	src/Selection.$(OBJEXT) src/TextConfigurable.$(OBJEXT) \
+	src/Selection.$(OBJEXT) src/SimpleController.$(OBJEXT) \
+	src/SimpleModel.$(OBJEXT) src/TextConfigurable.$(OBJEXT) \
 	src/Tree.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
@@ -154,9 +154,8 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/CutString.Po src/$(DEPDIR)/Error.Po \
 	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileEntry.Po \
 	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
-	src/$(DEPDIR)/GlobalController.Po src/$(DEPDIR)/GlobalModel.Po \
-	src/$(DEPDIR)/GuiConfigurable.Po src/$(DEPDIR)/Hist.Po \
-	src/$(DEPDIR)/HistAnalyzer.Po \
+	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/GuiConfigurable.Po \
+	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalyzer.Po \
 	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistModel.Po \
 	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/Job.Po \
 	src/$(DEPDIR)/JobSorter.Po src/$(DEPDIR)/JoinerConfigurable.Po \
@@ -166,7 +165,8 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/Plot.Po \
 	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
 	src/$(DEPDIR)/Progress.Po src/$(DEPDIR)/Runner.Po \
-	src/$(DEPDIR)/Selection.Po src/$(DEPDIR)/TextConfigurable.Po \
+	src/$(DEPDIR)/Selection.Po src/$(DEPDIR)/SimpleController.Po \
+	src/$(DEPDIR)/SimpleModel.Po src/$(DEPDIR)/TextConfigurable.Po \
 	src/$(DEPDIR)/Tree.Po src/$(DEPDIR)/main.Po \
 	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_cutstring.Po \
@@ -251,8 +251,6 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EXEEXT = @EXEEXT@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -273,9 +271,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -336,7 +331,6 @@ allsrcs = \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
 	$(srcdir)/src/FileSystem.cpp \
-	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/GuiConfigurable.cpp \
 	$(srcdir)/src/Hist.cpp \
@@ -359,6 +353,8 @@ allsrcs = \
 	$(srcdir)/src/Progress.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
+	$(srcdir)/src/SimpleController.cpp \
+	$(srcdir)/src/SimpleModel.cpp \
 	$(srcdir)/src/TextConfigurable.cpp \
 	$(srcdir)/src/Tree.cpp
 
@@ -491,8 +487,6 @@ src/FileModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/FileSystem.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/GlobalController.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/GlobalModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/GuiConfigurable.$(OBJEXT): src/$(am__dirstamp) \
@@ -531,6 +525,10 @@ src/Progress.$(OBJEXT): src/$(am__dirstamp) \
 src/Runner.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Selection.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/SimpleController.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/SimpleModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/TextConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -588,7 +586,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileEntry.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileSystem.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GuiConfigurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Hist.Po@am__quote@ # am--include-marker
@@ -611,6 +608,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Progress.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Runner.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Selection.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/SimpleController.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/SimpleModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/TextConfigurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Tree.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/main.Po@am__quote@ # am--include-marker
@@ -930,7 +929,6 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/FileEntry.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po
 	-rm -f src/$(DEPDIR)/FileSystem.Po
-	-rm -f src/$(DEPDIR)/GlobalController.Po
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
 	-rm -f src/$(DEPDIR)/GuiConfigurable.Po
 	-rm -f src/$(DEPDIR)/Hist.Po
@@ -953,6 +951,8 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/Progress.Po
 	-rm -f src/$(DEPDIR)/Runner.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
+	-rm -f src/$(DEPDIR)/SimpleController.Po
+	-rm -f src/$(DEPDIR)/SimpleModel.Po
 	-rm -f src/$(DEPDIR)/TextConfigurable.Po
 	-rm -f src/$(DEPDIR)/Tree.Po
 	-rm -f src/$(DEPDIR)/main.Po
@@ -1024,7 +1024,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/FileEntry.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po
 	-rm -f src/$(DEPDIR)/FileSystem.Po
-	-rm -f src/$(DEPDIR)/GlobalController.Po
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
 	-rm -f src/$(DEPDIR)/GuiConfigurable.Po
 	-rm -f src/$(DEPDIR)/Hist.Po
@@ -1047,6 +1046,8 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/Progress.Po
 	-rm -f src/$(DEPDIR)/Runner.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
+	-rm -f src/$(DEPDIR)/SimpleController.Po
+	-rm -f src/$(DEPDIR)/SimpleModel.Po
 	-rm -f src/$(DEPDIR)/TextConfigurable.Po
 	-rm -f src/$(DEPDIR)/Tree.Po
 	-rm -f src/$(DEPDIR)/main.Po

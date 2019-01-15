@@ -14,7 +14,6 @@ allsrcs = \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
 	$(srcdir)/src/FileSystem.cpp \
-	$(srcdir)/src/GlobalController.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/GuiConfigurable.cpp \
 	$(srcdir)/src/Hist.cpp \
@@ -37,6 +36,8 @@ allsrcs = \
 	$(srcdir)/src/Progress.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
+	$(srcdir)/src/SimpleController.cpp \
+	$(srcdir)/src/SimpleModel.cpp \
 	$(srcdir)/src/TextConfigurable.cpp \
 	$(srcdir)/src/Tree.cpp
 

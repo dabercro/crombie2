@@ -2,8 +2,7 @@
 #define CROMBIE2_GLOBALMODEL_H
 
 
-#include <crombie2/ConfigModel.h>
-#include <crombie2/ConfigTable.h>
+#include <crombie2/SimpleModel.h>
 #include <crombie2/Configurable.h>
 
 
@@ -11,9 +10,9 @@ namespace crombie2 {
   /**
      @brief A ConfigModel for miscellaneous variables
   */
-  class GlobalModel : public ConfigModel {
+  class GlobalModel : public SimpleModel {
   public:
-    GlobalModel () = default;
+    GlobalModel ();
     GlobalModel (const GlobalModel& other);
 
     std::string get_name () const override;
@@ -30,7 +29,7 @@ namespace crombie2 {
     /// The luminosity in pb
     Configurable<double> luminosity {"Luminosity [/pb]", 10000};
 
-    /// The weights to read
+    /// The weights to read to normalize MC
     Configurable<std::string> normhist {"Weight Hist", "hSumW"};
 
     Configurable<std::string> runnum {"Run Expression", "runNumber"};
@@ -42,25 +41,6 @@ namespace crombie2 {
     Configurable<double> maxratio {"Ratio Maximum", 2.0};
 
     Configurable<std::string> outplotdir {"Plot Output", ""};
-
-    ConfigTable configs {
-      &inputdir,
-      &nthreads,
-      &tree,
-      &luminosity,
-      &normhist,
-      &runnum,
-      &luminum,
-      &minratio,
-      &maxratio,
-      &outplotdir
-    };
-
-  private:
-
-    void read (const Types::strings& config) override;
-
-    std::list<std::string> serialize () const override;
 
   };
 

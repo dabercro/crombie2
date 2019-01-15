@@ -6,9 +6,10 @@
 
 #include <crombie2/CutController.h>
 #include <crombie2/FileController.h>
-#include <crombie2/GlobalController.h>
+#include <crombie2/GlobalModel.h>
 #include <crombie2/PlotController.h>
 #include <crombie2/Progress.h>
+#include <crombie2/SimpleController.h>
 
 
 namespace crombie2 {
@@ -29,7 +30,7 @@ namespace crombie2 {
     FileController filecontrol;
 
     GlobalModel globalmodel {};
-    GlobalController globalcontrol;
+    SimpleController globalcontrol;
 
     PlotModel plotmodel {};
     PlotController plotcontrol;
