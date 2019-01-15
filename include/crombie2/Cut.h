@@ -12,7 +12,7 @@ namespace crombie2 {
   */
   class Cut : public TextConfigurable {
   public:
-    Cut (const std::string& cut);
+    explicit Cut (const std::string& cut);
 
     std::string label () const override;
 

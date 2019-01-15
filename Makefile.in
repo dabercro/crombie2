@@ -127,9 +127,9 @@ crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
 am_crombie2catch_OBJECTS = $(am__objects_1) \
 	test/test_configurable.$(OBJEXT) test/test_cutstring.$(OBJEXT) \
-	test/test_fileentry.$(OBJEXT) test/test_parser.$(OBJEXT) \
-	test/test_testconfig.$(OBJEXT) test/utils.$(OBJEXT) \
-	test/main.$(OBJEXT)
+	test/test_fileentry.$(OBJEXT) test/test_misc.$(OBJEXT) \
+	test/test_parser.$(OBJEXT) test/test_testconfig.$(OBJEXT) \
+	test/utils.$(OBJEXT) test/main.$(OBJEXT)
 crombie2catch_OBJECTS = $(am_crombie2catch_OBJECTS)
 crombie2catch_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -170,7 +170,8 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/Tree.Po src/$(DEPDIR)/main.Po \
 	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_cutstring.Po \
-	test/$(DEPDIR)/test_fileentry.Po test/$(DEPDIR)/test_parser.Po \
+	test/$(DEPDIR)/test_fileentry.Po test/$(DEPDIR)/test_misc.Po \
+	test/$(DEPDIR)/test_parser.Po \
 	test/$(DEPDIR)/test_testconfig.Po test/$(DEPDIR)/utils.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -250,6 +251,8 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EXEEXT = @EXEEXT@
+GTK_CFLAGS = @GTK_CFLAGS@
+GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -270,6 +273,9 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -364,6 +370,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_configurable.cpp \
 	$(srcdir)/test/test_cutstring.cpp \
 	$(srcdir)/test/test_fileentry.cpp \
+	$(srcdir)/test/test_misc.cpp \
 	$(srcdir)/test/test_parser.cpp \
 	$(srcdir)/test/test_testconfig.cpp \
 	$(srcdir)/test/utils.cpp \
@@ -545,6 +552,8 @@ test/test_cutstring.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_fileentry.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
+test/test_misc.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
 test/test_parser.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_testconfig.$(OBJEXT): test/$(am__dirstamp) \
@@ -609,6 +618,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_configurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_cutstring.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_fileentry.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_misc.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_parser.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_testconfig.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/utils.Po@am__quote@ # am--include-marker
@@ -950,6 +960,7 @@ distclean: distclean-am
 	-rm -f test/$(DEPDIR)/test_configurable.Po
 	-rm -f test/$(DEPDIR)/test_cutstring.Po
 	-rm -f test/$(DEPDIR)/test_fileentry.Po
+	-rm -f test/$(DEPDIR)/test_misc.Po
 	-rm -f test/$(DEPDIR)/test_parser.Po
 	-rm -f test/$(DEPDIR)/test_testconfig.Po
 	-rm -f test/$(DEPDIR)/utils.Po
@@ -1043,6 +1054,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f test/$(DEPDIR)/test_configurable.Po
 	-rm -f test/$(DEPDIR)/test_cutstring.Po
 	-rm -f test/$(DEPDIR)/test_fileentry.Po
+	-rm -f test/$(DEPDIR)/test_misc.Po
 	-rm -f test/$(DEPDIR)/test_parser.Po
 	-rm -f test/$(DEPDIR)/test_testconfig.Po
 	-rm -f test/$(DEPDIR)/utils.Po

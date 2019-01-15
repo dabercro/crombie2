@@ -65,9 +65,6 @@ namespace crombie2 {
     void set_total (double newtotal);
 
 
-    /// Gives the total number of events in the histogram
-    double integral (bool include_under_over = true);
-
     /// Get the maximum value including uncertainties (for plotting)
     double max_w_unc () const;
 

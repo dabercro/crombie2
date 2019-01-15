@@ -123,20 +123,6 @@ double Hist::get_unc(unsigned bin) const {
 }
 
 
-double Hist::integral (bool include_under_over) {
-
-  double output {0};
-
-  for (unsigned i_bin = include_under_over ? 0 : 1;
-       i_bin < nbins - (include_under_over ? 0 : 1);
-       ++i_bin)
-    output += contents[i_bin];
-
-  return output;
-
-}
-
-
 double Hist::max_w_unc () const {
   double output = 0;
   for (unsigned ibin = 1; ibin <= nbins; ++ibin)

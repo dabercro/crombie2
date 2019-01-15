@@ -21,10 +21,6 @@ namespace crombie2 {
 
     const std::vector<Hist>& get_result () const;
 
-    std::string get_output_file () const;
-
-    std::string get_input_file () const;
-
     const FileGroup& get_group () const;
 
   private:

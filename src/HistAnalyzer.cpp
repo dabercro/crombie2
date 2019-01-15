@@ -66,24 +66,3 @@ const std::vector<Hist>& HistAnalyzer::get_result () const {
   return hists;
 
 }
-
-
-std::string HistAnalyzer::get_output_file () const {
-
-  return selection.cut.get() + "_" + plot.name.get();
-
-}
-
-
-std::string HistAnalyzer::get_input_file () const {
-
-  return job.get_entry().name.get();
-
-}
-
-
-const FileGroup& HistAnalyzer::get_group () const {
-
-  return job.get_group();
-
-}
