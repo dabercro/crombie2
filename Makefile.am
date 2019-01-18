@@ -59,7 +59,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/utils.cpp \
 	$(srcdir)/test/main.cpp
 
-AM_CPPFLAGS = @GTK_CFLAGS@ @MARIADB_CFLAGS@ -I$(srcdir)/include -std=c++17 \
+AM_CPPFLAGS = @GTK_CFLAGS@ -I$(srcdir)/include -std=c++17 \
 	`root-config --cflags | sed s/-std=c++11//`
-AM_LDFLAGS = @GTK_LIBS@ @MARIADB_LIBS@ \
+AM_LDFLAGS = @GTK_LIBS@ \
 	`root-config --libs --ldflags`
