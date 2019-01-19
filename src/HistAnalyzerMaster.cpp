@@ -267,10 +267,10 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     auto bkg_ratio = bkg_hist.ratio(bkg_hist);
     auto data_ratio = data_hist.ratio(bkg_hist);
 
-    auto set_yaxis = [bottom, titleoff] (auto* hist) {
+    auto set_yaxis = [bottom, titleoff, this] (auto* hist) {
       auto* axis = hist->GetYaxis();
       axis->SetNdivisions(504, true);
-      axis->SetTitle("Data/Pred.");
+      axis->SetTitle(std::string(plotstylemodel.ratiolabel).data());
       axis->SetTitleOffset((bottom)/(1-bottom) * titleoff);
       axis->CenterTitle();
       return hist;
@@ -330,7 +330,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   latex.SetTextFont(52);
   latex.SetTextAlign(11);
 
-  latex.DrawLatex(0.2, toplocation, "Preliminary");
+  latex.DrawLatex(0.2, toplocation, std::string(plotstylemodel.plottype).data());
 
   // Save everything
   FileSystem::mkdirs(outputdir);

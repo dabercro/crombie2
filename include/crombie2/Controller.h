@@ -34,9 +34,9 @@ namespace crombie2 {
 
     virtual void redraw () = 0;
 
-  private:
-
     static const std::string last_tag;
+
+  private:
 
     ConfigModel& model;
 

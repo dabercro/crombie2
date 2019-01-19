@@ -22,9 +22,9 @@ void SimpleModel::read (const Types::strings& config) {
 
   auto iter = config.begin();
   for (auto* configurable : configs.get_confs()) {
-    configurable->set(*iter++);
     if (iter == config.end())
       break;
+    configurable->set(*iter++);
   }
 
 }

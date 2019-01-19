@@ -104,17 +104,18 @@ PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/ConfigTable.$(OBJEXT) src/Controller.$(OBJEXT) \
-	src/Cut.$(OBJEXT) src/CutController.$(OBJEXT) \
-	src/CutModel.$(OBJEXT) src/CutString.$(OBJEXT) \
-	src/Error.$(OBJEXT) src/FileController.$(OBJEXT) \
-	src/FileEntry.$(OBJEXT) src/FileModel.$(OBJEXT) \
-	src/FileSystem.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
-	src/GuiConfigurable.$(OBJEXT) src/Hist.$(OBJEXT) \
-	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
-	src/HistModel.$(OBJEXT) src/HistSplit.$(OBJEXT) \
-	src/Job.$(OBJEXT) src/JobSorter.$(OBJEXT) \
-	src/JoinerConfigurable.$(OBJEXT) src/MainController.$(OBJEXT) \
-	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
+	src/CrossSecDB.$(OBJEXT) src/Cut.$(OBJEXT) \
+	src/CutController.$(OBJEXT) src/CutModel.$(OBJEXT) \
+	src/CutString.$(OBJEXT) src/Error.$(OBJEXT) \
+	src/FileController.$(OBJEXT) src/FileEntry.$(OBJEXT) \
+	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
+	src/GlobalModel.$(OBJEXT) src/GuiConfigurable.$(OBJEXT) \
+	src/Hist.$(OBJEXT) src/HistAnalyzer.$(OBJEXT) \
+	src/HistAnalyzerMaster.$(OBJEXT) src/HistModel.$(OBJEXT) \
+	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
+	src/JobSorter.$(OBJEXT) src/JoinerConfigurable.$(OBJEXT) \
+	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
+	src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
 	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) \
 	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
@@ -149,13 +150,14 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/ConfigPage.Po src/$(DEPDIR)/ConfigTable.Po \
-	src/$(DEPDIR)/Controller.Po src/$(DEPDIR)/Cut.Po \
-	src/$(DEPDIR)/CutController.Po src/$(DEPDIR)/CutModel.Po \
-	src/$(DEPDIR)/CutString.Po src/$(DEPDIR)/Error.Po \
-	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileEntry.Po \
-	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
-	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/GuiConfigurable.Po \
-	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalyzer.Po \
+	src/$(DEPDIR)/Controller.Po src/$(DEPDIR)/CrossSecDB.Po \
+	src/$(DEPDIR)/Cut.Po src/$(DEPDIR)/CutController.Po \
+	src/$(DEPDIR)/CutModel.Po src/$(DEPDIR)/CutString.Po \
+	src/$(DEPDIR)/Error.Po src/$(DEPDIR)/FileController.Po \
+	src/$(DEPDIR)/FileEntry.Po src/$(DEPDIR)/FileModel.Po \
+	src/$(DEPDIR)/FileSystem.Po src/$(DEPDIR)/GlobalModel.Po \
+	src/$(DEPDIR)/GuiConfigurable.Po src/$(DEPDIR)/Hist.Po \
+	src/$(DEPDIR)/HistAnalyzer.Po \
 	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistModel.Po \
 	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/Job.Po \
 	src/$(DEPDIR)/JobSorter.Po src/$(DEPDIR)/JoinerConfigurable.Po \
@@ -252,8 +254,6 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EXEEXT = @EXEEXT@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -274,9 +274,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -328,6 +325,7 @@ allsrcs = \
 	$(srcdir)/src/ConfigPage.cpp \
 	$(srcdir)/src/ConfigTable.cpp \
 	$(srcdir)/src/Controller.cpp \
+	$(srcdir)/src/CrossSecDB.cpp \
 	$(srcdir)/src/Cut.cpp \
 	$(srcdir)/src/CutController.cpp \
 	$(srcdir)/src/CutModel.cpp \
@@ -478,6 +476,8 @@ src/ConfigTable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Controller.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/CrossSecDB.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/Cut.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/CutController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -586,6 +586,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigPage.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigTable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Controller.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CrossSecDB.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Cut.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutModel.Po@am__quote@ # am--include-marker
@@ -930,6 +931,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
 	-rm -f src/$(DEPDIR)/ConfigTable.Po
 	-rm -f src/$(DEPDIR)/Controller.Po
+	-rm -f src/$(DEPDIR)/CrossSecDB.Po
 	-rm -f src/$(DEPDIR)/Cut.Po
 	-rm -f src/$(DEPDIR)/CutController.Po
 	-rm -f src/$(DEPDIR)/CutModel.Po
@@ -1026,6 +1028,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
 	-rm -f src/$(DEPDIR)/ConfigTable.Po
 	-rm -f src/$(DEPDIR)/Controller.Po
+	-rm -f src/$(DEPDIR)/CrossSecDB.Po
 	-rm -f src/$(DEPDIR)/Cut.Po
 	-rm -f src/$(DEPDIR)/CutController.Po
 	-rm -f src/$(DEPDIR)/CutModel.Po

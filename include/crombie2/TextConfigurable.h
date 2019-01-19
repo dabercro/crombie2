@@ -15,11 +15,13 @@ namespace crombie2 {
 
     Gtk::Widget& get_widget () override;
 
+  protected:
+    /// The box that holds the entry
+    Gtk::Entry entry {};
+
   private:
     void on_update ();
 
-    /// The box that holds the entry
-    Gtk::Entry entry {};
   };
 }
 

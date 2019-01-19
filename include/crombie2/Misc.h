@@ -37,6 +37,8 @@ namespace crombie2 {
 
     void unlock ();
 
+    bool confirm (const std::string& message);
+
   }
 }
 

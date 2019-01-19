@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <array>
 #include <cstdlib>
 #include <exception>
@@ -5,6 +7,8 @@
 #include <memory>
 #include <mutex>
 #include <sstream>
+
+#include <gtkmm/messagedialog.h>
 
 #include <crombie2/Misc.h>
 
@@ -77,4 +81,13 @@ void Misc::lock () {
 
 void Misc::unlock () {
   rootlock.unlock();
+}
+
+
+bool Misc::confirm (const std::string& message) {
+
+  Gtk::MessageDialog dialog (message, false, Gtk::MESSAGE_INFO, Gtk::BUTTONS_YES_NO);
+
+  return dialog.run() == Gtk::RESPONSE_YES;
+
 }

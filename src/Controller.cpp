@@ -51,8 +51,10 @@ void Controller::on_update () {
 void Controller::on_save () {
 
   on_update();
-  model.save_tag(tagentry.get_entry()->get_text());
+  auto text = tagentry.get_entry()->get_text();
+  model.save_tag(text);
   update_entries();
+  tagentry.set_active_text(text);
 
 }
 

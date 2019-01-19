@@ -46,6 +46,11 @@ namespace crombie2 {
 
     operator C () const { return value; }
 
+    C operator= (C val) {
+      entry.set_text(std::to_string(val));
+      return value = val;
+    }
+
   private:
     std::string name;
     C value;

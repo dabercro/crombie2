@@ -2,7 +2,9 @@
 #define CROMBIE2_FILECONTROLLER_H
 
 
+#include <crombie2/CrossSecDB.h>
 #include <crombie2/Controller.h>
+#include <crombie2/CrossSecDB.h>
 #include <crombie2/FileModel.h>
 #include <crombie2/MiniFileController.h>
 
@@ -28,6 +30,13 @@ namespace crombie2 {
     Gtk::Button addbutton {"Add File Group"};
 
     std::list<MiniFileController> minicontrollers {};
+
+    Gtk::HBox crosssecbox {};
+
+    CrossSecDB xs_db {};
+
+    void on_check_xs ();
+    Gtk::Button checkxs {"Check Cross Sections"};
 
   };
 }

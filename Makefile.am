@@ -5,6 +5,7 @@ allsrcs = \
 	$(srcdir)/src/ConfigPage.cpp \
 	$(srcdir)/src/ConfigTable.cpp \
 	$(srcdir)/src/Controller.cpp \
+	$(srcdir)/src/CrossSecDB.cpp \
 	$(srcdir)/src/Cut.cpp \
 	$(srcdir)/src/CutController.cpp \
 	$(srcdir)/src/CutModel.cpp \
