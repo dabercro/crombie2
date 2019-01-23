@@ -12,8 +12,8 @@ Job::Job (const GlobalModel& globalmodel,
   globalmodel {globalmodel},
   group {group},
   entry {entry},
-  file_name {globalmodel.inputdir.get() + "/" + entry.name.get() + "/" + file},
-  size {FileSystem::get_size(globalmodel.inputdir.get() + "/" + entry.name.get() + "/" + file)} {}
+  file_name {globalmodel.inputdir.get() + "/" + file},
+  size {FileSystem::get_size(globalmodel.inputdir.get() + "/" + file)} {}
 
 
 void Job::add_analyzer (Analyzer* analyzer) {

@@ -16,15 +16,17 @@ namespace crombie2 {
     /**
        Create a configurable with a static label
        @param label The label for this configurable
-       @param value The value of the configurable
+       @param value The initial value of the configurable
     */
     Configurable (const std::string& label, const C& value) :
       name{label}, value{value} {}
 
+    /// Get the label to write on the table
     std::string label () const override {
       return name;
     }
 
+    /// Get the value in string form
     std::string get () const override {
       if constexpr (std::is_same<C, std::string>::value)
         return value;
@@ -34,6 +36,7 @@ namespace crombie2 {
       return ss.str();
     }
 
+    /// Set the value using a string
     void set (const std::string& input) override {
       if constexpr (std::is_same<C, std::string>::value)
         value = input;
@@ -44,16 +47,23 @@ namespace crombie2 {
       }
     }
 
+    /// Allows the Configurable to be compared directly or substituted in places
     operator C () const { return value; }
 
+    /// Sets the value of the Configurable and updates the widget for the user
     C operator= (C val) {
-      entry.set_text(std::to_string(val));
+      auto text = std::to_string(val);
+      // Take away all of the zeros
+      while (text.back() == '0')
+        text.pop_back();
+
+      entry.set_text(text);
       return value = val;
     }
 
   private:
-    std::string name;
-    C value;
+    std::string name;   ///< Name for the label shown by ConfigTable
+    C value;            ///< Value being held
 
   };
 

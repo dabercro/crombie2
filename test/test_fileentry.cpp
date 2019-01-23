@@ -10,34 +10,52 @@
 
 TEST_CASE("Test File Entries") {
 
-  std::vector<std::string> dirnames {
-    "test",
-    "data",
-    "mc"
-  };
-
-  std::vector<std::string> rootfiles {
-    "001.root", "002.root", "003.root"
-  };
-
   auto dir = test_dir("fileentry");
-
-  for (auto& basedir : dirnames) {
-    crombie2::FileSystem::mkdirs(dir + "/" + basedir);
-    for (auto& file : rootfiles) {
-      std::ofstream output {dir + "/" + basedir + "/" + file};
-      output << '\n';
-    }
-  }
 
   crombie2::GlobalModel model {};
   crombie2::FileEntry entry {};
 
   model.inputdir.set(dir);
 
-  for (auto& basedir : dirnames) {
-    entry.name.set(basedir);
-    REQUIRE(entry.files(model.inputdir).size() == rootfiles.size());
+  SECTION("Multiple Files") {
+
+    std::vector<std::string> dirnames {
+      "test",
+      "data",
+      "mc"
+    };
+
+    std::vector<std::string> rootfiles {
+      "001.root", "002.root", "003.root"
+    };
+
+    for (auto& basedir : dirnames) {
+      crombie2::FileSystem::mkdirs(dir + "/" + basedir);
+      for (auto& file : rootfiles) {
+        std::ofstream output {dir + "/" + basedir + "/" + file};
+        output << '\n';
+      }
+    }
+
+    for (auto& basedir : dirnames) {
+      entry.name.set(basedir);
+      auto files = entry.files(model.inputdir);
+      REQUIRE(files.size() == rootfiles.size());
+      REQUIRE(files.front() == basedir + "/001.root");
+    }
+
+  }
+
+  SECTION("Single File") {
+    {
+      std::ofstream output {dir + "/testsingle.root"};
+      output << '\n';
+    }
+
+    entry.name.set("testsingle");
+
+    REQUIRE(entry.files(model.inputdir) == std::vector<std::string>{"testsingle.root"});
+
   }
 
 }

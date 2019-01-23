@@ -67,7 +67,8 @@ void FileController::on_check_xs () {
         continue;
 
       for (auto& file : group.files) {
-        auto xs = xs_db.get_xs(file.name);
+        auto dataset = Misc::split(file.name, "/").back();
+        auto xs = xs_db.get_xs(dataset);
 
         if (xs != file.xs and
             Misc::confirm(std::string("Change ") + file.name.get() + "?\n" +

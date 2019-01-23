@@ -28,8 +28,8 @@ namespace crombie2 {
     Types::strings& files (const std::string& inputdir);
 
   private:
-    std::string last_global {};
-    Types::strings files_cache {};
+    std::string last_listing {};    ///< Variable that holds the last directory that was listed
+    Types::strings files_cache {};  ///< A cache of the last listing results
 
   };
 }

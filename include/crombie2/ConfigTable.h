@@ -35,10 +35,19 @@ namespace crombie2 {
     void add_conf (GuiConfigurable* conf);
 
   private:
+    /**
+       A Gtk::Table must have at least one row.
+       This is just a hack to get either the real needed size or one (1),
+       whichever is greater.
+    */
     guint size () const;
 
+    /// Pointers to the configurables to draw
     std::vector<GuiConfigurable*> confs;
+
+    /// Each table has this frame drawn around it
     Gtk::Frame frame {};
+    /// The internal table to draw
     Gtk::Table table;
 
     const bool horizontal;

@@ -83,6 +83,11 @@ void ConfigModel::save_tag (const std::string& tag) {
   // Make output directory, just in case
   FileSystem::mkdirs(FileSystem::dirname(tag_file_name));
 
+  if (tag != "latest" and
+      FileSystem::exists(tag_file_name) and
+      not Misc::confirm(get_name() + ": replace tag " + tag + "?"))
+    return;
+
   std::ofstream output {tag_file_name};
   output << save() << std::endl;
 

@@ -26,21 +26,6 @@ Tree::~Tree () {
 }
 
 
-bool Tree::next() {
-
-  if (ientry == nentries)
-    return false;
-
-  tree->GetEntry(ientry++);
-
-  for (auto& form : forms)
-    form.second.first = form.second.second->EvalInstance();
-
-  return true;
-
-}
-
-
 double& Tree::request (const std::string& expr) {
   auto i_form = forms.find(expr);
   if (i_form != forms.end())
@@ -53,17 +38,22 @@ double& Tree::request (const std::string& expr) {
       // Only save branches that are really in the expression
       const std::regex regexpr {std::string("\\b") + name + "\\b"};
       std::smatch matches;
-      if (std::regex_search(expr, matches, regexpr))
+      if (std::regex_search(expr, matches, regexpr)) {
+        if (not tree->GetBranchStatus(name))
+          branches_to_read.push_back(tree->GetBranch(name));
+
         tree->SetBranchStatus(name, 1);
+      }
     }
   }
 
   // Put the formula in, in a thread-safe way
   Misc::lock();
-  TTreeFormula* form = new TTreeFormula(expr.data(), expr.data(), tree);
+  auto output = forms.insert({
+      expr, std::make_pair(0.0,
+                           std::make_unique<TTreeFormula>(expr.data(), expr.data(), tree))
+  });
   Misc::unlock();
-
-  auto output = forms.insert({expr, std::make_pair(0.0, form)});
 
   return output.first->second.first;
 

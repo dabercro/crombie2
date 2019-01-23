@@ -110,7 +110,8 @@ std::list<std::string> FileModel::serialize () const {
 
   }
 
-  output.pop_back();
+  if (output.size())
+    output.pop_back();
 
   return output;
 
