@@ -73,7 +73,7 @@ std::string ConfigModel::save () {
 }
 
 
-void ConfigModel::save_tag (const std::string& tag) {
+void ConfigModel::save_tag (const std::string& tag, bool overwrite) {
 
   if (not is_valid())
     return;
@@ -83,7 +83,7 @@ void ConfigModel::save_tag (const std::string& tag) {
   // Make output directory, just in case
   FileSystem::mkdirs(FileSystem::dirname(tag_file_name));
 
-  if (tag != "latest" and
+  if (not overwrite and
       FileSystem::exists(tag_file_name) and
       not Misc::confirm(get_name() + ": replace tag " + tag + "?"))
     return;

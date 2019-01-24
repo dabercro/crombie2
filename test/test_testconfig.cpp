@@ -46,7 +46,7 @@ TEST_CASE("TestConfig object") {
   REQUIRE(one.get() == two.get());
 
   crombie2::TestConfig three {};
-  two.save_tag("tag");
+  two.save_tag("tag", true);
   three.load_tag("tag");
 
   REQUIRE(one.get() == three.get());

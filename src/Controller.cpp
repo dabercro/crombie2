@@ -43,7 +43,7 @@ const std::string Controller::last_tag = "latest";
 
 void Controller::on_update () {
 
-  model.save_tag(last_tag);
+  model.save_tag(last_tag, true);
 
 }
 
@@ -74,7 +74,6 @@ void Controller::update_entries () {
 
   for (auto& file :
          FileSystem::list(ConfigModel::get_config_dir() + "/" + model.get_name() + "/tags"))
-    if (file != last_tag)
-      tagentry.append_text(file);
+    tagentry.append_text(file);
 
 }

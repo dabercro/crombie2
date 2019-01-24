@@ -51,8 +51,10 @@ namespace crombie2 {
     /**
        Saves the configuration in a file
        @param tag The name of the tag
+       @param overwrite Set to true if you definitely want to overwrite tag.
+              Otherwise, a prompt is displayed to confirm overwriting.
     */
-    void save_tag (const std::string& tag);
+    void save_tag (const std::string& tag, bool overwrite = false);
 
 
     /**
