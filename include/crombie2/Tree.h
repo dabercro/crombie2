@@ -14,7 +14,10 @@
 
 namespace crombie2 {
   /**
-     @brief Reads a TTree from a .root file and tracks desired formula results
+     @brief Reads a TTree from a .root file and tracks desired formula results.
+
+     Before the tree is looped over, requests can be made to activate branches to read.
+     Pointers to other TObjects can also be gathered through the Tree::get<> function.
   */
   class Tree {
   public:
@@ -24,7 +27,7 @@ namespace crombie2 {
 
 
     /**
-       Fill the tree with the next event's branch contents.
+       @brief Fill the branches with the next event's contents.
        @returns False when there are no more events to read.
     */
     inline bool next() {
@@ -41,14 +44,14 @@ namespace crombie2 {
 
 
     /**
-       Get a reference to where the result for a TTreeFormula
+       @brief Get a reference to where the result for a TTreeFormula will be.
        @param expr The expression to turn into a TTreeFormula for this tree
     */
     double& request (const std::string& expr);
 
 
     /**
-       Get a bare pointer to a TObject inside of this file.
+       @brief Get a bare pointer to a TObject inside of this file.
        @param name is the name of the object, searched for with TFile::Get
     */
     template<typename C> C* get(const std::string& name) {

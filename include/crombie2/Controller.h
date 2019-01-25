@@ -18,10 +18,8 @@ namespace crombie2 {
   class Controller {
   public:
 
-    /// Hold a reference to the page to draw on
     Controller (ConfigPage& page, ConfigModel& model);
     virtual ~Controller () = default;
-
 
     /// Get a reference back to the page for something else to draw on
     ConfigPage& get_page ();
@@ -30,6 +28,7 @@ namespace crombie2 {
 
   protected:
 
+    /// Reference to page that is drawn on
     ConfigPage& page;
 
     virtual void redraw () = 0;
@@ -38,11 +37,13 @@ namespace crombie2 {
 
   private:
 
+    /// Model that is saved and loaded from Controller interface
     ConfigModel& model;
 
     void on_save ();
     void on_load ();
 
+    /// Updates the list of tags to select from
     void update_entries ();
 
     Gtk::HBox updatebox {};
@@ -54,5 +55,6 @@ namespace crombie2 {
 
   };
 }
+
 
 #endif

@@ -8,7 +8,7 @@
 
 namespace crombie2 {
   /**
-     @brief A config model that just consists of a list of configurables
+     @brief A config model that just consists of a list of configurables.
 
      This is an abstract class which does not implement get_name()
   */

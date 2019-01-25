@@ -130,7 +130,7 @@ Types::strings FileSystem::list(std::string directory) {
   Types::strings output {};
 
   if (not exists(directory)) {
-    Error::Exception(std::runtime_error {directory + " does not seem to exist."});
+    Error::Exception(directory + " does not seem to exist.");
     return output;
   }
 

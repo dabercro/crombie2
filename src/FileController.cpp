@@ -78,6 +78,6 @@ void FileController::on_check_xs () {
     }
   }
   else
-    Error::Exception(std::runtime_error{"Cross Section Getter is not set!"});
+    Error::Exception("Cross Section Getter is not set!");
 
 }
