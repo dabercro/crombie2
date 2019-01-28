@@ -10,7 +10,7 @@ namespace crombie2 {
   class HistRefs {
   public:
     HistRefs (double& cut, double& expr, double& weight, double& sub) :
-    cut {cut}, expr {expr}, weight {weight}, sub {sub} {}
+      cut {cut}, expr {expr}, weight {weight}, sub {sub} {}
     double& cut;
     double& expr;
     double& weight;

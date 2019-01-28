@@ -61,7 +61,7 @@ bool Cut::is_literal () const {
 
 std::string Cut::cut () const {
 
-  if (value[0] != '!' and value.size())
+  if (value[0] != '#' and value.size())
     return value;
   return "1";
 

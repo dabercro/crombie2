@@ -1,18 +1,19 @@
 #include <crombie2/HistAnalyzer.h>
+#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
 
 
-HistAnalyzer::HistAnalyzer (const Job& job, const Plot& plot, const Selection& selection,
-                            const CutModel& cutmodel, const GlobalModel& globalmodel) :
-  job {job},
+HistAnalyzer::HistAnalyzer (const Job& job, const Plot& plot,
+                            const std::string& var,
+                            const std::string& cutstr,
+                            const std::string& weightstr,
+                            const GlobalModel& globalmodel) :
   plot {plot},
-  selection {selection},
-  cutstr {cutmodel.expand(selection.cut)},
-  weightstr {cutmodel.expand(job.get_group().type == FileGroup::FileType::DATA
-                             ? selection.data_weight
-                             : selection.mc_weight)},
+  var {var},
+  cutstr {cutstr},
+  weightstr {weightstr},
   total_str {globalmodel.normhist}
 {
 
@@ -36,7 +37,7 @@ void HistAnalyzer::make_requests (Tree& tree) {
 
   for (auto& substr : substrs)
     refs.emplace_back(tree.request(cutstr),
-                      tree.request(plot.expr(job.get_group().type)),
+                      tree.request(var),
                       tree.request(weightstr),
                       tree.request(substr));
 

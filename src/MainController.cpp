@@ -25,18 +25,33 @@ MainController::MainController (ConfigPage& globalpage,
 
   button.set_border_width(10);
 
+  // Histogram making
+
   jobpage.pack_start(histsbox, Gtk::PACK_SHRINK);
 
   histsbox.pack_start(dohists, Gtk::PACK_SHRINK);
   histsbox.pack_start(histslabel, Gtk::PACK_SHRINK);
   histsbox.pack_start(histoutput);
-  histsbox.show();
 
+  histsbox.show();
   dohists.show();
   histslabel.show();
 
   histoutput.set_text(Misc::shell("printf $(date +%y%m%d)"));
   histoutput.show();
+
+  // Cutflow making
+
+  jobpage.pack_start(cutflowbox, Gtk::PACK_SHRINK);
+
+  cutflowbox.pack_start(docutflow, Gtk::PACK_SHRINK);
+  cutflowbox.pack_start(cutflowlabel, Gtk::PACK_SHRINK);
+
+  cutflowbox.show();
+  docutflow.show();
+  cutflowlabel.show();
+
+  // Submission buttons
 
   jobpage.pack_end(submitbox, Gtk::PACK_SHRINK);
   submitbox.pack_start(button, Gtk::PACK_SHRINK);
@@ -79,6 +94,7 @@ void MainController::run (unsigned num_files, Progress& progress) {
     num_files, cutmodel, filemodel,
     globalmodel, plotmodel, plotstylemodel, progress
   };
-  runner.run(dohists.get_active() ? histoutput.get_text() : "");
+  runner.run(dohists.get_active() ? histoutput.get_text() : "",
+             docutflow.get_active());
 
 }

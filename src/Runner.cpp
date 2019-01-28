@@ -2,6 +2,7 @@
 #include <mutex>
 #include <thread>
 
+#include <crombie2/CutflowAnalyzerMaster.h>
 #include <crombie2/HistAnalyzerMaster.h>
 #include <crombie2/Runner.h>
 
@@ -30,7 +31,8 @@ Runner::Runner (unsigned num_files,
 }
 
 
-void Runner::run (const std::string& histoutputdir) {
+void Runner::run (const std::string& histoutputdir,
+                  bool docutflow) {
 
   auto start = std::chrono::steady_clock::now();
 
@@ -50,6 +52,10 @@ void Runner::run (const std::string& histoutputdir) {
     histoutputdir, jobs, plotmodel, cutmodel, globalmodel, plotstylemodel
   };
 
+  CutflowAnalyzerMaster cutflowanalyzers {
+    docutflow, jobs, cutmodel
+  };
+
   // Run jobs
   unsigned nthreads {globalmodel.nthreads};
   std::vector<std::thread> threads {};
@@ -65,6 +71,8 @@ void Runner::run (const std::string& histoutputdir) {
 
   // Output histograms stuff
   histanalyzers.output();
+  if (docutflow)
+    cutflowanalyzers.output();
 
   auto end = std::chrono::steady_clock::now();
   std::chrono::duration<double> diff = end - start;

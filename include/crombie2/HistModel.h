@@ -34,8 +34,6 @@ namespace crombie2 {
     bool cached {false};
     std::list<HistAnalyzer> analyzers {};      ///< Analyzers are only needed when the hist isn't already cached
 
-    const HistAnalyzer analyzer_prototype;     ///< All other analyzers will just be copied from this
-
     // Saved in cache
 
     // Input files
@@ -56,6 +54,8 @@ namespace crombie2 {
     // Not saved in cache, but annoyingly still used at the moment
     std::string label;
     std::vector<std::string> legend_entries {};
+
+    const HistAnalyzer analyzer_prototype;     ///< All other analyzers will just be copied from this
 
   };
 }

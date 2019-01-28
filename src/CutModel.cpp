@@ -161,3 +161,38 @@ bool CutModel::is_valid () const {
   return true;
 
 }
+
+
+std::vector<std::string> CutModel::cutflow (const std::string& label) const {
+
+  std::vector<std::string> output {};
+
+  // If not a good label or model, just abandon
+  if (not is_valid() or not label.size())
+    return output;
+
+  // If a negation operator in front, just send it back
+  if (label.front() == '!')
+    output.push_back(expand(label));
+
+  else {
+    auto& cutstring = cutstrings.at(label);
+    // If not joined by &&, send back
+    if (cutstring.joiner.get() != "&&")
+      output.push_back(expand(label));
+    else {
+      // For each cut, add literals and expand labels
+      for (auto& cut : cutstring.get_cuts()) {
+        if (cut.is_literal())
+          output.push_back(cut.cut());
+        else {
+          auto expanded = cutflow(cut.get());
+          output.insert(output.end(), expanded.begin(), expanded.end());
+        }
+      }
+    }
+  }
+
+  return output;
+
+}

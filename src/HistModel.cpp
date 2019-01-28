@@ -3,6 +3,7 @@
 
 #include <crombie2/FileSystem.h>
 #include <crombie2/HistModel.h>
+#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
@@ -10,18 +11,19 @@ using namespace crombie2;
 
 HistModel::HistModel (Job& job, const GlobalModel& globalmodel,
                       const Plot& plot, const CutModel& cutmodel, const Selection& selection) :
-  analyzer_prototype {job, plot, selection, cutmodel, globalmodel},
   inputdir {globalmodel.inputdir},
   inputfile {job.get_entry().name},
   nbins {plot.nbins},
   min {plot.min},
   max {plot.max},
   var {plot.expr(job.get_group().type)},
-  cutstr {cutmodel.expand(selection.cut)},
+  cutstr {Misc::nminus1(var, cutmodel.expand(selection.cut))},
   weightstr {cutmodel.expand(job.get_group().type == FileGroup::FileType::DATA
                              ? selection.data_weight
                              : selection.mc_weight)},
-  label {plot.label}
+  label {plot.label},
+  analyzer_prototype {job, plot, var, cutstr, weightstr, globalmodel}
+
 {
 
   for (auto& sub_proc : job.get_group().entries) {

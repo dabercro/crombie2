@@ -6,6 +6,7 @@
 #include <iterator>
 #include <memory>
 #include <mutex>
+#include <regex>
 #include <sstream>
 
 #include <gtkmm/messagedialog.h>
@@ -89,5 +90,13 @@ bool Misc::confirm (const std::string& message) {
   Gtk::MessageDialog dialog (message, false, Gtk::MESSAGE_INFO, Gtk::BUTTONS_YES_NO);
 
   return dialog.run() == Gtk::RESPONSE_YES;
+
+}
+
+
+std::string Misc::nminus1 (const std::string& var, const std::string& cut) {
+
+  std::regex expr{std::string("\\b") + var + "\\b\\s*[=<>]*\\s*-?[\\d\\.]+"};
+  return std::regex_replace(cut, expr, "(1)");
 
 }

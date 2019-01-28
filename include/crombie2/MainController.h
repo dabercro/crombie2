@@ -47,10 +47,14 @@ namespace crombie2 {
 
     std::list<Progress> progresses {};
 
-    Gtk::HBox histsbox {};
-    Gtk::CheckButton dohists {};
-    Gtk::Label histslabel {"Plot output directory"};
-    Gtk::Entry histoutput {};
+    Gtk::HBox histsbox {};                           ///< Holds the parameters for making histograms
+    Gtk::CheckButton dohists {};                     ///< Check box to activate histogram making
+    Gtk::Label histslabel {"Plot output directory"}; ///< Label for the histoutput entry
+    Gtk::Entry histoutput {};                        ///< Location to place histograms
+
+    Gtk::HBox cutflowbox {};                   ///< Holds parameters for cutflow making
+    Gtk::CheckButton docutflow {};             ///< Check box to activate cutflow making
+    Gtk::Label cutflowlabel {"Print Cutflow"}; ///< Label for the histoutput entry
 
     Gtk::HButtonBox submitbox {};
     Gtk::Button button {"Submit"};

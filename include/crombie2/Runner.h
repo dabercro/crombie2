@@ -23,7 +23,8 @@ namespace crombie2 {
             const PlotStyleModel& plotstylemodel,
             Progress& progress);
 
-    void run(const std::string& histoutputdir);
+    void run(const std::string& histoutputdir,
+             bool docutflow);
 
   private:
     unsigned num_files;

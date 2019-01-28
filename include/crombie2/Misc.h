@@ -39,6 +39,13 @@ namespace crombie2 {
 
     bool confirm (const std::string& message);
 
+    /**
+       @brief Returns the a cut with a variable taken out.
+
+       The function only removes expressions where the variable name is to the left of an operator.
+    */
+    std::string nminus1(const std::string& var, const std::string& cut);
+
   }
 }
 

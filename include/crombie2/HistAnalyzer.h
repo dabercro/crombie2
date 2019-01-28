@@ -12,8 +12,11 @@
 namespace crombie2 {
   class HistAnalyzer : public Analyzer {
   public:
-    HistAnalyzer (const Job& job, const Plot& plot, const Selection& selection,
-                  const CutModel& cutmodel, const GlobalModel& globalmodel);
+    HistAnalyzer (const Job& job, const Plot& plot,
+                  const std::string& var,
+                  const std::string& cutstr,
+                  const std::string& weightstr,
+                  const GlobalModel& globalmodel);
 
     void make_requests (Tree& tree) override;
 
@@ -25,10 +28,9 @@ namespace crombie2 {
 
   private:
 
-    const Job& job;
     const Plot& plot;
-    const Selection& selection;
 
+    const std::string var;
     const std::string cutstr;
     const std::string weightstr;
     std::vector<std::string> substrs {};
