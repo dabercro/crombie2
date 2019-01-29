@@ -3,7 +3,6 @@
 
 
 #include <crombie2/Controller.h>
-#include <crombie2/CutModel.h>
 #include <crombie2/MiniCutController.h>
 #include <crombie2/SelectionDisplay.h>
 

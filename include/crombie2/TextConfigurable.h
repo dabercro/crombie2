@@ -10,6 +10,7 @@
 namespace crombie2 {
   /**
      @brief A GuiConfigurable that is edited through a Gtk::Entry.
+
      The value is immediately updated when the contents of Gtk::Entry is edited.
      This is still an abstract class, but implements GuiConfigurable::get_widget.
   */

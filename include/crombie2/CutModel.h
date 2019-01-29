@@ -33,7 +33,7 @@ namespace crombie2 {
     bool is_valid () const override;
 
     /**
-       @param cutlabel Is the cut to get the cutflow cuts for
+       @param label Is the cut to get the cutflow cuts for
        @returns The list of cuts to make a cutflow table for the given label
     */
     std::vector<std::string> cutflow (const std::string& label) const;
