@@ -124,6 +124,7 @@ namespace {
       hist->SetMarkerStyle(8);
       hist->SetMarkerColor(style);
       hist->SetLineColor(style);
+      hist->SetLineWidth(1);
       break;
     case(FileGroup::FileType::SIGNAL) :
       hist->SetLineStyle(style);
@@ -131,6 +132,7 @@ namespace {
     case(FileGroup::FileType::MC) :
       hist->SetFillStyle(1001);
       hist->SetFillColor(style);
+      hist->SetLineWidth(1);
       break;
     default: // Don't know what you would want to do here
       throw;

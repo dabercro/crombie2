@@ -1,6 +1,6 @@
-#include <crombie2/Error.h>
-
 #include <gtkmm/messagedialog.h>
+
+#include <crombie2/Error.h>
 
 
 using namespace crombie2;

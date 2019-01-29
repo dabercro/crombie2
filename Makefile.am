@@ -40,6 +40,7 @@ allsrcs = \
 	$(srcdir)/src/Progress.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
+	$(srcdir)/src/SelectionDisplay.cpp \
 	$(srcdir)/src/SimpleController.cpp \
 	$(srcdir)/src/SimpleModel.cpp \
 	$(srcdir)/src/TextConfigurable.cpp \

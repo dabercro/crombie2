@@ -122,8 +122,9 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
 	src/PlotStyleModel.$(OBJEXT) src/Progress.$(OBJEXT) \
 	src/Runner.$(OBJEXT) src/Selection.$(OBJEXT) \
-	src/SimpleController.$(OBJEXT) src/SimpleModel.$(OBJEXT) \
-	src/TextConfigurable.$(OBJEXT) src/Tree.$(OBJEXT)
+	src/SelectionDisplay.$(OBJEXT) src/SimpleController.$(OBJEXT) \
+	src/SimpleModel.$(OBJEXT) src/TextConfigurable.$(OBJEXT) \
+	src/Tree.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
@@ -170,6 +171,7 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
 	src/$(DEPDIR)/PlotStyleModel.Po src/$(DEPDIR)/Progress.Po \
 	src/$(DEPDIR)/Runner.Po src/$(DEPDIR)/Selection.Po \
+	src/$(DEPDIR)/SelectionDisplay.Po \
 	src/$(DEPDIR)/SimpleController.Po src/$(DEPDIR)/SimpleModel.Po \
 	src/$(DEPDIR)/TextConfigurable.Po src/$(DEPDIR)/Tree.Po \
 	src/$(DEPDIR)/main.Po test/$(DEPDIR)/main.Po \
@@ -362,6 +364,7 @@ allsrcs = \
 	$(srcdir)/src/Progress.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
+	$(srcdir)/src/SelectionDisplay.cpp \
 	$(srcdir)/src/SimpleController.cpp \
 	$(srcdir)/src/SimpleModel.cpp \
 	$(srcdir)/src/TextConfigurable.cpp \
@@ -543,6 +546,8 @@ src/Runner.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Selection.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/SelectionDisplay.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/SimpleController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/SimpleModel.$(OBJEXT): src/$(am__dirstamp) \
@@ -629,6 +634,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Progress.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Runner.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Selection.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/SelectionDisplay.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/SimpleController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/SimpleModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/TextConfigurable.Po@am__quote@ # am--include-marker
@@ -976,6 +982,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/Progress.Po
 	-rm -f src/$(DEPDIR)/Runner.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
+	-rm -f src/$(DEPDIR)/SelectionDisplay.Po
 	-rm -f src/$(DEPDIR)/SimpleController.Po
 	-rm -f src/$(DEPDIR)/SimpleModel.Po
 	-rm -f src/$(DEPDIR)/TextConfigurable.Po
@@ -1075,6 +1082,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/Progress.Po
 	-rm -f src/$(DEPDIR)/Runner.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
+	-rm -f src/$(DEPDIR)/SelectionDisplay.Po
 	-rm -f src/$(DEPDIR)/SimpleController.Po
 	-rm -f src/$(DEPDIR)/SimpleModel.Po
 	-rm -f src/$(DEPDIR)/TextConfigurable.Po

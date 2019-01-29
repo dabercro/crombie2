@@ -40,6 +40,7 @@ CutController::CutController (ConfigPage& page, CutModel& model) :
 void CutController::redraw () {
 
   numcuts = 0;
+  selectiondisplays.clear();
   cutboxes.clear();
   minicontrollers.clear();
 
@@ -47,7 +48,7 @@ void CutController::redraw () {
     add_cut(cutmodel.get_cutstring(cut));
 
   for (auto& selection : cutmodel.selections)
-    selection.table.draw(selectionbox);
+    fill_selection(selection);
 
 }
 
@@ -75,7 +76,21 @@ void CutController::on_add_cut () {
 
 void CutController::on_add_selection () {
 
-  auto& selection = cutmodel.selections.emplace_back("", "", "");
-  selection.table.draw(selectionbox);
+  fill_selection(cutmodel.selections.emplace_back("", "", ""));
+
+}
+
+
+void CutController::fill_selection (Selection& selection) {
+
+  auto& display = selectiondisplays.emplace_back(cutmodel, selection);
+
+  selectionbox.pack_start(display.box, Gtk::PACK_SHRINK);
+
+  selection.table.draw(display.box);
+  display.box.pack_end(display);
+
+  display.box.show();
+  display.show();
 
 }
