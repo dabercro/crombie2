@@ -16,7 +16,7 @@ HistAnalyzerMaster::HistAnalyzerMaster (const std::string& outdir, std::vector<J
                                         const PlotModel& plotmodel, const CutModel& cutmodel,
                                         const GlobalModel& globalmodel,
                                         const PlotStyleModel& plotstylemodel) :
-  outputdir {outdir.size() ? plotstylemodel.outplotdir.get() + "/" + outdir : ""},
+  outputdir {outdir},
   globalmodel {globalmodel},
   plotstylemodel {plotstylemodel}
 {

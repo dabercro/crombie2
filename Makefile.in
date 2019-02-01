@@ -115,6 +115,8 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/HistAnalyzerMaster.$(OBJEXT) src/HistModel.$(OBJEXT) \
 	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
 	src/JobSorter.$(OBJEXT) src/JoinerConfigurable.$(OBJEXT) \
+	src/JSONAnalyzerMaster.$(OBJEXT) src/JSONAnalyzer.$(OBJEXT) \
+	src/JSONModel.$(OBJEXT) src/LumiSelection.$(OBJEXT) \
 	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
 	src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
@@ -130,7 +132,8 @@ crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
 am_crombie2catch_OBJECTS = $(am__objects_1) \
 	test/test_configurable.$(OBJEXT) test/test_cutstring.$(OBJEXT) \
-	test/test_fileentry.$(OBJEXT) test/test_misc.$(OBJEXT) \
+	test/test_fileentry.$(OBJEXT) \
+	test/test_lumiselection.$(OBJEXT) test/test_misc.$(OBJEXT) \
 	test/test_parser.$(OBJEXT) test/test_testconfig.$(OBJEXT) \
 	test/utils.$(OBJEXT) test/main.$(OBJEXT)
 crombie2catch_OBJECTS = $(am_crombie2catch_OBJECTS)
@@ -162,10 +165,12 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/GuiConfigurable.Po \
 	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalyzer.Po \
 	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistModel.Po \
-	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/Job.Po \
-	src/$(DEPDIR)/JobSorter.Po src/$(DEPDIR)/JoinerConfigurable.Po \
-	src/$(DEPDIR)/MainController.Po src/$(DEPDIR)/MainWindow.Po \
-	src/$(DEPDIR)/MiniCutController.Po \
+	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/JSONAnalyzer.Po \
+	src/$(DEPDIR)/JSONAnalyzerMaster.Po src/$(DEPDIR)/JSONModel.Po \
+	src/$(DEPDIR)/Job.Po src/$(DEPDIR)/JobSorter.Po \
+	src/$(DEPDIR)/JoinerConfigurable.Po \
+	src/$(DEPDIR)/LumiSelection.Po src/$(DEPDIR)/MainController.Po \
+	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
 	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
 	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/Plot.Po \
 	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
@@ -177,8 +182,9 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/main.Po test/$(DEPDIR)/main.Po \
 	test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_cutstring.Po \
-	test/$(DEPDIR)/test_fileentry.Po test/$(DEPDIR)/test_misc.Po \
-	test/$(DEPDIR)/test_parser.Po \
+	test/$(DEPDIR)/test_fileentry.Po \
+	test/$(DEPDIR)/test_lumiselection.Po \
+	test/$(DEPDIR)/test_misc.Po test/$(DEPDIR)/test_parser.Po \
 	test/$(DEPDIR)/test_testconfig.Po test/$(DEPDIR)/utils.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -351,6 +357,10 @@ allsrcs = \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/JobSorter.cpp \
 	$(srcdir)/src/JoinerConfigurable.cpp \
+	$(srcdir)/src/JSONAnalyzerMaster.cpp \
+	$(srcdir)/src/JSONAnalyzer.cpp \
+	$(srcdir)/src/JSONModel.cpp \
+	$(srcdir)/src/LumiSelection.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \
@@ -378,6 +388,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_configurable.cpp \
 	$(srcdir)/test/test_cutstring.cpp \
 	$(srcdir)/test/test_fileentry.cpp \
+	$(srcdir)/test/test_lumiselection.cpp \
 	$(srcdir)/test/test_misc.cpp \
 	$(srcdir)/test/test_parser.cpp \
 	$(srcdir)/test/test_testconfig.cpp \
@@ -523,6 +534,14 @@ src/JobSorter.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/JoinerConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/JSONAnalyzerMaster.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/JSONAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/JSONModel.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/LumiSelection.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/MainController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MainWindow.$(OBJEXT): src/$(am__dirstamp) \
@@ -572,6 +591,8 @@ test/test_cutstring.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_fileentry.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
+test/test_lumiselection.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
 test/test_misc.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_parser.$(OBJEXT): test/$(am__dirstamp) \
@@ -618,9 +639,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzerMaster.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistSplit.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JSONAnalyzer.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JSONAnalyzerMaster.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JSONModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Job.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JobSorter.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JoinerConfigurable.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/LumiSelection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainWindow.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniCutController.Po@am__quote@ # am--include-marker
@@ -644,6 +669,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_configurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_cutstring.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_fileentry.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_lumiselection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_misc.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_parser.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_testconfig.Po@am__quote@ # am--include-marker
@@ -966,9 +992,13 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
 	-rm -f src/$(DEPDIR)/HistModel.Po
 	-rm -f src/$(DEPDIR)/HistSplit.Po
+	-rm -f src/$(DEPDIR)/JSONAnalyzer.Po
+	-rm -f src/$(DEPDIR)/JSONAnalyzerMaster.Po
+	-rm -f src/$(DEPDIR)/JSONModel.Po
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/JobSorter.Po
 	-rm -f src/$(DEPDIR)/JoinerConfigurable.Po
+	-rm -f src/$(DEPDIR)/LumiSelection.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
 	-rm -f src/$(DEPDIR)/MiniCutController.Po
@@ -992,6 +1022,7 @@ distclean: distclean-am
 	-rm -f test/$(DEPDIR)/test_configurable.Po
 	-rm -f test/$(DEPDIR)/test_cutstring.Po
 	-rm -f test/$(DEPDIR)/test_fileentry.Po
+	-rm -f test/$(DEPDIR)/test_lumiselection.Po
 	-rm -f test/$(DEPDIR)/test_misc.Po
 	-rm -f test/$(DEPDIR)/test_parser.Po
 	-rm -f test/$(DEPDIR)/test_testconfig.Po
@@ -1066,9 +1097,13 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
 	-rm -f src/$(DEPDIR)/HistModel.Po
 	-rm -f src/$(DEPDIR)/HistSplit.Po
+	-rm -f src/$(DEPDIR)/JSONAnalyzer.Po
+	-rm -f src/$(DEPDIR)/JSONAnalyzerMaster.Po
+	-rm -f src/$(DEPDIR)/JSONModel.Po
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/JobSorter.Po
 	-rm -f src/$(DEPDIR)/JoinerConfigurable.Po
+	-rm -f src/$(DEPDIR)/LumiSelection.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
 	-rm -f src/$(DEPDIR)/MiniCutController.Po
@@ -1092,6 +1127,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f test/$(DEPDIR)/test_configurable.Po
 	-rm -f test/$(DEPDIR)/test_cutstring.Po
 	-rm -f test/$(DEPDIR)/test_fileentry.Po
+	-rm -f test/$(DEPDIR)/test_lumiselection.Po
 	-rm -f test/$(DEPDIR)/test_misc.Po
 	-rm -f test/$(DEPDIR)/test_parser.Po
 	-rm -f test/$(DEPDIR)/test_testconfig.Po

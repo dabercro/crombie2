@@ -19,13 +19,24 @@ namespace crombie2 {
     /// Create directories, recursively if needed
     void mkdirs(const std::string& path);
 
-    /// The name of files inside of the directory
-    Types::strings list(std::string directory);
+    /**
+       @brief Get the contents of a directory
+
+       @param directory The full or relative (from directory where program is run from) path
+       @param shouldexist Can be set to false if it's possible for a directory to not exist.
+                          If true, displays an error message to the user.
+       @returns The name of files inside of the directory, relative to the directory.
+                It's an empty vector if the directory does not exist
+    */
+    Types::strings list(std::string directory, bool shouldexist = true);
 
 
     /**
-       If this would overwrite a directory that exists, ask for confirmation.
-       This returns whether or not the user confirms the file to be removed.
+       @brief Confirm overwrite of file or directory.
+
+       @param path Full or relative path of file or directory for message
+       @returns This returns whether or not the user confirms the file to be removed.
+                If the file doesn't exist, no prompt is generated, and true is returned.
     */
     bool confirm_overwrite(const std::string& path);
 

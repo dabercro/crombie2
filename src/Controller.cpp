@@ -73,7 +73,8 @@ void Controller::update_entries () {
   tagentry.clear_items();
 
   for (auto& file :
-         FileSystem::list(ConfigModel::get_config_dir() + "/" + model.get_name() + "/tags"))
+         FileSystem::list(ConfigModel::get_config_dir() + "/" + model.get_name() + "/tags",
+                          false))  // The tag directory might not exist (e.g., for a new user)
     tagentry.append_text(file);
 
 }

@@ -58,7 +58,7 @@ void FileController::on_add_group () {
 
 void FileController::on_check_xs () {
 
-  xs_db.save_tag(Controller::last_tag);
+  xs_db.save_tag(Controller::last_tag, true);
 
   if (xs_db.executable.get().size()) {
 

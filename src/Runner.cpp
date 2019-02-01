@@ -4,6 +4,7 @@
 
 #include <crombie2/CutflowAnalyzerMaster.h>
 #include <crombie2/HistAnalyzerMaster.h>
+#include <crombie2/JSONAnalyzerMaster.h>
 #include <crombie2/Runner.h>
 
 
@@ -14,6 +15,7 @@ Runner::Runner (unsigned num_files,
                 const CutModel& cutmodel,
                 const FileModel& filemodel,
                 const GlobalModel& globalmodel,
+                const JSONModel& jsonmodel,
                 const PlotModel& plotmodel,
                 const PlotStyleModel& plotstylemodel,
                 Progress& progress) :
@@ -21,6 +23,7 @@ Runner::Runner (unsigned num_files,
   cutmodel {cutmodel},
   filemodel {filemodel},
   globalmodel {globalmodel},
+  jsonmodel {jsonmodel},
   plotmodel {plotmodel},
   plotstylemodel {plotstylemodel},
   progress {progress}
@@ -32,7 +35,7 @@ Runner::Runner (unsigned num_files,
 
 
 void Runner::run (const std::string& histoutputdir,
-                  bool docutflow) {
+                  bool docutflow, bool dolumi) {
 
   auto start = std::chrono::steady_clock::now();
 
@@ -56,6 +59,10 @@ void Runner::run (const std::string& histoutputdir,
     docutflow, jobs, cutmodel
   };
 
+  JSONAnalyzerMaster jsonanalyzers {
+    dolumi, jobs, jsonmodel
+  };
+
   // Run jobs
   unsigned nthreads {globalmodel.nthreads};
   std::vector<std::thread> threads {};
@@ -73,6 +80,8 @@ void Runner::run (const std::string& histoutputdir,
   histanalyzers.output();
   if (docutflow)
     cutflowanalyzers.output();
+  if (dolumi)
+    jsonanalyzers.output();
 
   auto end = std::chrono::steady_clock::now();
   std::chrono::duration<double> diff = end - start;

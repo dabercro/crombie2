@@ -23,6 +23,7 @@ namespace crombie2 {
     Gtk::Notebook book {};
 
     ConfigPage globals {"Globals"};
+    ConfigPage json {"JSON Settings"};
     ConfigPage plotstyle {"Plot Style"};
     ConfigPage files {"Files"};
     ConfigPage plots {"Plots"};
@@ -32,6 +33,7 @@ namespace crombie2 {
 
     MainController maincontrol {
       globals,
+      json,
       plotstyle,
       files,
       plots,

@@ -1,5 +1,6 @@
 #include <thread>
 
+#include <crombie2/FileSystem.h>
 #include <crombie2/MainController.h>
 #include <crombie2/Misc.h>
 #include <crombie2/Runner.h>
@@ -9,6 +10,7 @@ using namespace crombie2;
 
 
 MainController::MainController (ConfigPage& globalpage,
+                                ConfigPage& jsonpage,
                                 ConfigPage& plotstylepage,
                                 ConfigPage& filepage,
                                 ConfigPage& plotpage,
@@ -16,6 +18,7 @@ MainController::MainController (ConfigPage& globalpage,
                                 ConfigPage& uncertaintypage,
                                 ConfigPage& jobpage) :
   globalcontrol {globalpage, globalmodel},
+  jsoncontrol {jsonpage, jsonmodel},
   plotstylecontrol {plotstylepage, plotstylemodel},
   filecontrol {filepage, filemodel},
   plotcontrol {plotpage, plotmodel},
@@ -51,6 +54,17 @@ MainController::MainController (ConfigPage& globalpage,
   docutflow.show();
   cutflowlabel.show();
 
+  // Lumi JSON making
+
+  jobpage.pack_start(lumibox, Gtk::PACK_SHRINK);
+
+  lumibox.pack_start(dolumi, Gtk::PACK_SHRINK);
+  lumibox.pack_start(lumilabel, Gtk::PACK_SHRINK);
+
+  lumibox.show();
+  dolumi.show();
+  lumilabel.show();
+
   // Submission buttons
 
   jobpage.pack_end(submitbox, Gtk::PACK_SHRINK);
@@ -76,9 +90,16 @@ void MainController::on_submit_job () {
   progress.set_progress(std::string("Setting up ") +
                         std::to_string(num_files) + " files");
 
-  if (cutmodel.is_valid()) {
+  std::string outdir = dohists.get_active()
+    ? plotstylemodel.outplotdir.get() + "/" + histoutput.get_text()
+    : "";
 
-    std::thread thread {[num_files, &progress, this] () { run(num_files, progress); }};
+  // Check if everything is okay
+  if (cutmodel.is_valid() and
+      (not outdir.size() or FileSystem::confirm_overwrite(outdir))
+      ) {
+
+    std::thread thread {[num_files, &progress, outdir, this] () { run(num_files, outdir, progress); }};
     thread.detach();
 
   }
@@ -88,13 +109,12 @@ void MainController::on_submit_job () {
 }
 
 
-void MainController::run (unsigned num_files, Progress& progress) {
+void MainController::run (unsigned num_files, const std::string& histoutdir, Progress& progress) {
 
   Runner runner {
     num_files, cutmodel, filemodel,
-    globalmodel, plotmodel, plotstylemodel, progress
+    globalmodel, jsonmodel, plotmodel, plotstylemodel, progress
   };
-  runner.run(dohists.get_active() ? histoutput.get_text() : "",
-             docutflow.get_active());
+  runner.run(histoutdir, docutflow.get_active(), dolumi.get_active());
 
 }

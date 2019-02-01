@@ -6,6 +6,7 @@
 
 #include <crombie2/CutController.h>
 #include <crombie2/FileController.h>
+#include <crombie2/JSONModel.h>
 #include <crombie2/GlobalModel.h>
 #include <crombie2/PlotController.h>
 #include <crombie2/PlotStyleModel.h>
@@ -17,6 +18,7 @@ namespace crombie2 {
   class MainController {
   public:
     MainController (ConfigPage& globalpage,
+                    ConfigPage& jsonpage,
                     ConfigPage& plotstylepage,
                     ConfigPage& filepage,
                     ConfigPage& plotpage,
@@ -27,6 +29,9 @@ namespace crombie2 {
   private:
     GlobalModel globalmodel {};
     SimpleController globalcontrol;
+
+    JSONModel jsonmodel {};
+    SimpleController jsoncontrol;
 
     PlotStyleModel plotstylemodel {};
     SimpleController plotstylecontrol;
@@ -43,7 +48,7 @@ namespace crombie2 {
     ConfigPage& jobpage;
 
     void on_submit_job ();
-    void run (unsigned num_files, Progress& progress);
+    void run (unsigned num_files, const std::string& histoutdir, Progress& progress);
 
     std::list<Progress> progresses {};
 
@@ -55,6 +60,10 @@ namespace crombie2 {
     Gtk::HBox cutflowbox {};                   ///< Holds parameters for cutflow making
     Gtk::CheckButton docutflow {};             ///< Check box to activate cutflow making
     Gtk::Label cutflowlabel {"Print Cutflow"}; ///< Label for the histoutput entry
+
+    Gtk::HBox lumibox {};
+    Gtk::CheckButton dolumi {};
+    Gtk::Label lumilabel {"Print Luminosity Selection"};
 
     Gtk::HButtonBox submitbox {};
     Gtk::Button button {"Submit"};

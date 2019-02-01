@@ -123,13 +123,13 @@ void FileSystem::mkdirs(const std::string& path) {
 }
 
 
-Types::strings FileSystem::list(std::string directory) {
+Types::strings FileSystem::list(std::string directory, bool shouldexist) {
   if (is_xrd(directory))
     return xrd_list(directory);
 
   Types::strings output {};
 
-  if (not exists(directory)) {
+  if (shouldexist and not exists(directory)) {
     Error::Exception(directory + " does not seem to exist.");
     return output;
   }
@@ -146,11 +146,8 @@ Types::strings FileSystem::list(std::string directory) {
 
 
 bool FileSystem::confirm_overwrite(const std::string& path) {
-  if (exists(path)) {
-    std::string response;
-    std::cout << path << " already exists. Want to overwrite? (y/N)" << std::endl;
-    std::getline(std::cin, response);
-    return response == "y";
-  }
+  if (exists(path))
+    return Misc::confirm(path + " already exists. Want to overwrite?");
+
   return true;
 }

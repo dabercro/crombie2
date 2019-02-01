@@ -32,10 +32,6 @@ namespace crombie2 {
     /// The weights to read to normalize MC
     Configurable<std::string> normhist {"Weight Hist", "hSumW"};
 
-    Configurable<std::string> runnum {"Run Expression", "runNumber"};
-
-    Configurable<std::string> luminum {"Lumi Expression", "lumiNumber"};
-
   };
 
 }

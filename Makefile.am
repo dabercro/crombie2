@@ -27,6 +27,10 @@ allsrcs = \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/JobSorter.cpp \
 	$(srcdir)/src/JoinerConfigurable.cpp \
+	$(srcdir)/src/JSONAnalyzerMaster.cpp \
+	$(srcdir)/src/JSONAnalyzer.cpp \
+	$(srcdir)/src/JSONModel.cpp \
+	$(srcdir)/src/LumiSelection.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \
@@ -57,6 +61,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_configurable.cpp \
 	$(srcdir)/test/test_cutstring.cpp \
 	$(srcdir)/test/test_fileentry.cpp \
+	$(srcdir)/test/test_lumiselection.cpp \
 	$(srcdir)/test/test_misc.cpp \
 	$(srcdir)/test/test_parser.cpp \
 	$(srcdir)/test/test_testconfig.cpp \
