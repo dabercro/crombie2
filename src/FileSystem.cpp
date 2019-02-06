@@ -129,8 +129,9 @@ Types::strings FileSystem::list(std::string directory, bool shouldexist) {
 
   Types::strings output {};
 
-  if (shouldexist and not exists(directory)) {
-    Error::Exception(directory + " does not seem to exist.");
+  if (not exists(directory)) {
+    if (shouldexist)
+      Error::Exception(directory + " does not seem to exist.");
     return output;
   }
 
