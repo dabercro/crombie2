@@ -6,7 +6,7 @@
 using namespace crombie2;
 
 
-HistSplit::HistSplit(const std::vector<std::string>& entries)
+HistSplit::HistSplit (const std::vector<std::string>& entries)
 {
 
   hists.reserve(entries.size());

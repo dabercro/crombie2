@@ -10,6 +10,7 @@
 #include <crombie2/JobSorter.h>
 #include <crombie2/PlotModel.h>
 #include <crombie2/Progress.h>
+#include <crombie2/ReweightParams.h>
 
 
 namespace crombie2 {
@@ -26,7 +27,8 @@ namespace crombie2 {
             Progress& progress);
 
     void run(const std::string& histoutputdir,
-             bool docutflow, bool dolumi);
+             bool docutflow, bool dolumi,
+             ReweightParams reweight);
 
   private:
     unsigned num_files;

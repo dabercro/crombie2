@@ -12,7 +12,8 @@
 using namespace crombie2;
 
 
-HistAnalyzerMaster::HistAnalyzerMaster (const std::string& outdir, std::vector<Job>& jobs,
+HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
+                                        const std::string& outdir, std::vector<Job>& jobs,
                                         const PlotModel& plotmodel, const CutModel& cutmodel,
                                         const GlobalModel& globalmodel,
                                         const PlotStyleModel& plotstylemodel) :
@@ -22,7 +23,7 @@ HistAnalyzerMaster::HistAnalyzerMaster (const std::string& outdir, std::vector<J
 {
 
   // If no output directory, we are not going to make hist analyzers
-  if (not outputdir.size())
+  if (not dohists)
     return;
 
   for (auto& job : jobs) {
@@ -47,7 +48,8 @@ HistAnalyzerMaster::HistAnalyzerMaster (const std::string& outdir, std::vector<J
 
 }
 
-void HistAnalyzerMaster::output () {
+
+void HistAnalyzerMaster::output () const {
 
   if (not outputdir.size())
     return;
@@ -64,14 +66,10 @@ void HistAnalyzerMaster::output () {
 
     // Scale all of the histograms
     for (auto& key_input : key_output.second) {
-      auto& histmodel = key_input.second;
 
-      auto histsplit = histmodel.get_histsplit();
+      auto histsplit = scaled_split(key_input);
 
       auto type = types.at(key_input.first);
-
-      if (type != FileGroup::FileType::DATA)
-        histsplit.scale(globalmodel.luminosity, xs.at(key_input.first));
 
       auto& outmap = type == FileGroup::FileType::MC
         ? mchists
@@ -87,6 +85,18 @@ void HistAnalyzerMaster::output () {
     draw_plot(key_output.first, datahists, mchists, signalhists);
 
   }
+
+}
+
+
+HistSplit HistAnalyzerMaster::scaled_split (const std::pair<std::string, HistModel>& histentry) const {
+
+  auto histsplit = histentry.second.get_histsplit();
+
+  if (types.at(histentry.first) != FileGroup::FileType::DATA)
+    histsplit.scale(globalmodel.luminosity, xs.at(histentry.first));
+
+  return histsplit;
 
 }
 
@@ -160,7 +170,7 @@ namespace {
 void HistAnalyzerMaster::draw_plot(const std::string& output,
                                    Types::map<Hist>& data,
                                    Types::map<Hist>& mc,
-                                   Types::map<Hist>& signal) {
+                                   Types::map<Hist>& signal) const {
 
   // Use this to store sums for ratios
   Hist data_hist {};
@@ -341,5 +351,39 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     auto outname = outputdir + "/" + output + suff;
     canv.SaveAs(outname.data());
   }
+
+}
+
+
+HistAnalysis HistAnalyzerMaster::get_analysis_histograms (const std::string& selection,
+                                                          const std::string& plotname,
+                                                          const std::string& signal) const {
+
+  Hist data {};
+  Hist mc {};
+  Hist background {};
+
+  auto keyname = selection + "_" + plotname;
+
+  for (auto& hists : histmodels.at(keyname)) {
+
+    auto type = types.at(hists.first);
+
+    for (auto& histpair : scaled_split(hists).get_hists()) {
+      auto& hist = histpair.second;
+
+      if (type == FileGroup::FileType::DATA)
+        data.add(hist);
+      else if (not signal.size() or histpair.first == signal)
+        mc.add(hist);
+      else
+        background.add(hist);
+    }
+
+  }
+
+  return signal.size()
+    ? HistAnalysis(std::move(data), std::move(mc), std::move(background))
+    : HistAnalysis(std::move(data), std::move(mc));
 
 }

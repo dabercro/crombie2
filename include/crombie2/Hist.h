@@ -35,7 +35,7 @@ namespace crombie2 {
 
 
     /// Adds another histogram's bin contents to this Hist
-    void add  (const Hist& other);
+    void add  (const Hist& other, double factor = 1.0);
 
 
     /// Scale this histogram by a direct scale factor
@@ -83,6 +83,9 @@ namespace crombie2 {
     double get_total () const;
     const std::vector<double>& get_contents () const;
     const std::vector<double>& get_errors () const;
+
+    /// Get the sum of the bin contents
+    double integral (bool overflow = false) const;
 
   private:
 

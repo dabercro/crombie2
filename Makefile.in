@@ -111,10 +111,11 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
 	src/FileController.$(OBJEXT) src/FileEntry.$(OBJEXT) \
 	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
 	src/GlobalModel.$(OBJEXT) src/GuiConfigurable.$(OBJEXT) \
-	src/Hist.$(OBJEXT) src/HistAnalyzer.$(OBJEXT) \
-	src/HistAnalyzerMaster.$(OBJEXT) src/HistModel.$(OBJEXT) \
-	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
-	src/JobSorter.$(OBJEXT) src/JoinerConfigurable.$(OBJEXT) \
+	src/Hist.$(OBJEXT) src/HistAnalysis.$(OBJEXT) \
+	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
+	src/HistModel.$(OBJEXT) src/HistSplit.$(OBJEXT) \
+	src/Job.$(OBJEXT) src/JobSorter.$(OBJEXT) \
+	src/JoinerConfigurable.$(OBJEXT) \
 	src/JSONAnalyzerMaster.$(OBJEXT) src/JSONAnalyzer.$(OBJEXT) \
 	src/JSONModel.$(OBJEXT) src/LumiSelection.$(OBJEXT) \
 	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
@@ -163,7 +164,8 @@ am__depfiles_remade = src/$(DEPDIR)/ConfigModel.Po \
 	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileEntry.Po \
 	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
 	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/GuiConfigurable.Po \
-	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalyzer.Po \
+	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalysis.Po \
+	src/$(DEPDIR)/HistAnalyzer.Po \
 	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistModel.Po \
 	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/JSONAnalyzer.Po \
 	src/$(DEPDIR)/JSONAnalyzerMaster.Po src/$(DEPDIR)/JSONModel.Po \
@@ -350,6 +352,7 @@ allsrcs = \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/GuiConfigurable.cpp \
 	$(srcdir)/src/Hist.cpp \
+	$(srcdir)/src/HistAnalysis.cpp \
 	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/HistAnalyzerMaster.cpp \
 	$(srcdir)/src/HistModel.cpp \
@@ -521,6 +524,8 @@ src/GlobalModel.$(OBJEXT): src/$(am__dirstamp) \
 src/GuiConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Hist.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/HistAnalysis.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/HistAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/HistAnalyzerMaster.$(OBJEXT): src/$(am__dirstamp) \
@@ -635,6 +640,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GuiConfigurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Hist.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalysis.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzerMaster.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistModel.Po@am__quote@ # am--include-marker
@@ -988,6 +994,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
 	-rm -f src/$(DEPDIR)/GuiConfigurable.Po
 	-rm -f src/$(DEPDIR)/Hist.Po
+	-rm -f src/$(DEPDIR)/HistAnalysis.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
 	-rm -f src/$(DEPDIR)/HistModel.Po
@@ -1093,6 +1100,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
 	-rm -f src/$(DEPDIR)/GuiConfigurable.Po
 	-rm -f src/$(DEPDIR)/Hist.Po
+	-rm -f src/$(DEPDIR)/HistAnalysis.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
 	-rm -f src/$(DEPDIR)/HistModel.Po

@@ -43,10 +43,16 @@ namespace crombie2 {
     void on_save ();
     void on_load ();
 
+    void on_export ();
+    void on_import ();
+
     /// Updates the list of tags to select from
     void update_entries ();
 
     Gtk::HBox updatebox {};
+
+    Gtk::Button exportbutton {"Export"};
+    Gtk::Button importbutton {"Import"};
 
     Gtk::Button updatebutton {"Update"};
     Gtk::Button savebutton {"Save Tag"};

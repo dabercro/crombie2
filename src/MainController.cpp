@@ -30,40 +30,24 @@ MainController::MainController (ConfigPage& globalpage,
 
   // Histogram making
 
-  jobpage.pack_start(histsbox, Gtk::PACK_SHRINK);
-
-  histsbox.pack_start(dohists, Gtk::PACK_SHRINK);
-  histsbox.pack_start(histslabel, Gtk::PACK_SHRINK);
-  histsbox.pack_start(histoutput);
-
-  histsbox.show();
-  dohists.show();
-  histslabel.show();
+  setup_controls(histsbox, dohists, histslabel, histoutput);
 
   histoutput.set_text(Misc::shell("printf $(date +%y%m%d)"));
   histoutput.show();
 
   // Cutflow making
 
-  jobpage.pack_start(cutflowbox, Gtk::PACK_SHRINK);
-
-  cutflowbox.pack_start(docutflow, Gtk::PACK_SHRINK);
-  cutflowbox.pack_start(cutflowlabel, Gtk::PACK_SHRINK);
-
-  cutflowbox.show();
-  docutflow.show();
-  cutflowlabel.show();
+  setup_controls(cutflowbox, docutflow, cutflowlabel);
 
   // Lumi JSON making
 
-  jobpage.pack_start(lumibox, Gtk::PACK_SHRINK);
+  setup_controls(lumibox, dolumi, lumilabel);
 
-  lumibox.pack_start(dolumi, Gtk::PACK_SHRINK);
-  lumibox.pack_start(lumilabel, Gtk::PACK_SHRINK);
+  // Reweight histograms
 
-  lumibox.show();
-  dolumi.show();
-  lumilabel.show();
+  setup_controls(reweightbox, doreweight, reweight_selection_label, reweight_selection,
+                 reweight_plotname_label, reweight_plotname, reweight_signal_label, reweight_signal,
+                 reweight_output_label, reweight_output);
 
   // Submission buttons
 
@@ -74,6 +58,17 @@ MainController::MainController (ConfigPage& globalpage,
 
   submitbox.show();
   button.show();
+
+}
+
+
+void MainController::setup_controls (Gtk::HBox& box, Gtk::Widget& to_add) {
+
+  box.pack_start(to_add, Gtk::PACK_SHRINK);
+  to_add.show();
+
+  jobpage.pack_start(box, Gtk::PACK_SHRINK);
+  box.show();
 
 }
 
@@ -115,6 +110,11 @@ void MainController::run (unsigned num_files, const std::string& histoutdir, Pro
     num_files, cutmodel, filemodel,
     globalmodel, jsonmodel, plotmodel, plotstylemodel, progress
   };
-  runner.run(histoutdir, docutflow.get_active(), dolumi.get_active());
+  runner.run(histoutdir, docutflow.get_active(), dolumi.get_active(),
+             {
+               doreweight.get_active(), reweight_selection.get_text(),
+               reweight_plotname.get_text(), reweight_signal.get_text(),
+               reweight_output.get_text()
+             });
 
 }

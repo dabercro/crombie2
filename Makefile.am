@@ -20,6 +20,7 @@ allsrcs = \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/GuiConfigurable.cpp \
 	$(srcdir)/src/Hist.cpp \
+	$(srcdir)/src/HistAnalysis.cpp \
 	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/HistAnalyzerMaster.cpp \
 	$(srcdir)/src/HistModel.cpp \

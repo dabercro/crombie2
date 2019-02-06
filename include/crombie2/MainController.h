@@ -65,8 +65,35 @@ namespace crombie2 {
     Gtk::CheckButton dolumi {};
     Gtk::Label lumilabel {"Print Luminosity Selection"};
 
+    Gtk::HBox reweightbox {};
+    Gtk::CheckButton doreweight {};
+    Gtk::Label reweight_selection_label {"Reweight Selection"};
+    Gtk::Entry reweight_selection {};
+    Gtk::Label reweight_plotname_label {"Plot Name"};
+    Gtk::Entry reweight_plotname {};
+    Gtk::Label reweight_signal_label {"Signal Entry"};
+    Gtk::Entry reweight_signal {};
+    Gtk::Label reweight_output_label {"Output File"};
+    Gtk::Entry reweight_output {};
+
     Gtk::HButtonBox submitbox {};
     Gtk::Button button {"Submit"};
+
+    /**
+       @brief Allows easy adding of controls to the "Jobs" page.
+
+       Adds a widget into a box, adds that box to the "Jobs" ConfigPage, and then shows the box and widget.
+       This terminates the variadic template function with the same name.
+    */
+    void setup_controls (Gtk::HBox& box, Gtk::Widget& to_add);
+
+    /// Allows easy adding of controls to the "Jobs" page.
+    template <typename ... Args> void setup_controls (Gtk::HBox& box, Gtk::Widget& to_add,
+                                                      Args& ... more_widgets) {
+      box.pack_start(to_add, Gtk::PACK_SHRINK);
+      to_add.show();
+      setup_controls(box, more_widgets ...);
+    }
 
   };
 }

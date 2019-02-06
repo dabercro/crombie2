@@ -35,7 +35,8 @@ Runner::Runner (unsigned num_files,
 
 
 void Runner::run (const std::string& histoutputdir,
-                  bool docutflow, bool dolumi) {
+                  bool docutflow, bool dolumi,
+                  ReweightParams reweight) {
 
   auto start = std::chrono::steady_clock::now();
 
@@ -52,7 +53,9 @@ void Runner::run (const std::string& histoutputdir,
 
   // Create histograms
   HistAnalyzerMaster histanalyzers {
-    histoutputdir, jobs, plotmodel, cutmodel, globalmodel, plotstylemodel
+    reweight.doreweight or histoutputdir.size(),
+    histoutputdir, jobs,
+    plotmodel, cutmodel, globalmodel, plotstylemodel
   };
 
   CutflowAnalyzerMaster cutflowanalyzers {
@@ -82,6 +85,11 @@ void Runner::run (const std::string& histoutputdir,
     cutflowanalyzers.output();
   if (dolumi)
     jsonanalyzers.output();
+
+  // Reweight stuff
+  histanalyzers.get_analysis_histograms(reweight.selection, reweight.plotname, reweight.signal).
+    reweight(reweight.output);
+  
 
   auto end = std::chrono::steady_clock::now();
   std::chrono::duration<double> diff = end - start;

@@ -30,22 +30,22 @@ void Hist::fill(double val, double weight) {
 }
 
 
-void Hist::add(const Hist& other) {
+void Hist::add(const Hist& other, double factor) {
 
   if (nbins == 0)
-    *this = other;               // If this not set yet, just simple assignment
+    *this = other;                 // If this not set yet, just simple assignment
   else {
-    total += other.total;        // Increase the total events count
-    if (other.nbins != nbins) {  // Check for binning error
+    total += factor * other.total; // Increase the total events count
+    if (other.nbins != nbins) {    // Check for binning error
       std::cerr << "Num bins other: " << other.nbins << " me: " << nbins << std::endl;
       throw std::runtime_error{"Hists don't have same number of bins"};
     }
 
     // Add these histograms together
     for (unsigned ibin = 0; ibin < contents.size(); ++ibin) {
-      contents[ibin] += other.contents[ibin];
+      contents[ibin] += factor * other.contents[ibin];
       if (sumw2.size())
-        sumw2[ibin] += other.sumw2[ibin];
+        sumw2[ibin] += std::pow(factor, 2) * other.sumw2[ibin];
     }
 
   }
@@ -188,6 +188,16 @@ const std::vector<double>& Hist::get_contents () const {
 const std::vector<double>& Hist::get_errors () const {
 
   return sumw2;
+
+}
+
+
+double Hist::integral (bool overflow) const {
+
+  double output {0};
+  for (unsigned bin = 1 - overflow; bin < contents.size() - overflow; bin++)
+    output += bin;
+  return output;
 
 }
 
