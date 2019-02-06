@@ -20,8 +20,8 @@ Controller::Controller (ConfigPage& page, ConfigModel& model) :
   updatebox.pack_end(tagentry, Gtk::PACK_SHRINK);
   tagentry.show();
 
-  for (auto* button : {&loadbutton, &savebutton, &updatebutton,
-        &exportbutton, &importbutton}) {
+  for (auto* button : {&loadbutton, &savebutton,
+        &exportbutton, &importbutton, &updatebutton}) {
 
     button->set_border_width(5);
     updatebox.pack_end(*button, Gtk::PACK_SHRINK);
@@ -81,8 +81,11 @@ void Controller::on_export () {
 
   // Uses the tag entry widget for file name
   auto filename = tagentry.get_entry()->get_text();
-  if (FileSystem::confirm_overwrite(filename))
-    model.save(filename);
+  if (not filename.size())
+    Error::Exception("No target file", "Enter the file name into the tag entry");
+  else
+    if (FileSystem::confirm_overwrite(filename))
+      model.save(filename);
 
 }
 
