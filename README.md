@@ -22,7 +22,7 @@ cd build
 ../configure <options>
 ```
 
-For installation on the MIT tier-3,
+For compilation on the MIT tier-3,
 I actually have to use the following configure command because
 the operating system has a very old `libc++.so` or something:
 
@@ -33,7 +33,7 @@ CPPFLAGS=-D_GLIBCXX_USE_CXX11_ABI=0 ../configure
 Then build
 
 ```
-make -j3 && make install
+make -j3 && make install-strip   # Debugging symbols will be in your build directory
 ```
 
 By default, this will install the executables `crombie2` and `crombie2catch`
