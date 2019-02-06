@@ -1,5 +1,3 @@
-#include <exception>
-
 #include <gtkmm/filechooserdialog.h>
 
 #include <crombie2/Controller.h>

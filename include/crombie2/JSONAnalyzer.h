@@ -2,8 +2,6 @@
 #define CROMBIE2_JSONANALYZER_H
 
 
-#include <memory>
-
 #include <crombie2/Analyzer.h>
 #include <crombie2/JSONModel.h>
 #include <crombie2/JSONRefs.h>
