@@ -18,7 +18,12 @@ namespace crombie2 {
   class Controller {
   public:
 
-    Controller (ConfigPage& page, ConfigModel& model);
+    /**
+       @param page Is the ConfigPage that this will draw on
+       @param model Is the model that is controlled
+       @param load_last If false, does not load a "latest" tag for the model on contruction
+    */
+    Controller (ConfigPage& page, ConfigModel& model, bool load_last = true);
     virtual ~Controller () = default;
 
     /// Get a reference back to the page for something else to draw on
@@ -26,12 +31,12 @@ namespace crombie2 {
 
     void on_update ();
 
+    virtual void redraw () = 0;
+
   protected:
 
     /// Reference to page that is drawn on
     ConfigPage& page;
-
-    virtual void redraw () = 0;
 
     static const std::string last_tag;
 

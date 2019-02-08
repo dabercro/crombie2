@@ -13,6 +13,7 @@ MainWindow::MainWindow ()
   book.show();
   add_page(globals);
   add_page(json);
+  add_page(reweight);
   add_page(plotstyle);
   add_page(files);
   add_page(plots);

@@ -16,7 +16,7 @@ namespace crombie2 {
     HistAnalysis (const Hist& data, const Hist& mc, const Hist& background);
 
     /// Create reweight histogram
-    void reweight (const std::string& outputfile) const;
+    void reweight (bool normalize, const std::string& output) const;
 
   private:
     bool has_background {false};

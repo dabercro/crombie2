@@ -16,6 +16,7 @@ Runner::Runner (unsigned num_files,
                 const FileModel& filemodel,
                 const GlobalModel& globalmodel,
                 const JSONModel& jsonmodel,
+                const ReweightModel& reweightmodel,
                 const PlotModel& plotmodel,
                 const PlotStyleModel& plotstylemodel,
                 Progress& progress) :
@@ -24,6 +25,7 @@ Runner::Runner (unsigned num_files,
   filemodel {filemodel},
   globalmodel {globalmodel},
   jsonmodel {jsonmodel},
+  reweightmodel {reweightmodel},
   plotmodel {plotmodel},
   plotstylemodel {plotstylemodel},
   progress {progress}
@@ -36,7 +38,7 @@ Runner::Runner (unsigned num_files,
 
 void Runner::run (const std::string& histoutputdir,
                   bool docutflow, bool dolumi,
-                  ReweightParams reweight) {
+                  bool doreweight, bool re_normalize) {
 
   auto start = std::chrono::steady_clock::now();
 
@@ -53,9 +55,10 @@ void Runner::run (const std::string& histoutputdir,
 
   // Create histograms
   HistAnalyzerMaster histanalyzers {
-    reweight.doreweight or histoutputdir.size(),
+    doreweight or histoutputdir.size(),
     histoutputdir, jobs,
-    plotmodel, cutmodel, globalmodel, plotstylemodel
+    plotmodel, cutmodel,
+    reweightmodel, globalmodel, plotstylemodel
   };
 
   CutflowAnalyzerMaster cutflowanalyzers {
@@ -87,9 +90,10 @@ void Runner::run (const std::string& histoutputdir,
     jsonanalyzers.output();
 
   // Reweight stuff
-  histanalyzers.get_analysis_histograms(reweight.selection, reweight.plotname, reweight.signal).
-    reweight(reweight.output);
-  
+  if (doreweight)
+    histanalyzers.get_analysis_histograms().
+      reweight(re_normalize, reweightmodel.output);
+
 
   auto end = std::chrono::steady_clock::now();
   std::chrono::duration<double> diff = end - start;

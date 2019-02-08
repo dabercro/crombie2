@@ -24,6 +24,7 @@ namespace crombie2 {
 
     ConfigPage globals {"Globals"};
     ConfigPage json {"JSON Settings"};
+    ConfigPage reweight {"Reweight Settings"};
     ConfigPage plotstyle {"Plot Style"};
     ConfigPage files {"Files"};
     ConfigPage plots {"Plots"};
@@ -34,6 +35,7 @@ namespace crombie2 {
     MainController maincontrol {
       globals,
       json,
+      reweight,
       plotstyle,
       files,
       plots,

@@ -8,14 +8,15 @@
 using namespace crombie2;
 
 
-Controller::Controller (ConfigPage& page, ConfigModel& model) :
+Controller::Controller (ConfigPage& page, ConfigModel& model, bool load_last) :
   page {page},
   model {model}
 {
 
   update_entries();
 
-  model.load_tag(last_tag);
+  if (load_last)
+    model.load_tag(last_tag);
 
   updatebox.pack_end(tagentry, Gtk::PACK_SHRINK);
   tagentry.show();

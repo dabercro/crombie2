@@ -195,8 +195,8 @@ const std::vector<double>& Hist::get_errors () const {
 double Hist::integral (bool overflow) const {
 
   double output {0};
-  for (unsigned bin = 1 - overflow; bin < contents.size() - overflow; bin++)
-    output += bin;
+  for (unsigned bin = 1 - overflow; bin < contents.size() - !overflow; bin++)
+    output += contents.at(bin);
   return output;
 
 }

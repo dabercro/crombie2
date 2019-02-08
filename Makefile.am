@@ -1,6 +1,8 @@
 bindir = $(srcdir)/bin
 
 allsrcs = \
+	$(srcdir)/src/AllController.cpp \
+	$(srcdir)/src/AllModels.cpp \
 	$(srcdir)/src/ConfigModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
 	$(srcdir)/src/ConfigTable.cpp \
@@ -43,6 +45,7 @@ allsrcs = \
 	$(srcdir)/src/PlotModel.cpp \
 	$(srcdir)/src/PlotStyleModel.cpp \
 	$(srcdir)/src/Progress.cpp \
+	$(srcdir)/src/ReweightModel.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
 	$(srcdir)/src/SelectionDisplay.cpp \
@@ -62,6 +65,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_configurable.cpp \
 	$(srcdir)/test/test_cutstring.cpp \
 	$(srcdir)/test/test_fileentry.cpp \
+	$(srcdir)/test/test_hist.cpp \
 	$(srcdir)/test/test_lumiselection.cpp \
 	$(srcdir)/test/test_misc.cpp \
 	$(srcdir)/test/test_parser.cpp \

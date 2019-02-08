@@ -4,6 +4,7 @@
 
 #include <mutex>
 
+#include <crombie2/AllController.h>
 #include <crombie2/CutController.h>
 #include <crombie2/FileController.h>
 #include <crombie2/JSONModel.h>
@@ -11,6 +12,7 @@
 #include <crombie2/PlotController.h>
 #include <crombie2/PlotStyleModel.h>
 #include <crombie2/Progress.h>
+#include <crombie2/ReweightModel.h>
 #include <crombie2/SimpleController.h>
 
 
@@ -19,6 +21,7 @@ namespace crombie2 {
   public:
     MainController (ConfigPage& globalpage,
                     ConfigPage& jsonpage,
+                    ConfigPage& reweightpage,
                     ConfigPage& plotstylepage,
                     ConfigPage& filepage,
                     ConfigPage& plotpage,
@@ -33,6 +36,9 @@ namespace crombie2 {
     JSONModel jsonmodel {};
     SimpleController jsoncontrol;
 
+    ReweightModel reweightmodel {};
+    SimpleController reweightcontrol;
+
     PlotStyleModel plotstylemodel {};
     SimpleController plotstylecontrol;
 
@@ -45,6 +51,12 @@ namespace crombie2 {
     CutModel cutmodel {};
     CutController cutcontrol;
 
+    AllModels allmodels {
+      globalmodel, jsonmodel,
+      reweightmodel, plotstylemodel,
+      filemodel, plotmodel, cutmodel
+    };
+    AllController allcontrol;
     ConfigPage& jobpage;
 
     void on_submit_job ();
@@ -67,14 +79,8 @@ namespace crombie2 {
 
     Gtk::HBox reweightbox {};
     Gtk::CheckButton doreweight {};
-    Gtk::Label reweight_selection_label {"Reweight Selection"};
-    Gtk::Entry reweight_selection {};
-    Gtk::Label reweight_plotname_label {"Plot Name"};
-    Gtk::Entry reweight_plotname {};
-    Gtk::Label reweight_signal_label {"Signal Entry"};
-    Gtk::Entry reweight_signal {};
-    Gtk::Label reweight_output_label {"Output File"};
-    Gtk::Entry reweight_output {};
+    Gtk::Label reweight_norm_label {"Normalize before reweight"};
+    Gtk::CheckButton reweight_norm {};
 
     Gtk::HButtonBox submitbox {};
     Gtk::Button button {"Submit"};

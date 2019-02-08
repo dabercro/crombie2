@@ -6,6 +6,7 @@
 #include <crombie2/HistModel.h>
 #include <crombie2/PlotModel.h>
 #include <crombie2/PlotStyleModel.h>
+#include <crombie2/ReweightModel.h>
 
 
 namespace crombie2 {
@@ -16,23 +17,11 @@ namespace crombie2 {
                         std::vector<Job>& jobs,
                         const PlotModel& plotmodel,
                         const CutModel& cutmodel,
+                        const ReweightModel& reweightmodel,
                         const GlobalModel& globalmodel,
                         const PlotStyleModel& plotstylemodel);
 
-    /**
-       @brief Get a HistAnalysis object from a selection, plot specification, and signal selection
-
-       Empty strings are treated as using the only value possible.
-       If multiple values for the parameter would be possible, it is an error.
-
-       @param selection Must be filled if more than one selection exists. Gets plots from this selection.
-       @param plotname Must be filled if more than one plot exists. Gets the given plot.
-       @param signal If filled, Use this legend entry as the signal for the plots. Others are background.
-       @returns HistAnalysis object
-    */
-    HistAnalysis get_analysis_histograms (const std::string& selection,
-                                          const std::string& plotname,
-                                          const std::string& signal) const;
+    HistAnalysis get_analysis_histograms () const;
 
     /// Outputs histograms into the plots directory if outputdir was set
     void output () const;
@@ -46,6 +35,9 @@ namespace crombie2 {
 
     /// Maps the input file name to cross sections
     Types::map<double> xs {};
+    const PlotModel& plotmodel;
+    const CutModel& cutmodel;
+    const ReweightModel& reweightmodel;
     const GlobalModel& globalmodel;
     const PlotStyleModel& plotstylemodel;
 

@@ -15,9 +15,13 @@ using namespace crombie2;
 HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
                                         const std::string& outdir, std::vector<Job>& jobs,
                                         const PlotModel& plotmodel, const CutModel& cutmodel,
+                                        const ReweightModel& reweightmodel,
                                         const GlobalModel& globalmodel,
                                         const PlotStyleModel& plotstylemodel) :
   outputdir {outdir},
+  plotmodel {plotmodel},
+  cutmodel {cutmodel},
+  reweightmodel {reweightmodel},
   globalmodel {globalmodel},
   plotstylemodel {plotstylemodel}
 {
@@ -355,24 +359,34 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 }
 
 
-HistAnalysis HistAnalyzerMaster::get_analysis_histograms (const std::string& selection,
-                                                          const std::string& plotname,
-                                                          const std::string& signal) const {
+HistAnalysis HistAnalyzerMaster::get_analysis_histograms () const {
 
   Hist data {};
   Hist mc {};
   Hist background {};
 
+  auto _selection = reweightmodel.selection.get();
+  auto selection = _selection.size()
+    ? _selection
+    : cutmodel.selections.front().cut.get();
+
+  auto _plotname = reweightmodel.plotname.get();
+  auto plotname = _plotname.size()
+    ? _plotname
+    : plotmodel.plots.front().name.get();
+
+  auto signal = reweightmodel.signal.get();
+
   auto keyname = selection + "_" + plotname;
 
   for (auto& hists : histmodels.at(keyname)) {
 
-    auto type = types.at(hists.first);
+    auto histsplit = scaled_split(hists);
 
-    for (auto& histpair : scaled_split(hists).get_hists()) {
+    for (auto& histpair : histsplit.get_hists()) {
       auto& hist = histpair.second;
 
-      if (type == FileGroup::FileType::DATA)
+      if (histpair.first == reweightmodel.candle.get())
         data.add(hist);
       else if (not signal.size() or histpair.first == signal)
         mc.add(hist);

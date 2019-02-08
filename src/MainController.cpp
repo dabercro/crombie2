@@ -11,6 +11,7 @@ using namespace crombie2;
 
 MainController::MainController (ConfigPage& globalpage,
                                 ConfigPage& jsonpage,
+                                ConfigPage& reweightpage,
                                 ConfigPage& plotstylepage,
                                 ConfigPage& filepage,
                                 ConfigPage& plotpage,
@@ -19,10 +20,15 @@ MainController::MainController (ConfigPage& globalpage,
                                 ConfigPage& jobpage) :
   globalcontrol {globalpage, globalmodel},
   jsoncontrol {jsonpage, jsonmodel},
+  reweightcontrol {reweightpage, reweightmodel},
   plotstylecontrol {plotstylepage, plotstylemodel},
   filecontrol {filepage, filemodel},
   plotcontrol {plotpage, plotmodel},
   cutcontrol {selectionpage, cutmodel},
+  allcontrol {jobpage, allmodels,
+      globalcontrol, jsoncontrol, reweightcontrol,
+      plotstylecontrol, filecontrol, plotcontrol,
+      cutcontrol, allcontrol},
   jobpage {jobpage}
 {
 
@@ -45,9 +51,8 @@ MainController::MainController (ConfigPage& globalpage,
 
   // Reweight histograms
 
-  setup_controls(reweightbox, doreweight, reweight_selection_label, reweight_selection,
-                 reweight_plotname_label, reweight_plotname, reweight_signal_label, reweight_signal,
-                 reweight_output_label, reweight_output);
+  setup_controls(reweightbox, doreweight,
+                 reweight_norm_label, reweight_norm);
 
   // Submission buttons
 
@@ -108,13 +113,10 @@ void MainController::run (unsigned num_files, const std::string& histoutdir, Pro
 
   Runner runner {
     num_files, cutmodel, filemodel,
-    globalmodel, jsonmodel, plotmodel, plotstylemodel, progress
+    globalmodel, jsonmodel, reweightmodel,
+    plotmodel, plotstylemodel, progress
   };
   runner.run(histoutdir, docutflow.get_active(), dolumi.get_active(),
-             {
-               doreweight.get_active(), reweight_selection.get_text(),
-               reweight_plotname.get_text(), reweight_signal.get_text(),
-               reweight_output.get_text()
-             });
+             doreweight.get_active(), reweight_norm.get_active());
 
 }

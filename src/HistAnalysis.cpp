@@ -18,15 +18,18 @@ HistAnalysis::HistAnalysis (const Hist& data, const Hist& mc, const Hist& backgr
   background {background} {}
 
 
-void HistAnalysis::reweight (const std::string& outputfile) const {
+void HistAnalysis::reweight (bool normalize, const std::string& output) const {
 
   // Copy data
   Hist data_copy {data};
 
   // Normalize to match mc
-  auto mc_total = mc.integral() + background.integral();
+  if (normalize) {
 
-  data_copy.scale(mc_total / data_copy.integral());
+    auto mc_total = mc.integral() + background.integral();
+    data_copy.scale(mc_total / data_copy.integral());
+
+  }
 
   // Subtract background, if necessary
   if (has_background)
@@ -35,7 +38,7 @@ void HistAnalysis::reweight (const std::string& outputfile) const {
   // Get the reweight histogram and save it
   auto result = data_copy.ratio(mc);
 
-  TFile outfile {outputfile.data(), "RECREATE"};
+  TFile outfile {output.data(), "RECREATE"};
   outfile.WriteTObject(result.roothist(), "reweight");
   outfile.Close();
 
