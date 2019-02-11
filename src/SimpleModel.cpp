@@ -24,7 +24,8 @@ void SimpleModel::read (const Types::strings& config) {
   for (auto* configurable : configs.get_confs()) {
     if (iter == config.end())
       break;
-    configurable->set(*iter++);
+    auto line = *iter++;
+    configurable->set(line == "_" ? "" : line);
   }
 
 }
@@ -33,8 +34,12 @@ void SimpleModel::read (const Types::strings& config) {
 std::list<std::string> SimpleModel::serialize () const {
 
   std::list<std::string> output {};
-  for (auto* configurable : configs.get_confs())
-    output.push_back(configurable->get());
+  for (auto* configurable : configs.get_confs()) {
+    auto line = configurable->get();
+    output.push_back(line.size()
+                     ? configurable->get()
+                     : "_");
+  }
 
   return output;
 

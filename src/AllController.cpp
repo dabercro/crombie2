@@ -6,7 +6,7 @@ using namespace crombie2;
 
 void AllController::redraw () {
 
-  for (auto& controller : controllers)
+  for (auto* controller : controllers)
     controller->redraw();
 
 }

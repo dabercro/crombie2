@@ -26,9 +26,9 @@ MainController::MainController (ConfigPage& globalpage,
   plotcontrol {plotpage, plotmodel},
   cutcontrol {selectionpage, cutmodel},
   allcontrol {jobpage, allmodels,
-      globalcontrol, jsoncontrol, reweightcontrol,
-      plotstylecontrol, filecontrol, plotcontrol,
-      cutcontrol, allcontrol},
+      globalcontrol, jsoncontrol,
+      reweightcontrol, plotstylecontrol,
+      filecontrol, plotcontrol, cutcontrol},
   jobpage {jobpage}
 {
 

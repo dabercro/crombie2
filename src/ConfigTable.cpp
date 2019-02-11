@@ -34,8 +34,6 @@ void ConfigTable::draw (Gtk::Box& page) {
     frame.show();
   }
 
-  table.show();
-
   redraw();
 
 }
@@ -43,13 +41,10 @@ void ConfigTable::draw (Gtk::Box& page) {
 
 void ConfigTable::redraw () {
 
-  table.hide_all();
-
   for (auto* child : table.get_children())
     table.remove(*child);
 
   table.resize(horizontal ? 1 : size(), horizontal ? 2 * size() : 2);
-  table.show();
 
   for (unsigned i_conf = 0; i_conf != confs.size(); i_conf++) {
     auto* config = confs[i_conf];
@@ -65,6 +60,8 @@ void ConfigTable::redraw () {
     label.show();
     entry.show();
   }
+
+  table.show();
 
 }
 
