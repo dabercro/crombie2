@@ -111,6 +111,9 @@ void MainController::on_submit_job () {
 
 void MainController::run (unsigned num_files, const std::string& histoutdir, Progress& progress) {
 
+  if (histoutdir.size())
+    allmodels.save(histoutdir + "/models");
+
   Runner runner {
     num_files, cutmodel, filemodel,
     globalmodel, jsonmodel, reweightmodel,
