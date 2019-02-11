@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstring>
 #include <dirent.h>
 #include <iostream>
@@ -141,6 +142,8 @@ Types::strings FileSystem::list(std::string directory, bool shouldexist) {
       output.emplace_back(dir_ent->d_name);
   }
   closedir(indir);
+
+  std::sort(output.begin(), output.end());
 
   return output;
 }

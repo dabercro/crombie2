@@ -18,7 +18,6 @@ namespace crombie2 {
                      Controllers& ... args) :
       Controller {page, model, false}, allmodel {model} { add(args ...); }
 
-  protected:
     void redraw () override;
 
   private:

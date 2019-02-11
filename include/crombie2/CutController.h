@@ -15,7 +15,6 @@ namespace crombie2 {
   public:
     CutController (ConfigPage& page, CutModel& model);
 
-  protected:
     void redraw () override;
 
   private:

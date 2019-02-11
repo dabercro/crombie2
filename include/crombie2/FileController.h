@@ -18,7 +18,6 @@ namespace crombie2 {
   public:
     FileController (ConfigPage& page, FileModel& model);
 
-  protected:
     void redraw () override;
 
   private:

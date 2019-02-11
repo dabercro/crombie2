@@ -15,7 +15,6 @@ namespace crombie2 {
   public:
     SimpleController (ConfigPage& page, SimpleModel& model);
 
-  protected:
     void redraw () override;
 
   private:

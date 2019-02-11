@@ -15,7 +15,6 @@ namespace crombie2 {
   public:
     PlotController (ConfigPage& page, PlotModel& model);
 
-  protected:
     void redraw () override;
 
   private:
