@@ -14,7 +14,6 @@ allsrcs = \
 	$(srcdir)/src/CutString.cpp \
 	$(srcdir)/src/CutflowAnalyzer.cpp \
 	$(srcdir)/src/CutflowAnalyzerMaster.cpp \
-	$(srcdir)/src/Error.cpp \
 	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \

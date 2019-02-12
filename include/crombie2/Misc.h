@@ -46,6 +46,9 @@ namespace crombie2 {
     */
     std::string nminus1(const std::string& var, const std::string& cut);
 
+    /// Displays messages for user
+    void message (const std::string& primary, const std::string& secondary = "");
+
   }
 }
 

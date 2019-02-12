@@ -1,8 +1,8 @@
 #include <gtkmm/filechooserdialog.h>
 
 #include <crombie2/Controller.h>
-#include <crombie2/Error.h>
 #include <crombie2/FileSystem.h>
+#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
@@ -83,10 +83,12 @@ void Controller::on_export () {
   // Uses the tag entry widget for file name
   auto filename = tagentry.get_entry()->get_text();
   if (not filename.size())
-    Error::Exception("No target file", "Enter the file name into the tag entry");
-  else
-    if (FileSystem::confirm_overwrite(filename))
-      model.save(filename);
+    filename = model.get_name() + ".cnf";
+
+  if (FileSystem::confirm_overwrite(filename))
+    model.save(filename);
+
+  Misc::message(model.get_name() + "exported", filename);
 
 }
 
@@ -103,7 +105,7 @@ void Controller::on_import () {
       model.load(filename);
     }
     catch (const std::exception& e) {
-      Error::Exception (e, filename + " doesn't seem to be a valid file.");
+      Misc::message (e.what(), filename + " doesn't seem to be a valid file.");
       model.load_tag(last_tag);
     }
   }

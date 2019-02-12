@@ -108,7 +108,7 @@ am__objects_1 = src/AllController.$(OBJEXT) src/AllModels.$(OBJEXT) \
 	src/CrossSecDB.$(OBJEXT) src/Cut.$(OBJEXT) \
 	src/CutController.$(OBJEXT) src/CutModel.$(OBJEXT) \
 	src/CutString.$(OBJEXT) src/CutflowAnalyzer.$(OBJEXT) \
-	src/CutflowAnalyzerMaster.$(OBJEXT) src/Error.$(OBJEXT) \
+	src/CutflowAnalyzerMaster.$(OBJEXT) \
 	src/FileController.$(OBJEXT) src/FileEntry.$(OBJEXT) \
 	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
 	src/GlobalModel.$(OBJEXT) src/GuiConfigurable.$(OBJEXT) \
@@ -162,7 +162,7 @@ am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	src/$(DEPDIR)/Cut.Po src/$(DEPDIR)/CutController.Po \
 	src/$(DEPDIR)/CutModel.Po src/$(DEPDIR)/CutString.Po \
 	src/$(DEPDIR)/CutflowAnalyzer.Po \
-	src/$(DEPDIR)/CutflowAnalyzerMaster.Po src/$(DEPDIR)/Error.Po \
+	src/$(DEPDIR)/CutflowAnalyzerMaster.Po \
 	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileEntry.Po \
 	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
 	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/GuiConfigurable.Po \
@@ -268,6 +268,8 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EXEEXT = @EXEEXT@
+GTK_CFLAGS = @GTK_CFLAGS@
+GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -288,6 +290,9 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -348,7 +353,6 @@ allsrcs = \
 	$(srcdir)/src/CutString.cpp \
 	$(srcdir)/src/CutflowAnalyzer.cpp \
 	$(srcdir)/src/CutflowAnalyzerMaster.cpp \
-	$(srcdir)/src/Error.cpp \
 	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
@@ -520,7 +524,6 @@ src/CutflowAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/CutflowAnalyzerMaster.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/Error.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/FileController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/FileEntry.$(OBJEXT): src/$(am__dirstamp) \
@@ -648,7 +651,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutString.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutflowAnalyzer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutflowAnalyzerMaster.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Error.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileEntry.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileModel.Po@am__quote@ # am--include-marker
@@ -1006,7 +1008,6 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/CutString.Po
 	-rm -f src/$(DEPDIR)/CutflowAnalyzer.Po
 	-rm -f src/$(DEPDIR)/CutflowAnalyzerMaster.Po
-	-rm -f src/$(DEPDIR)/Error.Po
 	-rm -f src/$(DEPDIR)/FileController.Po
 	-rm -f src/$(DEPDIR)/FileEntry.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po
@@ -1116,7 +1117,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/CutString.Po
 	-rm -f src/$(DEPDIR)/CutflowAnalyzer.Po
 	-rm -f src/$(DEPDIR)/CutflowAnalyzerMaster.Po
-	-rm -f src/$(DEPDIR)/Error.Po
 	-rm -f src/$(DEPDIR)/FileController.Po
 	-rm -f src/$(DEPDIR)/FileEntry.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po

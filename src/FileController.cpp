@@ -1,4 +1,3 @@
-#include <crombie2/Error.h>
 #include <crombie2/FileController.h>
 #include <crombie2/Misc.h>
 
@@ -78,6 +77,6 @@ void FileController::on_check_xs () {
     }
   }
   else
-    Error::Exception("Cross Section Getter is not set!");
+    Misc::message("Cross Section Getter is not set!");
 
 }

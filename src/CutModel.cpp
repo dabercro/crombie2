@@ -1,7 +1,7 @@
 #include <regex>
 
 #include <crombie2/CutModel.h>
-#include <crombie2/Error.h>
+#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
@@ -55,7 +55,7 @@ CutString& CutModel::add_cutstring (const std::string& label, const std::string&
   }
 
   std::runtime_error e {"Tried to add duplicate cut label."};
-  Error::Exception(e, "Tried to add duplicate cut label \"" + label + "\"");
+  Misc::message(e.what(), "Tried to add duplicate cut label \"" + label + "\"");
 
   throw e;
 
@@ -110,7 +110,7 @@ std::string CutModel::expand (const std::string& cutlabel) const {
     cutstring = &cutstrings.at(label);
   }
   catch (const std::exception& e) {
-    Error::Exception(e, std::string("Key \"") + label + "\" does not seem to be in the map");
+    Misc::message(e.what(), std::string("Key \"") + label + "\" does not seem to be in the map");
     throw;
   }
 

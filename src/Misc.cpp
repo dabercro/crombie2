@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <array>
 #include <cstdlib>
 #include <exception>
@@ -98,5 +96,16 @@ std::string Misc::nminus1 (const std::string& var, const std::string& cut) {
 
   std::regex expr{std::string("\\b") + var + "\\b\\s*[=<>]*\\s*-?[\\d\\.]+"};
   return std::regex_replace(cut, expr, "(1)");
+
+}
+
+void Misc::message (const std::string& primary, const std::string& secondary) {
+
+  Gtk::MessageDialog window (primary);
+
+  if (secondary.size())
+    window.set_secondary_text(secondary);
+
+  window.run();
 
 }

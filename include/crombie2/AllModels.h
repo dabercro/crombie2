@@ -2,9 +2,6 @@
 #define CROMBIE2_ALLMODELS_H
 
 
-#include <map>
-#include <string>
-
 #include <crombie2/ConfigModel.h>
 
 
@@ -32,7 +29,7 @@ namespace crombie2 {
       add(args ...);
     }
 
-    std::map<std::string, ConfigModel*> models {};
+    Types::map<ConfigModel*> models {};
   };
 }
 

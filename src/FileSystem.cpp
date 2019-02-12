@@ -5,7 +5,6 @@
 #include <sys/stat.h>
 
 
-#include <crombie2/Error.h>
 #include <crombie2/FileSystem.h>
 #include <crombie2/Misc.h>
 
@@ -132,7 +131,7 @@ Types::strings FileSystem::list(std::string directory, bool shouldexist) {
 
   if (not exists(directory)) {
     if (shouldexist)
-      Error::Exception(directory + " does not seem to exist.");
+      Misc::message(directory + " does not seem to exist.");
     return output;
   }
 
