@@ -18,14 +18,6 @@ namespace crombie2 {
     std::string get_name () const override;
 
     /**
-       @brief Which selection to use.
-
-       If there is only one selection in the CutModel,
-       then this can be left blank.
-    */
-    Configurable<std::string> selection {"Selection", ""};
-
-    /**
        @brief Which plot to use.
 
        If there is only one plot in the PlotModel,

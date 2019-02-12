@@ -6,7 +6,6 @@ using namespace crombie2;
 
 ReweightModel::ReweightModel () :
   SimpleModel {
-    &selection,
     &plotname,
     &candle,
     &signal,

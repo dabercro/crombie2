@@ -21,7 +21,7 @@ namespace crombie2 {
                         const GlobalModel& globalmodel,
                         const PlotStyleModel& plotstylemodel);
 
-    HistAnalysis get_analysis_histograms () const;
+    HistAnalysis get_analysis_histograms (const std::string& selection) const;
 
     /// Outputs histograms into the plots directory if outputdir was set
     void output () const;

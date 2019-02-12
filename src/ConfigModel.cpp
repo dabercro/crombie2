@@ -43,15 +43,13 @@ void ConfigModel::load_tag (const std::string& tag) {
 
 void ConfigModel::save (const std::string& file_name) {
 
-  if (not FileSystem::exists(file_name)) {
-    // Make the directory for the output
-    FileSystem::mkdirs(FileSystem::dirname(file_name));
+  // Make the directory for the output
+  FileSystem::mkdirs(FileSystem::dirname(file_name));
 
-    std::ofstream output {file_name};
+  std::ofstream output {file_name};
 
-    for (auto& line : serialize())
-      output << line << std::endl;
-  }
+  for (auto& line : serialize())
+    output << line << std::endl;
 
 }
 

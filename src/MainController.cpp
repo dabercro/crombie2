@@ -112,7 +112,7 @@ void MainController::on_submit_job () {
 void MainController::run (unsigned num_files, const std::string& histoutdir, Progress& progress) {
 
   if (histoutdir.size())
-    allmodels.save(histoutdir + "/models");
+    allmodels.save(histoutdir + "/models.cnf");
 
   Runner runner {
     num_files, cutmodel, filemodel,

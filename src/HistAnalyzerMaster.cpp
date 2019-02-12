@@ -359,16 +359,11 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 }
 
 
-HistAnalysis HistAnalyzerMaster::get_analysis_histograms () const {
+HistAnalysis HistAnalyzerMaster::get_analysis_histograms (const std::string& selection) const {
 
   Hist data {};
   Hist mc {};
   Hist background {};
-
-  auto _selection = reweightmodel.selection.get();
-  auto selection = _selection.size()
-    ? _selection
-    : cutmodel.selections.front().cut.get();
 
   auto _plotname = reweightmodel.plotname.get();
   auto plotname = _plotname.size()

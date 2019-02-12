@@ -1,5 +1,6 @@
 #include "TFile.h"
 
+#include <crombie2/FileSystem.h>
 #include <crombie2/HistAnalysis.h>
 
 
@@ -18,7 +19,8 @@ HistAnalysis::HistAnalysis (const Hist& data, const Hist& mc, const Hist& backgr
   background {background} {}
 
 
-void HistAnalysis::reweight (bool normalize, const std::string& output) const {
+void HistAnalysis::reweight (bool normalize, const std::string& output,
+                             const std::string& histname) const {
 
   // Copy data
   Hist data_copy {data};
@@ -38,8 +40,8 @@ void HistAnalysis::reweight (bool normalize, const std::string& output) const {
   // Get the reweight histogram and save it
   auto result = data_copy.ratio(mc);
 
-  TFile outfile {output.data(), "RECREATE"};
-  outfile.WriteTObject(result.roothist(), "reweight");
+  TFile outfile {output.data(), FileSystem::exists(output) ? "UPDATE" : "RECREATE"};
+  outfile.WriteTObject(result.roothist(), histname.data());
   outfile.Close();
 
 }

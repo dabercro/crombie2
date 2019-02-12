@@ -1,4 +1,5 @@
 #include <gtkmm/filechooserdialog.h>
+#include <gtkmm/filefilter.h>
 
 #include <crombie2/Controller.h>
 #include <crombie2/FileSystem.h>
@@ -99,17 +100,23 @@ void Controller::on_import () {
   dialog.add_button("Cancel", Gtk::RESPONSE_CANCEL);
   dialog.add_button("Open", Gtk::RESPONSE_OK);
 
+  Gtk::FileFilter filter {};
+  filter.set_name("Config Files");
+  filter.add_pattern("*.cnf");
+
+  dialog.add_filter(filter);
+
   if (dialog.run() == Gtk::RESPONSE_OK) {
     auto filename = dialog.get_filename();
     try {
       model.load(filename);
+      redraw();
     }
     catch (const std::exception& e) {
       Misc::message (e.what(), filename + " doesn't seem to be a valid file.");
       model.load_tag(last_tag);
     }
   }
-  redraw();
 
 }
 

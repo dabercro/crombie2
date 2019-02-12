@@ -90,10 +90,13 @@ void Runner::run (const std::string& histoutputdir,
     jsonanalyzers.output();
 
   // Reweight stuff
-  if (doreweight)
-    histanalyzers.get_analysis_histograms().
-      reweight(re_normalize, reweightmodel.output);
-
+  if (doreweight) {
+    for (auto& selection : cutmodel.selections) {
+      std::string cut = selection.cut;
+      histanalyzers.get_analysis_histograms(cut).
+        reweight(re_normalize, reweightmodel.output, cut + "_reweight");
+    }
+  }
 
   auto end = std::chrono::steady_clock::now();
   std::chrono::duration<double> diff = end - start;
