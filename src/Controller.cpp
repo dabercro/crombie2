@@ -89,12 +89,19 @@ void Controller::on_export () {
   if (FileSystem::confirm_overwrite(filename))
     model.save(filename);
 
-  Misc::message(model.get_name() + "exported", filename);
+  Misc::message(model.get_name() + " exported", filename);
 
 }
 
 
 void Controller::on_import () {
+
+  auto filename = tagentry.get_entry()->get_text();
+  if (filename.size() and FileSystem::exists(filename)) {
+    model.load(filename);
+    redraw();
+    return;
+  }
 
   Gtk::FileChooserDialog dialog {model.get_name() + ": Choose a configuration file"};
   dialog.add_button("Cancel", Gtk::RESPONSE_CANCEL);
@@ -107,7 +114,7 @@ void Controller::on_import () {
   dialog.add_filter(filter);
 
   if (dialog.run() == Gtk::RESPONSE_OK) {
-    auto filename = dialog.get_filename();
+    filename = dialog.get_filename();
     try {
       model.load(filename);
       redraw();

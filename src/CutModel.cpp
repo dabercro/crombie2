@@ -21,7 +21,7 @@ void CutModel::read (const Types::strings& config) {
   // This is used to select lines that describe a cut at the end
   std::regex selectionline{"^:\\s+(\\w+)\\s+(\\w+)\\s+(\\w+)\\s*$"};
   // This is used to read all other (non-empty) lines
-  std::regex expr{"^(\\S*)\\s*([^\\s\\']*)\\s+(\\S.+)$"};
+  std::regex expr{"^(\\S*)\\s*([^\\s\\']*)\\s+(\\S.*)$"};
 
   std::smatch matches;
 
