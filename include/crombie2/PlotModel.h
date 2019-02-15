@@ -4,6 +4,7 @@
 
 #include <crombie2/ConfigModel.h>
 #include <crombie2/Plot.h>
+#include <crombie2/RemoveWrapper.h>
 
 
 namespace crombie2 {
@@ -12,12 +13,14 @@ namespace crombie2 {
   */
   class PlotModel : public ConfigModel {
   public:
+    PlotModel () = default;
+    PlotModel (const PlotModel& other);
 
     std::string get_name () const override;
 
-    Plot& add_plot ();
+    RemoveWrapper<Plot>& add_plot ();
 
-    std::list<Plot> plots {};
+    std::list<RemoveWrapper<Plot>> plots {};
 
   private:
 

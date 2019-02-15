@@ -10,6 +10,7 @@ namespace crombie2 {
   public:
     Plot () = default;
     Plot (const Plot& other);
+    virtual ~Plot () = default;
 
     Configurable<std::string> name {"Variable", ""};
     Configurable<unsigned> nbins {"Number of Bins", 20};

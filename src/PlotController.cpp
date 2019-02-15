@@ -29,14 +29,14 @@ void PlotController::redraw () {
   boxes.clear();
 
   for (auto& plot : plotmodel.plots)
-    add_table(plot.table);
+    add_table(plot);
 
 }
 
 
-void PlotController::add_table (ConfigTable& table) {
+void PlotController::add_table (RemoveWrapper<Plot>& plot) {
 
-  if (((plotted++) % 5) == 0) {
+  if (((plotted++) % 4) == 0) {
     boxes.emplace_back();
     page.box().pack_start(boxes.back(), Gtk::PACK_SHRINK);
     boxes.back().show();
@@ -44,7 +44,10 @@ void PlotController::add_table (ConfigTable& table) {
 
   auto& box = boxes.back();
 
-  table.draw(box);
+  plot.table.draw(box);
+
+  box.pack_start(plot.remove, Gtk::PACK_SHRINK);
+  plot.remove.show();
 
 }
 
@@ -52,6 +55,6 @@ void PlotController::add_table (ConfigTable& table) {
 void PlotController::on_add_plot() {
 
   auto& plot = plotmodel.add_plot();
-  add_table(plot.table);
+  add_table(plot);
 
 }

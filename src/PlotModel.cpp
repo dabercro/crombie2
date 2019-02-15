@@ -6,13 +6,21 @@
 using namespace crombie2;
 
 
+PlotModel::PlotModel (const PlotModel& other) {
+
+  for (const Plot& plot : other.plots)
+    plots.emplace_back(plots, plot);
+
+}
+
+
 std::string PlotModel::get_name () const {
   return "plots";
 }
 
 
-Plot& PlotModel::add_plot () {
-  plots.emplace_back();
+RemoveWrapper<Plot>& PlotModel::add_plot () {
+  plots.emplace_back(plots);
   return plots.back();
 }
 

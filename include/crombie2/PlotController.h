@@ -18,7 +18,7 @@ namespace crombie2 {
     void redraw () override;
 
   private:
-    void add_table (ConfigTable& table);
+    void add_table (RemoveWrapper<Plot>& table);
     void on_add_plot ();
 
     PlotModel& plotmodel;
