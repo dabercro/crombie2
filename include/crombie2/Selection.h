@@ -13,6 +13,8 @@ namespace crombie2 {
     Selection (const std::string& cut, const std::string& data, const std::string& mc);
     Selection (const Selection& other);
 
+    virtual ~Selection () = default;
+
     Configurable<std::string> cut;
     Configurable<std::string> data_weight;
     Configurable<std::string> mc_weight;

@@ -23,7 +23,7 @@ namespace crombie2 {
 
     void add_cut (CutString& cutstring);
     void add_selection ();
-    void fill_selection (Selection& selection);
+    void fill_selection (RemoveWrapper<Selection>& selection);
 
     CutModel& cutmodel;
 

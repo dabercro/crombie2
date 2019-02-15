@@ -76,12 +76,14 @@ void CutController::on_add_cut () {
 
 void CutController::on_add_selection () {
 
-  fill_selection(cutmodel.selections.emplace_back("", "", ""));
+  fill_selection(cutmodel.selections.
+                 emplace_back(cutmodel.selections, // RemoveWrapper needs a reference to this list
+                              "", "", ""));        // Otherwise, fill with empty space
 
 }
 
 
-void CutController::fill_selection (Selection& selection) {
+void CutController::fill_selection (RemoveWrapper<Selection>& selection) {
 
   auto& display = selectiondisplays.emplace_back(cutmodel, selection);
 
@@ -89,6 +91,13 @@ void CutController::fill_selection (Selection& selection) {
 
   selection.table.draw(display.box);
   display.box.pack_end(display);
+
+  selection.also_remove([&display, this] () {
+      selectiondisplays.remove_if([&display] (auto& ele) { return &ele == &display; });
+    });
+
+  display.box.pack_start(selection.remove, Gtk::PACK_SHRINK);
+  selection.remove.show();
 
   display.box.show();
   display.show();
