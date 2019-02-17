@@ -1,3 +1,7 @@
+#include <exception>
+
+#include <crombie2/Controller.h>
+#include <crombie2/ConfigModel.h>
 #include <crombie2/ConfigPage.h>
 
 
@@ -18,6 +22,14 @@ ConfigPage::ConfigPage (const std::string& label) :
 }
 
 
+ConfigPage& ConfigPage::operator=(const ConfigPage& other) {
+
+  label = other.label;
+  return *this;
+
+}
+
+
 const std::string& ConfigPage::get_label () {
   return label;
 }
@@ -25,4 +37,32 @@ const std::string& ConfigPage::get_label () {
 
 Gtk::VBox& ConfigPage::box () {
   return internalbox;
+}
+
+
+void ConfigPage::set_controller_model (Controller& controller, ConfigModel& model) {
+
+  controller_ptr = &controller;
+  model_ptr = &model;
+
+}
+
+
+Controller& ConfigPage::get_controller () {
+
+  if (controller_ptr)
+    return *controller_ptr;
+
+  throw std::logic_error {"ConfigPage::get_controller: Controller not set yet"};
+
+}
+
+
+ConfigModel& ConfigPage::get_model () {
+
+  if (model_ptr)
+    return *model_ptr;
+
+  throw std::logic_error {"ConfigPage::get_model: Model not set yet"};
+
 }

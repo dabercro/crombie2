@@ -13,23 +13,13 @@ namespace crombie2 {
   class AllController : public Controller {
 
   public:
-    template <typename ... Controllers>
-      AllController (ConfigPage& page, AllModels& model,
-                     Controllers& ... args) :
-      Controller {page, model, false}, allmodel {model} { add(args ...); }
+    AllController (ConfigPage& page, AllModels& model,
+                   std::map<std::string, ConfigPage>& pagemap);
 
     void redraw () override;
 
   private:
 
-    void add (Controller& controller);
-
-    template <typename ... Controllers> void add (Controller& controller, Controllers& ... args) {
-      add(controller);
-      add(args ...);
-    }
-
-    AllModels& allmodel;
     std::list<Controller*> controllers {};
 
   };

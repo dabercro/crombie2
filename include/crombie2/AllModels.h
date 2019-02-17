@@ -3,15 +3,14 @@
 
 
 #include <crombie2/ConfigModel.h>
+#include <crombie2/ConfigPage.h>
 
 
 namespace crombie2 {
   class AllModels : public ConfigModel {
   public:
     /// Initialize with all of the models used
-    template <typename ... Models> AllModels (Models& ... args) {
-      add(args ...);
-    }
+    AllModels (std::map<std::string, ConfigPage>& pagemap);
 
     std::string get_name () const override;
 
@@ -21,13 +20,6 @@ namespace crombie2 {
     std::list<std::string> serialize () const override;
 
   private:
-
-    void add (ConfigModel& config);
-
-    template <typename ... Models> void add (ConfigModel& config, Models& ... args) {
-      add(config);
-      add(args ...);
-    }
 
     Types::map<ConfigModel*> models {};
   };

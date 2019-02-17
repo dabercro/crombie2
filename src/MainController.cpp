@@ -9,26 +9,17 @@
 using namespace crombie2;
 
 
-MainController::MainController (ConfigPage& globalpage,
-                                ConfigPage& jsonpage,
-                                ConfigPage& reweightpage,
-                                ConfigPage& plotstylepage,
-                                ConfigPage& filepage,
-                                ConfigPage& plotpage,
-                                ConfigPage& selectionpage,
-                                ConfigPage& uncertaintypage,
+MainController::MainController (std::map<std::string, ConfigPage>& pagemap,
                                 ConfigPage& jobpage) :
-  globalcontrol {globalpage, globalmodel},
-  jsoncontrol {jsonpage, jsonmodel},
-  reweightcontrol {reweightpage, reweightmodel},
-  plotstylecontrol {plotstylepage, plotstylemodel},
-  filecontrol {filepage, filemodel},
-  plotcontrol {plotpage, plotmodel},
-  cutcontrol {selectionpage, cutmodel},
-  allcontrol {jobpage, allmodels,
-      globalcontrol, jsoncontrol,
-      reweightcontrol, plotstylecontrol,
-      filecontrol, plotcontrol, cutcontrol},
+  globalcontrol {pagemap.at("globals"), globalmodel},
+  jsoncontrol {pagemap.at("json"), jsonmodel},
+  reweightcontrol {pagemap.at("reweight"), reweightmodel},
+  plotstylecontrol {pagemap.at("plotstyle"), plotstylemodel},
+  filecontrol {pagemap.at("files"), filemodel},
+  plotcontrol {pagemap.at("plots"), plotmodel},
+  cutcontrol {pagemap.at("selections"), cutmodel},
+  allmodels  {pagemap},
+  allcontrol {jobpage, allmodels, pagemap},
   jobpage {jobpage}
 {
 

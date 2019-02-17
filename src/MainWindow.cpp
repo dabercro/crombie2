@@ -11,14 +11,13 @@ MainWindow::MainWindow ()
 
   add(book);
   book.show();
-  add_page(globals);
-  add_page(json);
-  add_page(reweight);
-  add_page(plotstyle);
-  add_page(files);
-  add_page(plots);
-  add_page(selections);
-  add_page(uncertainties);
+  add_page(pagemap.at("globals"));
+  add_page(pagemap.at("json"));
+  add_page(pagemap.at("reweight"));
+  add_page(pagemap.at("plotstyle"));
+  add_page(pagemap.at("files"));
+  add_page(pagemap.at("plots"));
+  add_page(pagemap.at("selections"));
   add_page(jobpage);
 
   maximize();
@@ -28,4 +27,20 @@ MainWindow::MainWindow ()
 void MainWindow::add_page (ConfigPage& page) {
   book.append_page(page, page.get_label());
   page.show();
+}
+
+std::map<std::string, ConfigPage> MainWindow::init_map () {
+
+  std::map<std::string, ConfigPage> output {};
+
+  output["globals"] = ConfigPage("Globals");
+  output["json"] = ConfigPage("JSON Settings");
+  output["reweight"] = ConfigPage("Reweight Settings");
+  output["plotstyle"] = ConfigPage("Plot Style");
+  output["files"] = ConfigPage("Files");
+  output["plots"] = ConfigPage("Plots");
+  output["selections"] = ConfigPage("Selections");
+
+  return output;
+
 }

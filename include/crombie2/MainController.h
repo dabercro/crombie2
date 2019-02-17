@@ -19,14 +19,7 @@
 namespace crombie2 {
   class MainController {
   public:
-    MainController (ConfigPage& globalpage,
-                    ConfigPage& jsonpage,
-                    ConfigPage& reweightpage,
-                    ConfigPage& plotstylepage,
-                    ConfigPage& filepage,
-                    ConfigPage& plotpage,
-                    ConfigPage& selectionpage,
-                    ConfigPage& uncertaintypage,
+    MainController (std::map<std::string, ConfigPage>& pagemap,
                     ConfigPage& jobpage);
 
   private:
@@ -51,11 +44,7 @@ namespace crombie2 {
     CutModel cutmodel {};
     CutController cutcontrol;
 
-    AllModels allmodels {
-      globalmodel, jsonmodel,
-      reweightmodel, plotstylemodel,
-      filemodel, plotmodel, cutmodel
-    };
+    AllModels allmodels;
     AllController allcontrol;
     ConfigPage& jobpage;
 

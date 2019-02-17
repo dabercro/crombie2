@@ -14,6 +14,8 @@ Controller::Controller (ConfigPage& page, ConfigModel& model, bool load_last) :
   model {model}
 {
 
+  page.set_controller_model(*this, model);
+
   update_entries();
 
   if (load_last)

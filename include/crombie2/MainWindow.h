@@ -2,7 +2,7 @@
 #define CROMBIE2_MAINWINDOW_H
 
 
-#include <memory>
+#include <map>
 
 #include <gtkmm/notebook.h>
 #include <gtkmm/window.h>
@@ -18,29 +18,18 @@ namespace crombie2 {
 
   private:
 
+    static std::map<std::string, ConfigPage> init_map ();
+
     void add_page (ConfigPage& page);
 
     Gtk::Notebook book {};
 
-    ConfigPage globals {"Globals"};
-    ConfigPage json {"JSON Settings"};
-    ConfigPage reweight {"Reweight Settings"};
-    ConfigPage plotstyle {"Plot Style"};
-    ConfigPage files {"Files"};
-    ConfigPage plots {"Plots"};
-    ConfigPage selections {"Selections"};
-    ConfigPage uncertainties {"Uncertainties"};
+    std::map<std::string, ConfigPage> pagemap {init_map()};
+
     ConfigPage jobpage {"Jobs"};
 
     MainController maincontrol {
-      globals,
-      json,
-      reweight,
-      plotstyle,
-      files,
-      plots,
-      selections,
-      uncertainties,
+      pagemap,
       jobpage
     };
 

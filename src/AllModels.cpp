@@ -5,6 +5,18 @@
 using namespace crombie2;
 
 
+AllModels::AllModels (std::map<std::string, ConfigPage>& pagemap) {
+
+  for (auto& page : pagemap) {
+
+    auto& model = page.second.get_model();
+    models.insert({model.get_name(), &model});
+
+  }
+
+}
+
+
 std::string AllModels::get_name () const {
 
   return "all";
@@ -34,12 +46,5 @@ std::list<std::string> AllModels::serialize () const {
     output.push_back(model.first + "   " + model.second->save());
 
   return output;
-
-}
-
-
-void AllModels::add (ConfigModel& config) {
-
-  models.insert({config.get_name(), &config});
 
 }
