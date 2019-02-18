@@ -1,8 +1,6 @@
 #include <exception>
 
 #include <crombie2/Controller.h>
-#include <crombie2/ConfigModel.h>
-#include <crombie2/ConfigPage.h>
 
 
 using namespace crombie2;

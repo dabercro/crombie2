@@ -14,6 +14,7 @@ MainWindow::MainWindow ()
   add_page(pagemap.at("globals"));
   add_page(pagemap.at("json"));
   add_page(pagemap.at("reweight"));
+  add_page(pagemap.at("onthefly"));
   add_page(pagemap.at("plotstyle"));
   add_page(pagemap.at("files"));
   add_page(pagemap.at("plots"));
@@ -35,11 +36,12 @@ std::map<std::string, ConfigPage> MainWindow::init_map () {
 
   output["globals"] = ConfigPage("Globals");
   output["json"] = ConfigPage("JSON Settings");
-  output["reweight"] = ConfigPage("Reweight Settings");
+  output["reweight"] = ConfigPage("Reweight Generation");
   output["plotstyle"] = ConfigPage("Plot Style");
   output["files"] = ConfigPage("Files");
   output["plots"] = ConfigPage("Plots");
   output["selections"] = ConfigPage("Selections");
+  output["onthefly"] = ConfigPage("On The Fly Reweighting");
 
   return output;
 

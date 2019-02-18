@@ -9,7 +9,9 @@
 #include <crombie2/FileController.h>
 #include <crombie2/JSONModel.h>
 #include <crombie2/GlobalModel.h>
-#include <crombie2/PlotController.h>
+#include <crombie2/ListController.h>
+#include <crombie2/OnTheFlyModel.h>
+#include <crombie2/PlotModel.h>
 #include <crombie2/PlotStyleModel.h>
 #include <crombie2/Progress.h>
 #include <crombie2/ReweightModel.h>
@@ -32,6 +34,9 @@ namespace crombie2 {
     ReweightModel reweightmodel {};
     SimpleController reweightcontrol;
 
+    OnTheFlyModel ontheflymodel {};
+    ListController<ReweightReader> ontheflycontrol;
+
     PlotStyleModel plotstylemodel {};
     SimpleController plotstylecontrol;
 
@@ -39,7 +44,7 @@ namespace crombie2 {
     FileController filecontrol;
 
     PlotModel plotmodel {};
-    PlotController plotcontrol;
+    ListController<Plot> plotcontrol;
 
     CutModel cutmodel {};
     CutController cutcontrol;

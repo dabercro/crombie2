@@ -38,7 +38,7 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
         styles.insert({legend.legend, legend.style});
     }
 
-    for (auto& plot : plotmodel.plots) {
+    for (auto& plot : plotmodel.list) {
       for (auto& selection : cutmodel.selections) {
         auto output_file = selection.cut.get() + "_" + plot.name.get();
 
@@ -368,7 +368,7 @@ HistAnalysis HistAnalyzerMaster::get_analysis_histograms (const std::string& sel
   auto _plotname = reweightmodel.plotname.get();
   auto plotname = _plotname.size()
     ? _plotname
-    : plotmodel.plots.front().name.get();
+    : plotmodel.list.front().name.get();
 
   auto signal = reweightmodel.signal.get();
 

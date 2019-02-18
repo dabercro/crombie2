@@ -6,35 +6,20 @@
 using namespace crombie2;
 
 
-PlotModel::PlotModel (const PlotModel& other) {
-
-  for (const Plot& plot : other.plots)
-    plots.emplace_back(plots, plot);
-
-}
-
-
 std::string PlotModel::get_name () const {
   return "plots";
 }
 
 
-RemoveWrapper<Plot>& PlotModel::add_plot () {
-  plots.emplace_back(plots);
-  return plots.back();
-}
-
-
-
 void PlotModel::read (const Types::strings& config) {
-  plots.clear();
+  list.clear();
 
   std::regex expr {"'([^']+)',\\s*(\\d+),\\s*(-?[\\d\\.]+),\\s*(-?[\\d\\.]+),\\s*'([^']+)'(,\\s*'([^']+)',\\s*'([^']+)')?"};
   std::smatch matches;
 
   for (auto& line : config) {
     if (std::regex_match(line, matches, expr)) {
-      auto& plot = add_plot();
+      auto& plot = add();
       for (unsigned imatch = 0; imatch < 5; imatch++)
         plot.table.get_confs()[imatch]->set(matches[imatch + 1]);
 
@@ -48,8 +33,10 @@ void PlotModel::read (const Types::strings& config) {
 
 
 std::list<std::string> PlotModel::serialize () const {
+
   std::list<std::string> output {};
-  for (auto& plot : plots) {
+
+  for (auto& plot : list) {
     if (not plot.name.get().size())
       continue;
 
@@ -66,5 +53,7 @@ std::list<std::string> PlotModel::serialize () const {
         plot.mc_var.get() + "'";
     output.push_back(line);
   }
+
   return output;
+
 }

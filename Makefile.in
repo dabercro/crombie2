@@ -122,13 +122,14 @@ am__objects_1 = src/AllController.$(OBJEXT) src/AllModels.$(OBJEXT) \
 	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
 	src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
-	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) \
-	src/PlotController.$(OBJEXT) src/PlotModel.$(OBJEXT) \
+	src/OnTheFlyModel.$(OBJEXT) src/OnTheFlyReweighter.$(OBJEXT) \
+	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) src/PlotModel.$(OBJEXT) \
 	src/PlotStyleModel.$(OBJEXT) src/Progress.$(OBJEXT) \
-	src/ReweightModel.$(OBJEXT) src/Runner.$(OBJEXT) \
-	src/Selection.$(OBJEXT) src/SelectionDisplay.$(OBJEXT) \
-	src/SimpleController.$(OBJEXT) src/SimpleModel.$(OBJEXT) \
-	src/TextConfigurable.$(OBJEXT) src/Tree.$(OBJEXT)
+	src/ReweightModel.$(OBJEXT) src/ReweightReader.$(OBJEXT) \
+	src/Runner.$(OBJEXT) src/Selection.$(OBJEXT) \
+	src/SelectionDisplay.$(OBJEXT) src/SimpleController.$(OBJEXT) \
+	src/SimpleModel.$(OBJEXT) src/TextConfigurable.$(OBJEXT) \
+	src/Tree.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
@@ -176,11 +177,13 @@ am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	src/$(DEPDIR)/LumiSelection.Po src/$(DEPDIR)/MainController.Po \
 	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
 	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
-	src/$(DEPDIR)/Parse.Po src/$(DEPDIR)/Plot.Po \
-	src/$(DEPDIR)/PlotController.Po src/$(DEPDIR)/PlotModel.Po \
+	src/$(DEPDIR)/OnTheFlyModel.Po \
+	src/$(DEPDIR)/OnTheFlyReweighter.Po src/$(DEPDIR)/Parse.Po \
+	src/$(DEPDIR)/Plot.Po src/$(DEPDIR)/PlotModel.Po \
 	src/$(DEPDIR)/PlotStyleModel.Po src/$(DEPDIR)/Progress.Po \
-	src/$(DEPDIR)/ReweightModel.Po src/$(DEPDIR)/Runner.Po \
-	src/$(DEPDIR)/Selection.Po src/$(DEPDIR)/SelectionDisplay.Po \
+	src/$(DEPDIR)/ReweightModel.Po src/$(DEPDIR)/ReweightReader.Po \
+	src/$(DEPDIR)/Runner.Po src/$(DEPDIR)/Selection.Po \
+	src/$(DEPDIR)/SelectionDisplay.Po \
 	src/$(DEPDIR)/SimpleController.Po src/$(DEPDIR)/SimpleModel.Po \
 	src/$(DEPDIR)/TextConfigurable.Po src/$(DEPDIR)/Tree.Po \
 	src/$(DEPDIR)/main.Po test/$(DEPDIR)/main.Po \
@@ -377,13 +380,15 @@ allsrcs = \
 	$(srcdir)/src/MiniCutController.cpp \
 	$(srcdir)/src/MiniFileController.cpp \
 	$(srcdir)/src/Misc.cpp \
+	$(srcdir)/src/OnTheFlyModel.cpp \
+	$(srcdir)/src/OnTheFlyReweighter.cpp \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/Plot.cpp \
-	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
 	$(srcdir)/src/PlotStyleModel.cpp \
 	$(srcdir)/src/Progress.cpp \
 	$(srcdir)/src/ReweightModel.cpp \
+	$(srcdir)/src/ReweightReader.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
 	$(srcdir)/src/SelectionDisplay.cpp \
@@ -569,10 +574,12 @@ src/MiniCutController.$(OBJEXT): src/$(am__dirstamp) \
 src/MiniFileController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Misc.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/OnTheFlyModel.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/OnTheFlyReweighter.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/Parse.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/Plot.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
-src/PlotController.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/PlotModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/PlotStyleModel.$(OBJEXT): src/$(am__dirstamp) \
@@ -580,6 +587,8 @@ src/PlotStyleModel.$(OBJEXT): src/$(am__dirstamp) \
 src/Progress.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/ReweightModel.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/ReweightReader.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Runner.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -675,13 +684,15 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniCutController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniFileController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Misc.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/OnTheFlyModel.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/OnTheFlyReweighter.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Parse.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Plot.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotStyleModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Progress.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ReweightModel.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ReweightReader.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Runner.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Selection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/SelectionDisplay.Po@am__quote@ # am--include-marker
@@ -1032,13 +1043,15 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/MiniCutController.Po
 	-rm -f src/$(DEPDIR)/MiniFileController.Po
 	-rm -f src/$(DEPDIR)/Misc.Po
+	-rm -f src/$(DEPDIR)/OnTheFlyModel.Po
+	-rm -f src/$(DEPDIR)/OnTheFlyReweighter.Po
 	-rm -f src/$(DEPDIR)/Parse.Po
 	-rm -f src/$(DEPDIR)/Plot.Po
-	-rm -f src/$(DEPDIR)/PlotController.Po
 	-rm -f src/$(DEPDIR)/PlotModel.Po
 	-rm -f src/$(DEPDIR)/PlotStyleModel.Po
 	-rm -f src/$(DEPDIR)/Progress.Po
 	-rm -f src/$(DEPDIR)/ReweightModel.Po
+	-rm -f src/$(DEPDIR)/ReweightReader.Po
 	-rm -f src/$(DEPDIR)/Runner.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
 	-rm -f src/$(DEPDIR)/SelectionDisplay.Po
@@ -1141,13 +1154,15 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/MiniCutController.Po
 	-rm -f src/$(DEPDIR)/MiniFileController.Po
 	-rm -f src/$(DEPDIR)/Misc.Po
+	-rm -f src/$(DEPDIR)/OnTheFlyModel.Po
+	-rm -f src/$(DEPDIR)/OnTheFlyReweighter.Po
 	-rm -f src/$(DEPDIR)/Parse.Po
 	-rm -f src/$(DEPDIR)/Plot.Po
-	-rm -f src/$(DEPDIR)/PlotController.Po
 	-rm -f src/$(DEPDIR)/PlotModel.Po
 	-rm -f src/$(DEPDIR)/PlotStyleModel.Po
 	-rm -f src/$(DEPDIR)/Progress.Po
 	-rm -f src/$(DEPDIR)/ReweightModel.Po
+	-rm -f src/$(DEPDIR)/ReweightReader.Po
 	-rm -f src/$(DEPDIR)/Runner.Po
 	-rm -f src/$(DEPDIR)/Selection.Po
 	-rm -f src/$(DEPDIR)/SelectionDisplay.Po

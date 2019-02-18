@@ -38,13 +38,15 @@ allsrcs = \
 	$(srcdir)/src/MiniCutController.cpp \
 	$(srcdir)/src/MiniFileController.cpp \
 	$(srcdir)/src/Misc.cpp \
+	$(srcdir)/src/OnTheFlyModel.cpp \
+	$(srcdir)/src/OnTheFlyReweighter.cpp \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/Plot.cpp \
-	$(srcdir)/src/PlotController.cpp \
 	$(srcdir)/src/PlotModel.cpp \
 	$(srcdir)/src/PlotStyleModel.cpp \
 	$(srcdir)/src/Progress.cpp \
 	$(srcdir)/src/ReweightModel.cpp \
+	$(srcdir)/src/ReweightReader.cpp \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/Selection.cpp \
 	$(srcdir)/src/SelectionDisplay.cpp \

@@ -1,16 +1,16 @@
-#ifndef CROMBIE2_PLOTMODEL_H
-#define CROMBIE2_PLOTMODEL_H
+#ifndef CROMBIE2_ONTHEFLYMODEL_H
+#define CROMBIE2_ONTHEFLYMODEL_H
 
 
 #include <crombie2/ListModel.h>
-#include <crombie2/Plot.h>
+#include <crombie2/ReweightReader.h>
 
 
 namespace crombie2 {
   /**
-     @brief The ConfigModel that handles a list of plots to make
+     @brief The ConfigModel that handles a list of reweights to make on the fly
   */
-  class PlotModel : public ListModel<Plot> {
+  class OnTheFlyModel : public ListModel<ReweightReader> {
 
   public:
     std::string get_name () const override;
@@ -21,6 +21,7 @@ namespace crombie2 {
 
   };
 }
+
 
 
 #endif
