@@ -2,10 +2,9 @@
 #define CROMBIE2_LISTCONTROLLER_H
 
 
-#include <gtkmm/buttonbox.h>
-
 #include <crombie2/Controller.h>
 #include <crombie2/ListModel.h>
+#include <crombie2/Misc.h>
 
 
 namespace crombie2 {
@@ -20,20 +19,40 @@ namespace crombie2 {
       Controller {page, model},
       listmodel {model}
     {
-      buttonbox.pack_start(addbutton, Gtk::PACK_EXPAND_PADDING);
+      auto& perrowlabel = perrow.get_label();
+      auto& perrowentry = perrow.get_widget();
+
+      buttonbox.pack_start(addbutton, Gtk::PACK_SHRINK);
+      buttonbox.pack_start(redrawbutton, Gtk::PACK_SHRINK);
+      buttonbox.pack_start(perrowlabel, Gtk::PACK_SHRINK);
+      buttonbox.pack_start(perrowentry, Gtk::PACK_SHRINK);
+
       page.pack_start(buttonbox, Gtk::PACK_SHRINK);
 
       addbutton.set_border_width(10);
+      redrawbutton.set_border_width(10);
 
       buttonbox.show();
+
       addbutton.show();
+      redrawbutton.show();
+      perrowlabel.show();
+      perrowentry.show();
+
       addbutton.signal_clicked().
         connect(sigc::mem_fun(*this, &ListController<E>::on_add));
+      redrawbutton.signal_clicked().
+        connect(sigc::mem_fun(*this, &ListController<E>::redraw));
 
       redraw();
     }
 
     void redraw () override  {
+      if (not unsigned(perrow)) {
+        Misc::message("Items per row is set to a zero-like value!");
+        return;
+      }        
+
       drawn = 0;
       boxes.clear();
       for (auto& item : listmodel.list)
@@ -43,7 +62,7 @@ namespace crombie2 {
   private:
     template <typename I>
       void add_table (I& item) {
-      if (((drawn++) % 4) == 0) {
+      if (((drawn++) % unsigned(perrow)) == 0) {
         boxes.emplace_back();
         page.box().pack_start(boxes.back(), Gtk::PACK_SHRINK);
         boxes.back().show();
@@ -64,8 +83,10 @@ namespace crombie2 {
     unsigned drawn {0};
 
     std::list<Gtk::HBox> boxes {};
-    Gtk::HButtonBox buttonbox {};
+    Gtk::HBox buttonbox {};
     Gtk::Button addbutton {"Add"};
+    Gtk::Button redrawbutton {"Redraw"};
+    Configurable<unsigned> perrow {"Items per row: ", 4};
 
   };
 }

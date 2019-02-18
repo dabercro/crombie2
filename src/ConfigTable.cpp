@@ -11,8 +11,10 @@ ConfigTable::ConfigTable (const std::initializer_list<GuiConfigurable*>& configs
 {
 
   table.set_spacings(10);
-  if (not horizontal)
+  if (not horizontal) {
     table.set_border_width(20);
+    frame.add(table);
+  }
 
 }
 
@@ -30,7 +32,6 @@ void ConfigTable::draw (Gtk::Box& page) {
     page.pack_start(table, Gtk::PACK_SHRINK);
   else {
     page.pack_start(frame, Gtk::PACK_SHRINK);
-    frame.add(table);
     frame.show();
   }
 
