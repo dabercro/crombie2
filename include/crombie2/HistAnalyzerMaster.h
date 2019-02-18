@@ -19,7 +19,8 @@ namespace crombie2 {
                         const CutModel& cutmodel,
                         const ReweightModel& reweightmodel,
                         const GlobalModel& globalmodel,
-                        const PlotStyleModel& plotstylemodel);
+                        const PlotStyleModel& plotstylemodel,
+                        const OnTheFlyModel& onthefly);
 
     HistAnalysis get_analysis_histograms (const std::string& selection) const;
 

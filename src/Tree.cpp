@@ -26,10 +26,7 @@ Tree::~Tree () {
 }
 
 
-double& Tree::request (const std::string& expr) {
-  auto i_form = forms.find(expr);
-  if (i_form != forms.end())
-    return i_form->second.first;
+std::shared_ptr<TTreeFormula> Tree::get_formula (const std::string& expr) {
 
   // Update set of needed branches
   for (auto* branch : *(tree->GetListOfBranches())) {
@@ -49,12 +46,27 @@ double& Tree::request (const std::string& expr) {
 
   // Put the formula in, in a thread-safe way
   Misc::lock();
-  auto output = forms.insert({
-      expr, std::make_pair(0.0,
-                           std::make_unique<TTreeFormula>(expr.data(), expr.data(), tree))
-  });
+  auto output = std::make_shared<TTreeFormula>(expr.data(), expr.data(), tree);
   Misc::unlock();
 
+  return output;
+
+}
+
+
+double& Tree::request (const std::string& expr) {
+  auto i_form = forms.find(expr);
+  if (i_form != forms.end())
+    return i_form->second.first;
+
+  auto output = forms.insert({expr, std::make_pair(0.0, get_formula(expr))});
+
   return output.first->second.first;
+}
+
+
+double Tree::max (const std::string& branch) {
+
+  return tree->GetMaximum(branch.data());
 
 }

@@ -9,8 +9,12 @@
 using namespace crombie2;
 
 
-HistModel::HistModel (Job& job, const GlobalModel& globalmodel,
-                      const Plot& plot, const CutModel& cutmodel, const Selection& selection) :
+HistModel::HistModel (Job& job,
+               const GlobalModel& globalmodel,
+               const Plot& plot,
+               const CutModel& cutmodel,
+               const Selection& selection,
+               const OnTheFlyModel& reweight) :
   inputdir {globalmodel.inputdir},
   inputfile {job.get_entry().name},
   nbins {plot.nbins},
@@ -21,8 +25,9 @@ HistModel::HistModel (Job& job, const GlobalModel& globalmodel,
   weightstr {cutmodel.expand(job.get_group().type == FileGroup::FileType::DATA
                              ? selection.data_weight
                              : selection.mc_weight)},
+  reweight {reweight},
   label {plot.label},
-  analyzer_prototype {job, plot, var, cutstr, weightstr, globalmodel}
+  analyzer_prototype {job, plot, var, cutstr, weightstr, globalmodel, reweight}
 
 {
 
@@ -31,9 +36,12 @@ HistModel::HistModel (Job& job, const GlobalModel& globalmodel,
     legend_entries.emplace_back(sub_proc.legend);
   }
 
+  bool reweighing = reweight.list.size();
+
   // If data isn't saved, prepare the analyzers
-  cache_file = save() + ".dat";
-  cached = FileSystem::exists(cache_file);
+
+  cache_file = reweighing ? "" : save() + ".dat";
+  cached = FileSystem::exists(cache_file) and not reweighing;
 
 }
 
@@ -90,17 +98,20 @@ HistSplit HistModel::get_histsplit () const {
       output.add(analyzer.get_result());
 
     // Dump the cache
-    std::ofstream file {cache_file};
+    if (cache_file.size()) {
 
-    for (auto& hist_pair : output.get_hists()) {
+      std::ofstream file {cache_file};
 
-      auto& hist = hist_pair.second;
-      file << hist.get_total() << std::endl;
-      auto& contents = hist.get_contents();
-      auto& errors = hist.get_errors();
-      for (unsigned i_bin = 0; i_bin < contents.size(); ++i_bin)
-        file << contents.at(i_bin) << " " << errors.at(i_bin) << std::endl;
+      for (auto& hist_pair : output.get_hists()) {
 
+        auto& hist = hist_pair.second;
+        file << hist.get_total() << std::endl;
+        auto& contents = hist.get_contents();
+        auto& errors = hist.get_errors();
+        for (unsigned i_bin = 0; i_bin < contents.size(); ++i_bin)
+          file << contents.at(i_bin) << " " << errors.at(i_bin) << std::endl;
+
+      }
     }
   }
   else {

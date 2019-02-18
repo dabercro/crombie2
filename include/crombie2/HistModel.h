@@ -9,9 +9,12 @@
 namespace crombie2 {
   class HistModel : public ConfigModel {
   public:
-    HistModel (Job& job, const GlobalModel& globalmodel,
-               const Plot& plot, const CutModel& cutmodel, const Selection& selection);
-               // const OnTheFlyModel& reweight);
+    HistModel (Job& job,
+               const GlobalModel& globalmodel,
+               const Plot& plot,
+               const CutModel& cutmodel,
+               const Selection& selection,
+               const OnTheFlyModel& reweight);
 
     std::string get_name () const override;
 
@@ -51,6 +54,8 @@ namespace crombie2 {
     const std::string cutstr;
     const std::string weightstr;
     std::vector<std::string> substrs {};
+
+    const OnTheFlyModel& reweight;
 
     // Not saved in cache, but annoyingly still used at the moment
     std::string label;

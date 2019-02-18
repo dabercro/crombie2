@@ -5,6 +5,8 @@
 #include <crombie2/Configurable.h>
 #include <crombie2/ConfigTable.h>
 
+#include "TH1D.h"
+
 
 namespace crombie2 {
   class ReweightReader {
@@ -23,6 +25,9 @@ namespace crombie2 {
     ConfigTable table {
       &expr, &cut, &file, &hist
     };
+
+    std::string extract_index () const;
+    TH1D extract_hist () const;
 
   };
 }

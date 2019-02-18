@@ -61,6 +61,12 @@ namespace crombie2 {
       return obj;
     }
 
+
+    /// Get the maximum value of an expression
+    double max (const std::string& branch);
+
+    std::shared_ptr<TTreeFormula> get_formula (const std::string& expr);
+
   private:
 
     TFile* file;          ///< The TFile that is being read
@@ -69,7 +75,7 @@ namespace crombie2 {
     long long ientry {0}; ///< Which entry are we on
 
     /// Hold all of the TTreeFormulas for this tree
-    Types::map<std::pair<double, std::unique_ptr<TTreeFormula>>> forms {};
+    Types::map<std::pair<double, std::shared_ptr<TTreeFormula>>> forms {};
 
     /// Hold the branches to be read to skip locking
     std::vector<TBranch*> branches_to_read {};

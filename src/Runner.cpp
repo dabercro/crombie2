@@ -17,6 +17,7 @@ Runner::Runner (unsigned num_files,
                 const GlobalModel& globalmodel,
                 const JSONModel& jsonmodel,
                 const ReweightModel& reweightmodel,
+                const OnTheFlyModel& ontheflymodel,
                 const PlotModel& plotmodel,
                 const PlotStyleModel& plotstylemodel,
                 Progress& progress) :
@@ -26,6 +27,7 @@ Runner::Runner (unsigned num_files,
   globalmodel {globalmodel},
   jsonmodel {jsonmodel},
   reweightmodel {reweightmodel},
+  ontheflymodel {ontheflymodel},
   plotmodel {plotmodel},
   plotstylemodel {plotstylemodel},
   progress {progress}
@@ -58,7 +60,8 @@ void Runner::run (const std::string& histoutputdir,
     doreweight or histoutputdir.size(),
     histoutputdir, jobs,
     plotmodel, cutmodel,
-    reweightmodel, globalmodel, plotstylemodel
+    reweightmodel, globalmodel,
+    plotstylemodel, ontheflymodel
   };
 
   CutflowAnalyzerMaster cutflowanalyzers {

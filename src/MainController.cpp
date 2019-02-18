@@ -108,7 +108,8 @@ void MainController::run (unsigned num_files, const std::string& histoutdir, Pro
 
   Runner runner {
     num_files, cutmodel, filemodel,
-    globalmodel, jsonmodel, reweightmodel,
+    globalmodel, jsonmodel,
+    reweightmodel, ontheflymodel,
     plotmodel, plotstylemodel, progress
   };
   runner.run(histoutdir, docutflow.get_active(), dolumi.get_active(),

@@ -8,6 +8,7 @@
 #include <crombie2/FileModel.h>
 #include <crombie2/JSONModel.h>
 #include <crombie2/JobSorter.h>
+#include <crombie2/OnTheFlyModel.h>
 #include <crombie2/PlotModel.h>
 #include <crombie2/Progress.h>
 #include <crombie2/ReweightModel.h>
@@ -23,6 +24,7 @@ namespace crombie2 {
             const GlobalModel& globalmodel,
             const JSONModel& jsonmodel,
             const ReweightModel& reweightmodel,
+            const OnTheFlyModel& ontheflymodel,
             const PlotModel& plotmodel,
             const PlotStyleModel& plotstylemodel,
             Progress& progress);
@@ -38,6 +40,7 @@ namespace crombie2 {
     GlobalModel globalmodel;
     JSONModel jsonmodel;
     ReweightModel reweightmodel;
+    OnTheFlyModel ontheflymodel;
     PlotModel plotmodel;
     PlotStyleModel plotstylemodel;
 

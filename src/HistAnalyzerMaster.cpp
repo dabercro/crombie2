@@ -17,7 +17,8 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
                                         const PlotModel& plotmodel, const CutModel& cutmodel,
                                         const ReweightModel& reweightmodel,
                                         const GlobalModel& globalmodel,
-                                        const PlotStyleModel& plotstylemodel) :
+                                        const PlotStyleModel& plotstylemodel,
+                                        const OnTheFlyModel& onthefly) :
   outputdir {outdir},
   plotmodel {plotmodel},
   cutmodel {cutmodel},
@@ -44,7 +45,7 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
 
         histmodels[output_file].
           insert({job.get_entry().name.get(),
-                  {job, globalmodel, plot, cutmodel, selection}}).
+                  {job, globalmodel, plot, cutmodel, selection, onthefly}}).
           first->second.add_job(job);
       }
     }

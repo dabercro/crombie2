@@ -9,8 +9,11 @@ HistAnalyzer::HistAnalyzer (const Job& job, const Plot& plot,
                             const std::string& var,
                             const std::string& cutstr,
                             const std::string& weightstr,
-                            const GlobalModel& globalmodel) :
+                            const GlobalModel& globalmodel,
+                            const OnTheFlyModel& reweight) :
+  type {job.get_group().type},
   plot {plot},
+  reweight {reweight},
   var {var},
   cutstr {cutstr},
   weightstr {weightstr},
@@ -41,6 +44,13 @@ void HistAnalyzer::make_requests (Tree& tree) {
                       tree.request(weightstr),
                       tree.request(substr));
 
+  if (type != FileGroup::FileType::DATA) {
+    reweighters.reserve(reweight.list.size());
+
+    for (auto& config : reweight.list)
+      reweighters.emplace_back(config, tree);
+  }
+
 }
 
 
@@ -52,8 +62,14 @@ void HistAnalyzer::notify () {
 
     for (auto& ref : refs) {
       if (ref.sub) {
-        hists[i_hist].fill(ref.expr, ref.weight);
+
+        double reweight {1.0};
+        for (auto& reweigher : reweighters)
+          reweight *= reweigher.eval();
+
+        hists[i_hist].fill(ref.expr, ref.weight * reweight);
         break;
+
       }
       ++i_hist;
     }

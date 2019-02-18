@@ -11,23 +11,20 @@
 namespace crombie2 {
   class OnTheFlyReweighter {
   public:
-    OnTheFlyReweighter (const OnTheFlyModel& model,
+    OnTheFlyReweighter (const ReweightReader& config,
                         Tree& tree);
 
-    double eval () const;
+    /// Get the reweight for the event the Tree is currently on
+    double eval ();
 
   private:
-    const OnTheFlyModel& model;
+    std::vector<std::shared_ptr<TTreeFormula>> expressions {};
+    std::vector<std::shared_ptr<TTreeFormula>> cuts {};
 
-    std::vector<std::unique_ptr<TTreeFormula>> expressions {};
-    std::vector<std::unique_ptr<TTreeFormula>> cuts {};
-
+    const std::string index_expr;
     double& index;
 
     TH1D hist;
-
-    static std::string extract_index (const OnTheFlyModel& model);
-    static TH1D extract_hist (const OnTheFlyModel& model);
 
   };
 }

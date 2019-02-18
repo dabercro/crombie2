@@ -7,6 +7,7 @@
 #include <crombie2/Hist.h>
 #include <crombie2/HistRefs.h>
 #include <crombie2/OnTheFlyModel.h>
+#include <crombie2/OnTheFlyReweighter.h>
 #include <crombie2/Plot.h>
 
 
@@ -17,8 +18,8 @@ namespace crombie2 {
                   const std::string& var,
                   const std::string& cutstr,
                   const std::string& weightstr,
-                  const GlobalModel& globalmodel);
-                  // const OnTheFlyModel& reweight
+                  const GlobalModel& globalmodel,
+                  const OnTheFlyModel& reweight);
 
     void make_requests (Tree& tree) override;
 
@@ -30,8 +31,9 @@ namespace crombie2 {
 
   private:
 
+    FileGroup::FileType type;
     const Plot& plot;
-    // const OnTheFlyModel& reweight;
+    const OnTheFlyModel& reweight;
 
     const std::string var;
     const std::string cutstr;
@@ -41,6 +43,8 @@ namespace crombie2 {
     std::list<HistRefs> refs {};
 
     std::vector<Hist> hists {};
+
+    std::vector<OnTheFlyReweighter> reweighters {};
 
     const std::string total_str;
   };
