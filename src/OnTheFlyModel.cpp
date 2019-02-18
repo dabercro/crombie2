@@ -37,7 +37,7 @@ std::list<std::string> OnTheFlyModel::serialize () const {
   for (auto& reweight : list) {
 
     std::string line =
-      reweight.expr.get() + "', " +
+      reweight.expr.get() + ", " +
       reweight.cut.get() + ", " +
       reweight.file.get() + ", " +
       reweight.hist.get();

@@ -63,11 +63,11 @@ void HistAnalyzer::notify () {
     for (auto& ref : refs) {
       if (ref.sub) {
 
-        double reweight {1.0};
+        double newweight {1.0};
         for (auto& reweigher : reweighters)
-          reweight *= reweigher.eval();
+          newweight *= reweigher.eval();
 
-        hists[i_hist].fill(ref.expr, ref.weight * reweight);
+        hists[i_hist].fill(ref.expr, ref.weight * newweight);
         break;
 
       }

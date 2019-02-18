@@ -15,7 +15,7 @@ OnTheFlyReweighter::OnTheFlyReweighter (const ReweightReader& config,
 
   // Assuming index is just a branch
   unsigned max = index_expr != "1" ? tree.max(index_expr) : 1;
-  std::regex sub_string {std::string("[") + index_expr + "]"};
+  std::regex sub_string {std::string("\\[") + index_expr + "\\]"};
 
   expressions.reserve(max);
   cuts.reserve(max);
@@ -24,8 +24,9 @@ OnTheFlyReweighter::OnTheFlyReweighter (const ReweightReader& config,
 
     std::string new_string = std::string("[") + std::to_string(max) + "]";
 
-    auto substitute = [&sub_string, &new_string]
-      (const auto& str) { return std::regex_replace(str, sub_string, new_string); };
+    auto substitute = [&sub_string, &new_string] (const auto& str) {
+      return std::regex_replace(str, sub_string, new_string);
+    };
 
     // Create all of the formulas that we want to potentially evaluate
     expressions.push_back(tree.get_formula(substitute(config.expr.get())));
@@ -44,8 +45,7 @@ double OnTheFlyReweighter::eval () {
 
   for (unsigned i_eval = 0; i_eval < num; i_eval++) {
     if (cuts[i_eval]->EvalInstance())
-      output *= hist.GetBinContent
-        (hist.FindBin(expressions[i_eval]->EvalInstance()));
+      output *= hist.GetBinContent(hist.FindBin(expressions[i_eval]->EvalInstance()));
   }
 
   return output;
