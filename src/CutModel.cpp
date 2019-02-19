@@ -89,8 +89,8 @@ std::list<std::string> CutModel::serialize () const {
       if (cut.get().size()) {
         line += cut.get();
         output.push_back(line);
+        line = "    ";
       }
-      line = "    ";
     }
   }
 
