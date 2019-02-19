@@ -4,7 +4,7 @@
 using namespace crombie2;
 
 
-MiniCutController::MiniCutController(CutString& cutstring) :
+MiniCutController::MiniCutController(RemoveWrapper<CutString>& cutstring) :
   cutstring {cutstring},
   labeltable{&(cutstring.name), &(cutstring.joiner)},
   cuttable {}
@@ -22,6 +22,9 @@ MiniCutController::MiniCutController(CutString& cutstring) :
 
 
 void MiniCutController::draw (Gtk::Box& page) {
+
+  page.pack_start(cutstring.remove, Gtk::PACK_SHRINK);
+  cutstring.remove.show();
 
   page.pack_start(box, Gtk::PACK_SHRINK);
 

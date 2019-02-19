@@ -4,6 +4,7 @@
 
 #include <crombie2/ConfigTable.h>
 #include <crombie2/CutString.h>
+#include <crombie2/RemoveWrapper.h>
 
 
 namespace crombie2 {
@@ -12,12 +13,12 @@ namespace crombie2 {
   */
   class MiniCutController {
   public:
-    explicit MiniCutController(CutString& cutstring);
+    explicit MiniCutController(RemoveWrapper<CutString>& cutstring);
 
     void draw (Gtk::Box& page);
 
   private:
-    CutString& cutstring;
+    RemoveWrapper<CutString>& cutstring;
     ConfigTable labeltable;
     ConfigTable cuttable;
 

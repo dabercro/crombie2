@@ -18,6 +18,7 @@ namespace crombie2 {
   class CutString {
   public:
     CutString (const std::string& name, const std::string& joiner);
+    virtual ~CutString () = default;
 
     /// Add a cut to this CutString and return a reference to what's added
     Cut& add_cut ();

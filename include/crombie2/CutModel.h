@@ -21,16 +21,16 @@ namespace crombie2 {
 
     std::string get_name () const override;
 
-    CutString& add_cutstring (const std::string& label, const std::string& joiner = "&&");
+    RemoveWrapper<CutString>& add_cutstring (const std::string& label, const std::string& joiner = "&&");
 
     /// Expands a cutstring for viewing
     std::string expand (const std::string& cutlabel) const;
 
     /// Returns the list of labels
-    const std::list<std::string>& get_labels () const;
+    std::list<std::string> get_labels () const;
 
     /// Returns a cut based on it's label
-    CutString& get_cutstring (const std::string& label);
+    RemoveWrapper<CutString>& get_cutstring (const std::string& label);
 
     std::list<RemoveWrapper<Selection>> selections {};
 
@@ -44,15 +44,15 @@ namespace crombie2 {
 
   private:
 
-    void read (const Types::strings& config) override;
+     RemoveWrapper<CutString>& at (const std::string& label);
+     const RemoveWrapper<CutString>& at (const std::string& label) const;
 
-    std::list<std::string> serialize () const override;
+     void read (const Types::strings& config) override;
 
-    /// Holds the cut strings
-    std::map<std::string, CutString> cutstrings {};
+     std::list<std::string> serialize () const override;
 
-    /// Keeps the cut labels in order
-    std::list<std::string> cutlabels {};
+     /// Holds the cut strings
+     std::list<RemoveWrapper<CutString>> cutstrings {};
 
   };
 }

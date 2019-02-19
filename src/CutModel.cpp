@@ -7,10 +7,11 @@
 using namespace crombie2;
 
 
-CutModel::CutModel (const CutModel& other) :
-  cutstrings {other.cutstrings},
-  cutlabels {other.cutlabels}
+CutModel::CutModel (const CutModel& other)
 {
+
+  for (const CutString& cut : other.cutstrings)
+    cutstrings.emplace_back(cutstrings, cut);
 
   for (const Selection& selection : other.selections)
     selections.emplace_back(selections, selection);
@@ -27,7 +28,6 @@ void CutModel::read (const Types::strings& config) {
 
   selections.clear();
   cutstrings.clear();
-  cutlabels.clear();
 
   // This is used to select lines that describe a cut at the end
   std::regex selectionline{"^:\\s+(\\w+)\\s+(\\w+)\\s+(\\w+)\\s*$"};
@@ -54,21 +54,9 @@ void CutModel::read (const Types::strings& config) {
 }
 
 
-CutString& CutModel::add_cutstring (const std::string& label, const std::string& joiner) {
+RemoveWrapper<CutString>& CutModel::add_cutstring (const std::string& label, const std::string& joiner) {
 
-  auto inserted = cutstrings.insert(std::make_pair(label, CutString(label, joiner)));
-  if (std::get<1>(inserted)) {
-
-    auto& output = std::get<0>(inserted)->second;
-    cutlabels.push_back(output.name.get());
-    return output;
-
-  }
-
-  std::runtime_error e {"Tried to add duplicate cut label."};
-  Misc::message(e.what(), "Tried to add duplicate cut label \"" + label + "\"");
-
-  throw e;
+  return cutstrings.emplace_back(cutstrings, CutString(label, joiner));
 
 }
 
@@ -77,8 +65,7 @@ std::list<std::string> CutModel::serialize () const {
 
   std::list<std::string> output {};
 
-  for (auto& label : cutlabels) {
-    const auto& cutstring = cutstrings.at(label);
+  for (const auto& cutstring : cutstrings) {
     if (not cutstring.name.get().size())
       continue;
 
@@ -118,7 +105,7 @@ std::string CutModel::expand (const std::string& cutlabel) const {
   // There should be no way to be invalid without throwing an exception
   const CutString* cutstring {nullptr};
   try {
-    cutstring = &cutstrings.at(label);
+    cutstring = &at(label);
   }
   catch (const std::exception& e) {
     Misc::message(e.what(), std::string("Key \"") + label + "\" does not seem to be in the map");
@@ -142,16 +129,20 @@ std::string CutModel::expand (const std::string& cutlabel) const {
 }
 
 
-const std::list<std::string>& CutModel::get_labels () const {
+std::list<std::string> CutModel::get_labels () const {
 
-  return cutlabels;
+  std::list<std::string> output {};
+  for (auto& cut : cutstrings)
+    output.emplace_back(cut.name);
+
+  return output;
 
 }
 
 
-CutString& CutModel::get_cutstring (const std::string& label) {
+RemoveWrapper<CutString>& CutModel::get_cutstring (const std::string& label) {
 
-  return cutstrings.at(label);
+  return at(label);
 
 }
 
@@ -187,7 +178,7 @@ std::vector<std::string> CutModel::cutflow (const std::string& label) const {
     output.push_back(expand(label));
 
   else {
-    auto& cutstring = cutstrings.at(label);
+    auto& cutstring = at(label);
     // If not joined by &&, send back
     if (cutstring.joiner.get() != "&&")
       output.push_back(expand(label));
@@ -205,5 +196,23 @@ std::vector<std::string> CutModel::cutflow (const std::string& label) const {
   }
 
   return output;
+
+}
+
+
+const RemoveWrapper<CutString>& CutModel::at (const std::string& label) const {
+
+  for (const auto& cut : cutstrings)
+    if (cut.name.get() == label)
+      return cut;
+
+}
+
+
+RemoveWrapper<CutString>& CutModel::at (const std::string& label) {
+
+  for (auto& cut : cutstrings)
+    if (cut.name.get() == label)
+      return cut;
 
 }

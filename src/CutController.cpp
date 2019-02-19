@@ -53,7 +53,7 @@ void CutController::redraw () {
 }
 
 
-void CutController::add_cut (CutString& cutstring) {
+void CutController::add_cut (RemoveWrapper<CutString>& cutstring) {
 
   if (((numcuts++) % 1) == 0) {
     cutboxes.emplace_back();
@@ -61,8 +61,14 @@ void CutController::add_cut (CutString& cutstring) {
     cutboxes.back().show();
   }
 
-  minicontrollers.emplace_back(cutstring);
-  minicontrollers.back().draw(cutboxes.back());
+  auto& mini = minicontrollers.emplace_back(cutstring);
+  mini.draw(cutboxes.back());
+
+  cutstring.also_remove([&mini, this] () {
+      minicontrollers.remove_if([&mini] (auto& ele) {
+          return &mini == &ele;
+        });
+    });
 
 }
 
