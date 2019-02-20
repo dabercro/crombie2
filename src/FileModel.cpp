@@ -38,8 +38,8 @@ void FileModel::read (const Types::strings& config) {
   FileGroup::FileType current_type {FileGroup::FileType::DATA};
 
   // Not pointing to a legend entry list in the beginning
-  std::list<LegendEntry>* current_entries {nullptr};
-  std::list<FileEntry>* current_files {nullptr};
+  RemoveList<LegendEntry>* current_entries {nullptr};
+  RemoveList<FileEntry>* current_files {nullptr};
 
   std::regex legend_expr {"\\s*([^;]+);\\s*([^;]+);\\s*([^;]+);\\s*(\\d+)"};
   std::regex file_expr {"\\s*(\\S+)\\s+\\{([\\d\\.]+)\\}"};
@@ -53,7 +53,7 @@ void FileModel::read (const Types::strings& config) {
         current_files = &(fg.files);
       }
 
-      auto& entry = current_entries->emplace_back();
+      auto& entry = current_entries->append();
       entry.datacard.set(matches[1]);
       entry.legend.set(matches[2]);
       entry.cut.set(matches[3]);
@@ -67,7 +67,7 @@ void FileModel::read (const Types::strings& config) {
 
       current_entries = nullptr;
 
-      auto& file = current_files->emplace_back();
+      auto& file = current_files->append();
       file.name.set(matches[1]);
       file.xs.set(matches[2]);
 

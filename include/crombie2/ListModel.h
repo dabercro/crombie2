@@ -3,7 +3,7 @@
 
 
 #include <crombie2/ConfigModel.h>
-#include <crombie2/RemoveWrapper.h>
+#include <crombie2/RemoveList.h>
 
 
 namespace crombie2 {
@@ -15,17 +15,11 @@ namespace crombie2 {
 
   public:
 
-    ListModel<E> () = default;
-    ListModel<E> (const ListModel<E>& other) {
-      for (const E& item : other.list)
-        list.emplace_back(list, item);
-    }
-
     RemoveWrapper<E>& add () {
-      return list.emplace_back(list);
+      return list.append();
     }
 
-    std::list<RemoveWrapper<E>> list {};
+    RemoveList<E> list {};
 
   };
 }

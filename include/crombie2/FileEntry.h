@@ -15,6 +15,7 @@ namespace crombie2 {
   public:
     FileEntry () = default;
     FileEntry (const FileEntry& other);
+    virtual ~FileEntry () = default;
 
     Configurable<std::string> name {"File Name", ""};
     Configurable<double> xs {"Cross Section", 0};

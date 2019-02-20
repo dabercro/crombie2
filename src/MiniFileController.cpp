@@ -23,7 +23,7 @@ MiniFileController::MiniFileController(FileGroup& filegroup, Gtk::Box& page) :
     box.show();
 
     if (not confs.size())
-      confs.emplace_back();
+      confs.append();
 
     for (auto& entry : confs)
       entry.table.draw(box);
@@ -56,14 +56,14 @@ MiniFileController::MiniFileController(FileGroup& filegroup, Gtk::Box& page) :
 
 void MiniFileController::on_add_entry () {
 
-  filegroup.entries.emplace_back().table.draw(legendlist);
+  filegroup.entries.append().table.draw(legendlist);
 
 }
 
 
 void MiniFileController::on_add_file () {
 
-  filegroup.files.emplace_back().table.draw(filelist);
+  filegroup.files.append().table.draw(filelist);
 
 }
 

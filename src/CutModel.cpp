@@ -7,18 +7,6 @@
 using namespace crombie2;
 
 
-CutModel::CutModel (const CutModel& other)
-{
-
-  for (const CutString& cut : other.cutstrings)
-    cutstrings.emplace_back(cutstrings, cut);
-
-  for (const Selection& selection : other.selections)
-    selections.emplace_back(selections, selection);
-
-}
-
-
 std::string CutModel::get_name () const {
   return "cuts";
 }
@@ -40,7 +28,7 @@ void CutModel::read (const Types::strings& config) {
 
   for (auto& line : config) {
     if (std::regex_search(line, matches, selectionline))
-      selections.emplace_back(selections, matches[1], matches[2], matches[3]);
+      selections.append(matches[1], matches[2], matches[3]);
 
     else if (std::regex_search(line, matches, expr)) {
       // Add a cutstring into the map and get a pointer to it
@@ -56,7 +44,7 @@ void CutModel::read (const Types::strings& config) {
 
 RemoveWrapper<CutString>& CutModel::add_cutstring (const std::string& label, const std::string& joiner) {
 
-  return cutstrings.emplace_back(cutstrings, CutString(label, joiner));
+  return cutstrings.append(CutString(label, joiner));
 
 }
 

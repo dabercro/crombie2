@@ -5,7 +5,7 @@
 #include <crombie2/ConfigModel.h>
 #include <crombie2/CutString.h>
 #include <crombie2/Selection.h>
-#include <crombie2/RemoveWrapper.h>
+#include <crombie2/RemoveList.h>
 
 
 namespace crombie2 {
@@ -15,9 +15,6 @@ namespace crombie2 {
   class CutModel : public ConfigModel {
 
   public:
-
-    CutModel () = default;
-    CutModel (const CutModel& other);
 
     std::string get_name () const override;
 
@@ -32,7 +29,7 @@ namespace crombie2 {
     /// Returns a cut based on it's label
     RemoveWrapper<CutString>& get_cutstring (const std::string& label);
 
-    std::list<RemoveWrapper<Selection>> selections {};
+    RemoveList<Selection> selections {};
 
     bool is_valid () const override;
 
@@ -52,7 +49,7 @@ namespace crombie2 {
      std::list<std::string> serialize () const override;
 
      /// Holds the cut strings
-     std::list<RemoveWrapper<CutString>> cutstrings {};
+     RemoveList<CutString> cutstrings {};
 
   };
 }

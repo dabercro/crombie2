@@ -4,6 +4,7 @@
 
 #include <crombie2/LegendEntry.h>
 #include <crombie2/FileEntry.h>
+#include <crombie2/RemoveList.h>
 
 
 namespace crombie2 {
@@ -17,8 +18,8 @@ namespace crombie2 {
 
     FileType type {FileType::DATA};
 
-    std::list<LegendEntry> entries {};
-    std::list<FileEntry> files {};
+    RemoveList<LegendEntry> entries {};
+    RemoveList<FileEntry> files {};
 
   };
 }
