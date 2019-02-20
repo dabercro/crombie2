@@ -2,8 +2,6 @@
 #define CROMBIE2_REMOVELIST_H
 
 
-#include <list>
-
 #include <crombie2/RemoveWrapper.h>
 
 

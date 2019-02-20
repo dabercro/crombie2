@@ -6,7 +6,6 @@
 #include <crombie2/Job.h>
 #include <crombie2/Hist.h>
 #include <crombie2/HistRefs.h>
-#include <crombie2/OnTheFlyModel.h>
 #include <crombie2/OnTheFlyReweighter.h>
 #include <crombie2/Plot.h>
 

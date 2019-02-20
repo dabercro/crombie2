@@ -2,8 +2,6 @@
 #define CROMBIE2_SELECTIONDISPLAY_H
 
 
-#include <gtkmm/button.h>
-
 #include <crombie2/CutModel.h>
 
 

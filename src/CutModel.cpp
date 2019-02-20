@@ -194,6 +194,8 @@ const RemoveWrapper<CutString>& CutModel::at (const std::string& label) const {
     if (cut.name.get() == label)
       return cut;
 
+  throw std::runtime_error {label + " does not exist in CutModel"};
+
 }
 
 
@@ -202,5 +204,7 @@ RemoveWrapper<CutString>& CutModel::at (const std::string& label) {
   for (auto& cut : cutstrings)
     if (cut.name.get() == label)
       return cut;
+
+  throw std::runtime_error {label + " does not exist in CutModel"};
 
 }

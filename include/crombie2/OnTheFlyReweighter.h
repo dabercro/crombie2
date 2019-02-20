@@ -5,8 +5,6 @@
 #include <crombie2/OnTheFlyModel.h>
 #include <crombie2/Tree.h>
 
-#include "TH1D.h"
-
 
 namespace crombie2 {
   class OnTheFlyReweighter {
