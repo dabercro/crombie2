@@ -1,3 +1,5 @@
+#include <regex>
+
 #include <crombie2/ReweightReader.h>
 
 #include "TFile.h"
@@ -36,5 +38,29 @@ TH1D ReweightReader::extract_hist () const {
   input.Close();
 
   return output;
+
+}
+
+
+namespace {
+
+  std::string remove_index (const std::string& str) {
+    std::regex expr{"\\[[^\\]]+\\]"};
+    return std::regex_replace(str, expr, "");
+  }
+
+}
+
+
+std::string ReweightReader::extract_expr () const {
+
+  return remove_index(expr);
+
+}
+
+
+std::string ReweightReader::extract_cut () const {
+
+  return remove_index(cut);
 
 }

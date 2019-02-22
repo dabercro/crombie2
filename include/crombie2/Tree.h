@@ -30,17 +30,7 @@ namespace crombie2 {
        @brief Fill the branches with the next event's contents.
        @returns False when there are no more events to read.
     */
-    inline bool next() {
-      if (ientry == nentries)
-        return false;
-      // Get the branch entries directly to avoid TBranchElement locking
-      for (auto* branch : branches_to_read)
-        branch->GetEntry(ientry);
-      ientry++;
-      for (auto& form : forms)
-        form.second.first = form.second.second->EvalInstance();
-      return true;
-    }
+    bool next();
 
 
     /**
@@ -76,9 +66,6 @@ namespace crombie2 {
 
     /// Hold all of the TTreeFormulas for this tree
     Types::map<std::pair<double, std::shared_ptr<TTreeFormula>>> forms {};
-
-    /// Hold the branches to be read to skip locking
-    std::vector<TBranch*> branches_to_read {};
 
   };
 }

@@ -27,6 +27,9 @@ namespace crombie2 {
     };
 
     std::string extract_index () const;
+    std::string extract_expr () const;
+    std::string extract_cut () const;
+
     TH1D extract_hist () const;
 
   };

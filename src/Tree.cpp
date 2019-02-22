@@ -36,9 +36,6 @@ std::shared_ptr<TTreeFormula> Tree::get_formula (const std::string& expr) {
       const std::regex regexpr {std::string("\\b") + name + "\\b"};
       std::smatch matches;
       if (std::regex_search(expr, matches, regexpr)) {
-        if (not tree->GetBranchStatus(name))
-          branches_to_read.push_back(tree->GetBranch(name));
-
         tree->SetBranchStatus(name, 1);
       }
     }
@@ -51,6 +48,17 @@ std::shared_ptr<TTreeFormula> Tree::get_formula (const std::string& expr) {
 
   return output;
 
+}
+
+
+bool Tree::next () {
+  if (ientry == nentries)
+    return false;
+  // Get the branch entries directly to avoid TBranchElement locking
+  tree->GetEntry(ientry++);
+  for (auto& form : forms)
+    form.second.first = form.second.second->EvalInstance();
+  return true;
 }
 
 

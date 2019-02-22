@@ -30,6 +30,8 @@ MainController::MainController (std::map<std::string, ConfigPage>& pagemap,
 
   setup_controls(histsbox, dohists, histslabel, histoutput);
 
+  dohists.set_active(true);
+
   histoutput.set_text(Misc::shell("printf $(date +%y%m%d)"));
   histoutput.show();
 

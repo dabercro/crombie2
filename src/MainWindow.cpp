@@ -11,6 +11,7 @@ MainWindow::MainWindow ()
 
   add(book);
   book.show();
+  add_page(jobpage);
   add_page(pagemap.at("globals"));
   add_page(pagemap.at("json"));
   add_page(pagemap.at("reweight"));
@@ -19,9 +20,7 @@ MainWindow::MainWindow ()
   add_page(pagemap.at("files"));
   add_page(pagemap.at("plots"));
   add_page(pagemap.at("selections"));
-  add_page(jobpage);
 
-  maximize();
 }
 
 

@@ -16,13 +16,13 @@ namespace crombie2 {
     double eval ();
 
   private:
-    std::vector<std::shared_ptr<TTreeFormula>> expressions {};
-    std::vector<std::shared_ptr<TTreeFormula>> cuts {};
-
     const std::string index_expr;
     double& index;
 
     TH1D hist;
+
+    std::shared_ptr<TTreeFormula> expr;
+    std::shared_ptr<TTreeFormula> cut;
 
   };
 }
