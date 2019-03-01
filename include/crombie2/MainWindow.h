@@ -33,6 +33,11 @@ namespace crombie2 {
       jobpage
     };
 
+    bool on_key_press_event (GdkEventKey* event) override;
+    bool on_key_release_event (GdkEventKey* event) override;
+
+    bool cntrl {false};
+
   };
 }
 

@@ -10,11 +10,11 @@ using namespace crombie2;
 
 
 HistModel::HistModel (Job& job,
-               const GlobalModel& globalmodel,
-               const Plot& plot,
-               const CutModel& cutmodel,
-               const Selection& selection,
-               const OnTheFlyModel& reweight) :
+                      const GlobalModel& globalmodel,
+                      const Plot& plot,
+                      const CutModel& cutmodel,
+                      const Selection& selection,
+                      const OnTheFlyModel& reweight) :
   inputdir {globalmodel.inputdir},
   inputfile {job.get_entry().name},
   nbins {plot.nbins},
@@ -36,7 +36,7 @@ HistModel::HistModel (Job& job,
     legend_entries.emplace_back(sub_proc.legend);
   }
 
-  bool reweighing = reweight.list.size();
+  bool reweighing = reweight.list.size() and job.get_group().type != FileGroup::FileType::DATA;
 
   // If data isn't saved, prepare the analyzers
 

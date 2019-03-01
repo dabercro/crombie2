@@ -1,5 +1,7 @@
 #include <regex>
 
+#include <crombie2/FileSystem.h>
+#include <crombie2/Misc.h>
 #include <crombie2/OnTheFlyModel.h>
 
 
@@ -8,6 +10,20 @@ using namespace crombie2;
 
 std::string OnTheFlyModel::get_name () const {
   return "onthefly";
+}
+
+
+bool OnTheFlyModel::is_valid () const {
+
+  for (auto& reader : list) {
+    if (not FileSystem::exists(reader.file)) {
+      Misc::message(get_name(), reader.file.get() + " does not exist!");
+      return false;
+    }    
+  }
+
+  return true;
+
 }
 
 

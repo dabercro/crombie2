@@ -15,6 +15,8 @@ namespace crombie2 {
   public:
     std::string get_name () const override;
 
+    bool is_valid () const override;
+
   private:
     void read (const Types::strings& config) override;
     std::list<std::string> serialize () const override;

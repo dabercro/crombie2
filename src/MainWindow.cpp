@@ -1,3 +1,5 @@
+#include <gtkmm/main.h>
+
 #include <crombie2/MainWindow.h>
 #include <crombie2/Misc.h>
 
@@ -26,6 +28,7 @@ MainWindow::MainWindow ()
 
 void MainWindow::add_page (ConfigPage& page) {
   book.append_page(page, page.get_label());
+  book.set_tab_reorderable(page, true);
   page.show();
 }
 
@@ -44,4 +47,47 @@ std::map<std::string, ConfigPage> MainWindow::init_map () {
 
   return output;
 
+}
+
+
+bool MainWindow::on_key_press_event (GdkEventKey* event) {
+  if (cntrl) {
+
+    switch(event->keyval) {
+
+    case GDK_KEY_Page_Up:
+      if (book.get_current_page())
+        book.prev_page();
+      else  // Assumes we have more than no pages
+        book.set_current_page(book.get_n_pages() - 1);
+      return false;
+
+    case GDK_KEY_Page_Down:
+      // Assumes we have more than no pages
+      if (book.get_current_page() != book.get_n_pages() - 1)
+        book.next_page();
+      else
+        book.set_current_page(0);
+      return false;
+
+    case GDK_KEY_q:
+    case GDK_KEY_Q:
+      Gtk::Main::quit();
+      return false;
+
+    }
+  }
+
+  if (event->keyval == GDK_KEY_Control_L)
+    cntrl = true;
+
+  return Gtk::Window::on_key_press_event(event);
+}
+
+
+bool MainWindow::on_key_release_event (GdkEventKey* event) {
+  if (event->keyval == GDK_KEY_Control_L)
+    cntrl = false;
+
+  return Gtk::Window::on_key_press_event(event);
 }

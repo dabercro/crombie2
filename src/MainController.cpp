@@ -89,7 +89,9 @@ void MainController::on_submit_job () {
     : "";
 
   // Check if everything is okay
-  if (cutmodel.is_valid() and
+  if (globalmodel.is_valid() and
+      ontheflymodel.is_valid() and
+      cutmodel.is_valid() and
       (not outdir.size() or FileSystem::confirm_overwrite(outdir))
       ) {
 

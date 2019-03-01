@@ -88,10 +88,10 @@ void Controller::on_export () {
   if (not filename.size())
     filename = model.get_name() + ".cnf";
 
-  if (FileSystem::confirm_overwrite(filename))
+  if (FileSystem::confirm_overwrite(filename)) {
     model.save(filename);
-
-  Misc::message(model.get_name() + " exported", filename);
+    Misc::message(model.get_name() + " exported", filename);
+  }
 
 }
 

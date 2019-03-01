@@ -17,6 +17,8 @@ namespace crombie2 {
 
     std::string get_name () const override;
 
+    bool is_valid () const override;
+
     /// Input directory for files
     Configurable<std::string> inputdir {"Input directory", "."};
 
