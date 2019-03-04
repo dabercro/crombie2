@@ -28,7 +28,8 @@ MainController::MainController (std::map<std::string, ConfigPage>& pagemap,
 
   // Histogram making
 
-  setup_controls(histsbox, dohists, histslabel, histoutput);
+  setup_controls(histsbox, dohists, histslabel, histoutput,
+                 histnorm_label, histnorm);
 
   dohists.set_active(true);
 
@@ -116,7 +117,8 @@ void MainController::run (unsigned num_files, const std::string& histoutdir, Pro
     reweightmodel, ontheflymodel,
     plotmodel, plotstylemodel, progress
   };
-  runner.run(histoutdir, docutflow.get_active(), dolumi.get_active(),
+  runner.run(histoutdir, histnorm.get_active(),
+             docutflow.get_active(), dolumi.get_active(),
              doreweight.get_active(), reweight_norm.get_active());
 
 }

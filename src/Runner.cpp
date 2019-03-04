@@ -39,6 +39,7 @@ Runner::Runner (unsigned num_files,
 
 
 void Runner::run (const std::string& histoutputdir,
+                  bool histnorm,
                   bool docutflow, bool dolumi,
                   bool doreweight, bool re_normalize) {
 
@@ -86,7 +87,7 @@ void Runner::run (const std::string& histoutputdir,
   progress.set_progress("Processing Output", 1.0);
 
   // Output histograms stuff
-  histanalyzers.output();
+  histanalyzers.output(histnorm);
   if (docutflow)
     cutflowanalyzers.output();
   if (dolumi)

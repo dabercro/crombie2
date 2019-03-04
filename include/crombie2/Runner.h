@@ -30,6 +30,7 @@ namespace crombie2 {
             Progress& progress);
 
     void run(const std::string& histoutputdir,
+             bool histnorm,
              bool docutflow, bool dolumi,
              bool doreweight, bool re_normalize);
 

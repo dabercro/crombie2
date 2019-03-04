@@ -41,7 +41,7 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
 
     for (auto& plot : plotmodel.list) {
       for (auto& selection : cutmodel.selections) {
-        auto output_file = selection.cut.get() + "_" + plot.name.get();
+        auto output_file = selection.get_name() + "_" + plot.name.get();
 
         histmodels[output_file].
           insert({job.get_entry().name.get(),
@@ -54,7 +54,7 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
 }
 
 
-void HistAnalyzerMaster::output () const {
+void HistAnalyzerMaster::output (bool normalize) const {
 
   if (not outputdir.size())
     return;
@@ -87,7 +87,7 @@ void HistAnalyzerMaster::output () const {
 
     }
 
-    draw_plot(key_output.first, datahists, mchists, signalhists);
+    draw_plot(key_output.first, datahists, mchists, signalhists, normalize);
 
   }
 
@@ -131,7 +131,9 @@ namespace {
   }
 
 
-  TH1D* styled (TH1D* hist, FileGroup::FileType type, short style) {
+  TH1D* styled (TH1D* hist, FileGroup::FileType type, short style, double scale = 1.0) {
+
+    hist->Scale(scale);
 
     hist->SetLineColor(kBlack);
     switch(type) {
@@ -175,7 +177,8 @@ namespace {
 void HistAnalyzerMaster::draw_plot(const std::string& output,
                                    Types::map<Hist>& data,
                                    Types::map<Hist>& mc,
-                                   Types::map<Hist>& signal) const {
+                                   Types::map<Hist>& signal,
+                                   bool normalize) const {
 
   // Use this to store sums for ratios
   Hist data_hist {};
@@ -190,12 +193,25 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   auto mcvec = sorted_vec(mc);
 
+  double scale = normalize
+    ? data_hist.integral()/bkg_hist.integral()
+    : 1.0;
+
+  bkg_hist.scale(scale);
+
+  auto* max_hist = &bkg_hist;
+
   THStack hs{"hs", ""};
   // Get the maximum value
   auto max = bkg_hist.max_w_unc();
   // Check the data histogram(s)
-  for(auto& dat : data)
-    max = std::max(dat.second.max_w_unc(), max);
+  for(auto& dat : data) {
+    auto check = dat.second.max_w_unc();
+    if (check > max) {
+      max = check;
+      max_hist = &dat.second;
+    }
+  }
 
   hs.SetMaximum(max);
 
@@ -209,12 +225,13 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     hs.Add(
       styled(i_mc->second,
              FileGroup::FileType::MC,
-             styles.at(i_mc->first))
+             styles.at(i_mc->first),
+             scale)
     );
 
   }
 
-  TLegend leg{legend(bkg_hist, styles.size())};
+  TLegend leg{legend(*max_hist, styles.size())};
 
   // MC entries
   for (auto& mc : mcvec)
@@ -308,7 +325,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     bhist->Draw("e2");
 
     // All of the signals should be drawn separately...
-    styled(signal_hist.ratio(bkg_hist).roothist(), FileGroup::FileType::SIGNAL, 2)->Draw("hist,same");
+    styled(signal_hist.ratio(bkg_hist).roothist(), FileGroup::FileType::SIGNAL, 2, scale)->Draw("hist,same");
     styled(data_ratio.roothist(), FileGroup::FileType::DATA, 1)->Draw("PE,same");
 
     pad2.SetGridy(1);
@@ -327,7 +344,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   constexpr double toplocation = 0.96;
   latex.SetTextSize(0.035);
 
-  double currentlumi {globalmodel.luminosity};
+  double currentlumi {globalmodel.luminosity * scale};
 
   if (currentlumi) {
     latex.SetTextAlign(31);

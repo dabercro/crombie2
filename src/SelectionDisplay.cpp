@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include <gtkmm/messagedialog.h>
 
 #include <crombie2/SelectionDisplay.h>
@@ -19,11 +21,20 @@ SelectionDisplay::SelectionDisplay (CutModel& cutmodel, Selection& selection) :
 
 void SelectionDisplay::on_click () {
 
-  auto label = selection.cut.get();
-  auto output = model.expand(label);
+  Gtk::MessageDialog message (selection.get_name());
 
-  Gtk::MessageDialog message (label);
-  message.set_secondary_text(output);
+  std::stringstream ss {};
+
+  ss << "Cut:" << std::endl
+     << model.expand(selection.cut)
+     << std::endl << std::endl
+     << "Data Weight:" << std::endl
+     << model.expand(selection.data_weight)
+     << std::endl << std::endl
+     << "MC Weight:" << std::endl
+     << model.expand(selection.mc_weight);
+
+  message.set_secondary_text(ss.str());
 
   message.run();
 

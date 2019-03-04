@@ -10,7 +10,10 @@ namespace crombie2 {
 
   class Selection {
   public:
-    Selection (const std::string& cut, const std::string& data, const std::string& mc);
+    Selection (const std::string& cut = "",
+               const std::string& data = "",
+               const std::string& mc = "",
+               const std::string& name = "");
     Selection (const Selection& other);
 
     virtual ~Selection () = default;
@@ -18,9 +21,12 @@ namespace crombie2 {
     Configurable<std::string> cut;
     Configurable<std::string> data_weight;
     Configurable<std::string> mc_weight;
+    Configurable<std::string> name;
     ConfigTable table {
-      &cut, &data_weight, &mc_weight
+      &cut, &data_weight, &mc_weight, &name
     };
+
+    std::string get_name () const;
   };
 
 }

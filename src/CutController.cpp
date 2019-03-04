@@ -83,8 +83,7 @@ void CutController::on_add_cut () {
 void CutController::on_add_selection () {
 
   fill_selection(cutmodel.selections.
-                 emplace_back(cutmodel.selections, // RemoveWrapper needs a reference to this list
-                              "", "", ""));        // Otherwise, fill with empty space
+                 emplace_back(cutmodel.selections)); // RemoveWrapper needs a reference to this list
 
 }
 
