@@ -38,6 +38,8 @@ namespace crombie2 {
 
     bool cntrl {false};
 
+    ConfigPage& current_page ();
+
   };
 }
 

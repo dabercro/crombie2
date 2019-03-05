@@ -55,10 +55,11 @@ namespace crombie2 {
 
 
     /**
-       Returns a pointer to a histogram that is owned by global list.
-       This list will handle the deletion when the program is done running.
+       Returns a pointer to a histogram that is owned by a list.
+       @param storeptr A pointer to a list to store the TH1D.
+                       If null, use a member list that has same scope as this object
     */
-    TH1D* roothist ();
+    TH1D* roothist (std::list<TH1D>* storeptr = nullptr);
 
 
     /// Sets the value of the total number of events, throws exception if total is already set
@@ -99,7 +100,7 @@ namespace crombie2 {
 
     double total {};                             ///< Stores the total weights of files filling this
 
-    static std::list<TH1D> histstore;
+    std::list<TH1D> localstore;                  ///< Keep in mind, these TH1D have same scope as Hist
 
     double get_unc (unsigned bin) const;         ///< Find the full uncertainty from uncs hists and sumw2
 

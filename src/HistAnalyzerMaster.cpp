@@ -180,6 +180,9 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
                                    Types::map<Hist>& signal,
                                    bool normalize) const {
 
+  // Stores TH1D for this function
+  std::list<TH1D> histstore {};
+
   // Use this to store sums for ratios
   Hist data_hist {};
   Hist bkg_hist {};
@@ -310,7 +313,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
       return hist;
     };
 
-    auto* bhist = set_yaxis(bkg_ratio.roothist());
+    auto* bhist = set_yaxis(bkg_ratio.roothist(&histstore));
 
     for (auto* axis : {bhist->GetXaxis(), bhist->GetYaxis()}) {
       axis->SetTitleSize(nomfont/bottom);
@@ -325,8 +328,8 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     bhist->Draw("e2");
 
     // All of the signals should be drawn separately...
-    styled(signal_hist.ratio(bkg_hist).roothist(), FileGroup::FileType::SIGNAL, 2, scale)->Draw("hist,same");
-    styled(data_ratio.roothist(), FileGroup::FileType::DATA, 1)->Draw("PE,same");
+    styled(signal_hist.ratio(bkg_hist).roothist(&histstore), FileGroup::FileType::SIGNAL, 2, scale)->Draw("hist,same");
+    styled(data_ratio.roothist(&histstore), FileGroup::FileType::DATA, 1)->Draw("PE,same");
 
     pad2.SetGridy(1);
 

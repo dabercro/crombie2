@@ -66,7 +66,9 @@ void Hist::scale(const double lumi, const double xs) {
 }
 
 
-TH1D* Hist::roothist() {
+TH1D* Hist::roothist(std::list<TH1D>* storeptr) {
+
+  auto& histstore {storeptr ? *storeptr : localstore};
 
   static unsigned plot = 0;
   auto title = std::string(";") + label + ";Events";
@@ -200,6 +202,3 @@ double Hist::integral (bool overflow) const {
   return output;
 
 }
-
-
-std::list<TH1D> Hist::histstore {};

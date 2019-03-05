@@ -1,5 +1,7 @@
 #include <exception>
 
+#include <gtkmm/scrollbar.h>
+
 #include <crombie2/Controller.h>
 
 
@@ -62,5 +64,21 @@ ConfigModel& ConfigPage::get_model () {
     return *model_ptr;
 
   throw std::logic_error {"ConfigPage::get_model: Model not set yet"};
+
+}
+
+
+void ConfigPage::scroll (Scroll direction) {
+
+  auto bar = (direction == Scroll::DOWN or direction == Scroll::UP)
+    ? std::make_pair(static_cast<Gtk::Scrollbar*> (scrolled.get_vscrollbar()), scrolled.get_vadjustment())
+    : std::make_pair(static_cast<Gtk::Scrollbar*> (scrolled.get_hscrollbar()), scrolled.get_hadjustment());
+
+  auto location = bar.first->get_value();
+  auto step = bar.second->get_step_increment() * (direction == Scroll::DOWN or
+                                                  direction == Scroll::RIGHT
+                                                  ? 1.0 : -1.0);
+
+  bar.first->set_value(location + step);
 
 }

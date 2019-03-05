@@ -15,6 +15,13 @@ namespace crombie2 {
   */
   class ConfigPage : public Gtk::VBox {
   public:
+    enum class Scroll {
+      DOWN,
+      UP,
+      LEFT,
+      RIGHT
+    };
+
     /**
        @param label The text to put in the box tab
     */
@@ -33,9 +40,11 @@ namespace crombie2 {
     Controller& get_controller ();
     ConfigModel& get_model ();
 
+    void scroll (Scroll direction);
+
   private:
 
-    std::string label;         ///< The label for the tab in the MainWindow
+    std::string label;               ///< The label for the tab in the MainWindow
     Gtk::ScrolledWindow scrolled {}; ///< For the middle of the page
     Gtk::VBox internalbox {};        ///< A box for drawing inside of the scroll box
 

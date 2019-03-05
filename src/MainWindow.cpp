@@ -56,6 +56,7 @@ bool MainWindow::on_key_press_event (GdkEventKey* event) {
     switch(event->keyval) {
 
     case GDK_KEY_Page_Up:
+    case GDK_KEY_braceleft:
       if (book.get_current_page())
         book.prev_page();
       else  // Assumes we have more than no pages
@@ -63,6 +64,7 @@ bool MainWindow::on_key_press_event (GdkEventKey* event) {
       return false;
 
     case GDK_KEY_Page_Down:
+    case GDK_KEY_braceright:
       // Assumes we have more than no pages
       if (book.get_current_page() != book.get_n_pages() - 1)
         book.next_page();
@@ -75,10 +77,26 @@ bool MainWindow::on_key_press_event (GdkEventKey* event) {
       Gtk::Main::quit();
       return false;
 
+    case GDK_KEY_Down:
+      current_page().scroll(ConfigPage::Scroll::DOWN);
+      return false;
+
+    case GDK_KEY_Up:
+      current_page().scroll(ConfigPage::Scroll::UP);
+      return false;
+
+    case GDK_KEY_Left:
+      current_page().scroll(ConfigPage::Scroll::LEFT);
+      return false;
+
+    case GDK_KEY_Right:
+      current_page().scroll(ConfigPage::Scroll::RIGHT);
+      return false;
+
     }
   }
 
-  if (event->keyval == GDK_KEY_Control_L)
+  if (event->keyval == GDK_KEY_Control_L or event->keyval == GDK_KEY_Meta_L)
     cntrl = true;
 
   return Gtk::Window::on_key_press_event(event);
@@ -86,8 +104,16 @@ bool MainWindow::on_key_press_event (GdkEventKey* event) {
 
 
 bool MainWindow::on_key_release_event (GdkEventKey* event) {
-  if (event->keyval == GDK_KEY_Control_L)
+  if (event->keyval == GDK_KEY_Control_L or event->keyval == GDK_KEY_Meta_L)
     cntrl = false;
 
   return Gtk::Window::on_key_press_event(event);
+}
+
+
+ConfigPage& MainWindow::current_page () {
+
+  auto* output = static_cast<ConfigPage*>(book.get_nth_page(book.get_current_page()));
+  return *output;
+
 }
