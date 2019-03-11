@@ -10,7 +10,7 @@ hence the uncreative name.
 Installation from this source repository requires the
 `gtkmm-2.4` libraries, `automake-1.16`, ROOT 6, and
 a compiler that supports the C++17 standard.
-From inside the root directory of this project, so the following.
+From inside the root directory of this project, do the following.
 
 ```
 autoreconf
