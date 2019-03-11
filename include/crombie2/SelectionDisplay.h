@@ -6,6 +6,9 @@
 
 
 namespace crombie2 {
+  /**
+     @brief A button that displays linked selection values
+  */
   class SelectionDisplay : public Gtk::Button {
   public:
     SelectionDisplay (CutModel& cutmodel, Selection& selection);

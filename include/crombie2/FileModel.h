@@ -4,7 +4,6 @@
 
 #include <crombie2/ConfigModel.h>
 #include <crombie2/FileGroup.h>
-#include <crombie2/RemoveList.h>
 
 
 namespace crombie2 {

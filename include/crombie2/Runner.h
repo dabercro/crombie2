@@ -16,6 +16,9 @@
 
 namespace crombie2 {
 
+  /**
+     @brief Copies models and runs jobs in a thread launched by the MainController
+  */
   class Runner {
   public:
     Runner (unsigned num_files,

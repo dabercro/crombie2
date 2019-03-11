@@ -13,11 +13,15 @@
 
 namespace crombie2 {
 
+  /**
+     @brief Implementation of histogram storage that doesn't do ROOT memory stuff
+  */
   class Hist {
   public:
 
     /**
-       Constructor of custom Hist class
+       @brief Constructor of custom Hist class
+
        @param label Is the label to go on the x-axis
        @param nbins The number of bins to show in the plot.
               There is also one overflow and one underflow bin stored internally.
@@ -43,7 +47,9 @@ namespace crombie2 {
 
 
     /**
-       Scale this histogram to a luminosity and cross section. 
+       @brief Scale this histogram to a luminosity and cross section. 
+
+       This assumes no other absolute scaling has happened.
        The result will be invalid if this scale function is called
        after any other call to Hist::scale.
     */
@@ -55,7 +61,8 @@ namespace crombie2 {
 
 
     /**
-       Returns a pointer to a histogram that is owned by a list.
+       @brief Returns a pointer to a histogram that is owned by a list.
+
        @param storeptr A pointer to a list to store the TH1D.
                        If null, use a member list that has same scope as this object
     */
@@ -69,11 +76,14 @@ namespace crombie2 {
     /// Get the maximum value including uncertainties (for plotting)
     double max_w_unc () const;
 
+
     /// Get the minimum value including uncertainties, but not less than 0.0 (for plotting)
     double min_w_unc (const bool includezeros = true) const;
 
+
     /**
-       Get the maximum bin and the total number of bins.
+       @brief Get the maximum bin and the total number of bins.
+
        Does not include overflow bins.
     */
     std::pair<unsigned, unsigned> get_maxbin_outof () const;
