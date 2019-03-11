@@ -4,6 +4,7 @@
 
 #include <crombie2/ConfigModel.h>
 #include <crombie2/FileGroup.h>
+#include <crombie2/RemoveList.h>
 
 
 namespace crombie2 {
@@ -15,9 +16,9 @@ namespace crombie2 {
 
     std::string get_name () const override;
 
-    FileGroup& add_files (FileGroup::FileType type = FileGroup::FileType::DATA);
+    RemoveWrapper<FileGroup>& add_files (FileGroup::FileType type = FileGroup::FileType::DATA);
 
-    std::list<FileGroup> filegroups {};
+    RemoveList<FileGroup> filegroups {};
 
     /**
        @param inputdir Is the directory that should prefix the names of the constituent FileEntry objects

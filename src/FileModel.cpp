@@ -12,8 +12,8 @@ std::string FileModel::get_name () const {
 }
 
 
-FileGroup& FileModel::add_files (FileGroup::FileType type) {
-  auto& output = filegroups.emplace_back();
+RemoveWrapper<FileGroup>& FileModel::add_files (FileGroup::FileType type) {
+  auto& output = filegroups.append();
   output.type = type;
   return output;
 }

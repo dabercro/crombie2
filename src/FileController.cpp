@@ -42,8 +42,15 @@ void FileController::redraw () {
 
   minicontrollers.clear();
 
-  for (auto& group : filemodel.filegroups)
-    minicontrollers.emplace_back(group, page.box());
+  for (auto& group : filemodel.filegroups) {
+    auto& mini = minicontrollers.emplace_back(group, page.box());
+
+    group.also_remove([&mini, this] () {
+        minicontrollers.remove_if([&mini] (auto& ele) {
+              return &mini == &ele;
+          });
+      });
+  }
 
 }
 

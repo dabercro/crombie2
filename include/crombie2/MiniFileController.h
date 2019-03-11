@@ -6,6 +6,7 @@
 #include <gtkmm/radiobutton.h>
 
 #include <crombie2/FileGroup.h>
+#include <crombie2/RemoveWrapper.h>
 
 
 namespace crombie2 {
@@ -14,7 +15,7 @@ namespace crombie2 {
   */
   class MiniFileController {
   public:
-    MiniFileController(FileGroup& filegroup, Gtk::Box& page);
+    MiniFileController(RemoveWrapper<FileGroup>& filegroup, Gtk::Box& page);
 
   private:
     FileGroup& filegroup;
@@ -38,6 +39,7 @@ namespace crombie2 {
     Gtk::VBox filelist {};
     Gtk::HButtonBox addlegendbox {};
     Gtk::HButtonBox addfilebox {};
+    Gtk::HButtonBox removebox {};
     Gtk::Button addentrybutton {"Add Entry"};
     Gtk::Button addfilebutton {"Add File"};
 

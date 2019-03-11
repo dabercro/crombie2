@@ -10,6 +10,8 @@
 namespace crombie2 {
   class FileGroup {
   public:
+    virtual ~FileGroup () = default;
+
     enum class FileType {
       DATA,
       MC,

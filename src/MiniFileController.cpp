@@ -4,7 +4,7 @@
 using namespace crombie2;
 
 
-MiniFileController::MiniFileController(FileGroup& filegroup, Gtk::Box& page) :
+MiniFileController::MiniFileController(RemoveWrapper<FileGroup>& filegroup, Gtk::Box& page) :
   filegroup {filegroup},
   databutton {"DATA"},
   radiogroup {databutton.get_group()},
@@ -50,6 +50,11 @@ MiniFileController::MiniFileController(FileGroup& filegroup, Gtk::Box& page) :
 
   fill(filegroup.entries, legendlist, addentrybutton, addlegendbox, &MiniFileController::on_add_entry);
   fill(filegroup.files, filelist, addfilebutton, addfilebox, &MiniFileController::on_add_file);
+
+  inframe.pack_start(removebox, Gtk::PACK_SHRINK);
+  removebox.pack_end(filegroup.remove, Gtk::PACK_SHRINK);
+  removebox.show();
+  filegroup.remove.show();
 
 }
 
