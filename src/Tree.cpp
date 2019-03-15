@@ -42,7 +42,7 @@ std::shared_ptr<TTreeFormula> Tree::get_formula (const std::string& expr) {
   }
 
   // Put the formula in, in a thread-safe way
-  Lock lock ();
+  Lock lock {};
   auto output = std::make_shared<TTreeFormula>(expr.data(), expr.data(), tree);
 
   return output;

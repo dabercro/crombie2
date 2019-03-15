@@ -88,7 +88,7 @@ void HistAnalyzerMaster::output () const {
 
     }
 
-    Lock lock ();
+    Lock lock {};
     draw_plot(key_output.first, datahists, mchists, signalhists);
 
   }
