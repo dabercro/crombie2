@@ -18,7 +18,7 @@ void CutModel::read (const Types::strings& config) {
   cutstrings.clear();
 
   // This is used to select lines that describe a cut at the end
-  std::regex selectionline{"^:\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s*(\\S*)\\s*$"};
+  std::regex selectionline{"^:\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s*([^\\s,]*)\\s*(,\\s*(\\S*))?\\s*$"};
   // This is used to read all other (non-empty) lines
   std::regex expr{"^(\\S*)\\s*([^\\s\\']*)\\s+(\\S.*)$"};
 
@@ -28,7 +28,7 @@ void CutModel::read (const Types::strings& config) {
 
   for (auto& line : config) {
     if (std::regex_search(line, matches, selectionline))
-      selections.append(matches[1], matches[2], matches[3], matches[4]);
+      selections.append(matches[1], matches[2], matches[3], matches[4], matches[6]);
 
     else if (std::regex_search(line, matches, expr)) {
       // Add a cutstring into the map and get a pointer to it
@@ -75,7 +75,8 @@ std::list<std::string> CutModel::serialize () const {
                        selection.cut.get() + " " +
                        selection.data_weight.get() + " " +
                        selection.mc_weight.get() + " " +
-                       selection.name.get());
+                       selection.name.get() + ", " +
+                       selection.control_plot.get());
   }
 
   return output;

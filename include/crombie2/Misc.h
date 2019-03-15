@@ -33,10 +33,6 @@ namespace crombie2 {
       return output;
     }
 
-    void lock ();
-
-    void unlock ();
-
     bool confirm (const std::string& message);
 
     /**

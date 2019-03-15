@@ -1,6 +1,6 @@
 #include <regex>
 
-#include <crombie2/Misc.h>
+#include <crombie2/Lock.h>
 #include <crombie2/Tree.h>
 
 
@@ -42,9 +42,8 @@ std::shared_ptr<TTreeFormula> Tree::get_formula (const std::string& expr) {
   }
 
   // Put the formula in, in a thread-safe way
-  Misc::lock();
+  Lock lock ();
   auto output = std::make_shared<TTreeFormula>(expr.data(), expr.data(), tree);
-  Misc::unlock();
 
   return output;
 

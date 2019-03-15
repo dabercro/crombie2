@@ -62,8 +62,11 @@ namespace crombie2 {
     Gtk::CheckButton dohists {};                     ///< Check box to activate histogram making
     Gtk::Label histslabel {"Plot output directory"}; ///< Label for the histoutput entry
     Gtk::Entry histoutput {};                        ///< Location to place histograms
-    Gtk::Label histnorm_label {"Normalize"};
-    Gtk::CheckButton histnorm {};
+
+    Gtk::HBox datacardbox {};
+    Gtk::CheckButton dodatacard {};
+    Gtk::Label datacardlabel {"Datacard directory"};
+    Gtk::Entry datacardoutput {};
 
     Gtk::HBox cutflowbox {};                   ///< Holds parameters for cutflow making
     Gtk::CheckButton docutflow {};             ///< Check box to activate cutflow making

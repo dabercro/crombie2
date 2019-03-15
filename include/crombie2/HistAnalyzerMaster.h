@@ -25,7 +25,7 @@ namespace crombie2 {
     HistAnalysis get_analysis_histograms (const std::string& selection) const;
 
     /// Outputs histograms into the plots directory if outputdir was set
-    void output (bool normalize) const;
+    void output () const;
 
   private:
     /// Place to dump plots. Can be blank.
@@ -55,8 +55,7 @@ namespace crombie2 {
     void draw_plot(const std::string& output,
                    Types::map<Hist>& data,
                    Types::map<Hist>& mc,
-                   Types::map<Hist>& signal,
-                   bool normalize) const;
+                   Types::map<Hist>& signal) const;
 
   };
 }

@@ -1,10 +1,10 @@
 #include <iostream>
 #include <cmath>
 #include <exception>
+#include <mutex>
 
 
 #include <crombie2/Hist.h>
-#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
@@ -66,15 +66,20 @@ void Hist::scale(const double lumi, const double xs) {
 }
 
 
+namespace {
+  std::mutex roothistlock {};
+}
+
+
 TH1D* Hist::roothist(std::list<TH1D>* storeptr) {
+
+  std::unique_lock<std::mutex> lock {roothistlock};
 
   auto& histstore {storeptr ? *storeptr : localstore};
 
   static unsigned plot = 0;
   auto title = std::string(";") + label + ";Events";
-  Misc::lock();
   histstore.emplace_back(std::to_string(plot++).data(), title.data(), static_cast<int>(nbins), min, max);
-  Misc::unlock();
   auto& hist = histstore.back();
   for (unsigned ibin = 0; ibin < contents.size(); ++ibin) {
     hist.SetBinContent(ibin, contents[ibin]);

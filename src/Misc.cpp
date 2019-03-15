@@ -3,7 +3,6 @@
 #include <exception>
 #include <iterator>
 #include <memory>
-#include <mutex>
 #include <regex>
 #include <sstream>
 
@@ -13,13 +12,6 @@
 
 
 using namespace crombie2;
-
-
-namespace {
-
-  std::mutex rootlock;
-
-}
 
 
 Types::strings Misc::tokenize(const std::string& str) {
@@ -70,16 +62,6 @@ std::string Misc::env(const std::string& variable, const std::string& fallback) 
   if (not fallback.size())
     throw std::runtime_error(std::string("Requesting non-existent variable '") + variable + "' with no fallback");
   return std::string(fallback);
-}
-
-
-void Misc::lock () {
-  rootlock.lock();
-}
-
-
-void Misc::unlock () {
-  rootlock.unlock();
 }
 
 

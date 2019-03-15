@@ -2,6 +2,7 @@
 #define CROMBIE2_PLOTSTYLEMODEL_H
 
 
+#include <crombie2/BoolConfigurable.h>
 #include <crombie2/Configurable.h>
 #include <crombie2/SimpleModel.h>
 
@@ -31,6 +32,9 @@ namespace crombie2 {
 
     /// The ratio pad axis label
     Configurable<std::string> ratiolabel {"Ratio Label", "Data/Pred."};
+
+    /// Determine if the plots are normalized or not
+    BoolConfigurable normalize {"Normalize Plots"};
 
   };
 

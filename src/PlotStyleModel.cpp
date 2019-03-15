@@ -10,7 +10,8 @@ PlotStyleModel::PlotStyleModel () :
     &plottype,
     &minratio,
     &maxratio,
-    &ratiolabel
+    &ratiolabel,
+    &normalize
   } {}
 
 

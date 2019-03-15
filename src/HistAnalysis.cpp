@@ -2,6 +2,7 @@
 
 #include <crombie2/FileSystem.h>
 #include <crombie2/HistAnalysis.h>
+#include <crombie2/Lock.h>
 
 
 using namespace crombie2;
@@ -40,6 +41,7 @@ void HistAnalysis::reweight (bool normalize, const std::string& output,
   // Get the reweight histogram and save it
   auto result = data_copy.ratio(mc);
 
+  Lock lock ();
   TFile outfile {output.data(), FileSystem::exists(output) ? "UPDATE" : "RECREATE"};
   outfile.WriteTObject(result.roothist(), histname.data());
   outfile.Close();

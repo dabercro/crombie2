@@ -3,6 +3,7 @@ bindir = $(srcdir)/bin
 allsrcs = \
 	$(srcdir)/src/AllController.cpp \
 	$(srcdir)/src/AllModels.cpp \
+	$(srcdir)/src/BoolConfigurable.cpp \
 	$(srcdir)/src/ConfigModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
 	$(srcdir)/src/ConfigTable.cpp \
@@ -21,6 +22,7 @@ allsrcs = \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/GuiConfigurable.cpp \
 	$(srcdir)/src/Hist.cpp \
+	$(srcdir)/src/Hist2D.cpp \
 	$(srcdir)/src/HistAnalysis.cpp \
 	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/HistAnalyzerMaster.cpp \
@@ -32,6 +34,7 @@ allsrcs = \
 	$(srcdir)/src/JSONAnalyzerMaster.cpp \
 	$(srcdir)/src/JSONAnalyzer.cpp \
 	$(srcdir)/src/JSONModel.cpp \
+	$(srcdir)/src/Lock.cpp \
 	$(srcdir)/src/LumiSelection.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \

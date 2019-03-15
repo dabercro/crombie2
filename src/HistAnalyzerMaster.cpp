@@ -2,6 +2,7 @@
 
 #include <crombie2/FileSystem.h>
 #include <crombie2/HistAnalyzerMaster.h>
+#include <crombie2/Lock.h>
 
 #include "TCanvas.h"
 #include "THStack.h"
@@ -54,7 +55,7 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
 }
 
 
-void HistAnalyzerMaster::output (bool normalize) const {
+void HistAnalyzerMaster::output () const {
 
   if (not outputdir.size())
     return;
@@ -87,7 +88,8 @@ void HistAnalyzerMaster::output (bool normalize) const {
 
     }
 
-    draw_plot(key_output.first, datahists, mchists, signalhists, normalize);
+    Lock lock ();
+    draw_plot(key_output.first, datahists, mchists, signalhists);
 
   }
 
@@ -177,8 +179,7 @@ namespace {
 void HistAnalyzerMaster::draw_plot(const std::string& output,
                                    Types::map<Hist>& data,
                                    Types::map<Hist>& mc,
-                                   Types::map<Hist>& signal,
-                                   bool normalize) const {
+                                   Types::map<Hist>& signal) const {
 
   // Stores TH1D for this function
   std::list<TH1D> histstore {};
@@ -196,7 +197,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   auto mcvec = sorted_vec(mc);
 
-  double scale = normalize
+  double scale = plotstylemodel.normalize
     ? data_hist.integral()/bkg_hist.integral()
     : 1.0;
 

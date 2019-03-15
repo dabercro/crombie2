@@ -46,3 +46,30 @@ TEST_CASE ("Nminus1") {
   REQUIRE (crombie2::Misc::nminus1("jet1pt", "(60 < jet1pt && jet2pt < 30)") == "(60 < jet1pt && jet2pt < 30)");
 
 }
+
+
+TEST_CASE ("Selection") {
+  test_dir("selection");
+
+  crombie2::CutModel cutmodel {};
+
+  cutmodel.add_cutstring("jetpt").add_cut().set("'jetpt > 60'");
+  cutmodel.add_cutstring("unity").add_cut().set("'1'");
+
+  cutmodel.selections.append("jetpt", "unity", "unity", "", "plotname");
+
+  std::string tag = "selection_test";
+
+  cutmodel.save_tag(tag, true);
+
+  crombie2::CutModel cutmodel2 {};
+
+  cutmodel2.load_tag(tag);
+
+  auto& sel1 = cutmodel.selections.front();
+  auto& sel2 = cutmodel2.selections.front();
+
+  REQUIRE (sel1.name.get() == sel2.name.get());
+  REQUIRE (sel1.control_plot.get() == sel2.control_plot.get());
+
+}

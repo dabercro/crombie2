@@ -103,24 +103,25 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = src/AllController.$(OBJEXT) src/AllModels.$(OBJEXT) \
-	src/ConfigModel.$(OBJEXT) src/ConfigPage.$(OBJEXT) \
-	src/ConfigTable.$(OBJEXT) src/Controller.$(OBJEXT) \
-	src/CrossSecDB.$(OBJEXT) src/Cut.$(OBJEXT) \
-	src/CutController.$(OBJEXT) src/CutModel.$(OBJEXT) \
-	src/CutString.$(OBJEXT) src/CutflowAnalyzer.$(OBJEXT) \
+	src/BoolConfigurable.$(OBJEXT) src/ConfigModel.$(OBJEXT) \
+	src/ConfigPage.$(OBJEXT) src/ConfigTable.$(OBJEXT) \
+	src/Controller.$(OBJEXT) src/CrossSecDB.$(OBJEXT) \
+	src/Cut.$(OBJEXT) src/CutController.$(OBJEXT) \
+	src/CutModel.$(OBJEXT) src/CutString.$(OBJEXT) \
+	src/CutflowAnalyzer.$(OBJEXT) \
 	src/CutflowAnalyzerMaster.$(OBJEXT) \
 	src/FileController.$(OBJEXT) src/FileEntry.$(OBJEXT) \
 	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
 	src/GlobalModel.$(OBJEXT) src/GuiConfigurable.$(OBJEXT) \
-	src/Hist.$(OBJEXT) src/HistAnalysis.$(OBJEXT) \
-	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
-	src/HistModel.$(OBJEXT) src/HistSplit.$(OBJEXT) \
-	src/Job.$(OBJEXT) src/JobSorter.$(OBJEXT) \
-	src/JoinerConfigurable.$(OBJEXT) \
+	src/Hist.$(OBJEXT) src/Hist2D.$(OBJEXT) \
+	src/HistAnalysis.$(OBJEXT) src/HistAnalyzer.$(OBJEXT) \
+	src/HistAnalyzerMaster.$(OBJEXT) src/HistModel.$(OBJEXT) \
+	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
+	src/JobSorter.$(OBJEXT) src/JoinerConfigurable.$(OBJEXT) \
 	src/JSONAnalyzerMaster.$(OBJEXT) src/JSONAnalyzer.$(OBJEXT) \
-	src/JSONModel.$(OBJEXT) src/LumiSelection.$(OBJEXT) \
-	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
-	src/MiniCutController.$(OBJEXT) \
+	src/JSONModel.$(OBJEXT) src/Lock.$(OBJEXT) \
+	src/LumiSelection.$(OBJEXT) src/MainController.$(OBJEXT) \
+	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
 	src/OnTheFlyModel.$(OBJEXT) src/OnTheFlyReweighter.$(OBJEXT) \
 	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) src/PlotModel.$(OBJEXT) \
@@ -157,23 +158,23 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
-	src/$(DEPDIR)/AllModels.Po src/$(DEPDIR)/ConfigModel.Po \
-	src/$(DEPDIR)/ConfigPage.Po src/$(DEPDIR)/ConfigTable.Po \
-	src/$(DEPDIR)/Controller.Po src/$(DEPDIR)/CrossSecDB.Po \
-	src/$(DEPDIR)/Cut.Po src/$(DEPDIR)/CutController.Po \
-	src/$(DEPDIR)/CutModel.Po src/$(DEPDIR)/CutString.Po \
-	src/$(DEPDIR)/CutflowAnalyzer.Po \
+	src/$(DEPDIR)/AllModels.Po src/$(DEPDIR)/BoolConfigurable.Po \
+	src/$(DEPDIR)/ConfigModel.Po src/$(DEPDIR)/ConfigPage.Po \
+	src/$(DEPDIR)/ConfigTable.Po src/$(DEPDIR)/Controller.Po \
+	src/$(DEPDIR)/CrossSecDB.Po src/$(DEPDIR)/Cut.Po \
+	src/$(DEPDIR)/CutController.Po src/$(DEPDIR)/CutModel.Po \
+	src/$(DEPDIR)/CutString.Po src/$(DEPDIR)/CutflowAnalyzer.Po \
 	src/$(DEPDIR)/CutflowAnalyzerMaster.Po \
 	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileEntry.Po \
 	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
 	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/GuiConfigurable.Po \
-	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/HistAnalysis.Po \
-	src/$(DEPDIR)/HistAnalyzer.Po \
+	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/Hist2D.Po \
+	src/$(DEPDIR)/HistAnalysis.Po src/$(DEPDIR)/HistAnalyzer.Po \
 	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistModel.Po \
 	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/JSONAnalyzer.Po \
 	src/$(DEPDIR)/JSONAnalyzerMaster.Po src/$(DEPDIR)/JSONModel.Po \
 	src/$(DEPDIR)/Job.Po src/$(DEPDIR)/JobSorter.Po \
-	src/$(DEPDIR)/JoinerConfigurable.Po \
+	src/$(DEPDIR)/JoinerConfigurable.Po src/$(DEPDIR)/Lock.Po \
 	src/$(DEPDIR)/LumiSelection.Po src/$(DEPDIR)/MainController.Po \
 	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
 	src/$(DEPDIR)/MiniFileController.Po src/$(DEPDIR)/Misc.Po \
@@ -340,6 +341,7 @@ top_srcdir = @top_srcdir@
 allsrcs = \
 	$(srcdir)/src/AllController.cpp \
 	$(srcdir)/src/AllModels.cpp \
+	$(srcdir)/src/BoolConfigurable.cpp \
 	$(srcdir)/src/ConfigModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
 	$(srcdir)/src/ConfigTable.cpp \
@@ -358,6 +360,7 @@ allsrcs = \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/GuiConfigurable.cpp \
 	$(srcdir)/src/Hist.cpp \
+	$(srcdir)/src/Hist2D.cpp \
 	$(srcdir)/src/HistAnalysis.cpp \
 	$(srcdir)/src/HistAnalyzer.cpp \
 	$(srcdir)/src/HistAnalyzerMaster.cpp \
@@ -369,6 +372,7 @@ allsrcs = \
 	$(srcdir)/src/JSONAnalyzerMaster.cpp \
 	$(srcdir)/src/JSONAnalyzer.cpp \
 	$(srcdir)/src/JSONModel.cpp \
+	$(srcdir)/src/Lock.cpp \
 	$(srcdir)/src/LumiSelection.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
@@ -503,6 +507,8 @@ src/AllController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/AllModels.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/BoolConfigurable.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/ConfigModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/ConfigPage.$(OBJEXT): src/$(am__dirstamp) \
@@ -537,6 +543,8 @@ src/GlobalModel.$(OBJEXT): src/$(am__dirstamp) \
 src/GuiConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Hist.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/Hist2D.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/HistAnalysis.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/HistAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
@@ -558,6 +566,7 @@ src/JSONAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/JSONModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/Lock.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/LumiSelection.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MainController.$(OBJEXT): src/$(am__dirstamp) \
@@ -644,6 +653,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/AllController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/AllModels.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/BoolConfigurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigPage.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigTable.Po@am__quote@ # am--include-marker
@@ -662,6 +672,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GlobalModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/GuiConfigurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Hist.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Hist2D.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalysis.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/HistAnalyzerMaster.Po@am__quote@ # am--include-marker
@@ -673,6 +684,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Job.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JobSorter.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/JoinerConfigurable.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Lock.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/LumiSelection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainWindow.Po@am__quote@ # am--include-marker
@@ -1003,6 +1015,7 @@ distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 		-rm -f src/$(DEPDIR)/AllController.Po
 	-rm -f src/$(DEPDIR)/AllModels.Po
+	-rm -f src/$(DEPDIR)/BoolConfigurable.Po
 	-rm -f src/$(DEPDIR)/ConfigModel.Po
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
 	-rm -f src/$(DEPDIR)/ConfigTable.Po
@@ -1021,6 +1034,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
 	-rm -f src/$(DEPDIR)/GuiConfigurable.Po
 	-rm -f src/$(DEPDIR)/Hist.Po
+	-rm -f src/$(DEPDIR)/Hist2D.Po
 	-rm -f src/$(DEPDIR)/HistAnalysis.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
@@ -1032,6 +1046,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/JobSorter.Po
 	-rm -f src/$(DEPDIR)/JoinerConfigurable.Po
+	-rm -f src/$(DEPDIR)/Lock.Po
 	-rm -f src/$(DEPDIR)/LumiSelection.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
@@ -1114,6 +1129,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -rf $(top_srcdir)/autom4te.cache
 		-rm -f src/$(DEPDIR)/AllController.Po
 	-rm -f src/$(DEPDIR)/AllModels.Po
+	-rm -f src/$(DEPDIR)/BoolConfigurable.Po
 	-rm -f src/$(DEPDIR)/ConfigModel.Po
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
 	-rm -f src/$(DEPDIR)/ConfigTable.Po
@@ -1132,6 +1148,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/GlobalModel.Po
 	-rm -f src/$(DEPDIR)/GuiConfigurable.Po
 	-rm -f src/$(DEPDIR)/Hist.Po
+	-rm -f src/$(DEPDIR)/Hist2D.Po
 	-rm -f src/$(DEPDIR)/HistAnalysis.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzer.Po
 	-rm -f src/$(DEPDIR)/HistAnalyzerMaster.Po
@@ -1143,6 +1160,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/Job.Po
 	-rm -f src/$(DEPDIR)/JobSorter.Po
 	-rm -f src/$(DEPDIR)/JoinerConfigurable.Po
+	-rm -f src/$(DEPDIR)/Lock.Po
 	-rm -f src/$(DEPDIR)/LumiSelection.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
