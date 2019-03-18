@@ -105,11 +105,17 @@ std::string CutModel::expand (const std::string& cutlabel) const {
   const std::string& joiner = cutstring->joiner.get();
 
   for (auto& cut : cutstring->get_cuts()) {
+
+    // Skip over empty cuts
+    if (cut.cut() == "1")
+      continue;
+
     if (output.back() != '(')
       output += std::string(" ") + joiner + " ";
     output += cut.is_literal()
       ? cut.cut()
       : expand(cut.get());
+
   }
 
   output += ")";
@@ -175,6 +181,9 @@ std::vector<std::string> CutModel::cutflow (const std::string& label) const {
     else {
       // For each cut, add literals and expand labels
       for (auto& cut : cutstring.get_cuts()) {
+        if (cut.cut() == "1")
+          continue;
+
         if (cut.is_literal())
           output.push_back(cut.cut());
         else {

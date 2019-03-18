@@ -36,6 +36,14 @@ TEST_CASE ("Cutstring Expansions") {
 
   }
 
+  SECTION ("Blank Cut") {
+
+    test.add_cut();
+    REQUIRE (cutmodel.expand("test") == "(jet1pt > 40)");
+    REQUIRE (cutmodel.cutflow("test") == crombie2::Types::strings{"jet1pt > 40"});
+
+  }
+
 }
 
 

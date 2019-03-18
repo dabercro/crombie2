@@ -80,7 +80,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/main.cpp
 
 crombie2cut_SOURCES = $(cutsrcs) \
-	$(srcdir)/src/cut.cpp
+	$(srcdir)/src/crombie2cut.cpp
 
 AM_CPPFLAGS = @GTK_CFLAGS@ -I$(srcdir)/include -std=c++17 \
 	`root-config --cflags | sed s/-std=c++11//`
