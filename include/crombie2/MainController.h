@@ -78,8 +78,7 @@ namespace crombie2 {
 
     Gtk::HBox reweightbox {};
     Gtk::CheckButton doreweight {};
-    Gtk::Label reweight_norm_label {"Normalize before reweight"};
-    Gtk::CheckButton reweight_norm {};
+    Gtk::Label reweight_label {"Do reweight"};
 
     Gtk::HButtonBox submitbox {};
     Gtk::Button button {"Submit"};

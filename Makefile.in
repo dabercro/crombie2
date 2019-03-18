@@ -86,7 +86,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = crombie2$(EXEEXT) crombie2catch$(EXEEXT)
+bin_PROGRAMS = crombie2$(EXEEXT) crombie2catch$(EXEEXT) \
+	crombie2cut$(EXEEXT)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -102,39 +103,40 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
-am__objects_1 = src/AllController.$(OBJEXT) src/AllModels.$(OBJEXT) \
-	src/BoolConfigurable.$(OBJEXT) src/ConfigModel.$(OBJEXT) \
-	src/ConfigPage.$(OBJEXT) src/ConfigTable.$(OBJEXT) \
-	src/Controller.$(OBJEXT) src/CrossSecDB.$(OBJEXT) \
-	src/Cut.$(OBJEXT) src/CutController.$(OBJEXT) \
-	src/CutModel.$(OBJEXT) src/CutString.$(OBJEXT) \
+am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigTable.$(OBJEXT) \
+	src/Cut.$(OBJEXT) src/CutModel.$(OBJEXT) \
+	src/CutString.$(OBJEXT) src/FileSystem.$(OBJEXT) \
+	src/GuiConfigurable.$(OBJEXT) src/JoinerConfigurable.$(OBJEXT) \
+	src/Misc.$(OBJEXT) src/Parse.$(OBJEXT) src/Selection.$(OBJEXT) \
+	src/TextConfigurable.$(OBJEXT)
+am__objects_2 = $(am__objects_1) src/AllController.$(OBJEXT) \
+	src/AllModels.$(OBJEXT) src/BoolConfigurable.$(OBJEXT) \
+	src/ConfigPage.$(OBJEXT) src/Controller.$(OBJEXT) \
+	src/CrossSecDB.$(OBJEXT) src/CutController.$(OBJEXT) \
 	src/CutflowAnalyzer.$(OBJEXT) \
 	src/CutflowAnalyzerMaster.$(OBJEXT) \
 	src/FileController.$(OBJEXT) src/FileEntry.$(OBJEXT) \
-	src/FileModel.$(OBJEXT) src/FileSystem.$(OBJEXT) \
-	src/GlobalModel.$(OBJEXT) src/GuiConfigurable.$(OBJEXT) \
+	src/FileModel.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
 	src/Hist.$(OBJEXT) src/Hist2D.$(OBJEXT) \
 	src/HistAnalysis.$(OBJEXT) src/HistAnalyzer.$(OBJEXT) \
 	src/HistAnalyzerMaster.$(OBJEXT) src/HistModel.$(OBJEXT) \
 	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
-	src/JobSorter.$(OBJEXT) src/JoinerConfigurable.$(OBJEXT) \
-	src/JSONAnalyzerMaster.$(OBJEXT) src/JSONAnalyzer.$(OBJEXT) \
-	src/JSONModel.$(OBJEXT) src/Lock.$(OBJEXT) \
-	src/LumiSelection.$(OBJEXT) src/MainController.$(OBJEXT) \
-	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
-	src/MiniFileController.$(OBJEXT) src/Misc.$(OBJEXT) \
-	src/OnTheFlyModel.$(OBJEXT) src/OnTheFlyReweighter.$(OBJEXT) \
-	src/Parse.$(OBJEXT) src/Plot.$(OBJEXT) src/PlotModel.$(OBJEXT) \
-	src/PlotStyleModel.$(OBJEXT) src/Progress.$(OBJEXT) \
-	src/ReweightModel.$(OBJEXT) src/ReweightReader.$(OBJEXT) \
-	src/Runner.$(OBJEXT) src/Selection.$(OBJEXT) \
+	src/JobSorter.$(OBJEXT) src/JSONAnalyzerMaster.$(OBJEXT) \
+	src/JSONAnalyzer.$(OBJEXT) src/JSONModel.$(OBJEXT) \
+	src/Lock.$(OBJEXT) src/LumiSelection.$(OBJEXT) \
+	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
+	src/MiniCutController.$(OBJEXT) \
+	src/MiniFileController.$(OBJEXT) src/OnTheFlyModel.$(OBJEXT) \
+	src/OnTheFlyReweighter.$(OBJEXT) src/Plot.$(OBJEXT) \
+	src/PlotModel.$(OBJEXT) src/PlotStyleModel.$(OBJEXT) \
+	src/Progress.$(OBJEXT) src/ReweightModel.$(OBJEXT) \
+	src/ReweightReader.$(OBJEXT) src/Runner.$(OBJEXT) \
 	src/SelectionDisplay.$(OBJEXT) src/SimpleController.$(OBJEXT) \
-	src/SimpleModel.$(OBJEXT) src/TextConfigurable.$(OBJEXT) \
-	src/Tree.$(OBJEXT)
-am_crombie2_OBJECTS = $(am__objects_1) src/main.$(OBJEXT)
+	src/SimpleModel.$(OBJEXT) src/Tree.$(OBJEXT)
+am_crombie2_OBJECTS = $(am__objects_2) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
-am_crombie2catch_OBJECTS = $(am__objects_1) \
+am_crombie2catch_OBJECTS = $(am__objects_2) \
 	test/test_configurable.$(OBJEXT) test/test_cutstring.$(OBJEXT) \
 	test/test_fileentry.$(OBJEXT) test/test_hist.$(OBJEXT) \
 	test/test_lumiselection.$(OBJEXT) test/test_misc.$(OBJEXT) \
@@ -142,6 +144,9 @@ am_crombie2catch_OBJECTS = $(am__objects_1) \
 	test/utils.$(OBJEXT) test/main.$(OBJEXT)
 crombie2catch_OBJECTS = $(am_crombie2catch_OBJECTS)
 crombie2catch_LDADD = $(LDADD)
+am_crombie2cut_OBJECTS = $(am__objects_1) src/cut.$(OBJEXT)
+crombie2cut_OBJECTS = $(am_crombie2cut_OBJECTS)
+crombie2cut_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -187,8 +192,8 @@ am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	src/$(DEPDIR)/SelectionDisplay.Po \
 	src/$(DEPDIR)/SimpleController.Po src/$(DEPDIR)/SimpleModel.Po \
 	src/$(DEPDIR)/TextConfigurable.Po src/$(DEPDIR)/Tree.Po \
-	src/$(DEPDIR)/main.Po test/$(DEPDIR)/main.Po \
-	test/$(DEPDIR)/test_configurable.Po \
+	src/$(DEPDIR)/cut.Po src/$(DEPDIR)/main.Po \
+	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_cutstring.Po \
 	test/$(DEPDIR)/test_fileentry.Po test/$(DEPDIR)/test_hist.Po \
 	test/$(DEPDIR)/test_lumiselection.Po \
@@ -208,8 +213,10 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = $(crombie2_SOURCES) $(crombie2catch_SOURCES)
-DIST_SOURCES = $(crombie2_SOURCES) $(crombie2catch_SOURCES)
+SOURCES = $(crombie2_SOURCES) $(crombie2catch_SOURCES) \
+	$(crombie2cut_SOURCES)
+DIST_SOURCES = $(crombie2_SOURCES) $(crombie2catch_SOURCES) \
+	$(crombie2cut_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -338,27 +345,34 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-allsrcs = \
+cutsrcs = \
+	$(srcdir)/src/ConfigModel.cpp \
+	$(srcdir)/src/ConfigTable.cpp \
+	$(srcdir)/src/Cut.cpp \
+	$(srcdir)/src/CutModel.cpp \
+	$(srcdir)/src/CutString.cpp \
+	$(srcdir)/src/FileSystem.cpp \
+	$(srcdir)/src/GuiConfigurable.cpp \
+	$(srcdir)/src/JoinerConfigurable.cpp \
+	$(srcdir)/src/Misc.cpp \
+	$(srcdir)/src/Parse.cpp \
+	$(srcdir)/src/Selection.cpp \
+	$(srcdir)/src/TextConfigurable.cpp
+
+allsrcs = $(cutsrcs) \
 	$(srcdir)/src/AllController.cpp \
 	$(srcdir)/src/AllModels.cpp \
 	$(srcdir)/src/BoolConfigurable.cpp \
-	$(srcdir)/src/ConfigModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
-	$(srcdir)/src/ConfigTable.cpp \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/CrossSecDB.cpp \
-	$(srcdir)/src/Cut.cpp \
 	$(srcdir)/src/CutController.cpp \
-	$(srcdir)/src/CutModel.cpp \
-	$(srcdir)/src/CutString.cpp \
 	$(srcdir)/src/CutflowAnalyzer.cpp \
 	$(srcdir)/src/CutflowAnalyzerMaster.cpp \
 	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
-	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
-	$(srcdir)/src/GuiConfigurable.cpp \
 	$(srcdir)/src/Hist.cpp \
 	$(srcdir)/src/Hist2D.cpp \
 	$(srcdir)/src/HistAnalysis.cpp \
@@ -368,7 +382,6 @@ allsrcs = \
 	$(srcdir)/src/HistSplit.cpp \
 	$(srcdir)/src/Job.cpp \
 	$(srcdir)/src/JobSorter.cpp \
-	$(srcdir)/src/JoinerConfigurable.cpp \
 	$(srcdir)/src/JSONAnalyzerMaster.cpp \
 	$(srcdir)/src/JSONAnalyzer.cpp \
 	$(srcdir)/src/JSONModel.cpp \
@@ -378,10 +391,8 @@ allsrcs = \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \
 	$(srcdir)/src/MiniFileController.cpp \
-	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/OnTheFlyModel.cpp \
 	$(srcdir)/src/OnTheFlyReweighter.cpp \
-	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/Plot.cpp \
 	$(srcdir)/src/PlotModel.cpp \
 	$(srcdir)/src/PlotStyleModel.cpp \
@@ -389,11 +400,9 @@ allsrcs = \
 	$(srcdir)/src/ReweightModel.cpp \
 	$(srcdir)/src/ReweightReader.cpp \
 	$(srcdir)/src/Runner.cpp \
-	$(srcdir)/src/Selection.cpp \
 	$(srcdir)/src/SelectionDisplay.cpp \
 	$(srcdir)/src/SimpleController.cpp \
 	$(srcdir)/src/SimpleModel.cpp \
-	$(srcdir)/src/TextConfigurable.cpp \
 	$(srcdir)/src/Tree.cpp
 
 AUTOMAKE_OPTIONS = subdir-objects
@@ -411,6 +420,9 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_testconfig.cpp \
 	$(srcdir)/test/utils.cpp \
 	$(srcdir)/test/main.cpp
+
+crombie2cut_SOURCES = $(cutsrcs) \
+	$(srcdir)/src/cut.cpp
 
 AM_CPPFLAGS = @GTK_CFLAGS@ -I$(srcdir)/include -std=c++17 \
 	`root-config --cflags | sed s/-std=c++11//`
@@ -503,28 +515,40 @@ src/$(am__dirstamp):
 src/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/$(DEPDIR)
 	@: > src/$(DEPDIR)/$(am__dirstamp)
+src/ConfigModel.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/ConfigTable.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/Cut.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/CutModel.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/CutString.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/FileSystem.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/GuiConfigurable.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/JoinerConfigurable.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/Misc.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/Parse.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/Selection.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/TextConfigurable.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/AllController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/AllModels.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/BoolConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/ConfigModel.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/ConfigPage.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
-src/ConfigTable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Controller.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/CrossSecDB.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/Cut.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/CutController.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
-src/CutModel.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
-src/CutString.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/CutflowAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -536,11 +560,7 @@ src/FileEntry.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/FileModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/FileSystem.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/GlobalModel.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
-src/GuiConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Hist.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/Hist2D.$(OBJEXT): src/$(am__dirstamp) \
@@ -557,8 +577,6 @@ src/HistSplit.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Job.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/JobSorter.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
-src/JoinerConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/JSONAnalyzerMaster.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -577,12 +595,10 @@ src/MiniCutController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MiniFileController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/Misc.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/OnTheFlyModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/OnTheFlyReweighter.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/Parse.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/Plot.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/PlotModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -596,15 +612,11 @@ src/ReweightReader.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Runner.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/Selection.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 src/SelectionDisplay.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/SimpleController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/SimpleModel.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
-src/TextConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Tree.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/main.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
@@ -642,6 +654,11 @@ test/main.$(OBJEXT): test/$(am__dirstamp) \
 crombie2catch$(EXEEXT): $(crombie2catch_OBJECTS) $(crombie2catch_DEPENDENCIES) $(EXTRA_crombie2catch_DEPENDENCIES) 
 	@rm -f crombie2catch$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(crombie2catch_OBJECTS) $(crombie2catch_LDADD) $(LIBS)
+src/cut.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+
+crombie2cut$(EXEEXT): $(crombie2cut_OBJECTS) $(crombie2cut_DEPENDENCIES) $(EXTRA_crombie2cut_DEPENDENCIES) 
+	@rm -f crombie2cut$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(crombie2cut_OBJECTS) $(crombie2cut_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -707,6 +724,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/SimpleModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/TextConfigurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Tree.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/cut.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/main.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/main.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_configurable.Po@am__quote@ # am--include-marker
@@ -1069,6 +1087,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/SimpleModel.Po
 	-rm -f src/$(DEPDIR)/TextConfigurable.Po
 	-rm -f src/$(DEPDIR)/Tree.Po
+	-rm -f src/$(DEPDIR)/cut.Po
 	-rm -f src/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/test_configurable.Po
@@ -1183,6 +1202,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/SimpleModel.Po
 	-rm -f src/$(DEPDIR)/TextConfigurable.Po
 	-rm -f src/$(DEPDIR)/Tree.Po
+	-rm -f src/$(DEPDIR)/cut.Po
 	-rm -f src/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/main.Po
 	-rm -f test/$(DEPDIR)/test_configurable.Po

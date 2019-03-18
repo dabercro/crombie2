@@ -36,6 +36,8 @@ namespace crombie2 {
     bool on_key_press_event (GdkEventKey* event) override;
     bool on_key_release_event (GdkEventKey* event) override;
 
+    bool is_cntrl (const GdkEventKey* event) const;
+
     bool cntrl {false};
 
     ConfigPage& current_page ();

@@ -15,13 +15,13 @@ MainWindow::MainWindow ()
   book.show();
   add_page(jobpage);
   add_page(pagemap.at("globals"));
-  add_page(pagemap.at("json"));
-  add_page(pagemap.at("reweight"));
-  add_page(pagemap.at("onthefly"));
-  add_page(pagemap.at("plotstyle"));
-  add_page(pagemap.at("files"));
-  add_page(pagemap.at("plots"));
   add_page(pagemap.at("selections"));
+  add_page(pagemap.at("plots"));
+  add_page(pagemap.at("files"));
+  add_page(pagemap.at("plotstyle"));
+  add_page(pagemap.at("onthefly"));
+  add_page(pagemap.at("reweight"));
+  add_page(pagemap.at("json"));
 
 }
 
@@ -96,7 +96,7 @@ bool MainWindow::on_key_press_event (GdkEventKey* event) {
     }
   }
 
-  if (event->keyval == GDK_KEY_Control_L or event->keyval == GDK_KEY_Meta_L)
+  if (is_cntrl(event))
     cntrl = true;
 
   return Gtk::Window::on_key_press_event(event);
@@ -104,7 +104,7 @@ bool MainWindow::on_key_press_event (GdkEventKey* event) {
 
 
 bool MainWindow::on_key_release_event (GdkEventKey* event) {
-  if (event->keyval == GDK_KEY_Control_L or event->keyval == GDK_KEY_Meta_L)
+  if (is_cntrl(event))
     cntrl = false;
 
   return Gtk::Window::on_key_press_event(event);
@@ -115,5 +115,13 @@ ConfigPage& MainWindow::current_page () {
 
   auto* output = static_cast<ConfigPage*>(book.get_nth_page(book.get_current_page()));
   return *output;
+
+}
+
+
+bool MainWindow::is_cntrl (const GdkEventKey* event) const {
+
+  return (event->keyval == GDK_KEY_Control_L or event->keyval == GDK_KEY_Meta_L or
+          event->keyval == GDK_KEY_Control_R or event->keyval == GDK_KEY_Meta_R);
 
 }

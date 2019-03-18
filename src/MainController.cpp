@@ -51,7 +51,7 @@ MainController::MainController (std::map<std::string, ConfigPage>& pagemap,
   // Reweight histograms
 
   setup_controls(reweightbox, doreweight,
-                 reweight_norm_label, reweight_norm);
+                 reweight_label);
 
   // Submission buttons
 
@@ -122,6 +122,6 @@ void MainController::run (unsigned num_files, const std::string& histoutdir, Pro
     plotmodel, plotstylemodel, progress
   };
   runner.run(histoutdir, docutflow.get_active(), dolumi.get_active(),
-             doreweight.get_active(), reweight_norm.get_active());
+             doreweight.get_active());
 
 }

@@ -9,7 +9,8 @@ ReweightModel::ReweightModel () :
     &plotname,
     &candle,
     &signal,
-    &output
+    &output,
+    &normalize
   } {}
 
 

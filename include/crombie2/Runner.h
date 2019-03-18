@@ -34,7 +34,7 @@ namespace crombie2 {
 
     void run(const std::string& histoutputdir,
              bool docutflow, bool dolumi,
-             bool doreweight, bool re_normalize);
+             bool doreweight);
 
   private:
     unsigned num_files;

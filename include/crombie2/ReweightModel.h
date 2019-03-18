@@ -2,6 +2,7 @@
 #define CROMBIE2_REWEIGHTMODEL_H
 
 
+#include <crombie2/BoolConfigurable.h>
 #include <crombie2/Configurable.h>
 #include <crombie2/SimpleModel.h>
 
@@ -38,6 +39,9 @@ namespace crombie2 {
 
     /// Location of the output file
     Configurable<std::string> output {"Output File", ""};
+
+    /// Normalizes the MC to match Data yields before getting the reweight
+    BoolConfigurable normalize {"Normalize Before Reweight"};
 
   };
 

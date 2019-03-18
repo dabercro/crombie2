@@ -40,7 +40,7 @@ Runner::Runner (unsigned num_files,
 
 void Runner::run (const std::string& histoutputdir,
                   bool docutflow, bool dolumi,
-                  bool doreweight, bool re_normalize) {
+                  bool doreweight) {
 
   auto start = std::chrono::steady_clock::now();
 
@@ -97,7 +97,7 @@ void Runner::run (const std::string& histoutputdir,
     for (auto& selection : cutmodel.selections) {
       std::string cut = selection.cut;
       histanalyzers.get_analysis_histograms(cut).
-        reweight(re_normalize, reweightmodel.output, cut + "_reweight");
+        reweight(reweightmodel.normalize, reweightmodel.output, cut + "_reweight");
     }
   }
 
