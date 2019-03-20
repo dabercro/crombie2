@@ -30,6 +30,7 @@ std::string BoolConfigurable::get () const {
 void BoolConfigurable::set (const std::string& input) {
 
   value = (input.size() and (input != "0"));
+  checkbox.set_active(value);
 
 }
 

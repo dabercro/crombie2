@@ -54,7 +54,7 @@ void ConfigModel::save (const std::string& file_name) {
 }
 
 
-std::string ConfigModel::save () {
+std::string ConfigModel::filename () const {
 
   auto hash_val = hash();
 
@@ -64,6 +64,15 @@ std::string ConfigModel::save () {
   // Put together full name from config_dictionary and name of the config type
   auto file_name = config_directory + "/" + get_name() + "/" + hash().insert(2, "/");
 
+  return file_name;
+
+}
+
+
+std::string ConfigModel::save () {
+
+  auto file_name = filename();
+
   save(file_name);
 
   return file_name;
@@ -71,10 +80,10 @@ std::string ConfigModel::save () {
 }
 
 
-void ConfigModel::save_tag (const std::string& tag, bool overwrite) {
+std::string ConfigModel::save_tag (const std::string& tag, bool overwrite) {
 
   if (not is_valid())
-    return;
+    return "";
 
   auto tag_file_name = config_directory + "/" + get_name() + "/tags/" + tag;
 
@@ -84,15 +93,18 @@ void ConfigModel::save_tag (const std::string& tag, bool overwrite) {
   if (not overwrite and
       FileSystem::exists(tag_file_name) and
       not Misc::confirm(get_name() + ": replace tag " + tag + "?"))
-    return;
+    return "";
 
+  auto file_name = save();
   std::ofstream output {tag_file_name};
-  output << save() << std::endl;
+  output << file_name << std::endl;
+
+  return file_name;
 
 }
 
 
-std::string ConfigModel::hash () {
+std::string ConfigModel::hash () const {
 
   // We'll hold the hash output (long) here to convert to string
   std::stringstream converter;

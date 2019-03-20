@@ -74,6 +74,8 @@ bool MainWindow::on_key_press_event (GdkEventKey* event) {
 
     case GDK_KEY_q:
     case GDK_KEY_Q:
+    case GDK_KEY_w:
+    case GDK_KEY_W:
       Gtk::Main::quit();
       return false;
 

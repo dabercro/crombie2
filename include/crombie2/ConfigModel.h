@@ -48,13 +48,18 @@ namespace crombie2 {
     std::string save ();
 
 
+    /// Gives what the filename would be
+    std::string filename () const;
+
+
     /**
        Saves the configuration in a file
        @param tag The name of the tag
        @param overwrite Set to true if you definitely want to overwrite tag.
               Otherwise, a prompt is displayed to confirm overwriting.
+       @returns The name of the config file
     */
-    void save_tag (const std::string& tag, bool overwrite = false);
+    std::string save_tag (const std::string& tag, bool overwrite = false);
 
 
     /**
@@ -85,7 +90,7 @@ namespace crombie2 {
   private:
 
     /// Make a hash of the serialization
-    std::string hash ();
+    std::string hash () const;
 
 
     /// The location to save all used configurations

@@ -1,3 +1,4 @@
+#include <gtkmm/clipboard.h>
 #include <gtkmm/filechooserdialog.h>
 #include <gtkmm/filefilter.h>
 
@@ -33,6 +34,12 @@ Controller::Controller (ConfigPage& page, ConfigModel& model, bool load_last) :
 
   }
 
+  copyname.set_border_width(5);
+  updatebox.pack_end(copyname, Gtk::PACK_SHRINK);
+
+  copyname.signal_clicked().
+    connect(sigc::mem_fun(*this, &Controller::on_copy_name));
+
   exportbutton.signal_clicked().
     connect(sigc::mem_fun(*this, &Controller::on_export));
   importbutton.signal_clicked().
@@ -56,7 +63,9 @@ const std::string Controller::last_tag = "latest";
 
 void Controller::on_update () {
 
-  model.save_tag(last_tag, true);
+  auto file_name = model.save_tag(last_tag, true);
+  copyname.set_label(file_name);
+  copyname.show();
 
 }
 
@@ -138,5 +147,16 @@ void Controller::update_entries () {
          FileSystem::list(ConfigModel::get_config_dir() + "/" + model.get_name() + "/tags",
                           false))  // The tag directory might not exist (e.g., for a new user)
     tagentry.append_text(file);
+
+}
+
+
+void Controller::on_copy_name () {
+
+  auto clippy = Gtk::Clipboard::get();
+
+  clippy->set_text(copyname.get_label());
+
+  Misc::message("Copied to clipboard.");
 
 }
