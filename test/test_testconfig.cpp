@@ -5,8 +5,8 @@
 
 #include <crombie2/ConfigModel.h>
 
-namespace crombie2 {
-  class TestConfig : public ConfigModel {
+namespace {
+  class TestConfig : public crombie2::ConfigModel {
 
   public:
 
@@ -18,7 +18,7 @@ namespace crombie2 {
 
   private:
 
-    void read (const Types::strings& config) override {
+    void read (const crombie2::Types::strings& config) override {
       info = config.front();
     }
 
@@ -36,8 +36,8 @@ TEST_CASE("TestConfig object") {
 
   test_dir("testconfig");
 
-  crombie2::TestConfig one {"test"};
-  crombie2::TestConfig two {"aa"};
+  TestConfig one {"test"};
+  TestConfig two {"aa"};
 
   REQUIRE(one.get() > two.get());
 
@@ -45,7 +45,7 @@ TEST_CASE("TestConfig object") {
 
   REQUIRE(one.get() == two.get());
 
-  crombie2::TestConfig three {};
+  TestConfig three {};
   two.save_tag("tag", true);
   three.load_tag("tag");
 
