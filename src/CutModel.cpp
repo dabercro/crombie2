@@ -118,6 +118,9 @@ std::string CutModel::expand (const std::string& cutlabel) const {
 
   }
 
+  if (output.back() == '(')
+    output += "1";
+
   output += ")";
 
   return output;

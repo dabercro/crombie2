@@ -81,3 +81,15 @@ TEST_CASE ("Selection") {
   REQUIRE (sel1.control_plot.get() == sel2.control_plot.get());
 
 }
+
+
+TEST_CASE ("Empty") {
+
+  test_dir("emptycut");
+
+  crombie2::CutModel cutmodel {};
+  cutmodel.add_cutstring("unity").add_cut().set("'1'");
+
+  REQUIRE (cutmodel.expand("unity") == "(1)");
+
+}
