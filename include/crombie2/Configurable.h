@@ -13,6 +13,10 @@ namespace crombie2 {
   */
   template<typename C> class Configurable : public TextConfigurable {
   public:
+
+    /// Create a configurable with an empty label
+    Configurable () {}
+
     /**
        Create a configurable with a static label
        @param label The label for this configurable
@@ -62,8 +66,8 @@ namespace crombie2 {
     }
 
   private:
-    std::string name;   ///< Name for the label shown by ConfigTable
-    C value;            ///< Value being held
+    std::string name {};   ///< Name for the label shown by ConfigTable
+    C value {};            ///< Value being held
 
   };
 

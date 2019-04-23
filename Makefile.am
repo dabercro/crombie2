@@ -27,6 +27,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
+	$(srcdir)/src/FitConfig.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/Hist.cpp \
 	$(srcdir)/src/Hist2D.cpp \

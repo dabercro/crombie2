@@ -57,7 +57,7 @@ namespace {
     // Match the outer <> and the first {} pair you come to
     std::regex expand_op {"<(.*?)\\{([^\\}]*)\\}(.*?)>(?!>)"};
     std::smatch matches;
-    while(std::regex_search(output, matches, expand_op)) {
+    while (std::regex_search(output, matches, expand_op)) {
       std::string begin = matches[1];
       auto tokens = Misc::tokenize(matches[2]);
       std::string end = matches[3];
