@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <algorithm>
 #include <regex>
 
@@ -25,13 +27,13 @@ void FitConfig::resize_guesses () {
 
   const std::string formula = entry.get_chars(0, -1);
 
-  std::regex index_counter {"\\[(\\d+\\)]"};
-  std::smatch match {};
+  std::regex index_counter {"\\[(\\d+)\\]"};
 
   unsigned max_index = 0;
 
-  while (std::regex_search(formula, match, index_counter))
-    max_index = std::max(max_index, unsigned(std::stoi(match.str()) + 1));
+  for (auto match = std::sregex_iterator(formula.begin(), formula.end(), index_counter);
+       match != std::sregex_iterator(); ++match)
+    max_index = std::max(max_index, unsigned(std::stoi((*match)[1].str()) + 1));
 
   if (max_index > guesses.size()) {
     for (unsigned index = guesses.size(); index < max_index; index++)

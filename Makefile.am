@@ -72,6 +72,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_configurable.cpp \
 	$(srcdir)/test/test_cutstring.cpp \
 	$(srcdir)/test/test_fileentry.cpp \
+	$(srcdir)/test/test_fit.cpp \
 	$(srcdir)/test/test_hist.cpp \
 	$(srcdir)/test/test_lumiselection.cpp \
 	$(srcdir)/test/test_misc.cpp \
