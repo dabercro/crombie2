@@ -13,7 +13,7 @@ namespace crombie2 {
   */
   class MiniCutController {
   public:
-    explicit MiniCutController(RemoveWrapper<CutString>& cutstring);
+    explicit MiniCutController (RemoveWrapper<CutString>& cutstring);
 
     void draw (Gtk::Box& page);
 

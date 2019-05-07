@@ -2,6 +2,14 @@
 #include <mutex>
 #include <thread>
 
+#include <crombie2/FileModel.h>
+#include <crombie2/JSONModel.h>
+#include <crombie2/JobSorter.h>
+#include <crombie2/OnTheFlyModel.h>
+#include <crombie2/PlotModel.h>
+#include <crombie2/Progress.h>
+#include <crombie2/ReweightModel.h>
+
 #include <crombie2/CutflowAnalyzerMaster.h>
 #include <crombie2/HistAnalyzerMaster.h>
 #include <crombie2/JSONAnalyzerMaster.h>
@@ -12,24 +20,10 @@ using namespace crombie2;
 
 
 Runner::Runner (unsigned num_files,
-                const CutModel& cutmodel,
-                const FileModel& filemodel,
-                const GlobalModel& globalmodel,
-                const JSONModel& jsonmodel,
-                const ReweightModel& reweightmodel,
-                const OnTheFlyModel& ontheflymodel,
-                const PlotModel& plotmodel,
-                const PlotStyleModel& plotstylemodel,
+                const AllModels& allmodels,
                 Progress& progress) :
   num_files {num_files},
-  cutmodel {cutmodel},
-  filemodel {filemodel},
-  globalmodel {globalmodel},
-  jsonmodel {jsonmodel},
-  reweightmodel {reweightmodel},
-  ontheflymodel {ontheflymodel},
-  plotmodel {plotmodel},
-  plotstylemodel {plotstylemodel},
+  allmodels {allmodels},
   progress {progress}
 {
 
@@ -38,13 +32,20 @@ Runner::Runner (unsigned num_files,
 }
 
 
-void Runner::run (const std::string& histoutputdir,
-                  bool docutflow, bool dolumi,
-                  bool doreweight) {
+void Runner::run (const RunConfig& config) {
 
   auto start = std::chrono::steady_clock::now();
 
   // Create all of the jobs
+
+  FileModel filemodel {allmodels.get<FileModel>()};
+  GlobalModel globalmodel {allmodels.get<GlobalModel>()};
+  CutModel cutmodel {allmodels.get<CutModel>()};
+  JSONModel jsonmodel {allmodels.get<JSONModel>()};
+  ReweightModel reweightmodel {allmodels.get<ReweightModel>()};
+  PlotModel plotmodel {allmodels.get<PlotModel>()};
+  OnTheFlyModel ontheflymodel {allmodels.get<OnTheFlyModel>()};
+  PlotStyleModel plotstylemodel {allmodels.get<PlotStyleModel>()};
 
   for (auto& group : filemodel.filegroups) {
     for (auto& entry : group.files) {
@@ -57,19 +58,19 @@ void Runner::run (const std::string& histoutputdir,
 
   // Create histograms
   HistAnalyzerMaster histanalyzers {
-    doreweight or histoutputdir.size(),
-    histoutputdir, jobs,
+    config.doreweight or config.dirs.at("plots").size(),
+    config.dirs.at("plots"), jobs,
     plotmodel, cutmodel,
     reweightmodel, globalmodel,
     plotstylemodel, ontheflymodel
   };
 
   CutflowAnalyzerMaster cutflowanalyzers {
-    docutflow, jobs, cutmodel
+    config.docutflow, jobs, cutmodel
   };
 
   JSONAnalyzerMaster jsonanalyzers {
-    dolumi, jobs, jsonmodel
+    config.dolumi, jobs, jsonmodel
   };
 
   // Run jobs
@@ -87,13 +88,13 @@ void Runner::run (const std::string& histoutputdir,
 
   // Output histograms stuff
   histanalyzers.output();
-  if (docutflow)
+  if (config.docutflow)
     cutflowanalyzers.output();
-  if (dolumi)
+  if (config.dolumi)
     jsonanalyzers.output();
 
   // Reweight stuff
-  if (doreweight) {
+  if (config.doreweight) {
     for (auto& selection : cutmodel.selections) {
       std::string cut = selection.cut;
       histanalyzers.get_analysis_histograms(cut).

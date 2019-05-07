@@ -12,8 +12,6 @@ namespace crombie2 {
 
     std::vector<Configurable<double>> guesses {};
 
-  private:
-
     void resize_guesses ();
 
   };

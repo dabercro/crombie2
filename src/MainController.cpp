@@ -14,6 +14,7 @@ MainController::MainController (std::map<std::string, ConfigPage>& pagemap,
   globalcontrol {pagemap.at("globals"), globalmodel},
   jsoncontrol {pagemap.at("json"), jsonmodel},
   reweightcontrol {pagemap.at("reweight"), reweightmodel},
+  datacardcontrol {pagemap.at("datacards"), datacardmodel},
   ontheflycontrol {pagemap.at("onthefly"), ontheflymodel},
   plotstylecontrol {pagemap.at("plotstyle"), plotstylemodel},
   filecontrol {pagemap.at("files"), filemodel},
@@ -31,14 +32,14 @@ MainController::MainController (std::map<std::string, ConfigPage>& pagemap,
   setup_controls(histsbox, dohists, histslabel, histoutput);
 
   dohists.set_active(true);
-
   histoutput.set_text(Misc::shell("printf $(date +%y%m%d)"));
-  histoutput.show();
 
   // Datacard making
 
   setup_controls(datacardbox, dodatacard,
                  datacardlabel, datacardoutput);
+
+  datacardoutput.set_text(Misc::shell("printf $(date +%y%m%d)"));
 
   // Cutflow making
 
@@ -93,14 +94,31 @@ void MainController::on_submit_job () {
     ? plotstylemodel.outplotdir.get() + "/" + histoutput.get_text()
     : "";
 
+  std::string datadir = dodatacard.get_active()
+    ? datacardmodel.outdir.get() + "/" + datacardoutput.get_text()
+    : "";
+
+  // Returns if it's okay to run
+  auto checkdir = [] (const std::string& dir) {
+    return not dir.size() or FileSystem::confirm_overwrite(dir);
+  };
+
   // Check if everything is okay
   if (globalmodel.is_valid() and
       ontheflymodel.is_valid() and
       cutmodel.is_valid() and
-      (not outdir.size() or FileSystem::confirm_overwrite(outdir))
+      checkdir(outdir) and
+      checkdir(datadir)
       ) {
 
-    std::thread thread {[num_files, &progress, outdir, this] () { run(num_files, outdir, progress); }};
+    std::thread thread {
+      [num_files, &progress, outdir, datadir, this] () {
+        run(num_files,
+            {{"plots", outdir},
+             {"datacards", datadir}},
+            progress);
+      }
+    };
     thread.detach();
 
   }
@@ -110,18 +128,21 @@ void MainController::on_submit_job () {
 }
 
 
-void MainController::run (unsigned num_files, const std::string& histoutdir, Progress& progress) {
+void MainController::run (unsigned num_files,
+                          const std::map<std::string, std::string>& dirs,
+                          Progress& progress) {
 
+  auto& histoutdir = dirs.at("plots");
   if (histoutdir.size())
     allmodels.save(histoutdir + "/models.cnf");
 
   Runner runner {
-    num_files, cutmodel, filemodel,
-    globalmodel, jsonmodel,
-    reweightmodel, ontheflymodel,
-    plotmodel, plotstylemodel, progress
+    num_files, allmodels, progress
   };
-  runner.run(histoutdir, docutflow.get_active(), dolumi.get_active(),
-             doreweight.get_active());
+  runner.run({dirs,
+        docutflow.get_active(),
+        dolumi.get_active(),
+        doreweight.get_active()
+        });
 
 }

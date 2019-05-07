@@ -24,6 +24,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/CutController.cpp \
 	$(srcdir)/src/CutflowAnalyzer.cpp \
 	$(srcdir)/src/CutflowAnalyzerMaster.cpp \
+	$(srcdir)/src/DatacardModel.cpp \
 	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
@@ -47,6 +48,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/MainWindow.cpp \
 	$(srcdir)/src/MiniCutController.cpp \
 	$(srcdir)/src/MiniFileController.cpp \
+	$(srcdir)/src/MiniFitController.cpp \
 	$(srcdir)/src/OnTheFlyModel.cpp \
 	$(srcdir)/src/OnTheFlyReweighter.cpp \
 	$(srcdir)/src/Plot.cpp \

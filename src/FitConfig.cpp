@@ -14,18 +14,14 @@ FitConfig::FitConfig (const std::string& expr) :
 {
 
   // Hacky way to make sure the entry is filled
-  get_widget();
   resize_guesses();
-
-  // Change in the future too
-  entry.signal_changed().connect(sigc::mem_fun(*this, &FitConfig::resize_guesses));
 
 }
 
 
 void FitConfig::resize_guesses () {
 
-  const std::string formula = entry.get_chars(0, -1);
+  const std::string formula = get();
 
   std::regex index_counter {"\\[(\\d+)\\]"};
 

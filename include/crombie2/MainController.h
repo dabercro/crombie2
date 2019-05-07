@@ -6,6 +6,7 @@
 
 #include <crombie2/AllController.h>
 #include <crombie2/CutController.h>
+#include <crombie2/DatacardModel.h>
 #include <crombie2/FileController.h>
 #include <crombie2/JSONModel.h>
 #include <crombie2/GlobalModel.h>
@@ -34,6 +35,9 @@ namespace crombie2 {
     ReweightModel reweightmodel {};
     SimpleController reweightcontrol;
 
+    DatacardModel datacardmodel {};
+    SimpleController datacardcontrol;
+
     OnTheFlyModel ontheflymodel {};
     ListController<ReweightReader> ontheflycontrol;
 
@@ -54,7 +58,7 @@ namespace crombie2 {
     ConfigPage& jobpage;
 
     void on_submit_job ();
-    void run (unsigned num_files, const std::string& histoutdir, Progress& progress);
+    void run (unsigned num_files, const std::map<std::string, std::string>& dirs, Progress& progress);
 
     std::list<Progress> progresses {};
 

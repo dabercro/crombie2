@@ -4,14 +4,9 @@
 
 #include <queue>
 
-#include <crombie2/CutModel.h>
-#include <crombie2/FileModel.h>
-#include <crombie2/JSONModel.h>
+#include <crombie2/AllModels.h>
 #include <crombie2/JobSorter.h>
-#include <crombie2/OnTheFlyModel.h>
-#include <crombie2/PlotModel.h>
-#include <crombie2/Progress.h>
-#include <crombie2/ReweightModel.h>
+#include <crombie2/RunConfig.h>
 
 
 namespace crombie2 {
@@ -22,31 +17,14 @@ namespace crombie2 {
   class Runner {
   public:
     Runner (unsigned num_files,
-            const CutModel& cutmodel,
-            const FileModel& filemodel,
-            const GlobalModel& globalmodel,
-            const JSONModel& jsonmodel,
-            const ReweightModel& reweightmodel,
-            const OnTheFlyModel& ontheflymodel,
-            const PlotModel& plotmodel,
-            const PlotStyleModel& plotstylemodel,
+            const AllModels& allmodels,
             Progress& progress);
 
-    void run(const std::string& histoutputdir,
-             bool docutflow, bool dolumi,
-             bool doreweight);
+    void run (const RunConfig& config);
 
   private:
     unsigned num_files;
-    CutModel cutmodel;
-    FileModel filemodel;
-    GlobalModel globalmodel;
-    JSONModel jsonmodel;
-    ReweightModel reweightmodel;
-    OnTheFlyModel ontheflymodel;
-    PlotModel plotmodel;
-    PlotStyleModel plotstylemodel;
-
+    AllModels allmodels;
     Progress& progress;
 
     std::vector<Job> jobs {};

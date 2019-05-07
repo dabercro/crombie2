@@ -24,6 +24,12 @@ namespace crombie2 {
       throw std::logic_error(key + " requested as wrong type!");
     }
 
+    template <class M>
+    const M& get () const {
+      auto* ptr = dynamic_cast<M*>(models.at(M().get_name()));
+      return *ptr;
+    }
+
   protected:
     void read (const Types::strings& config) override;
 
