@@ -2,17 +2,12 @@
 #include <mutex>
 #include <thread>
 
-#include <crombie2/FileModel.h>
-#include <crombie2/JSONModel.h>
-#include <crombie2/JobSorter.h>
-#include <crombie2/OnTheFlyModel.h>
-#include <crombie2/PlotModel.h>
-#include <crombie2/Progress.h>
-#include <crombie2/ReweightModel.h>
 
 #include <crombie2/CutflowAnalyzerMaster.h>
+#include <crombie2/FileModel.h>
 #include <crombie2/HistAnalyzerMaster.h>
 #include <crombie2/JSONAnalyzerMaster.h>
+#include <crombie2/Progress.h>
 #include <crombie2/Runner.h>
 
 
