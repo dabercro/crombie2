@@ -31,7 +31,7 @@ FileController::FileController (ConfigPage& page, FileModel& model) :
   page.box().pack_end(crosssecbox, Gtk::PACK_SHRINK);
   crosssecbox.show();
   xs_db.load_tag(Controller::last_tag);
-  xs_db.configs.draw(crosssecbox);
+  xs_db.draw(crosssecbox);
 
   redraw();
 

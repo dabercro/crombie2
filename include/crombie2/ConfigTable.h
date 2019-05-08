@@ -34,6 +34,10 @@ namespace crombie2 {
     */
     void add_conf (GuiConfigurable* conf);
 
+  protected:
+    /// Copy another ConfigTable to this one
+    void copy (const ConfigTable& other);
+
   private:
     /**
        A Gtk::Table must have at least one row.

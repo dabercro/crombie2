@@ -19,6 +19,15 @@ ConfigTable::ConfigTable (const std::initializer_list<GuiConfigurable*>& configs
 }
 
 
+void ConfigTable::copy (const ConfigTable& other) {
+
+  auto iter = other.get_confs().begin();
+  for (auto* configurable : get_confs())
+    configurable->set((*iter++)->get());
+
+}
+
+
 const std::vector<GuiConfigurable*>& ConfigTable::get_confs () const {
 
   return confs;

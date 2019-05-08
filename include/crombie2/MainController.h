@@ -6,7 +6,7 @@
 
 #include <crombie2/AllController.h>
 #include <crombie2/CutController.h>
-#include <crombie2/DatacardModel.h>
+#include <crombie2/DatacardController.h>
 #include <crombie2/FileController.h>
 #include <crombie2/JSONModel.h>
 #include <crombie2/GlobalModel.h>
@@ -36,7 +36,7 @@ namespace crombie2 {
     SimpleController reweightcontrol;
 
     DatacardModel datacardmodel {};
-    SimpleController datacardcontrol;
+    DatacardController datacardcontrol;
 
     OnTheFlyModel ontheflymodel {};
     ListController<ReweightReader> ontheflycontrol;

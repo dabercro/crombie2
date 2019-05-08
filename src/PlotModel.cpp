@@ -21,7 +21,7 @@ void PlotModel::read (const Types::strings& config) {
     if (std::regex_match(line, matches, expr)) {
       auto& plot = add();
       for (unsigned imatch = 0; imatch < 5; imatch++)
-        plot.table.get_confs()[imatch]->set(matches[imatch + 1]);
+        plot.get_confs()[imatch]->set(matches[imatch + 1]);
 
       plot.data_var.set(matches[7]);
       plot.mc_var.set(matches[8]);

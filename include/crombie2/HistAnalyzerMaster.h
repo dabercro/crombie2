@@ -27,6 +27,9 @@ namespace crombie2 {
     /// Outputs histograms into the plots directory if outputdir was set
     void output () const;
 
+    /// Creates datacard
+    void dumpdatacard (const std::string& datadir) const;
+
   private:
     /// Place to dump plots. Can be blank.
     const std::string outputdir;

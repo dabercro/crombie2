@@ -9,13 +9,13 @@ SimpleController::SimpleController (ConfigPage& page, SimpleModel& model) :
   simplemodel {model}
 {
 
-  simplemodel.configs.draw(page.box());
+  simplemodel.draw(page.box());
 
 }
 
 
 void SimpleController::redraw () {
 
-  simplemodel.configs.redraw();
+  simplemodel.redraw();
 
 }

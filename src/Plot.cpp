@@ -5,13 +5,12 @@ using namespace crombie2;
 
 
 Plot::Plot (const Plot& other) :
-  name {other.name},
-  nbins {other.nbins},
-  min {other.min},
-  max {other.max},
-  label {other.label},
-  data_var {other.data_var},
-  mc_var {other.mc_var} {}
+  Plot()
+{
+
+  copy(other);
+
+}
 
 
 std::string Plot::expr (FileGroup::FileType type) const {

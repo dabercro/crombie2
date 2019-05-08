@@ -9,10 +9,12 @@ using namespace crombie2;
 
 
 ReweightReader::ReweightReader (const ReweightReader& other) :
-  expr {other.expr},
-  cut {other.cut},
-  file {other.file},
-  hist {other.hist} {}
+  ReweightReader()
+{
+
+  copy(other);
+
+}
 
 
 std::string ReweightReader::extract_index () const {

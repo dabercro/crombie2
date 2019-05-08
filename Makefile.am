@@ -24,6 +24,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/CutController.cpp \
 	$(srcdir)/src/CutflowAnalyzer.cpp \
 	$(srcdir)/src/CutflowAnalyzerMaster.cpp \
+	$(srcdir)/src/DatacardController.cpp \
 	$(srcdir)/src/DatacardModel.cpp \
 	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileEntry.cpp \

@@ -68,7 +68,7 @@ namespace crombie2 {
         boxes.back().show();
       }
       auto& box = boxes.back();
-      item.table.draw(box);
+      item.draw(box);
 
       box.pack_start(item.remove, Gtk::PACK_SHRINK);
       item.remove.show();

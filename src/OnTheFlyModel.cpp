@@ -38,7 +38,7 @@ void OnTheFlyModel::read (const Types::strings& config) {
 
       auto& reweight = add();
       for (unsigned imatch = 0; imatch < 4; imatch++)
-        reweight.table.get_confs()[imatch]->set(matches[imatch + 1]);
+        reweight.get_confs()[imatch]->set(matches[imatch + 1]);
 
     }
   }

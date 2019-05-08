@@ -53,7 +53,9 @@ void Runner::run (const RunConfig& config) {
 
   // Create histograms
   HistAnalyzerMaster histanalyzers {
-    config.doreweight or config.dirs.at("plots").size(),
+    config.doreweight
+      or config.dirs.at("plots").size()
+      or config.dirs.at("datacards").size(),
     config.dirs.at("plots"), jobs,
     plotmodel, cutmodel,
     reweightmodel, globalmodel,
@@ -83,6 +85,10 @@ void Runner::run (const RunConfig& config) {
 
   // Output histograms stuff
   histanalyzers.output();
+
+  // Create datacards
+  histanalyzers.dumpdatacard(config.dirs.at("datacards"));
+
   if (config.docutflow)
     cutflowanalyzers.output();
   if (config.dolumi)

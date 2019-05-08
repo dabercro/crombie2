@@ -9,11 +9,13 @@
 
 
 namespace crombie2 {
-  class ReweightReader {
+  class ReweightReader : public ConfigTable {
 
   public:
 
-    ReweightReader () = default;
+    ReweightReader () : ConfigTable {
+      &expr, &cut, &file, &hist
+    } {}
     ReweightReader (const ReweightReader& other);
     virtual ~ReweightReader () = default;
 
@@ -21,10 +23,6 @@ namespace crombie2 {
     Configurable<std::string> cut {"Cut", "1"};
     Configurable<std::string> file {"File Name", ""};
     Configurable<std::string> hist {"Hist Name", ""};
-
-    ConfigTable table {
-      &expr, &cut, &file, &hist
-    };
 
     std::string extract_index () const;
     std::string extract_expr () const;

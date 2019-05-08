@@ -6,9 +6,11 @@
 
 
 namespace crombie2 {
-  class Plot {
+  class Plot : public ConfigTable {
   public:
-    Plot () = default;
+    Plot () : ConfigTable {
+      &name, &nbins, &min, &max, &label, &data_var, &mc_var
+    } {}
     Plot (const Plot& other);
     virtual ~Plot () = default;
 
@@ -19,9 +21,6 @@ namespace crombie2 {
     Configurable<std::string> label {"X Label", "[GeV]"};
     Configurable<std::string> data_var {"Data Variable", ""};
     Configurable<std::string> mc_var {"MC Variable", ""};
-    ConfigTable table {
-      &name, &nbins, &min, &max, &label, &data_var, &mc_var
-    };
 
     std::string expr (FileGroup::FileType type) const;
 

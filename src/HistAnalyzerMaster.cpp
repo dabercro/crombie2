@@ -418,3 +418,10 @@ HistAnalysis HistAnalyzerMaster::get_analysis_histograms (const std::string& sel
     : HistAnalysis(std::move(data), std::move(mc));
 
 }
+
+
+void HistAnalyzerMaster::dumpdatacard (const std::string& datadir) const {
+
+  
+
+}

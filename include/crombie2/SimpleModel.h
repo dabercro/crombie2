@@ -12,18 +12,11 @@ namespace crombie2 {
 
      This is an abstract class which does not implement get_name()
   */
-  class SimpleModel : public ConfigModel {
+  class SimpleModel : public ConfigModel, public ConfigTable {
   public:
     /// Constructor which passes arguments to the internal ConfigTable
     SimpleModel (std::initializer_list<GuiConfigurable*> initialize,
                  const bool horizontal = false);
-
-    /// A ConfigTable which is initialized by the child classes
-    ConfigTable configs;
-
-  protected:
-    /// Copy another SimpleModel to this one
-    void copy (const SimpleModel& other);
 
   private:
 
