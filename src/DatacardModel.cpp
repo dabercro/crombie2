@@ -14,6 +14,8 @@ std::string DatacardModel::get_name () const {
 
 void DatacardModel::read (const Types::strings& config) {
 
+  hists.clear();
+
   enum class mode {
     PLOTS,
     UNCERTAINTIES

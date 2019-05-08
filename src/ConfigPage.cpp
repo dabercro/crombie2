@@ -82,3 +82,11 @@ void ConfigPage::scroll (Scroll direction) {
   bar.first->set_value(location + step);
 
 }
+
+
+void ConfigPage::draw (Gtk::Widget& widget) {
+
+  internalbox.pack_start(widget, Gtk::PACK_SHRINK);
+  widget.show();
+
+}

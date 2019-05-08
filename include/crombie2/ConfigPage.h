@@ -42,6 +42,8 @@ namespace crombie2 {
 
     void scroll (Scroll direction);
 
+    void draw (Gtk::Widget& widget);
+
   private:
 
     std::string label;               ///< The label for the tab in the MainWindow

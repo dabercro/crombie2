@@ -24,8 +24,17 @@ namespace crombie2 {
 
     Gtk::Label plotlabel {"Plots"};
     Gtk::VBox plots {};
+    Gtk::Button plotbutton {"Add Plot"};
     Gtk::Label unclabel {"Uncertainties"};
     Gtk::VBox uncertainties {};
+    Gtk::Button uncbutton {"Add Uncertainty"};
+
+    std::list<Gtk::HBox> plotboxes {};
+
+    void draw_plot (RemoveWrapper<SelectionPlot>& plot);
+
+    void on_add_plot ();
+    void on_add_unc ();
 
   };
 }

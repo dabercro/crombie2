@@ -9,7 +9,8 @@ namespace crombie2 {
   class SelectionPlot : public ConfigTable {
   public:
     SelectionPlot () : ConfigTable {
-      &selection, &plot
+      {&selection, &plot},
+      true
     } {}
     SelectionPlot (const SelectionPlot& other) : SelectionPlot() { copy(other); }
     virtual ~SelectionPlot () = default;

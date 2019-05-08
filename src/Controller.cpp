@@ -122,7 +122,12 @@ void Controller::on_import () {
   filter.set_name("Config Files");
   filter.add_pattern("*.cnf");
 
+  Gtk::FileFilter allfilter {};
+  allfilter.set_name("All Files");
+  allfilter.add_pattern("*");
+
   dialog.add_filter(filter);
+  dialog.add_filter(allfilter);
 
   if (dialog.run() == Gtk::RESPONSE_OK) {
     filename = dialog.get_filename();

@@ -55,11 +55,8 @@ void CutController::redraw () {
 
 void CutController::add_cut (RemoveWrapper<CutString>& cutstring) {
 
-  if (((numcuts++) % 1) == 0) {
-    cutboxes.emplace_back();
-    page.box().pack_start(cutboxes.back(), Gtk::PACK_SHRINK);
-    cutboxes.back().show();
-  }
+  if (((numcuts++) % 1) == 0)
+    page.draw(cutboxes.emplace_back());
 
   auto& mini = minicontrollers.emplace_back(cutstring);
   mini.draw(cutboxes.back());
