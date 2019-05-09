@@ -146,3 +146,19 @@ std::string FileModel::get_datacard_name (const std::string& legend) const {
   throw std::logic_error{std::string("Searching for unknown legend ") + legend};
 
 }
+
+
+std::vector<std::string> FileModel::get_datacard_names (FileGroup::FileType type) const {
+
+  std::vector<std::string> output {};
+
+  for (auto& group : filegroups) {
+    if (group.type == type) {
+      for (auto& entry : group.entries)
+        output.emplace_back(entry.datacard);
+    }
+  }
+
+  return output;
+
+}

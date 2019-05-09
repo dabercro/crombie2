@@ -426,6 +426,24 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
                                        const DatacardModel& model,
                                        const FileModel& filemodel) const {
 
+  // Maps "bin" (region), then process, then Hist
+  std::map<std::string, std::map<std::string, Hist>> bin_proc_hist {};
+
+  for (auto& hist : model.hists) {
+    auto region = hist.selection.get();
+
+    auto key = region + "_" + hist.plot.get();
+
+    for (auto& infile : histmodels.at(key)) {
+
+      auto histsplit = scaled_split(infile);
+
+      for (auto& hist : histsplit.get_hists())
+        bin_proc_hist[region][filemodel.get_datacard_name(hist.first)].add(hist.second);
+
+    }
+  }
+
   FileSystem::mkdirs(datadir);
 
   std::ofstream datacard {datadir + "/datacard.txt"};
@@ -435,13 +453,23 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
            << "kmax   *   number of systematics (automatic)" << std::endl
            << "------------------------------" << std::endl
            << "shapes * * plots.root $PROCESS_$CHANNEL $PROCESS_$CHANNEL_$SYSTEMATIC" << std::endl
-           << "------------------------------" << std::endl;
+           << "------------------------------" << std::endl
+           << std::left << std::setw(25) << "bin";
 
-  for (auto& hist : model.hists) {
-    auto key = hist.selection.get() + "_" + hist.plot.get();
-
-    
-
+  std::vector<double> bin_contents {};
+  for (auto& bin : bin_proc_hist) {
+    double value = 0;
+    for (auto& data : filemodel.get_datacard_names(FileGroup::FileType::DATA))
+      value += bin.second.at(data).integral();
+    bin_contents.push_back(value);
+    datacard << std::left << std::setw(15) << bin.first;
   }
+
+  datacard << std::endl << std::left << std::setw(25) << "observation";
+
+  for (auto value : bin_contents)
+    datacard << std::left << std::setw(15) << std::setprecision(1) << std::fixed << value;
+
+  datacard << std::endl << "------------------------------" << std::endl;
 
 }

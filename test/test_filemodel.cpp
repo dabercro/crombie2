@@ -35,4 +35,8 @@ TEST_CASE("Test File Model legend to datacard") {
   REQUIRE(model.get_datacard_name("Data") == "data_obs");
   REQUIRE(model.get_datacard_name("TT") == "ttbar");
 
+  REQUIRE(model.get_datacard_names(crombie2::FileGroup::FileType::DATA) == std::vector<std::string>{"data_obs"});
+  REQUIRE(model.get_datacard_names(crombie2::FileGroup::FileType::MC) == std::vector<std::string>{"zj", "zb", "ttbar"});
+  REQUIRE(model.get_datacard_names(crombie2::FileGroup::FileType::SIGNAL) == std::vector<std::string>{});
+
 }

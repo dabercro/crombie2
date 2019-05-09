@@ -34,6 +34,9 @@ namespace crombie2 {
     /// Gets the datacard entry based on the legend entry
     std::string get_datacard_name (const std::string& legend) const;
 
+    /// Get the datacard process names for a given type of file
+    std::vector<std::string> get_datacard_names (FileGroup::FileType type) const;
+
   private:
 
     void read (const Types::strings& config) override;
