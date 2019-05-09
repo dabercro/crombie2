@@ -31,6 +31,9 @@ namespace crombie2 {
     /// Converts strings to FileGroup::FileType enums for reading
     static const std::map<std::string, FileGroup::FileType> str_to_type;
 
+    /// Gets the datacard entry based on the legend entry
+    std::string get_datacard_name (const std::string& legend) const;
+
   private:
 
     void read (const Types::strings& config) override;

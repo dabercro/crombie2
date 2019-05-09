@@ -1,5 +1,7 @@
+#include <fstream>
 #include <iomanip>
 
+#include <crombie2/DatacardModel.h>
 #include <crombie2/FileSystem.h>
 #include <crombie2/HistAnalyzerMaster.h>
 #include <crombie2/Lock.h>
@@ -420,8 +422,26 @@ HistAnalysis HistAnalyzerMaster::get_analysis_histograms (const std::string& sel
 }
 
 
-void HistAnalyzerMaster::dumpdatacard (const std::string& datadir) const {
+void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
+                                       const DatacardModel& model,
+                                       const FileModel& filemodel) const {
 
-  
+  FileSystem::mkdirs(datadir);
+
+  std::ofstream datacard {datadir + "/datacard.txt"};
+
+  datacard << "imax   *   number of channels" << std::endl
+           << "jmax   *   number of backgrounds" << std::endl
+           << "kmax   *   number of systematics (automatic)" << std::endl
+           << "------------------------------" << std::endl
+           << "shapes * * plots.root $PROCESS_$CHANNEL $PROCESS_$CHANNEL_$SYSTEMATIC" << std::endl
+           << "------------------------------" << std::endl;
+
+  for (auto& hist : model.hists) {
+    auto key = hist.selection.get() + "_" + hist.plot.get();
+
+    
+
+  }
 
 }

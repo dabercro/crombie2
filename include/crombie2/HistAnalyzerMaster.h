@@ -2,6 +2,8 @@
 #define CROMBIE2_HISTANALYZERMASTER_H
 
 
+#include <crombie2/DatacardModel.h>
+#include <crombie2/FileModel.h>
 #include <crombie2/HistAnalysis.h>
 #include <crombie2/HistModel.h>
 #include <crombie2/PlotModel.h>
@@ -28,7 +30,9 @@ namespace crombie2 {
     void output () const;
 
     /// Creates datacard
-    void dumpdatacard (const std::string& datadir) const;
+    void dumpdatacard (const std::string& datadir,
+                       const DatacardModel& model,
+                       const FileModel& filemodel) const;
 
   private:
     /// Place to dump plots. Can be blank.

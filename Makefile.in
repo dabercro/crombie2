@@ -140,11 +140,12 @@ crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
 am_crombie2catch_OBJECTS = $(am__objects_2) \
 	test/test_configurable.$(OBJEXT) test/test_cutstring.$(OBJEXT) \
-	test/test_fileentry.$(OBJEXT) test/test_fit.$(OBJEXT) \
-	test/test_hist.$(OBJEXT) test/test_lumiselection.$(OBJEXT) \
-	test/test_misc.$(OBJEXT) test/test_parser.$(OBJEXT) \
-	test/test_simplemodel.$(OBJEXT) test/test_testconfig.$(OBJEXT) \
-	test/utils.$(OBJEXT) test/main.$(OBJEXT)
+	test/test_fileentry.$(OBJEXT) test/test_filemodel.$(OBJEXT) \
+	test/test_fit.$(OBJEXT) test/test_hist.$(OBJEXT) \
+	test/test_lumiselection.$(OBJEXT) test/test_misc.$(OBJEXT) \
+	test/test_parser.$(OBJEXT) test/test_simplemodel.$(OBJEXT) \
+	test/test_testconfig.$(OBJEXT) test/utils.$(OBJEXT) \
+	test/main.$(OBJEXT)
 crombie2catch_OBJECTS = $(am_crombie2catch_OBJECTS)
 crombie2catch_LDADD = $(LDADD)
 am_crombie2cut_OBJECTS = $(am__objects_1) src/crombie2cut.$(OBJEXT)
@@ -201,7 +202,8 @@ am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	src/$(DEPDIR)/crombie2cut.Po src/$(DEPDIR)/main.Po \
 	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_cutstring.Po \
-	test/$(DEPDIR)/test_fileentry.Po test/$(DEPDIR)/test_fit.Po \
+	test/$(DEPDIR)/test_fileentry.Po \
+	test/$(DEPDIR)/test_filemodel.Po test/$(DEPDIR)/test_fit.Po \
 	test/$(DEPDIR)/test_hist.Po \
 	test/$(DEPDIR)/test_lumiselection.Po \
 	test/$(DEPDIR)/test_misc.Po test/$(DEPDIR)/test_parser.Po \
@@ -287,8 +289,6 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EXEEXT = @EXEEXT@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -309,9 +309,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -430,6 +427,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_configurable.cpp \
 	$(srcdir)/test/test_cutstring.cpp \
 	$(srcdir)/test/test_fileentry.cpp \
+	$(srcdir)/test/test_filemodel.cpp \
 	$(srcdir)/test/test_fit.cpp \
 	$(srcdir)/test/test_hist.cpp \
 	$(srcdir)/test/test_lumiselection.cpp \
@@ -663,6 +661,8 @@ test/test_cutstring.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_fileentry.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
+test/test_filemodel.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
 test/test_fit.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_hist.$(OBJEXT): test/$(am__dirstamp) \
@@ -766,6 +766,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_configurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_cutstring.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_fileentry.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_filemodel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_fit.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_hist.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_lumiselection.Po@am__quote@ # am--include-marker
@@ -1135,6 +1136,7 @@ distclean: distclean-am
 	-rm -f test/$(DEPDIR)/test_configurable.Po
 	-rm -f test/$(DEPDIR)/test_cutstring.Po
 	-rm -f test/$(DEPDIR)/test_fileentry.Po
+	-rm -f test/$(DEPDIR)/test_filemodel.Po
 	-rm -f test/$(DEPDIR)/test_fit.Po
 	-rm -f test/$(DEPDIR)/test_hist.Po
 	-rm -f test/$(DEPDIR)/test_lumiselection.Po
@@ -1256,6 +1258,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f test/$(DEPDIR)/test_configurable.Po
 	-rm -f test/$(DEPDIR)/test_cutstring.Po
 	-rm -f test/$(DEPDIR)/test_fileentry.Po
+	-rm -f test/$(DEPDIR)/test_filemodel.Po
 	-rm -f test/$(DEPDIR)/test_fit.Po
 	-rm -f test/$(DEPDIR)/test_hist.Po
 	-rm -f test/$(DEPDIR)/test_lumiselection.Po

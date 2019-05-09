@@ -41,6 +41,7 @@ void Runner::run (const RunConfig& config) {
   PlotModel plotmodel {allmodels.get<PlotModel>()};
   OnTheFlyModel ontheflymodel {allmodels.get<OnTheFlyModel>()};
   PlotStyleModel plotstylemodel {allmodels.get<PlotStyleModel>()};
+  DatacardModel datacardmodel {allmodels.get<DatacardModel>()};
 
   for (auto& group : filemodel.filegroups) {
     for (auto& entry : group.files) {
@@ -87,7 +88,7 @@ void Runner::run (const RunConfig& config) {
   histanalyzers.output();
 
   // Create datacards
-  histanalyzers.dumpdatacard(config.dirs.at("datacards"));
+  histanalyzers.dumpdatacard(config.dirs.at("datacards"), datacardmodel, filemodel);
 
   if (config.docutflow)
     cutflowanalyzers.output();

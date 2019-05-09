@@ -130,3 +130,19 @@ const std::map<std::string, FileGroup::FileType> FileModel::str_to_type {
   {"MC", FileGroup::FileType::MC},
   {"SIGNAL", FileGroup::FileType::SIGNAL}
 };
+
+
+std::string FileModel::get_datacard_name (const std::string& legend) const {
+
+  for (auto& group : filegroups) {
+
+    for (auto& entry : group.entries) {
+      if (legend == entry.legend.get())
+        return entry.datacard.get();
+    }
+
+  }
+
+  throw std::logic_error{std::string("Searching for unknown legend ") + legend};
+
+}
