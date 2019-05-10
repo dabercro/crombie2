@@ -18,7 +18,7 @@ void DatacardModel::read (const Types::strings& config) {
 
   enum class mode {
     PLOTS,
-    UNCERTAINTIES
+    UNC
   };
 
   mode currentmode {mode::PLOTS};
@@ -28,15 +28,23 @@ void DatacardModel::read (const Types::strings& config) {
   while (iterator != config.end()) {
     auto& line = *(iterator++);
     if (line == "UNC") {
-      currentmode = mode::UNCERTAINTIES;
+      currentmode = mode::UNC;
       continue;
     }    
+
     auto tokens = Misc::tokenize(line);
     if (currentmode == mode::PLOTS) {
       auto& newhist = hists.append();
       newhist.selection.set(tokens[0]);
       newhist.plot.set(tokens[1]);
     }
+    else if (currentmode == mode::UNC) {
+      auto& newflat = flats.append();
+      newflat.name.set(tokens[0]);
+      newflat.shape.set(tokens[1]);
+      newflat.value.set(tokens[2]);
+    }
+
   }
 
 }
@@ -54,5 +62,33 @@ std::list<std::string> DatacardModel::serialize () const {
   output.emplace_back("UNC");
 
   return output;
+
+}
+
+
+bool DatacardModel::is_valid (const CutModel& cuts, const PlotModel& plots, bool batch) const {
+
+  for (auto& hist : hists) {
+    try {
+      bool found = false;
+      auto plotname = hist.plot.get();
+      for (auto& plot : plots.list) {
+        if (plotname == plot.name.get()) {
+          found = true;
+          break;
+        }
+      }
+      if (not found) {
+        if (not batch)
+          Misc::message("Can't find plot", std::string("Plot \"") + plotname + "\" does not seem to be configured");
+        return false;
+      }
+    }
+    catch (const std::exception& e) {
+      return false;
+    }
+  }
+
+  return true;
 
 }

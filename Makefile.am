@@ -74,6 +74,7 @@ crombie2_SOURCES = $(allsrcs) \
 crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_configurable.cpp \
 	$(srcdir)/test/test_cutstring.cpp \
+	$(srcdir)/test/test_datacardmodel.cpp \
 	$(srcdir)/test/test_fileentry.cpp \
 	$(srcdir)/test/test_filemodel.cpp \
 	$(srcdir)/test/test_fit.cpp \

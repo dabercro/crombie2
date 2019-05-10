@@ -461,6 +461,8 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   FileSystem::mkdirs(datadir);
 
   std::ofstream datacard {datadir + "/datacard.txt"};
+  auto histfilename = datadir + "/plots.root";
+  TFile histfile {histfilename.data(), "RECREATE"};
 
   datacard << "imax   *   number of channels" << std::endl
            << "jmax   *   number of backgrounds" << std::endl
@@ -502,6 +504,9 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
     for (auto& bin : bin_proc_hist) {
       auto& hist = bin.second.at(proc);
       columns.push_back({bin.first, proc, mcnum, hist.integral()});
+
+      auto histname = proc + "_" + bin.first;
+      histfile.WriteTObject(hist.roothist(), histname.data());
     }
     ++mcnum;
   }
@@ -521,5 +526,7 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   mcline("process", &MCColumn::processname);
   mcline("process", &MCColumn::processnum);
   mcline("rate", &MCColumn::obs);
+
+  datacard << std::endl << "------------------------------" << std::endl;
 
 }

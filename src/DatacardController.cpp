@@ -15,13 +15,21 @@ DatacardController::DatacardController (ConfigPage& page, DatacardModel& model) 
   page.draw(plotlabel);
 
   for (auto& hist : datacardmodel.hists)
-    draw_plot(hist);
+    draw_config(hist, plots);
 
   page.draw(plots);
   page.draw(plotbutton);
 
+  for (auto& flat : datacardmodel.flats)
+    draw_config(flat, uncertainties);
+
+  page.draw(uncertainties);
+  page.draw(uncbutton);
+
   plotbutton.signal_clicked().
     connect(sigc::mem_fun(*this, &DatacardController::on_add_plot));
+  uncbutton.signal_clicked().
+    connect(sigc::mem_fun(*this, &DatacardController::on_add_unc));
 
 }
 
@@ -30,35 +38,24 @@ void DatacardController::redraw () {
 
   plotboxes.clear();
 
-  for (auto& hist : datacardmodel.hists)
-    draw_plot(hist);
+  for (auto& conf : datacardmodel.hists)
+    draw_config(conf, plots);
+
+  for (auto& conf : datacardmodel.flats)
+    draw_config(conf, uncertainties);
 
 }
 
 
 void DatacardController::on_add_plot () {
 
-  draw_plot(datacardmodel.hists.append());
+  draw_config(datacardmodel.hists.append(), plots);
 
 }
 
 
-void DatacardController::draw_plot (RemoveWrapper<SelectionPlot>& plot) {
+void DatacardController::on_add_unc () {
 
-  auto& box = plotboxes.emplace_back();
-
-  plot.draw(box);
-  box.pack_start(plot.remove, Gtk::PACK_SHRINK);
-  plot.remove.show();
-
-  plot.also_remove([&box, this] () {
-      plotboxes.remove_if([&box] (auto& ele) {
-          return &box == &ele;
-        });
-    });
-
-  plots.pack_start(box, Gtk::PACK_SHRINK);
-
-  box.show();
+  draw_config(datacardmodel.flats.append(), uncertainties);
 
 }
