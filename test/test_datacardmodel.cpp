@@ -27,3 +27,37 @@ TEST_CASE("Datacard Model validity") {
   REQUIRE(data.is_valid(cuts, plots, true) == true);
 
 }
+
+TEST_CASE("Datacard Model has region, plot") {
+
+  crombie2::DatacardModel data {};
+  auto& unc = data.flats.append();
+
+  // Empty means that all signals and processes are valid
+  REQUIRE(unc.has_process("proc") == true);
+  REQUIRE(unc.has_region("signal") == true);
+
+  unc.regions.set("signal1");
+
+  REQUIRE(unc.has_process("proc") == true);
+  REQUIRE(unc.has_region("signal") == false);
+
+  unc.regions.set("signal");
+  unc.procs.set("proc");
+
+  REQUIRE(unc.has_process("proc") == true);
+  REQUIRE(unc.has_region("signal") == true);
+
+  unc.regions.set("test,signal");
+  unc.procs.set("test,proc");
+
+  REQUIRE(unc.has_process("proc") == true);
+  REQUIRE(unc.has_region("signal") == true);
+
+  unc.regions.set("test,signal1");
+  unc.procs.set("test,proc1");
+
+  REQUIRE(unc.has_process("proc") == false);
+  REQUIRE(unc.has_region("signal") == false);
+
+}

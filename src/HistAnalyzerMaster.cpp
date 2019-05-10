@@ -6,6 +6,7 @@
 #include <crombie2/FileSystem.h>
 #include <crombie2/HistAnalyzerMaster.h>
 #include <crombie2/Lock.h>
+#include <crombie2/Misc.h>
 
 #include "TCanvas.h"
 #include "THStack.h"
@@ -86,9 +87,16 @@ void HistAnalyzerMaster::output () const {
            ? datahists
            : signalhists);
 
-      for (auto& entry : histsplit.get_hists())
-        outmap[entry.first].add(entry.second);
+      for (auto& entry : histsplit.get_hists()) {
+        auto& outhist = outmap[entry.first];
+        outhist.add(entry.second);
+      }
 
+    }
+
+    if (Misc::split(key_output.first, "_").front() == plotstylemodel.blind.get()) {
+      for (auto& datahist : datahists)
+        datahist.second.scale(0);
     }
 
     Lock lock {};
@@ -440,6 +448,9 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
                                        const DatacardModel& model,
                                        const FileModel& filemodel) const {
 
+  if (not datadir.size())
+    return;
+
   // Maps "bin" (region), then process, then Hist
   std::map<std::string, std::map<std::string, Hist>> bin_proc_hist {};
 
@@ -464,6 +475,8 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   auto histfilename = datadir + "/plots.root";
   TFile histfile {histfilename.data(), "RECREATE"};
 
+  // Standard header
+
   datacard << "imax   *   number of channels" << std::endl
            << "jmax   *   number of backgrounds" << std::endl
            << "kmax   *   number of systematics (automatic)" << std::endl
@@ -472,11 +485,18 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
            << "------------------------------" << std::endl
            << std::left << std::setw(25) << "bin";
 
+  // Get the columns for the data yields
+
   std::vector<double> bin_contents {};
   for (auto& bin : bin_proc_hist) {
     double value = 0;
-    for (auto& data : filemodel.get_datacard_names(FileGroup::FileType::DATA))
-      value += bin.second.at(data).integral();
+    for (auto& data : filemodel.get_datacard_names(FileGroup::FileType::DATA)) {
+      auto& hist = bin.second.at(data);
+      value += hist.integral();
+
+      auto histname = data + "_" + bin.first;
+      histfile.WriteTObject(hist.roothist(), histname.data());
+    }
     bin_contents.push_back(value);
     datacard << std::left << std::setw(15) << bin.first;
   }
@@ -487,6 +507,8 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
     datacard << std::left << std::setw(15) << std::setprecision(1) << std::fixed << value;
 
   datacard << std::endl << "------------------------------" << std::endl;
+
+  // Get the columns for the MC yields
 
   std::vector<MCColumn> columns {};
   int signalnum = 0;
@@ -528,5 +550,24 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   mcline("rate", &MCColumn::obs);
 
   datacard << std::endl << "------------------------------" << std::endl;
+
+  // Now make the uncertainties
+
+  for (auto& unc : model.flats) {
+
+    datacard << std::left << std::setw(15) << unc.name.get()
+             << std::left << std::setw(10) << unc.shape.get();
+
+    for (auto& column : columns) {
+
+      datacard << std::left << std::setw(15)
+               << (unc.has_process(column.processname) and unc.has_region(column.bin) ?
+                   unc.value.get() : "-");
+
+    }
+
+    datacard << std::endl;
+
+  }
 
 }

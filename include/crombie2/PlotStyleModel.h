@@ -36,6 +36,8 @@ namespace crombie2 {
     /// Determine if the plots are normalized or not
     BoolConfigurable normalize {"Normalize Plots"};
 
+    Configurable<std::string> blind {"Blind Channel", ""};
+
   };
 
 }

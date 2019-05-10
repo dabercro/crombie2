@@ -34,6 +34,12 @@ namespace crombie2 {
     */
     void add_conf (GuiConfigurable* conf);
 
+    /// Give the configurable values in a one-line string
+    std::string dump () const;
+
+    /// Given a space-separated line, loads the values into the table
+    void fill (const std::string& line) const;
+
   protected:
     /// Copy another ConfigTable to this one
     void copy (const ConfigTable& other);

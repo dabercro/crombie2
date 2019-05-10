@@ -3,6 +3,7 @@
 
 
 #include <crombie2/ConfigTable.h>
+#include <crombie2/Configurable.h>
 
 
 namespace crombie2 {
@@ -12,7 +13,7 @@ namespace crombie2 {
       {&name, &shape, &value, &regions, &procs},
       true
     } {}
-    FlatUncertainty (const FlatUncertainty& other) : FlatUncertainty() { copy(other); }
+    FlatUncertainty (const FlatUncertainty& other);
     virtual ~FlatUncertainty () = default;
 
     Configurable<std::string> name {"Name", ""};
@@ -21,6 +22,9 @@ namespace crombie2 {
 
     Configurable<std::string> regions {"Regions", ""};
     Configurable<std::string> procs {"Processes", ""};
+
+    bool has_process (const std::string& proc) const;
+    bool has_region (const std::string& region) const;
 
   };
 }

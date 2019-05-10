@@ -32,17 +32,15 @@ void DatacardModel::read (const Types::strings& config) {
       continue;
     }    
 
-    auto tokens = Misc::tokenize(line);
-    if (currentmode == mode::PLOTS) {
-      auto& newhist = hists.append();
-      newhist.selection.set(tokens[0]);
-      newhist.plot.set(tokens[1]);
-    }
-    else if (currentmode == mode::UNC) {
-      auto& newflat = flats.append();
-      newflat.name.set(tokens[0]);
-      newflat.shape.set(tokens[1]);
-      newflat.value.set(tokens[2]);
+    switch (currentmode) {
+    case mode::PLOTS:
+      hists.append().fill(line);
+      break;
+    case mode::UNC:
+      flats.append().fill(line);
+      break;
+    default:
+      throw;
     }
 
   }
@@ -57,9 +55,12 @@ std::list<std::string> DatacardModel::serialize () const {
   output.emplace_back(outdir);
 
   for (auto& hist : hists)
-    output.emplace_back(hist.selection.get() + " " + hist.plot.get());
+    output.emplace_back(hist.dump());
 
   output.emplace_back("UNC");
+
+  for (auto& unc : flats)
+    output.emplace_back(unc.dump());
 
   return output;
 

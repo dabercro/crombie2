@@ -1,4 +1,5 @@
 #include <crombie2/ConfigTable.h>
+#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
@@ -86,5 +87,35 @@ void ConfigTable::add_conf (GuiConfigurable* conf) {
 guint ConfigTable::size () const {
 
   return static_cast<guint>(std::max(confs.size(), 1ul));
+
+}
+
+
+std::string ConfigTable::dump () const {
+
+  std::string output {};
+
+  for (auto* conf : confs) {
+    auto conf_str = conf->get();
+
+    if (not conf_str.size())
+      conf_str = "_";
+
+    output += conf_str + ' ';
+  }
+
+  output.pop_back();
+
+  return output;
+
+}
+
+
+void ConfigTable::fill (const std::string& line) const {
+
+  unsigned index {0};
+
+  for (auto& val : Misc::tokenize(line))
+    confs.at(index++)->set(val == "_" ? "" : val);
 
 }
