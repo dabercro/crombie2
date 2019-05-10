@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iomanip>
+#include <type_traits>
 
 #include <crombie2/DatacardModel.h>
 #include <crombie2/FileSystem.h>
@@ -422,6 +423,19 @@ HistAnalysis HistAnalyzerMaster::get_analysis_histograms (const std::string& sel
 }
 
 
+namespace {
+
+  class MCColumn {
+  public:
+    std::string bin;
+    std::string processname;
+    int processnum;
+    double obs;
+  };
+
+}
+
+
 void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
                                        const DatacardModel& model,
                                        const FileModel& filemodel) const {
@@ -471,5 +485,41 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
     datacard << std::left << std::setw(15) << std::setprecision(1) << std::fixed << value;
 
   datacard << std::endl << "------------------------------" << std::endl;
+
+  std::vector<MCColumn> columns {};
+  int signalnum = 0;
+  int mcnum = 1;
+
+  for (auto& proc : filemodel.get_datacard_names(FileGroup::FileType::SIGNAL)) {
+    for (auto& bin : bin_proc_hist) {
+      auto& hist = bin.second.at(proc);
+      columns.push_back({bin.first, proc, signalnum, hist.integral()});
+    }
+    --signalnum;
+  }
+
+  for (auto& proc : filemodel.get_datacard_names(FileGroup::FileType::MC)) {
+    for (auto& bin : bin_proc_hist) {
+      auto& hist = bin.second.at(proc);
+      columns.push_back({bin.first, proc, mcnum, hist.integral()});
+    }
+    ++mcnum;
+  }
+
+  auto mcline = [&datacard, &columns] (std::string head, auto MCColumn::*offset) {
+    datacard << std::left << std::setw(25) << head;
+    for (auto& column : columns) {
+      datacard << std::left << std::setw(15);
+      if constexpr (std::is_same<decltype(column.*offset), double>::value)
+        datacard << std::setprecision(1) << std::fixed;
+      datacard << column.*offset;
+    }
+    datacard << std::endl;
+  };
+
+  mcline("bin", &MCColumn::bin);
+  mcline("process", &MCColumn::processname);
+  mcline("process", &MCColumn::processnum);
+  mcline("rate", &MCColumn::obs);
 
 }
