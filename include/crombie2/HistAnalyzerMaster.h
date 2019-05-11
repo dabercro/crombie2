@@ -6,7 +6,6 @@
 #include <crombie2/FileModel.h>
 #include <crombie2/HistAnalysis.h>
 #include <crombie2/HistModel.h>
-#include <crombie2/PlotModel.h>
 #include <crombie2/PlotStyleModel.h>
 #include <crombie2/ReweightModel.h>
 

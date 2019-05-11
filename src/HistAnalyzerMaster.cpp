@@ -1,8 +1,6 @@
 #include <fstream>
 #include <iomanip>
-#include <type_traits>
 
-#include <crombie2/DatacardModel.h>
 #include <crombie2/FileSystem.h>
 #include <crombie2/HistAnalyzerMaster.h>
 #include <crombie2/Lock.h>

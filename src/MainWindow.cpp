@@ -1,7 +1,6 @@
 #include <gtkmm/main.h>
 
 #include <crombie2/MainWindow.h>
-#include <crombie2/Misc.h>
 
 using namespace crombie2;
 

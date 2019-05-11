@@ -12,7 +12,6 @@
 #include <crombie2/GlobalModel.h>
 #include <crombie2/ListController.h>
 #include <crombie2/OnTheFlyModel.h>
-#include <crombie2/PlotModel.h>
 #include <crombie2/PlotStyleModel.h>
 #include <crombie2/Progress.h>
 #include <crombie2/ReweightModel.h>
