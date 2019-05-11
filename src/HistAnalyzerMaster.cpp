@@ -68,18 +68,24 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
         for (auto& hist : datacardmodel.hists) {
           if (hist.selection.get() + "_" + hist.plot.get() == output_file) {
             for (auto& unc : datacardmodel.flats) {
-              for (auto dir : {Misc::uncdir::UP, Misc::uncdir::DOWN}) {
-                auto unc_output_file = selection.get_name() + "_"
-                  + unc.name.get() + (dir == Misc::uncdir::UP ? "Up" : "Down") + "_"
-                  + plot.name.get();
 
-                histmodels[unc_output_file].
-                  insert({job.get_entry().name.get(),
-                        {job, globalmodel, plot,
-                            Misc::uncertify(branchlist, cutstr, unc.name, dir),
-                            Misc::uncertify(branchlist, weightstr, unc.name, dir),
-                            onthefly}}).
-                  first->second.add_job(job);
+              if (unc.shape.get() == "shape" and unc.has_region(hist.selection)) {
+
+                for (auto dir : {Misc::uncdir::UP, Misc::uncdir::DOWN}) {
+
+                  auto unc_output_file = selection.get_name() + "_"
+                    + unc.name.get() + (dir == Misc::uncdir::UP ? "Up" : "Down") + "_"
+                    + plot.name.get();
+
+                  histmodels[unc_output_file].
+                    insert({job.get_entry().name.get(),
+                          {job, globalmodel, plot,
+                              Misc::uncertify(branchlist, cutstr, unc.name, dir),
+                              Misc::uncertify(branchlist, weightstr, unc.name, dir),
+                              onthefly}}).
+                    first->second.add_job(job);
+
+                }
 
               }
             }
@@ -487,10 +493,10 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   // Maps "bin" (region), then process, then Hist
   std::map<std::string, std::map<std::string, Hist>> bin_proc_hist {};
 
-  for (auto& hist : datacardmodel.hists) {
-    auto region = hist.selection.get();
+  // Adds the region histograms to our bin_proc_hist
+  auto add_region = [&bin_proc_hist, &filemodel, this] (const std::string& region, const std::string& plot) {
 
-    auto key = region + "_" + hist.plot.get();
+    auto key = region + "_" + plot;
 
     for (auto& infile : histmodels.at(key)) {
 
@@ -500,13 +506,44 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
         bin_proc_hist[region][filemodel.get_datacard_name(hist.first)].add(hist.second);
 
     }
+
+  };
+
+  for (auto& hist : datacardmodel.hists) {
+    auto plot = hist.plot.get();
+    auto region = hist.selection.get();
+
+    add_region(region, plot);
+
+    for (auto& unc : datacardmodel.flats) {
+      if (unc.shape.get() == "shape" and unc.has_region(hist.selection)) {
+        for (auto dir : {Misc::uncdir::UP, Misc::uncdir::DOWN}) {
+          auto unc_region = region + "_"
+            + unc.name.get() + (dir == Misc::uncdir::UP ? "Up" : "Down");
+
+          add_region(unc_region, plot);
+        }
+      }
+    }
   }
 
   FileSystem::mkdirs(datadir);
 
-  std::ofstream datacard {datadir + "/datacard.txt"};
+  // Make the histograms in the .root file
+
   auto histfilename = datadir + "/plots.root";
   TFile histfile {histfilename.data(), "RECREATE"};
+
+  for (auto& bin : bin_proc_hist) {
+    for (auto& proc : bin.second) {
+      auto histname = proc.first + "_" + bin.first;
+      histfile.WriteTObject(proc.second.roothist(), histname.data());
+    }
+  }
+
+  histfile.Close();
+
+  std::ofstream datacard {datadir + "/datacard.txt"};
 
   // Standard header
 
@@ -521,17 +558,15 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   // Get the columns for the data yields
 
   std::vector<double> bin_contents {};
-  for (auto& bin : bin_proc_hist) {
+  for (auto& hist : datacardmodel.hists) {
+    auto& bin = bin_proc_hist.at(hist.selection);
     double value = 0;
     for (auto& data : filemodel.get_datacard_names(FileGroup::FileType::DATA)) {
-      auto& hist = bin.second.at(data);
+      auto& hist = bin.at(data);
       value += hist.integral();
-
-      auto histname = data + "_" + bin.first;
-      histfile.WriteTObject(hist.roothist(), histname.data());
     }
     bin_contents.push_back(value);
-    datacard << std::left << std::setw(15) << bin.first;
+    datacard << std::left << std::setw(15) << hist.selection.get();
   }
 
   datacard << std::endl << std::left << std::setw(25) << "observation";
@@ -548,20 +583,19 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   int mcnum = 1;
 
   for (auto& proc : filemodel.get_datacard_names(FileGroup::FileType::SIGNAL)) {
-    for (auto& bin : bin_proc_hist) {
-      auto& hist = bin.second.at(proc);
-      columns.push_back({bin.first, proc, signalnum, hist.integral()});
+    for (auto& hist : datacardmodel.hists) {
+      auto& bin = bin_proc_hist.at(hist.selection);
+      auto& prochist = bin.at(proc);
+      columns.push_back({hist.selection, proc, signalnum, prochist.integral()});
     }
     --signalnum;
   }
 
   for (auto& proc : filemodel.get_datacard_names(FileGroup::FileType::MC)) {
-    for (auto& bin : bin_proc_hist) {
-      auto& hist = bin.second.at(proc);
-      columns.push_back({bin.first, proc, mcnum, hist.integral()});
-
-      auto histname = proc + "_" + bin.first;
-      histfile.WriteTObject(hist.roothist(), histname.data());
+    for (auto& hist : datacardmodel.hists) {
+      auto& bin = bin_proc_hist.at(hist.selection);
+      auto& prochist = bin.at(proc);
+      columns.push_back({hist.selection, proc, mcnum, prochist.integral()});
     }
     ++mcnum;
   }
