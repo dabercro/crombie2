@@ -59,7 +59,7 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
 
         histmodels[output_file].
           insert({job.get_entry().name.get(),
-                  {job, globalmodel, plot, cutstr, weightstr, onthefly}}).
+                  {job, globalmodel, plot, plot.expr(job.get_group().type), cutstr, weightstr, onthefly}}).
           first->second.add_job(job);
 
         // If the selection is in the "shape" uncertainies, add a histogram
@@ -78,9 +78,10 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
                   histmodels[unc_output_file].
                     insert({job.get_entry().name.get(),
                           {job, globalmodel, plot,
-                              Misc::uncertify(branchlist, cutstr, unc.name, dir),
-                              Misc::uncertify(branchlist, weightstr, unc.name, dir),
-                              onthefly}}).
+                           Misc::uncertify(branchlist, plot.expr(job.get_group().type), unc.name, dir),
+                           Misc::uncertify(branchlist, cutstr, unc.name, dir),
+                           Misc::uncertify(branchlist, weightstr, unc.name, dir),
+                           onthefly}}).
                     first->second.add_job(job);
 
                 }

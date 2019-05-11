@@ -12,6 +12,7 @@ namespace crombie2 {
     HistModel (Job& job,
                const GlobalModel& globalmodel,
                const Plot& plot,
+               const std::string& var,
                const std::string& cutstr,
                const std::string& weightstr,
                const OnTheFlyModel& reweight);
