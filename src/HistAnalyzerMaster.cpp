@@ -23,18 +23,24 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
                                         const ReweightModel& reweightmodel,
                                         const GlobalModel& globalmodel,
                                         const PlotStyleModel& plotstylemodel,
+                                        const DatacardModel& datacardmodel,
                                         const OnTheFlyModel& onthefly) :
   outputdir {outdir},
   plotmodel {plotmodel},
   cutmodel {cutmodel},
   reweightmodel {reweightmodel},
   globalmodel {globalmodel},
-  plotstylemodel {plotstylemodel}
+  plotstylemodel {plotstylemodel},
+  datacardmodel {datacardmodel}
 {
 
   // If no output directory, we are not going to make hist analyzers
   if (not dohists)
     return;
+
+  std::set<std::string> branchlist {};
+  for (auto& branch : Misc::split(Misc::shell(globalmodel.brancheslist), "\n"))
+    branchlist.emplace(branch);
 
   for (auto& job : jobs) {
     auto& entry = job.get_entry();
@@ -48,10 +54,38 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
       for (auto& selection : cutmodel.selections) {
         auto output_file = selection.get_name() + "_" + plot.name.get();
 
+        auto cutstr = Misc::nminus1(plot.expr(job.get_group().type), cutmodel.expand(selection.cut));
+        auto weightstr = cutmodel.expand(job.get_group().type == FileGroup::FileType::DATA
+                                         ? selection.data_weight
+                                         : selection.mc_weight);
+
         histmodels[output_file].
           insert({job.get_entry().name.get(),
-                  {job, globalmodel, plot, cutmodel, selection, onthefly}}).
+                  {job, globalmodel, plot, cutstr, weightstr, onthefly}}).
           first->second.add_job(job);
+
+        // If the selection is in the "shape" uncertainies, add a histogram
+        for (auto& hist : datacardmodel.hists) {
+          if (hist.selection.get() + "_" + hist.plot.get() == output_file) {
+            for (auto& unc : datacardmodel.flats) {
+              for (auto dir : {Misc::uncdir::UP, Misc::uncdir::DOWN}) {
+                auto unc_output_file = selection.get_name() + "_"
+                  + unc.name.get() + (dir == Misc::uncdir::UP ? "Up" : "Down") + "_"
+                  + plot.name.get();
+
+                histmodels[unc_output_file].
+                  insert({job.get_entry().name.get(),
+                        {job, globalmodel, plot,
+                            Misc::uncertify(branchlist, cutstr, unc.name, dir),
+                            Misc::uncertify(branchlist, weightstr, unc.name, dir),
+                            onthefly}}).
+                  first->second.add_job(job);
+
+              }
+            }
+          }
+        }
+
       }
     }
   }
@@ -445,7 +479,6 @@ namespace {
 
 
 void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
-                                       const DatacardModel& model,
                                        const FileModel& filemodel) const {
 
   if (not datadir.size())
@@ -454,7 +487,7 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   // Maps "bin" (region), then process, then Hist
   std::map<std::string, std::map<std::string, Hist>> bin_proc_hist {};
 
-  for (auto& hist : model.hists) {
+  for (auto& hist : datacardmodel.hists) {
     auto region = hist.selection.get();
 
     auto key = region + "_" + hist.plot.get();
@@ -553,7 +586,7 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
 
   // Now make the uncertainties
 
-  for (auto& unc : model.flats) {
+  for (auto& unc : datacardmodel.flats) {
 
     datacard << std::left << std::setw(15) << unc.name.get()
              << std::left << std::setw(10) << unc.shape.get();

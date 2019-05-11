@@ -1,6 +1,8 @@
 #ifndef CROMBIE2_MISC_H
 #define CROMBIE2_MISC_H
 
+#include <set>
+
 #include <crombie2/Types.h>
 
 namespace crombie2 {
@@ -44,6 +46,14 @@ namespace crombie2 {
 
     /// Displays messages for user
     void message (const std::string& primary, const std::string& secondary = "");
+
+
+    enum class uncdir {
+      UP,
+      DOWN
+    };
+
+    std::string uncertify (const std::set<std::string>& branchlist, const std::string& expr, const std::string& unc, uncdir dir);
 
   }
 }

@@ -22,6 +22,7 @@ namespace crombie2 {
                         const ReweightModel& reweightmodel,
                         const GlobalModel& globalmodel,
                         const PlotStyleModel& plotstylemodel,
+                        const DatacardModel& datacardmodel,
                         const OnTheFlyModel& onthefly);
 
     HistAnalysis get_analysis_histograms (const std::string& selection) const;
@@ -31,7 +32,6 @@ namespace crombie2 {
 
     /// Creates datacard
     void dumpdatacard (const std::string& datadir,
-                       const DatacardModel& model,
                        const FileModel& filemodel) const;
 
   private:
@@ -48,6 +48,7 @@ namespace crombie2 {
     const ReweightModel& reweightmodel;
     const GlobalModel& globalmodel;
     const PlotStyleModel& plotstylemodel;
+    const DatacardModel& datacardmodel;
 
     /// Maps the input file name to type
     Types::map<FileGroup::FileType> types {};

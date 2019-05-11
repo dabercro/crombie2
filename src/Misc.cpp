@@ -81,6 +81,7 @@ std::string Misc::nminus1 (const std::string& var, const std::string& cut) {
 
 }
 
+
 void Misc::message (const std::string& primary, const std::string& secondary) {
 
   Gtk::MessageDialog window (primary);
@@ -89,5 +90,24 @@ void Misc::message (const std::string& primary, const std::string& secondary) {
     window.set_secondary_text(secondary);
 
   window.run();
+
+}
+
+
+std::string Misc::uncertify (const std::set<std::string>& branchlist, const std::string& expr, const std::string& unc, uncdir dir) {
+
+  std::string output {expr};
+
+  std::string dirstr = (dir == uncdir::UP ? "Up" : "Down");
+
+  for (auto& branch : branchlist) {
+    auto newbranch = branch + "_" + unc + dirstr;
+    if (branchlist.find(newbranch) != branchlist.end()) {
+      std::regex regexpr {std::string("\\b") + branch + "\\b"};
+      output = std::regex_replace(output, regexpr, newbranch);
+    }
+  }
+
+  return output;
 
 }

@@ -146,8 +146,8 @@ am_crombie2catch_OBJECTS = $(am__objects_2) \
 	test/test_fit.$(OBJEXT) test/test_hist.$(OBJEXT) \
 	test/test_lumiselection.$(OBJEXT) test/test_misc.$(OBJEXT) \
 	test/test_parser.$(OBJEXT) test/test_simplemodel.$(OBJEXT) \
-	test/test_testconfig.$(OBJEXT) test/utils.$(OBJEXT) \
-	test/main.$(OBJEXT)
+	test/test_shell.$(OBJEXT) test/test_testconfig.$(OBJEXT) \
+	test/utils.$(OBJEXT) test/main.$(OBJEXT)
 crombie2catch_OBJECTS = $(am_crombie2catch_OBJECTS)
 crombie2catch_LDADD = $(LDADD)
 am_crombie2cut_OBJECTS = $(am__objects_1) src/crombie2cut.$(OBJEXT)
@@ -211,6 +211,7 @@ am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	test/$(DEPDIR)/test_hist.Po \
 	test/$(DEPDIR)/test_lumiselection.Po \
 	test/$(DEPDIR)/test_misc.Po test/$(DEPDIR)/test_parser.Po \
+	test/$(DEPDIR)/test_shell.Po \
 	test/$(DEPDIR)/test_simplemodel.Po \
 	test/$(DEPDIR)/test_testconfig.Po test/$(DEPDIR)/utils.Po
 am__mv = mv -f
@@ -440,6 +441,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_misc.cpp \
 	$(srcdir)/test/test_parser.cpp \
 	$(srcdir)/test/test_simplemodel.cpp \
+	$(srcdir)/test/test_shell.cpp \
 	$(srcdir)/test/test_testconfig.cpp \
 	$(srcdir)/test/utils.cpp \
 	$(srcdir)/test/main.cpp
@@ -685,6 +687,8 @@ test/test_parser.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_simplemodel.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
+test/test_shell.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
 test/test_testconfig.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/utils.$(OBJEXT): test/$(am__dirstamp) \
@@ -784,6 +788,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_lumiselection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_misc.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_parser.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_shell.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_simplemodel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_testconfig.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/utils.Po@am__quote@ # am--include-marker
@@ -1156,6 +1161,7 @@ distclean: distclean-am
 	-rm -f test/$(DEPDIR)/test_lumiselection.Po
 	-rm -f test/$(DEPDIR)/test_misc.Po
 	-rm -f test/$(DEPDIR)/test_parser.Po
+	-rm -f test/$(DEPDIR)/test_shell.Po
 	-rm -f test/$(DEPDIR)/test_simplemodel.Po
 	-rm -f test/$(DEPDIR)/test_testconfig.Po
 	-rm -f test/$(DEPDIR)/utils.Po
@@ -1280,6 +1286,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f test/$(DEPDIR)/test_lumiselection.Po
 	-rm -f test/$(DEPDIR)/test_misc.Po
 	-rm -f test/$(DEPDIR)/test_parser.Po
+	-rm -f test/$(DEPDIR)/test_shell.Po
 	-rm -f test/$(DEPDIR)/test_simplemodel.Po
 	-rm -f test/$(DEPDIR)/test_testconfig.Po
 	-rm -f test/$(DEPDIR)/utils.Po

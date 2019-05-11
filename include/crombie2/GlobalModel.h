@@ -34,6 +34,9 @@ namespace crombie2 {
     /// The weights to read to normalize MC
     Configurable<std::string> normhist {"Weight Hist", "hSumW"};
 
+    /// A shell command to run to get the list of branches
+    Configurable<std::string> brancheslist {"Branches List Command", ""};
+
   };
 
 }

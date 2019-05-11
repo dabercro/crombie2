@@ -60,7 +60,8 @@ void Runner::run (const RunConfig& config) {
     config.dirs.at("plots"), jobs,
     plotmodel, cutmodel,
     reweightmodel, globalmodel,
-    plotstylemodel, ontheflymodel
+    plotstylemodel, datacardmodel,
+    ontheflymodel
   };
 
   CutflowAnalyzerMaster cutflowanalyzers {
@@ -88,7 +89,7 @@ void Runner::run (const RunConfig& config) {
   histanalyzers.output();
 
   // Create datacards
-  histanalyzers.dumpdatacard(config.dirs.at("datacards"), datacardmodel, filemodel);
+  histanalyzers.dumpdatacard(config.dirs.at("datacards"), filemodel);
 
   if (config.docutflow)
     cutflowanalyzers.output();

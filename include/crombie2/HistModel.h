@@ -12,8 +12,8 @@ namespace crombie2 {
     HistModel (Job& job,
                const GlobalModel& globalmodel,
                const Plot& plot,
-               const CutModel& cutmodel,
-               const Selection& selection,
+               const std::string& cutstr,
+               const std::string& weightstr,
                const OnTheFlyModel& reweight);
 
     std::string get_name () const override;

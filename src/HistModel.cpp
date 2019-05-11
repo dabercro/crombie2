@@ -12,8 +12,8 @@ using namespace crombie2;
 HistModel::HistModel (Job& job,
                       const GlobalModel& globalmodel,
                       const Plot& plot,
-                      const CutModel& cutmodel,
-                      const Selection& selection,
+                      const std::string& cutstr,
+                      const std::string& weightstr,
                       const OnTheFlyModel& reweight) :
   inputdir {globalmodel.inputdir},
   inputfile {job.get_entry().name},
@@ -21,10 +21,8 @@ HistModel::HistModel (Job& job,
   min {plot.min},
   max {plot.max},
   var {plot.expr(job.get_group().type)},
-  cutstr {Misc::nminus1(var, cutmodel.expand(selection.cut))},
-  weightstr {cutmodel.expand(job.get_group().type == FileGroup::FileType::DATA
-                             ? selection.data_weight
-                             : selection.mc_weight)},
+  cutstr {cutstr},
+  weightstr {weightstr},
   reweight {reweight},
   label {plot.label},
   analyzer_prototype {job, plot, var, cutstr, weightstr, globalmodel, reweight}
