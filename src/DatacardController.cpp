@@ -12,24 +12,36 @@ DatacardController::DatacardController (ConfigPage& page, DatacardModel& model) 
 
   info.draw(page.box());
 
-  page.draw(plotlabel);
+  auto renderlist = [&page, this] (auto& label, auto& list, auto& vbox,
+                                   auto& button, auto target) {
 
-  for (auto& hist : datacardmodel.hists)
-    draw_config(hist, plots);
+    page.draw(label);
 
-  page.draw(plots);
-  page.draw(plotbutton);
+    for (auto& ele : list)
+      draw_config(ele, vbox);
 
-  for (auto& flat : datacardmodel.flats)
-    draw_config(flat, uncertainties);
+    page.draw(vbox);
+    page.draw(button);
 
-  page.draw(uncertainties);
-  page.draw(uncbutton);
+    button.signal_clicked().
+      connect(sigc::mem_fun(*this, target));
 
-  plotbutton.signal_clicked().
-    connect(sigc::mem_fun(*this, &DatacardController::on_add_plot));
-  uncbutton.signal_clicked().
-    connect(sigc::mem_fun(*this, &DatacardController::on_add_unc));
+  };
+
+  // Plots for datacard
+
+  renderlist(plotlabel, datacardmodel.hists, plots,
+             plotbutton, &DatacardController::on_add_plot);
+
+  // Uncertainties
+
+  renderlist(unclabel, datacardmodel.flats, uncertainties,
+             uncbutton, &DatacardController::on_add_unc);
+
+  // RateParams
+
+  renderlist(ratelabel, datacardmodel.rateparams, rateparams,
+             ratebutton, &DatacardController::on_add_rate);
 
 }
 
@@ -44,6 +56,9 @@ void DatacardController::redraw () {
   for (auto& conf : datacardmodel.flats)
     draw_config(conf, uncertainties);
 
+  for (auto& conf : datacardmodel.rateparams)
+    draw_config(conf, rateparams);
+
 }
 
 
@@ -57,5 +72,12 @@ void DatacardController::on_add_plot () {
 void DatacardController::on_add_unc () {
 
   draw_config(datacardmodel.flats.append(), uncertainties);
+
+}
+
+
+void DatacardController::on_add_rate () {
+
+  draw_config(datacardmodel.rateparams.append(), rateparams);
 
 }

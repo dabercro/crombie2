@@ -16,6 +16,7 @@ namespace crombie2 {
   class ConfigTable {
   public:
     ConfigTable (const std::initializer_list<GuiConfigurable*>& configs, const bool horizontal = false);
+    virtual ~ConfigTable () = default;
 
     /// Get a collection of GuiConfigurable pointers
     const std::vector<GuiConfigurable*>& get_confs () const;

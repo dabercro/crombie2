@@ -15,10 +15,13 @@ std::string DatacardModel::get_name () const {
 void DatacardModel::read (const Types::strings& config) {
 
   hists.clear();
+  flats.clear();
+  rateparams.clear();
 
   enum class mode {
     PLOTS,
-    UNC
+    UNC,
+    RATEPARAMS 
   };
 
   mode currentmode {mode::PLOTS};
@@ -27,8 +30,13 @@ void DatacardModel::read (const Types::strings& config) {
   outdir.set(*(iterator++));
   while (iterator != config.end()) {
     auto& line = *(iterator++);
+
     if (line == "UNC") {
       currentmode = mode::UNC;
+      continue;
+    }    
+    else if (line == "RATE") {
+      currentmode = mode::RATEPARAMS;
       continue;
     }    
 
@@ -38,6 +46,9 @@ void DatacardModel::read (const Types::strings& config) {
       break;
     case mode::UNC:
       flats.append().fill(line);
+      break;
+    case mode::RATEPARAMS:
+      rateparams.append().fill(line);
       break;
     default:
       throw;
@@ -61,6 +72,11 @@ std::list<std::string> DatacardModel::serialize () const {
 
   for (auto& unc : flats)
     output.emplace_back(unc.dump());
+
+  output.emplace_back("RATE");
+
+  for (auto& rate : rateparams)
+    output.emplace_back(rate.dump());
 
   return output;
 
@@ -91,5 +107,17 @@ bool DatacardModel::is_valid (const CutModel& cuts, const PlotModel& plots, bool
   }
 
   return true;
+
+}
+
+
+const RateParams* DatacardModel::get_rateparams (const std::string& proc) const {
+
+  for (auto& rate : rateparams) {
+    if (rate.has_process(proc))
+      return &rate;
+  }
+
+  return nullptr;
 
 }

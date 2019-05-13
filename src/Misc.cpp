@@ -111,3 +111,19 @@ std::string Misc::uncertify (const std::set<std::string>& branchlist, const std:
   return output;
 
 }
+
+
+bool Misc::check_comma_field (const std::string& val, const std::string& tocheck) {
+
+  if (not tocheck.size())
+    return true;
+
+  auto vals = Misc::split(tocheck, ",");
+  for (auto& ele : vals) {
+    if (ele == val)
+      return true;
+  }
+
+  return false;
+
+}

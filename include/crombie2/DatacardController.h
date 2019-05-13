@@ -28,6 +28,9 @@ namespace crombie2 {
     Gtk::Label unclabel {"Uncertainties"};
     Gtk::VBox uncertainties {};
     Gtk::Button uncbutton {"Add Flat Uncertainty"};
+    Gtk::Label ratelabel {"Floating Parameters"};
+    Gtk::VBox rateparams {};
+    Gtk::Button ratebutton {"Add Floating Uncertainty"};
 
     std::list<Gtk::HBox> plotboxes {};
 
@@ -54,6 +57,7 @@ namespace crombie2 {
 
     void on_add_plot ();
     void on_add_unc ();
+    void on_add_rate ();
 
   };
 }

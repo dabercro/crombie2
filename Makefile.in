@@ -132,10 +132,11 @@ am__objects_2 = $(am__objects_1) src/AllController.$(OBJEXT) \
 	src/MiniFitController.$(OBJEXT) src/OnTheFlyModel.$(OBJEXT) \
 	src/OnTheFlyReweighter.$(OBJEXT) src/Plot.$(OBJEXT) \
 	src/PlotModel.$(OBJEXT) src/PlotStyleModel.$(OBJEXT) \
-	src/Progress.$(OBJEXT) src/ReweightModel.$(OBJEXT) \
-	src/ReweightReader.$(OBJEXT) src/Runner.$(OBJEXT) \
-	src/SelectionDisplay.$(OBJEXT) src/SimpleController.$(OBJEXT) \
-	src/SimpleModel.$(OBJEXT) src/Tree.$(OBJEXT)
+	src/Progress.$(OBJEXT) src/RateParams.$(OBJEXT) \
+	src/ReweightModel.$(OBJEXT) src/ReweightReader.$(OBJEXT) \
+	src/Runner.$(OBJEXT) src/SelectionDisplay.$(OBJEXT) \
+	src/SimpleController.$(OBJEXT) src/SimpleModel.$(OBJEXT) \
+	src/Tree.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_2) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
@@ -197,9 +198,9 @@ am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	src/$(DEPDIR)/OnTheFlyReweighter.Po src/$(DEPDIR)/Parse.Po \
 	src/$(DEPDIR)/Plot.Po src/$(DEPDIR)/PlotModel.Po \
 	src/$(DEPDIR)/PlotStyleModel.Po src/$(DEPDIR)/Progress.Po \
-	src/$(DEPDIR)/ReweightModel.Po src/$(DEPDIR)/ReweightReader.Po \
-	src/$(DEPDIR)/Runner.Po src/$(DEPDIR)/Selection.Po \
-	src/$(DEPDIR)/SelectionDisplay.Po \
+	src/$(DEPDIR)/RateParams.Po src/$(DEPDIR)/ReweightModel.Po \
+	src/$(DEPDIR)/ReweightReader.Po src/$(DEPDIR)/Runner.Po \
+	src/$(DEPDIR)/Selection.Po src/$(DEPDIR)/SelectionDisplay.Po \
 	src/$(DEPDIR)/SimpleController.Po src/$(DEPDIR)/SimpleModel.Po \
 	src/$(DEPDIR)/TextConfigurable.Po src/$(DEPDIR)/Tree.Po \
 	src/$(DEPDIR)/crombie2cut.Po src/$(DEPDIR)/main.Po \
@@ -417,6 +418,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/PlotModel.cpp \
 	$(srcdir)/src/PlotStyleModel.cpp \
 	$(srcdir)/src/Progress.cpp \
+	$(srcdir)/src/RateParams.cpp \
 	$(srcdir)/src/ReweightModel.cpp \
 	$(srcdir)/src/ReweightReader.cpp \
 	$(srcdir)/src/Runner.cpp \
@@ -641,6 +643,8 @@ src/PlotStyleModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Progress.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/RateParams.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/ReweightModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/ReweightReader.$(OBJEXT): src/$(am__dirstamp) \
@@ -766,6 +770,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/PlotStyleModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Progress.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/RateParams.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ReweightModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ReweightReader.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Runner.Po@am__quote@ # am--include-marker
@@ -1139,6 +1144,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/PlotModel.Po
 	-rm -f src/$(DEPDIR)/PlotStyleModel.Po
 	-rm -f src/$(DEPDIR)/Progress.Po
+	-rm -f src/$(DEPDIR)/RateParams.Po
 	-rm -f src/$(DEPDIR)/ReweightModel.Po
 	-rm -f src/$(DEPDIR)/ReweightReader.Po
 	-rm -f src/$(DEPDIR)/Runner.Po
@@ -1264,6 +1270,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/PlotModel.Po
 	-rm -f src/$(DEPDIR)/PlotStyleModel.Po
 	-rm -f src/$(DEPDIR)/Progress.Po
+	-rm -f src/$(DEPDIR)/RateParams.Po
 	-rm -f src/$(DEPDIR)/ReweightModel.Po
 	-rm -f src/$(DEPDIR)/ReweightReader.Po
 	-rm -f src/$(DEPDIR)/Runner.Po

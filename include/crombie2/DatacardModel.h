@@ -5,6 +5,7 @@
 #include <crombie2/CutModel.h>
 #include <crombie2/FlatUncertainty.h>
 #include <crombie2/PlotModel.h>
+#include <crombie2/RateParams.h>
 #include <crombie2/SelectionPlot.h>
 
 
@@ -25,7 +26,18 @@ namespace crombie2 {
 
     RemoveList<FlatUncertainty> flats {};
 
+    RemoveList<RateParams> rateparams {};
+
     bool is_valid (const CutModel& cuts, const PlotModel& plots, bool batch = false) const;
+
+    /**
+       Get the RateParams that covers a given process.
+
+       @returns A pointer to the needed RateParams.
+                If there is none that cover the desired process,
+                a null pointer is returned.
+    */
+    const RateParams* get_rateparams (const std::string& proc) const;
 
   private:
 

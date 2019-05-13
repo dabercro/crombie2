@@ -636,4 +636,21 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
 
   }
 
+  // Finally the rate params
+
+  datacard << "------------------------------" << std::endl;
+
+  for (auto& proc : filemodel.get_datacard_names(FileGroup::FileType::MC)) {
+    auto* rate = datacardmodel.get_rateparams(proc);
+    if (rate) {
+      for (auto& hist : datacardmodel.hists) {
+        auto region = hist.selection.get();
+        datacard << "SF_" << proc << "  rateParam  " << region << "  " << proc
+                 << "  [" << rate->min.get() << "," << rate->max.get() << "]"
+                 << std::endl;
+      }
+    }
+  }
+
+  datacard << "* autoMCStats 1 1 1" << std::endl;
 }

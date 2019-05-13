@@ -10,6 +10,9 @@
 
 int main (int argc, char *argv[])
 {
+  if (argc > 1)
+    crombie2::ConfigModel::set_config_dir(argv[1]);
+
   ROOT::EnableThreadSafety();
 
   // Some style stuff

@@ -57,6 +57,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/PlotModel.cpp \
 	$(srcdir)/src/PlotStyleModel.cpp \
 	$(srcdir)/src/Progress.cpp \
+	$(srcdir)/src/RateParams.cpp \
 	$(srcdir)/src/ReweightModel.cpp \
 	$(srcdir)/src/ReweightReader.cpp \
 	$(srcdir)/src/Runner.cpp \

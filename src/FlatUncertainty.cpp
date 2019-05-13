@@ -14,36 +14,15 @@ FlatUncertainty::FlatUncertainty (const FlatUncertainty& other) :
 }
 
 
-namespace {
-
-  bool check (const std::string& val, const GuiConfigurable& tocheck) {
-
-    auto check_str = tocheck.get();
-    if (not check_str.size())
-      return true;
-
-    auto vals = Misc::split(check_str, ",");
-    for (auto& ele : vals) {
-      if (ele == val)
-        return true;
-    }
-
-    return false;
-
-  }
-
-}
-
-
 bool FlatUncertainty::has_process (const std::string& proc) const {
 
-  return check(proc, procs);
+  return Misc::check_comma_field(proc, procs.get());
 
 }
 
 
 bool FlatUncertainty::has_region (const std::string& region) const {
 
-  return check(region, regions);
+  return Misc::check_comma_field(region, regions.get());
 
 }

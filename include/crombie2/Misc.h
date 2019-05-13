@@ -55,6 +55,19 @@ namespace crombie2 {
 
     std::string uncertify (const std::set<std::string>& branchlist, const std::string& expr, const std::string& unc, uncdir dir);
 
+
+    /** 
+       @brief Check for value in a comma-separated list.
+
+       If tocheck actually holds an empty field, then it's assumed the user wants to use all values.
+       In that case, this function always returns true.
+
+       @param val The value that we want to determine is present or not
+       @param tocheck The comma-separated list to search
+       @returns if the value is present, or if tocheck has an empty value
+    */
+    bool check_comma_field (const std::string& val, const std::string& tocheck);
+
   }
 }
 
