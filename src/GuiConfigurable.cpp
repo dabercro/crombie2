@@ -3,7 +3,10 @@
 
 using namespace crombie2;
 
-GuiConfigurable::GuiConfigurable () {
+GuiConfigurable::GuiConfigurable (const std::string& tooltip) {
+
+  if (tooltip.size())
+    label_obj.set_tooltip_text(tooltip);
 
   label_obj.set_alignment(Gtk::ALIGN_LEFT, Gtk::ALIGN_CENTER);
 

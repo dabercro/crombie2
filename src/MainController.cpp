@@ -132,9 +132,10 @@ void MainController::run (unsigned num_files,
                           const std::map<std::string, std::string>& dirs,
                           Progress& progress) {
 
-  auto& histoutdir = dirs.at("plots");
-  if (histoutdir.size())
-    allmodels.save(histoutdir + "/models.cnf");
+  for (auto& dir : dirs) {
+    if (dir.second.size())
+      allmodels.save(dir.second + "/models.cnf");
+  }
 
   Runner runner {
     num_files, allmodels, progress

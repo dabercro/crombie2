@@ -16,7 +16,7 @@ namespace crombie2 {
     RateParams (const RateParams& other);
     virtual ~RateParams () = default;
 
-    Configurable<std::string> procs {"Processes", ""};
+    Configurable<std::string> procs {"Processes", "", "Comma-separated list"};
     Configurable<double> min {"Min", 0.2};
     Configurable<double> max {"Max", 5};
 

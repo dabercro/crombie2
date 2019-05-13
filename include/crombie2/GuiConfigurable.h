@@ -14,7 +14,7 @@ namespace crombie2 {
   */
   class GuiConfigurable {
   public:
-    GuiConfigurable ();
+    GuiConfigurable (const std::string& tooltip = "");
     virtual ~GuiConfigurable () {}
 
     /// Get the label
@@ -32,7 +32,7 @@ namespace crombie2 {
     /// Get the label object
     Gtk::Label& get_label ();
 
-  private:
+  protected:
     Gtk::Label label_obj {};
 
   };

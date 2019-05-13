@@ -22,8 +22,8 @@ namespace crombie2 {
        @param label The label for this configurable
        @param value The initial value of the configurable
     */
-    Configurable (const std::string& label, const C& value) :
-      name{label}, value{value} {}
+    Configurable (const std::string& label, const C& value, const std::string& tooltip = "") :
+      TextConfigurable {tooltip}, name {label}, value {value} {}
 
     /// Get the label to write on the table
     std::string label () const override {

@@ -24,10 +24,12 @@ namespace crombie2 {
        If there is only one plot in the PlotModel,
        then this can be left blank.
     */
-    Configurable<std::string> plotname {"Plot Name", ""};
+    Configurable<std::string> plotname {"Plot Name", "",
+        "Name of the plot (see Plots page) to do scaling on"};
 
     /// The legend entry of the histogram that should be matched
-    Configurable<std::string> candle {"Candle", "Data"};
+    Configurable<std::string> candle {"Candle", "Data",
+        "Legend entry of the histogram that should be matched"};
 
     /**
        @brief The legend of the histogram to scale
@@ -35,10 +37,12 @@ namespace crombie2 {
        If blank, then scale the total of all
        non-candle histograms to match the candle.
     */
-    Configurable<std::string> signal {"Signal", ""};
+    Configurable<std::string> signal {"Signal", "",
+        "Legend of histogram to scale to correct value"};
 
     /// Location of the output file
-    Configurable<std::string> output {"Output File", ""};
+    Configurable<std::string> output {"Output File", "",
+        "ROOT file where scaling histogram is stored"};
 
     /// Normalizes the MC to match Data yields before getting the reweight
     BoolConfigurable normalize {"Normalize Before Reweight"};

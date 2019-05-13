@@ -17,7 +17,7 @@ namespace crombie2 {
   class TextConfigurable : public GuiConfigurable {
   public:
 
-    TextConfigurable ();
+    TextConfigurable (const std::string& tooltip = "");
     /// Copy constructor does not copy the Gtk::Entry widget
     TextConfigurable (const TextConfigurable& other);
 

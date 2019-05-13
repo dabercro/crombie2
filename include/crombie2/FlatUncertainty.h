@@ -20,8 +20,8 @@ namespace crombie2 {
     Configurable<std::string> shape {"Shape", "lnN"};
     Configurable<double> value {"Value", 0};
 
-    Configurable<std::string> regions {"Regions", ""};
-    Configurable<std::string> procs {"Processes", ""};
+    Configurable<std::string> regions {"Regions", "", "Comma-separated list"};
+    Configurable<std::string> procs {"Processes", "", "Comma-separated list"};
 
     bool has_process (const std::string& proc) const;
     bool has_region (const std::string& region) const;

@@ -4,14 +4,19 @@
 using namespace crombie2;
 
 
-TextConfigurable::TextConfigurable () {
+TextConfigurable::TextConfigurable (const std::string& tooltip) :
+  GuiConfigurable {tooltip}
+{
+
+  if (tooltip.size())
+    entry.set_tooltip_text(tooltip);
 
   entry.signal_changed().connect(sigc::mem_fun(*this, &TextConfigurable::on_update));
 
 }
 
 TextConfigurable::TextConfigurable (const TextConfigurable& other) :
-  TextConfigurable() {}
+  TextConfigurable {other.label_obj.get_tooltip_text()} {}
 
 
 Gtk::Widget& TextConfigurable::get_widget () {
