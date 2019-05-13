@@ -36,9 +36,13 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
   if (not dohists)
     return;
 
+  // Get the list of branches from the first job
+
+  Tree onefile {jobs[0].get_file_name(), globalmodel.tree};
+
   std::set<std::string> branchlist {};
-  for (auto& branch : Misc::split(Misc::shell(globalmodel.brancheslist), "\n"))
-    branchlist.emplace(branch);
+  for (auto* branch : *(onefile.get<TTree>(globalmodel.tree)->GetListOfBranches()))
+    branchlist.emplace(branch->GetName());
 
   for (auto& job : jobs) {
     auto& entry = job.get_entry();

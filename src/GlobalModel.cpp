@@ -12,8 +12,7 @@ GlobalModel::GlobalModel () :
     &nthreads,
     &tree,
     &luminosity,
-    &normhist,
-    &brancheslist
+    &normhist
   } {}
 
 
