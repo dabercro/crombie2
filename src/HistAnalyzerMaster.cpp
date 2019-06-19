@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iomanip>
+#include <regex>
 
 #include <crombie2/FileSystem.h>
 #include <crombie2/HistAnalyzerMaster.h>
@@ -427,8 +428,12 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   // Save everything
   FileSystem::mkdirs(outputdir);
 
+  const std::regex replace_expr {"/"};
+
   for (auto& suff : {".pdf", ".png", ".C"}) {
-    auto outname = outputdir + "/" + output + suff;
+    auto outname = outputdir + "/" +
+      std::regex_replace(output, replace_expr, "_") +
+      suff;
     canv.SaveAs(outname.data());
   }
 
