@@ -92,6 +92,9 @@ TH1D* Hist::roothist(std::list<TH1D>* storeptr) {
 
 Hist Hist::ratio(const Hist& other) const {
 
+  if (other.nbins != nbins)
+    throw std::logic_error{"Wrong number of bins in Hist::ratio"};
+
   Hist output{*this};
 
   for (unsigned ibin = 0; ibin < other.contents.size(); ++ibin) {

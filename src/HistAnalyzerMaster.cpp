@@ -138,13 +138,9 @@ void HistAnalyzerMaster::output () const {
 
     }
 
-    if (Misc::split(key_output.first, "_").front() == plotstylemodel.blind.get()) {
-      for (auto& datahist : datahists)
-        datahist.second.scale(0);
-    }
-
     Lock lock {};
-    draw_plot(key_output.first, datahists, mchists, signalhists);
+    draw_plot(key_output.first, datahists, mchists, signalhists,
+              Misc::split(key_output.first, "_").front() == plotstylemodel.blind.get());
 
   }
 
@@ -234,7 +230,8 @@ namespace {
 void HistAnalyzerMaster::draw_plot(const std::string& output,
                                    Types::map<Hist>& data,
                                    Types::map<Hist>& mc,
-                                   Types::map<Hist>& signal) const {
+                                   Types::map<Hist>& signal,
+                                   bool blinding) const {
 
   // Stores TH1D for this function
   std::list<TH1D> histstore {};
@@ -245,6 +242,9 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   Hist signal_hist {};
 
   add_to(data_hist, data);
+  if (blinding)
+    data_hist.scale(0);
+
   add_to(bkg_hist, mc);
   add_to(signal_hist, signal);
   // Add backgrounds to signal sums too
@@ -252,7 +252,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   auto mcvec = sorted_vec(mc);
 
-  double scale = plotstylemodel.normalize
+  double scale = (plotstylemodel.normalize and not blinding)
     ? data_hist.integral()/bkg_hist.integral()
     : 1.0;
 
@@ -263,12 +263,14 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   THStack hs{"hs", ""};
   // Get the maximum value
   auto max = bkg_hist.max_w_unc();
-  // Check the data histogram(s)
-  for(auto& dat : data) {
-    auto check = dat.second.max_w_unc();
-    if (check > max) {
-      max = check;
-      max_hist = &dat.second;
+  if (not blinding) {
+    // Check the data histogram(s)
+    for(auto& dat : data) {
+      auto check = dat.second.max_w_unc();
+      if (check > max) {
+        max = check;
+        max_hist = &dat.second;
+      }
     }
   }
 
@@ -341,12 +343,14 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   }
 
-  for (auto& dat : sorted_vec(data)) {
-    leg.AddEntry(styled(dat.second,
-                        FileGroup::FileType::DATA,
-                        styles.at(dat.first)),
-                 dat.first.data(), "lp");
-    dat.second->Draw("PE,same");
+  if (not blinding) {
+    for (auto& dat : sorted_vec(data)) {
+      leg.AddEntry(styled(dat.second,
+                          FileGroup::FileType::DATA,
+                          styles.at(dat.first)),
+                   dat.first.data(), "lp");
+      dat.second->Draw("PE,same");
+    }
   }
 
   canv.cd();
@@ -385,7 +389,8 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
     // All of the signals should be drawn separately...
     styled(signal_hist.ratio(bkg_hist).roothist(&histstore), FileGroup::FileType::SIGNAL, 2, scale)->Draw("hist,same");
-    styled(data_ratio.roothist(&histstore), FileGroup::FileType::DATA, 1)->Draw("PE,same");
+    if (not blinding)
+      styled(data_ratio.roothist(&histstore), FileGroup::FileType::DATA, 1)->Draw("PE,same");
 
     pad2.SetGridy(1);
 

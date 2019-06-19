@@ -62,7 +62,8 @@ namespace crombie2 {
     void draw_plot(const std::string& output,
                    Types::map<Hist>& data,
                    Types::map<Hist>& mc,
-                   Types::map<Hist>& signal) const;
+                   Types::map<Hist>& signal,
+                   bool blinding) const;
 
   };
 }
