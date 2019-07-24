@@ -616,9 +616,8 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   auto mcline = [&datacard, &columns] (std::string head, auto MCColumn::*offset) {
     datacard << std::left << std::setw(25) << head;
     for (auto& column : columns) {
-      datacard << std::left << std::setw(15);
-      if constexpr (std::is_same<decltype(column.*offset), double>::value)
-        datacard << std::setprecision(1) << std::fixed;
+      datacard << std::left << std::setw(20);
+      datacard << std::setprecision(6) << std::fixed;
       datacard << column.*offset;
     }
     datacard << std::endl;
@@ -629,7 +628,7 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   mcline("process", &MCColumn::processnum);
   mcline("rate", &MCColumn::obs);
 
-  datacard << std::endl << "------------------------------" << std::endl;
+  datacard << "------------------------------" << std::endl;
 
   // Now make the uncertainties
 
@@ -660,7 +659,7 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
       for (auto& hist : datacardmodel.hists) {
         auto region = hist.selection.get();
         datacard << "SF_" << proc << "  rateParam  " << region << "  " << proc
-                 << "  [" << rate->min.get() << "," << rate->max.get() << "]"
+                 << "  1  [" << rate->min.get() << "," << rate->max.get() << "]"
                  << std::endl;
       }
     }
