@@ -616,7 +616,7 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   auto mcline = [&datacard, &columns] (std::string head, auto MCColumn::*offset) {
     datacard << std::left << std::setw(25) << head;
     for (auto& column : columns) {
-      datacard << std::left << std::setw(20);
+      datacard << std::left << std::setw(17);
       datacard << std::setprecision(6) << std::fixed;
       datacard << column.*offset;
     }
@@ -639,7 +639,7 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
 
     for (auto& column : columns) {
 
-      datacard << std::left << std::setw(15)
+      datacard << std::left << std::setw(17)
                << (unc.has_process(column.processname) and unc.has_region(column.bin) ?
                    unc.value.get() : "-");
 
