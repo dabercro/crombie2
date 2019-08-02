@@ -27,7 +27,7 @@ Types::strings& FileEntry::files (const std::string& inputdir) {
   else {
     entry += '/';
     files_cache = Misc::comprehension<std::string>
-      (FileSystem::list(last_listing),
+      (FileSystem::list(last_listing, true, false),
        [&entry] (auto& ele) { return entry + ele; });
   }
 

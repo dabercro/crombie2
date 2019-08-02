@@ -123,7 +123,7 @@ void FileSystem::mkdirs(const std::string& path) {
 }
 
 
-Types::strings FileSystem::list(std::string directory, bool shouldexist) {
+Types::strings FileSystem::list(std::string directory, bool shouldexist, bool includeempty) {
   if (is_xrd(directory))
     return xrd_list(directory);
 
@@ -137,7 +137,8 @@ Types::strings FileSystem::list(std::string directory, bool shouldexist) {
 
   auto* indir = opendir(directory.data());
   while (auto* dir_ent = readdir(indir)) {
-    if (dir_ent->d_name[0] != '.')
+    if (dir_ent->d_name[0] != '.' and
+        (includeempty or get_size(directory + "/" + dir_ent->d_name)))
       output.emplace_back(dir_ent->d_name);
   }
   closedir(indir);

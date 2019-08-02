@@ -58,4 +58,25 @@ TEST_CASE("Test File Entries") {
 
   }
 
+  // We don't want to try to run on empty files.
+  // Just don't list them from the beginning!
+  SECTION("Empty File") {
+
+    std::string basedir = "empty";
+    crombie2::FileSystem::mkdirs(dir + "/" + basedir);
+
+    {
+      std::ofstream output {dir + "/" + basedir + "/notempty.root"};
+      output << '\n';
+      std::ofstream empty {dir + "/" + basedir + "/empty.root"};
+    }
+
+    entry.name.set(basedir);
+    auto files = entry.files(model.inputdir);
+
+    REQUIRE(files.size() == 1);
+    REQUIRE(files[0] == basedir + "/notempty.root");
+
+  }
+
 }

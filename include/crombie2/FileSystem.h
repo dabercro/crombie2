@@ -25,10 +25,12 @@ namespace crombie2 {
        @param directory The full or relative (from directory where program is run from) path
        @param shouldexist Can be set to false if it's possible for a directory to not exist.
                           If true, displays an error message to the user.
+       @param includeempty Can be sent to false if we do not want to include
+                           empty files in the directory listing.
        @returns The name of files inside of the directory, relative to the directory.
                 It's an empty vector if the directory does not exist
     */
-    Types::strings list(std::string directory, bool shouldexist = true);
+    Types::strings list(std::string directory, bool shouldexist = true, bool includeempty = true);
 
 
     /**
