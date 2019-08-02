@@ -302,7 +302,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   TCanvas canv{"canv", "canv", 600, 700};
   canv.cd();
   // Top pad
-  const double bottom = mcvec.size() ? 0.3 : 0.0;
+  const double bottom = mcvec.size() and data.size() ? 0.3 : 0.0;
 
   TPad pad1{"pad1", "pad1", 0.0, bottom, 1.0, 1.0};
   pad1.SetBottomMargin(bottom ? 0.025 : 0.1);
