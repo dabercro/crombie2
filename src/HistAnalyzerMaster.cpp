@@ -302,7 +302,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   TCanvas canv{"canv", "canv", 600, 700};
   canv.cd();
   // Top pad
-  const double bottom = mcvec.size() and data.size() ? 0.3 : 0.0;
+  const double bottom = mcvec.size() ? 0.3 : 0.0;
 
   TPad pad1{"pad1", "pad1", 0.0, bottom, 1.0, 1.0};
   pad1.SetBottomMargin(bottom ? 0.025 : 0.1);
@@ -362,7 +362,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     pad2.cd();
 
     auto bkg_ratio = bkg_hist.ratio(bkg_hist);
-    auto data_ratio = data_hist.ratio(bkg_hist);
+    auto data_ratio = data.size() ? data_hist.ratio(bkg_hist) : bkg_ratio;
 
     auto set_yaxis = [bottom, titleoff, this] (auto* hist) {
       auto* axis = hist->GetYaxis();
@@ -389,7 +389,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
     // All of the signals should be drawn separately...
     styled(signal_hist.ratio(bkg_hist).roothist(&histstore), FileGroup::FileType::SIGNAL, 2, scale)->Draw("hist,same");
-    if (not blinding)
+    if (not blinding and data.size())
       styled(data_ratio.roothist(&histstore), FileGroup::FileType::DATA, 1)->Draw("PE,same");
 
     pad2.SetGridy(1);
