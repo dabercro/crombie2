@@ -12,7 +12,8 @@ PlotStyleModel::PlotStyleModel () :
     &maxratio,
     &ratiolabel,
     &normalize,
-    &blind
+    &blind,
+    &ratiobuffer
   } {}
 
 

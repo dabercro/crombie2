@@ -363,6 +363,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
     auto bkg_ratio = bkg_hist.ratio(bkg_hist);
     auto data_ratio = data.size() ? data_hist.ratio(bkg_hist) : bkg_ratio;
+    auto signal_ratio = signal.size() ? signal_hist.ratio(bkg_hist) : bkg_ratio;
 
     auto set_yaxis = [bottom, titleoff, this] (auto* hist) {
       auto* axis = hist->GetYaxis();
@@ -383,12 +384,17 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     bhist->SetFillStyle(3001);
     bhist->SetFillColor(kGray);
 
-    bhist->SetMinimum(std::max(std::min(bkg_ratio.min_w_unc(), data_ratio.min_w_unc(false)), double(plotstylemodel.minratio)));
-    bhist->SetMaximum(std::min(std::max(bkg_ratio.max_w_unc(), data_ratio.max_w_unc()), double(plotstylemodel.maxratio)));
+    const float buffer = plotstylemodel.ratiobuffer;
+
+    bhist->SetMinimum(std::max(std::min({bkg_ratio.min_w_unc(), data_ratio.min_w_unc(false), signal_ratio.min_w_unc(false)}) * (1.0 + buffer) - buffer,
+                               double(plotstylemodel.minratio)));
+    bhist->SetMaximum(std::min(std::max({bkg_ratio.max_w_unc(), data_ratio.max_w_unc(), signal_ratio.max_w_unc()}) * (1.0 + buffer) - buffer,
+                               double(plotstylemodel.maxratio)));
     bhist->Draw("e2");
 
     // All of the signals should be drawn separately...
-    styled(signal_hist.ratio(bkg_hist).roothist(&histstore), FileGroup::FileType::SIGNAL, 2, scale)->Draw("hist,same");
+    if (signal.size())
+      styled(signal_ratio.roothist(&histstore), FileGroup::FileType::SIGNAL, 2, scale)->Draw("hist,same");
     if (not blinding and data.size())
       styled(data_ratio.roothist(&histstore), FileGroup::FileType::DATA, 1)->Draw("PE,same");
 

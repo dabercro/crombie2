@@ -38,6 +38,10 @@ namespace crombie2 {
 
     Configurable<std::string> blind {"Blind Channel", ""};
 
+    /// The buffer for the ratio pad
+    Configurable<double> ratiobuffer {"Ratio Buffer", 0,
+        "The size of the extra buffer in the ratio plot. Values between 0 and 1 make the most sense."};
+
   };
 
 }
