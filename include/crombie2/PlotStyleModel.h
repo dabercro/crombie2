@@ -42,6 +42,17 @@ namespace crombie2 {
     Configurable<double> ratiobuffer {"Ratio Buffer", 0,
         "The size of the extra buffer in the ratio plot. Values between 0 and 1 make the most sense."};
 
+    /// The forced maximum for the top pad
+    BoolConfigurable forcetop {"Force top pad values"};
+
+    /// The forced maximum for the top pad
+    Configurable<double> maximum {"Maximum", 0,
+        "The forced maximum for the top pad's y-value."};
+
+    /// The forced minimum for the top pad
+    Configurable<double> minimum {"Minimum", 0,
+        "The forced minimum for the top pad's y-value."};
+
   };
 
 }

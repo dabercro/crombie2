@@ -314,6 +314,11 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   if (mcvec.size()) {
 
+    if (plotstylemodel.forcetop) {
+      hs.SetMinimum(plotstylemodel.minimum);
+      hs.SetMaximum(plotstylemodel.maximum);
+    }
+
     hs.Draw("hist");
 
     hs.GetYaxis()->SetLabelSize(nomfont/(1 - bottom));

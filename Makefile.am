@@ -30,6 +30,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
 	$(srcdir)/src/FitConfig.cpp \
+	$(srcdir)/src/FitModel.cpp \
 	$(srcdir)/src/FlatUncertainty.cpp \
 	$(srcdir)/src/GlobalModel.cpp \
 	$(srcdir)/src/Hist.cpp \

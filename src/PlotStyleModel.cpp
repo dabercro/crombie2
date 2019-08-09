@@ -13,7 +13,10 @@ PlotStyleModel::PlotStyleModel () :
     &ratiolabel,
     &normalize,
     &blind,
-    &ratiobuffer
+    &ratiobuffer,
+    &forcetop,
+    &maximum,
+    &minimum
   } {}
 
 

@@ -1,4 +1,5 @@
 #include <crombie2/FitModel.h>
+#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
@@ -10,6 +11,22 @@ std::string FitModel::get_name () const {
 
 
 void FitModel::read (const Types::strings& config) {
+
+  fits.clear();
+
+  for (auto& line : config) {
+
+    auto split = Misc::split(line, "; ");
+
+    auto& fit = fits.append(split.front());
+
+    if (split.size() == 2) {
+      unsigned index = 0;
+      for (auto& guess : Misc::tokenize(split.back()))
+        fit.guesses[index++].set(guess);
+    }
+
+  }
 
 }
 
