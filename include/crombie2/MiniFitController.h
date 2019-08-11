@@ -19,9 +19,13 @@ namespace crombie2 {
     ConfigTable functiontable;
     ConfigTable parametertable {};
 
-    Gtk::Button updatebutton {"Update fit"};
 
     void on_update_fit ();
+
+    Gtk::HBox box {};
+    Gtk::VBox functionlist {};
+    Gtk::VBox guesslist {};
+    Gtk::Button updatebutton {"Update fit"};
 
   };
 }
