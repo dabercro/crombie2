@@ -12,6 +12,8 @@ namespace crombie2 {
 
     explicit MiniFitController (RemoveWrapper<FitConfig>& fit);
 
+    void draw (Gtk::Box& page);
+
   private:
 
     RemoveWrapper<FitConfig>& fit;

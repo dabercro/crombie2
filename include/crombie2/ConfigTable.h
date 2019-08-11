@@ -41,6 +41,8 @@ namespace crombie2 {
     /// Given a space-separated line, loads the values into the table
     void fill (const std::string& line) const;
 
+    void clear ();
+
   protected:
     /// Copy another ConfigTable to this one
     void copy (const ConfigTable& other);

@@ -19,6 +19,7 @@ MainController::MainController (std::map<std::string, ConfigPage>& pagemap,
   filecontrol {pagemap.at("files"), filemodel},
   plotcontrol {pagemap.at("plots"), plotmodel},
   cutcontrol {pagemap.at("selections"), cutmodel},
+  fitcontrol {pagemap.at("fits"), fitmodel},
   allmodels  {pagemap},
   allcontrol {jobpage, allmodels, pagemap},
   jobpage {jobpage}

@@ -119,3 +119,11 @@ void ConfigTable::fill (const std::string& line) const {
     confs.at(index++)->set(val == "_" ? "" : val);
 
 }
+
+
+void ConfigTable::clear () {
+
+  confs.clear();
+  redraw();
+
+}

@@ -12,13 +12,13 @@ namespace crombie2 {
 
     std::string get_name () const override;
 
+    RemoveList<FitConfig> fits {};
+
   private:
 
     void read (const Types::strings& config) override;
 
     std::list<std::string> serialize () const override;
-
-    RemoveList<FitConfig> fits {};
 
   };
 }

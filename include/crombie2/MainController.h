@@ -8,6 +8,7 @@
 #include <crombie2/CutController.h>
 #include <crombie2/DatacardController.h>
 #include <crombie2/FileController.h>
+#include <crombie2/FitController.h>
 #include <crombie2/JSONModel.h>
 #include <crombie2/GlobalModel.h>
 #include <crombie2/ListController.h>
@@ -51,6 +52,9 @@ namespace crombie2 {
 
     CutModel cutmodel {};
     CutController cutcontrol;
+
+    FitModel fitmodel {};
+    FitController fitcontrol;
 
     AllModels allmodels;
     AllController allcontrol;

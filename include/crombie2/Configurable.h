@@ -21,6 +21,7 @@ namespace crombie2 {
        Create a configurable with a static label
        @param label The label for this configurable
        @param value The initial value of the configurable
+       @param tooltip A message to show when hovering over the Configurable fields
     */
     Configurable (const std::string& label, const C& value, const std::string& tooltip = "") :
       TextConfigurable {tooltip}, name {label}, value {value} {}
