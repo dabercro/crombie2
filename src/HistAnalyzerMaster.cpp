@@ -58,6 +58,8 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
       types.insert({entry.name, job.get_group().type});
       for (auto& legend : job.get_group().entries)
         styles.insert({legend.legend, legend.style});
+      for (auto& compare : comparemodel.list)
+        styles.insert({compare.legend, compare.style});
     }
 
     for (auto& plot : plotmodel.list) {
@@ -115,8 +117,8 @@ void HistAnalyzerMaster::output () const {
   if (not outputdir.size())
     return;
 
-  // Map to output file and to input file
-  Types::map<Types::map<HistSplit>> hists;
+  // Map to output file
+  Types::map<Hist> comparehists;
 
   // Now make each output
   for (auto& key_output : histmodels) {
@@ -124,6 +126,8 @@ void HistAnalyzerMaster::output () const {
     Types::map<Hist> datahists;
     Types::map<Hist> mchists;
     Types::map<Hist> signalhists;
+
+    auto* compareuses = comparemodel.get(key_output.first);
 
     // Scale all of the histograms
     for (auto& key_input : key_output.second) {
@@ -139,16 +143,25 @@ void HistAnalyzerMaster::output () const {
            : signalhists);
 
       for (auto& entry : histsplit.get_hists()) {
-        auto& outhist = outmap[entry.first];
-        outhist.add(entry.second);
+        outmap[entry.first].add(entry.second);
+        if (compareuses)
+          comparehists[compareuses->legend].
+            add(entry.second);
       }
 
     }
 
     Lock lock {};
     draw_plot(key_output.first, datahists, mchists, signalhists,
-              Misc::split(key_output.first, "_").front() == plotstylemodel.blind.get());
+              Misc::split(key_output.first, "_").front() == plotstylemodel.blind.get(),
+              false);
 
+  }
+
+  if (comparemodel.list.size()) {
+    Lock lock {};
+    Types::map<Hist> emptyhists {};
+    draw_plot("comparison", emptyhists, emptyhists, comparehists, false, true);
   }
 
 }
@@ -168,7 +181,7 @@ HistSplit HistAnalyzerMaster::scaled_split (const std::pair<std::string, HistMod
 
 namespace {
 
-  void add_to (Hist& target, Types::map<Hist>& input) {
+  void add_to (Hist& target, const Types::map<Hist>& input) {
 
     for (auto& hist : input)
       target.add(hist.second);
@@ -176,22 +189,24 @@ namespace {
   }
 
 
-  std::vector<std::pair<std::string, TH1D*>> sorted_vec (Types::map<Hist>& hists) {
+  std::vector<std::pair<std::string, TH1D*>> sorted_vec (Types::map<Hist>& hists, bool usemax = false) {
     std::vector<std::pair<std::string, TH1D*>> sortvec {};
     sortvec.reserve(hists.size());
 
     for (auto& hist : hists)
       sortvec.push_back(std::make_pair(hist.first, hist.second.roothist()));
 
-    std::sort(sortvec.begin(), sortvec.end(), [] (auto& a, auto& b) {
-        return a.second->Integral() > b.second->Integral();
+    std::sort(sortvec.begin(), sortvec.end(), [usemax] (auto& a, auto& b) {
+        return usemax 
+          ? a.second->GetMaximum() > b.second->GetMaximum()
+          : a.second->Integral() > b.second->Integral();
       });
 
     return sortvec;
   }
 
 
-  TH1D* styled (TH1D* hist, FileGroup::FileType type, short style, double scale = 1.0) {
+  TH1D* styled (TH1D* hist, FileGroup::FileType type, short style, double scale = 1.0, bool comparing = false) {
 
     hist->Scale(scale);
 
@@ -204,7 +219,10 @@ namespace {
       hist->SetLineWidth(1);
       break;
     case(FileGroup::FileType::SIGNAL) :
-      hist->SetLineStyle(style);
+      if (comparing)
+        hist->SetLineColor(style);
+      else
+        hist->SetLineStyle(style);
       break;
     case(FileGroup::FileType::MC) :
       hist->SetFillStyle(1001);
@@ -238,7 +256,8 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
                                    Types::map<Hist>& data,
                                    Types::map<Hist>& mc,
                                    Types::map<Hist>& signal,
-                                   bool blinding) const {
+                                   bool blinding,
+                                   bool comparing) const {
 
   // Stores TH1D for this function
   std::list<TH1D> histstore {};
@@ -267,18 +286,20 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   bkg_hist.scale(scale);
 
-  auto* max_hist = &bkg_hist;
+  const auto* max_hist = &bkg_hist;
 
   THStack hs{"hs", ""};
   // Get the maximum value
   auto max = bkg_hist.max_w_unc();
   if (not blinding) {
     // Check the data histogram(s)
-    for(auto& dat : data) {
-      auto check = dat.second.max_w_unc();
-      if (check > max) {
-        max = check;
-        max_hist = &dat.second;
+    for (auto& hist : {data, signal}) {
+      for(auto& dat : hist) {
+        auto check = dat.second.max_w_unc();
+        if (check > max) {
+          max = check;
+          max_hist = &dat.second;
+        }
       }
     }
   }
@@ -348,7 +369,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     if (dofit) {
       for (auto& fit : fitmodel.fits) {
         std::cout << std::endl
-                  << "For: " << output << " Fitting: " << fit.get()
+                  << "For: " << output << " background Fitting: " << fit.get()
                   << std::endl << std::endl;
         fitstore.emplace_back(fit.fit_hist(bkg_sum));
       }
@@ -356,30 +377,39 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   }
 
-  for (auto& sig : sorted_vec(signal)) {
+  for (auto& sig : sorted_vec(signal, true)) {
+
+    auto style = styles.at(sig.first);
 
     leg.AddEntry(styled(sig.second,
                         FileGroup::FileType::SIGNAL,
-                        styles.at(sig.first)),
+                        style, 1.0, comparing),
                  sig.first.data(), "lp");
 
     if (bkg_sum)
       sig.second->Add(bkg_sum);
+
+    if (plotstylemodel.forcetop) {
+      sig.second->SetMinimum(plotstylemodel.minimum);
+      sig.second->SetMaximum(plotstylemodel.maximum);
+    }
+
     sig.second->Draw("hist,same");
 
     if (dofit) {
       for (auto& fit : fitmodel.fits) {
         std::cout << std::endl
-                  << "For: " << output << " Fitting: " << fit.get()
+                  << "For: " << output << " " << sig.first << " Fitting: " << fit.get()
                   << std::endl << std::endl;
         fitstore.emplace_back(fit.fit_hist(sig.second));
+        fitstore.back().SetLineColor(style);
       }
     }
 
   }
 
   if (not blinding) {
-    for (auto& dat : sorted_vec(data)) {
+    for (auto& dat : sorted_vec(data, true)) {
       leg.AddEntry(styled(dat.second,
                           FileGroup::FileType::DATA,
                           styles.at(dat.first)),
@@ -429,7 +459,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
     // All of the signals should be drawn separately...
     if (signal.size())
-      styled(signal_ratio.roothist(&histstore), FileGroup::FileType::SIGNAL, 2, scale)->Draw("hist,same");
+      styled(signal_ratio.roothist(&histstore), FileGroup::FileType::SIGNAL, 2, scale, comparing)->Draw("hist,same");
     if (not blinding and data.size())
       styled(data_ratio.roothist(&histstore), FileGroup::FileType::DATA, 1)->Draw("PE,same");
 

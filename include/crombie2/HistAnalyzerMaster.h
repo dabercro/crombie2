@@ -71,7 +71,8 @@ namespace crombie2 {
                    Types::map<Hist>& data,
                    Types::map<Hist>& mc,
                    Types::map<Hist>& signal,
-                   bool blinding) const;
+                   bool blinding,
+                   bool comparing) const;
 
   };
 }

@@ -115,7 +115,8 @@ void MainController::on_submit_job () {
       cutmodel.is_valid() and
       (not dodatacard.get_active() or datacardmodel.is_valid(cutmodel, plotmodel)) and
       checkdir(outdir) and
-      checkdir(datadir)
+      checkdir(datadir) and
+      comparemodel.is_valid(cutmodel, plotmodel)
       ) {
 
     std::thread thread {

@@ -2,7 +2,6 @@
 
 #include <crombie2/MainWindow.h>
 
-
 #include "TROOT.h"
 #include "TStyle.h"
 #include "TError.h"
