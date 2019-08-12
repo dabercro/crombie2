@@ -16,7 +16,8 @@ PlotStyleModel::PlotStyleModel () :
     &ratiobuffer,
     &forcetop,
     &maximum,
-    &minimum
+    &minimum,
+    &saveroot
   } {}
 
 

@@ -12,6 +12,7 @@
 #include "THStack.h"
 #include "TLatex.h"
 #include "TLegend.h"
+#include "TFile.h"
 
 
 using namespace crombie2;
@@ -515,6 +516,19 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
       std::regex_replace(output, replace_expr, "_") +
       suff;
     canv.SaveAs(outname.data());
+  }
+
+  if (plotstylemodel.saveroot) {
+    auto outname = outputdir + "/" +
+      std::regex_replace(output, replace_expr, "_") + ".root";
+
+    TFile rootout {outname.data(), "RECREATE"};
+    for (auto* hists : {&data, &mc, &signal}) {
+      for (auto& hist : *hists) {
+        rootout.WriteTObject(hist.second.roothist(), hist.first.data());
+      }
+    }
+    
   }
 
 }

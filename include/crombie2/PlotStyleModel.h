@@ -53,6 +53,8 @@ namespace crombie2 {
     Configurable<double> minimum {"Minimum", 0,
         "The forced minimum for the top pad's y-value."};
 
+    BoolConfigurable saveroot {"Save .root file"};
+
   };
 
 }
