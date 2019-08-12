@@ -39,3 +39,21 @@ void FitConfig::resize_guesses () {
     guesses.resize(max_index);
 
 }
+
+
+TF1 FitConfig::fit_hist (TH1D* tofit) const {
+
+  const std::string expr = get();
+
+  auto* xaxis = tofit->GetXaxis();
+
+  TF1 formula {expr.data(), expr.data(), xaxis->GetBinLowEdge(1), xaxis->GetBinUpEdge(xaxis->GetNbins())};
+
+  for (auto& guess : guesses)
+    formula.SetParameter(std::stoi(guess.label()), guess);
+
+  tofit->Fit(&formula);
+
+  return formula;
+
+}

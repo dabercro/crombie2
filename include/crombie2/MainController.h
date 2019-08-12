@@ -5,6 +5,7 @@
 #include <mutex>
 
 #include <crombie2/AllController.h>
+#include <crombie2/CompareModel.h>
 #include <crombie2/CutController.h>
 #include <crombie2/DatacardController.h>
 #include <crombie2/FileController.h>
@@ -56,6 +57,9 @@ namespace crombie2 {
     FitModel fitmodel {};
     FitController fitcontrol;
 
+    CompareModel comparemodel {};
+    ListController<Compare> comparecontrol;
+
     AllModels allmodels;
     AllController allcontrol;
     ConfigPage& jobpage;
@@ -86,6 +90,10 @@ namespace crombie2 {
     Gtk::HBox reweightbox {};
     Gtk::CheckButton doreweight {};
     Gtk::Label reweight_label {"Do reweight"};
+
+    Gtk::HBox fitbox {};
+    Gtk::CheckButton dofit {};
+    Gtk::Label fit_label {"Do fit"};
 
     Gtk::HButtonBox submitbox {};
     Gtk::Button button {"Submit"};

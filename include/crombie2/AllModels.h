@@ -17,14 +17,6 @@ namespace crombie2 {
     std::string get_name () const override;
 
     template <class M>
-    const M& get (const std::string& key) const {
-      auto* ptr = dynamic_cast<M*>(models.at(key));
-      if (ptr)
-        return *ptr;
-      throw std::logic_error(key + " requested as wrong type!");
-    }
-
-    template <class M>
     const M& get () const {
       auto* ptr = dynamic_cast<M*>(models.at(M().get_name()));
       return *ptr;

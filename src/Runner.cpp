@@ -41,6 +41,8 @@ void Runner::run (const RunConfig& config) {
   OnTheFlyModel ontheflymodel {allmodels.get<OnTheFlyModel>()};
   PlotStyleModel plotstylemodel {allmodels.get<PlotStyleModel>()};
   DatacardModel datacardmodel {allmodels.get<DatacardModel>()};
+  FitModel fitmodel {allmodels.get<FitModel>()};
+  CompareModel comparemodel {allmodels.get<CompareModel>()};
 
   for (auto& group : filemodel.filegroups) {
     for (auto& entry : group.files) {
@@ -60,7 +62,9 @@ void Runner::run (const RunConfig& config) {
     plotmodel, cutmodel,
     reweightmodel, globalmodel,
     plotstylemodel, datacardmodel,
-    ontheflymodel
+    ontheflymodel,
+    config.dofit, fitmodel,
+    comparemodel
   };
 
   CutflowAnalyzerMaster cutflowanalyzers {

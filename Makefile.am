@@ -18,6 +18,8 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/AllController.cpp \
 	$(srcdir)/src/AllModels.cpp \
 	$(srcdir)/src/BoolConfigurable.cpp \
+	$(srcdir)/src/Compare.cpp \
+	$(srcdir)/src/CompareModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/CrossSecDB.cpp \

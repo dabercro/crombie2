@@ -15,6 +15,7 @@ namespace crombie2 {
     bool docutflow;
     bool dolumi;
     bool doreweight;
+    bool dofit;
 
   };
 }

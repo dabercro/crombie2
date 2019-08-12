@@ -111,6 +111,7 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigTable.$(OBJEXT) \
 	src/TextConfigurable.$(OBJEXT)
 am__objects_2 = $(am__objects_1) src/AllController.$(OBJEXT) \
 	src/AllModels.$(OBJEXT) src/BoolConfigurable.$(OBJEXT) \
+	src/Compare.$(OBJEXT) src/CompareModel.$(OBJEXT) \
 	src/ConfigPage.$(OBJEXT) src/Controller.$(OBJEXT) \
 	src/CrossSecDB.$(OBJEXT) src/CutController.$(OBJEXT) \
 	src/CutflowAnalyzer.$(OBJEXT) \
@@ -172,6 +173,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	src/$(DEPDIR)/AllModels.Po src/$(DEPDIR)/BoolConfigurable.Po \
+	src/$(DEPDIR)/Compare.Po src/$(DEPDIR)/CompareModel.Po \
 	src/$(DEPDIR)/ConfigModel.Po src/$(DEPDIR)/ConfigPage.Po \
 	src/$(DEPDIR)/ConfigTable.Po src/$(DEPDIR)/Controller.Po \
 	src/$(DEPDIR)/CrossSecDB.Po src/$(DEPDIR)/Cut.Po \
@@ -297,8 +299,6 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EXEEXT = @EXEEXT@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -319,9 +319,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -386,6 +383,8 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/AllController.cpp \
 	$(srcdir)/src/AllModels.cpp \
 	$(srcdir)/src/BoolConfigurable.cpp \
+	$(srcdir)/src/Compare.cpp \
+	$(srcdir)/src/CompareModel.cpp \
 	$(srcdir)/src/ConfigPage.cpp \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/CrossSecDB.cpp \
@@ -578,6 +577,10 @@ src/AllModels.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/BoolConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/Compare.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/CompareModel.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/ConfigPage.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Controller.$(OBJEXT): src/$(am__dirstamp) \
@@ -734,6 +737,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/AllController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/AllModels.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/BoolConfigurable.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Compare.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CompareModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigPage.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/ConfigTable.Po@am__quote@ # am--include-marker
@@ -1110,6 +1115,8 @@ distclean: distclean-am
 		-rm -f src/$(DEPDIR)/AllController.Po
 	-rm -f src/$(DEPDIR)/AllModels.Po
 	-rm -f src/$(DEPDIR)/BoolConfigurable.Po
+	-rm -f src/$(DEPDIR)/Compare.Po
+	-rm -f src/$(DEPDIR)/CompareModel.Po
 	-rm -f src/$(DEPDIR)/ConfigModel.Po
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
 	-rm -f src/$(DEPDIR)/ConfigTable.Po
@@ -1238,6 +1245,8 @@ maintainer-clean: maintainer-clean-am
 		-rm -f src/$(DEPDIR)/AllController.Po
 	-rm -f src/$(DEPDIR)/AllModels.Po
 	-rm -f src/$(DEPDIR)/BoolConfigurable.Po
+	-rm -f src/$(DEPDIR)/Compare.Po
+	-rm -f src/$(DEPDIR)/CompareModel.Po
 	-rm -f src/$(DEPDIR)/ConfigModel.Po
 	-rm -f src/$(DEPDIR)/ConfigPage.Po
 	-rm -f src/$(DEPDIR)/ConfigTable.Po

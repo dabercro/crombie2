@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iomanip>
+#include <iostream>
 #include <regex>
 
 #include <crombie2/FileSystem.h>
@@ -23,14 +24,20 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
                                         const GlobalModel& globalmodel,
                                         const PlotStyleModel& plotstylemodel,
                                         const DatacardModel& datacardmodel,
-                                        const OnTheFlyModel& onthefly) :
+                                        const OnTheFlyModel& onthefly,
+                                        bool dofit,
+                                        const FitModel& fitmodel,
+                                        const CompareModel& comparemodel) :
   outputdir {outdir},
   plotmodel {plotmodel},
   cutmodel {cutmodel},
   reweightmodel {reweightmodel},
   globalmodel {globalmodel},
   plotstylemodel {plotstylemodel},
-  datacardmodel {datacardmodel}
+  datacardmodel {datacardmodel},
+  dofit {dofit},
+  fitmodel {fitmodel},
+  comparemodel {comparemodel}
 {
 
   // If no output directory, we are not going to make hist analyzers
@@ -235,6 +242,8 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   // Stores TH1D for this function
   std::list<TH1D> histstore {};
+  // Stores fit functions
+  std::list<TF1> fitstore {};
 
   // Use this to store sums for ratios
   Hist data_hist {};
@@ -312,6 +321,8 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   const double nomfont = 0.03;          // Target font size for plot labels
   const double titleoff = 1.55;         // Title offset
 
+  TH1D* bkg_sum = nullptr;
+
   if (mcvec.size()) {
 
     if (plotstylemodel.forcetop) {
@@ -329,21 +340,40 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     hs.GetXaxis()->SetLabelSize(0);
     hs.GetXaxis()->SetTitleSize(0);
 
-    auto* bkg_sum = bkg_hist.roothist();
+    bkg_sum = bkg_hist.roothist();
     bkg_sum->SetFillStyle(3001);
     bkg_sum->SetFillColor(kGray);
     bkg_sum->Draw("e2,same");
 
-    for (auto& sig : sorted_vec(signal)) {
+    if (dofit) {
+      for (auto& fit : fitmodel.fits) {
+        std::cout << std::endl
+                  << "For: " << output << " Fitting: " << fit.get()
+                  << std::endl << std::endl;
+        fitstore.emplace_back(fit.fit_hist(bkg_sum));
+      }
+    }
 
-      leg.AddEntry(styled(sig.second,
-                          FileGroup::FileType::SIGNAL,
-                          styles.at(sig.first)),
-                   sig.first.data(), "lp");
+  }
 
+  for (auto& sig : sorted_vec(signal)) {
+
+    leg.AddEntry(styled(sig.second,
+                        FileGroup::FileType::SIGNAL,
+                        styles.at(sig.first)),
+                 sig.first.data(), "lp");
+
+    if (bkg_sum)
       sig.second->Add(bkg_sum);
-      sig.second->Draw("hist,same");
+    sig.second->Draw("hist,same");
 
+    if (dofit) {
+      for (auto& fit : fitmodel.fits) {
+        std::cout << std::endl
+                  << "For: " << output << " Fitting: " << fit.get()
+                  << std::endl << std::endl;
+        fitstore.emplace_back(fit.fit_hist(sig.second));
+      }
     }
 
   }
@@ -411,6 +441,10 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   }
 
   pad1.cd();
+
+  for (auto& fit : fitstore)
+    fit.Draw("same");
+
   leg.Draw();
 
   canv.cd();

@@ -20,6 +20,7 @@ MainController::MainController (std::map<std::string, ConfigPage>& pagemap,
   plotcontrol {pagemap.at("plots"), plotmodel},
   cutcontrol {pagemap.at("selections"), cutmodel},
   fitcontrol {pagemap.at("fits"), fitmodel},
+  comparecontrol {pagemap.at("compare"), comparemodel},
   allmodels  {pagemap},
   allcontrol {jobpage, allmodels, pagemap},
   jobpage {jobpage}
@@ -53,6 +54,11 @@ MainController::MainController (std::map<std::string, ConfigPage>& pagemap,
 
   setup_controls(reweightbox, doreweight,
                  reweight_label);
+
+  // Fit histograms
+
+  setup_controls(fitbox, dofit,
+                 fit_label);
 
   // Submission buttons
 
@@ -144,7 +150,8 @@ void MainController::run (unsigned num_files,
   runner.run({dirs,
         docutflow.get_active(),
         dolumi.get_active(),
-        doreweight.get_active()
+        doreweight.get_active(),
+        dofit.get_active()
         });
 
 }

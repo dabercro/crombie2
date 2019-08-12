@@ -2,8 +2,10 @@
 #define CROMBIE2_HISTANALYZERMASTER_H
 
 
+#include <crombie2/CompareModel.h>
 #include <crombie2/DatacardModel.h>
 #include <crombie2/FileModel.h>
+#include <crombie2/FitModel.h>
 #include <crombie2/HistAnalysis.h>
 #include <crombie2/HistModel.h>
 #include <crombie2/PlotStyleModel.h>
@@ -22,7 +24,10 @@ namespace crombie2 {
                         const GlobalModel& globalmodel,
                         const PlotStyleModel& plotstylemodel,
                         const DatacardModel& datacardmodel,
-                        const OnTheFlyModel& onthefly);
+                        const OnTheFlyModel& onthefly,
+                        bool dofit,
+                        const FitModel& fitmodel,
+                        const CompareModel& comparemodel);
 
     HistAnalysis get_analysis_histograms (const std::string& selection) const;
 
@@ -48,6 +53,9 @@ namespace crombie2 {
     const GlobalModel& globalmodel;
     const PlotStyleModel& plotstylemodel;
     const DatacardModel& datacardmodel;
+    bool dofit;
+    const FitModel& fitmodel;
+    const CompareModel& comparemodel;
 
     /// Maps the input file name to type
     Types::map<FileGroup::FileType> types {};

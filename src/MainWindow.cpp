@@ -19,10 +19,11 @@ MainWindow::MainWindow ()
   add_page(pagemap.at("files"));
   add_page(pagemap.at("plotstyle"));
   add_page(pagemap.at("datacards"));
+  add_page(pagemap.at("fits"));
+  add_page(pagemap.at("compare"));
   add_page(pagemap.at("onthefly"));
   add_page(pagemap.at("reweight"));
   add_page(pagemap.at("json"));
-  add_page(pagemap.at("fits"));
 
 }
 
@@ -45,6 +46,7 @@ std::map<std::string, ConfigPage> MainWindow::init_map () {
   output["files"] = ConfigPage("Files");
   output["fits"] = ConfigPage("Fits");
   output["plots"] = ConfigPage("Plots");
+  output["compare"] = ConfigPage("Comparisons");
   output["selections"] = ConfigPage("Selections");
   output["onthefly"] = ConfigPage("On The Fly Reweighting");
 
