@@ -2,8 +2,6 @@
 #define CROMBIE2_MAINWINDOW_H
 
 
-#include <map>
-
 #include <gtkmm/notebook.h>
 #include <gtkmm/window.h>
 
