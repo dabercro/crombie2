@@ -1,5 +1,6 @@
 #include <fstream>
 #include <sstream>
+#include <regex>
 
 #include <crombie2/ConfigModel.h>
 #include <crombie2/FileSystem.h>
@@ -142,3 +143,19 @@ bool ConfigModel::is_valid () const {
   return true;
 
 }
+
+void ConfigModel::replace (const std::string& target, const std::string& newstr) {
+
+  Types::strings newlines {};
+
+  std::regex expr {target};
+
+  for (auto& line : serialize()) {
+    if (line.size())
+      newlines.push_back(std::regex_replace(line, expr, newstr));
+  }
+
+  read(newlines);
+
+}
+

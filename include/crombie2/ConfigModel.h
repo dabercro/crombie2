@@ -74,6 +74,8 @@ namespace crombie2 {
 
     virtual bool is_valid () const;
 
+    void replace (const std::string& target, const std::string& newstr);
+
   protected:
 
     /**

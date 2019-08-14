@@ -162,6 +162,12 @@ void HistAnalyzerMaster::output () const {
   if (comparemodel.list.size()) {
     Lock lock {};
     Types::map<Hist> emptyhists {};
+
+    if (plotstylemodel.normalize) {
+      for (auto& hist : comparehists)
+        hist.second.scale(1.0/hist.second.integral());
+    }
+
     draw_plot("comparison", emptyhists, emptyhists, comparehists, false, true);
   }
 
@@ -281,7 +287,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   auto mcvec = sorted_vec(mc);
 
-  double scale = (plotstylemodel.normalize and not blinding)
+  double scale = (plotstylemodel.normalize and data.size() and not blinding)
     ? data_hist.integral()/bkg_hist.integral()
     : 1.0;
 
@@ -294,8 +300,8 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   auto max = bkg_hist.max_w_unc();
   if (not blinding) {
     // Check the data histogram(s)
-    for (auto& hist : {data, signal}) {
-      for(auto& dat : hist) {
+    for (auto* hist : {&data, &signal}) {
+      for(auto& dat : *hist) {
         auto check = dat.second.max_w_unc();
         if (check > max) {
           max = check;

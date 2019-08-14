@@ -82,6 +82,14 @@ std::string Misc::nminus1 (const std::string& var, const std::string& cut) {
 }
 
 
+std::string Misc::replace (const std::string& input, const std::string& target, const std::string& newstr) {
+
+  std::regex expr {target};
+  return std::regex_replace(input, expr, newstr);
+
+}
+
+
 void Misc::message (const std::string& primary, const std::string& secondary) {
 
   Gtk::MessageDialog window (primary);

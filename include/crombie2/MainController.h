@@ -64,6 +64,8 @@ namespace crombie2 {
     AllController allcontrol;
     ConfigPage& jobpage;
 
+    void on_replace_all ();
+
     void on_submit_job ();
     void run (unsigned num_files, const std::map<std::string, std::string>& dirs, Progress& progress);
 
@@ -94,6 +96,12 @@ namespace crombie2 {
     Gtk::HBox fitbox {};
     Gtk::CheckButton dofit {};
     Gtk::Label fit_label {"Do fit"};
+
+    Gtk::HBox replace_box {};
+    Gtk::Entry replace1 {};
+    Gtk::Label replace_label {" to "};
+    Gtk::Entry replace2 {};
+    Gtk::Button replace_button {"Replace All"};
 
     Gtk::HButtonBox submitbox {};
     Gtk::Button button {"Submit"};

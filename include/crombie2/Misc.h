@@ -68,6 +68,8 @@ namespace crombie2 {
     */
     bool check_comma_field (const std::string& val, const std::string& tocheck);
 
+    std::string replace (const std::string& input, const std::string& target, const std::string& newstr);
+
   }
 }
 

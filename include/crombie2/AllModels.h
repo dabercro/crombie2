@@ -22,14 +22,13 @@ namespace crombie2 {
       return *ptr;
     }
 
+    Types::map<ConfigModel*> models {};
+
   protected:
     void read (const Types::strings& config) override;
 
     std::list<std::string> serialize () const override;
 
-  private:
-
-    Types::map<ConfigModel*> models {};
   };
 }
 

@@ -60,6 +60,13 @@ MainController::MainController (std::map<std::string, ConfigPage>& pagemap,
   setup_controls(fitbox, dofit,
                  fit_label);
 
+  // Replace in configs
+
+  setup_controls(replace_box, replace1, replace_label, replace2, replace_button);
+
+  replace_button.signal_clicked().
+    connect(sigc::mem_fun(*this, &MainController::on_replace_all));
+
   // Submission buttons
 
   jobpage.pack_end(submitbox, Gtk::PACK_SHRINK);
@@ -154,5 +161,23 @@ void MainController::run (unsigned num_files,
         doreweight.get_active(),
         dofit.get_active()
         });
+
+}
+
+
+void MainController::on_replace_all () {
+
+  auto target = replace1.get_text();
+  auto newstr = replace2.get_text();
+
+  if ((target.size() and newstr.size()) or Misc::confirm("One entry is empty. Continue?")) {
+
+    histoutput.set_text(Misc::replace(histoutput.get_text(), target, newstr));
+    datacardoutput.set_text(Misc::replace(datacardoutput.get_text(), target, newstr));
+
+    for (auto& model : allmodels.models)
+      model.second->replace(target, newstr);
+
+  }
 
 }
