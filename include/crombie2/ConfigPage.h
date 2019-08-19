@@ -1,14 +1,15 @@
 #ifndef CROMBIE2_CONFIGPAGE_H
 #define CROMBIE2_CONFIGPAGE_H
 
-#include <string>
 
 #include <gtkmm/box.h>
 #include <gtkmm/scrolledwindow.h>
 
+#include <crombie2/ConfigModel.h>
+
+
 namespace crombie2 {
   class Controller;
-  class ConfigModel;
 
   /**
      @brief Page that shows up as a tab in the MainWindow

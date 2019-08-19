@@ -21,21 +21,25 @@ SelectionDisplay::SelectionDisplay (CutModel& cutmodel, Selection& selection) :
 
 void SelectionDisplay::on_click () {
 
-  Gtk::MessageDialog message (selection.get_name());
+  if (model.is_valid()) {
 
-  std::stringstream ss {};
+    Gtk::MessageDialog message (selection.get_name());
 
-  ss << "Cut:" << std::endl
-     << model.expand(selection.cut)
-     << std::endl << std::endl
-     << "Data Weight:" << std::endl
-     << model.expand(selection.data_weight)
-     << std::endl << std::endl
-     << "MC Weight:" << std::endl
-     << model.expand(selection.mc_weight);
+    std::stringstream ss {};
 
-  message.set_secondary_text(ss.str());
+    ss << "Cut:" << std::endl
+       << model.expand(selection.cut)
+       << std::endl << std::endl
+       << "Data Weight:" << std::endl
+       << model.expand(selection.data_weight)
+       << std::endl << std::endl
+       << "MC Weight:" << std::endl
+       << model.expand(selection.mc_weight);
 
-  message.run();
+    message.set_secondary_text(ss.str());
+
+    message.run();
+
+  }
 
 }

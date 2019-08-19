@@ -2,9 +2,6 @@
 #define CROMBIE2_ALLMODELS_H
 
 
-#include <exception>
-
-#include <crombie2/ConfigModel.h>
 #include <crombie2/ConfigPage.h>
 
 

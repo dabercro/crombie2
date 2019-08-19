@@ -5,7 +5,6 @@
 #include <gtkmm/button.h>
 #include <gtkmm/comboboxentrytext.h>
 
-#include <crombie2/ConfigModel.h>
 #include <crombie2/ConfigPage.h>
 
 
@@ -48,6 +47,9 @@ namespace crombie2 {
     void on_save ();
     void on_load ();
 
+    /// Redraws model. Hack to deal with Gtk not drawing on unexposed spaces
+    void on_redraw();
+
     void on_export ();
     void on_import ();
 
@@ -62,6 +64,7 @@ namespace crombie2 {
 
     Gtk::Button exportbutton {"Export"};
     Gtk::Button importbutton {"Import"};
+    Gtk::Button redrawbutton {"Redraw"};
 
     Gtk::Button updatebutton {"Update"};
     Gtk::Button savebutton {"Save Tag"};

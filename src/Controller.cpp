@@ -25,7 +25,7 @@ Controller::Controller (ConfigPage& page, ConfigModel& model, bool load_last) :
   updatebox.pack_end(tagentry, Gtk::PACK_SHRINK);
   tagentry.show();
 
-  for (auto* button : {&loadbutton, &savebutton,
+  for (auto* button : {&loadbutton, &savebutton, &redrawbutton,
         &exportbutton, &importbutton, &updatebutton}) {
 
     button->set_border_width(5);
@@ -44,6 +44,8 @@ Controller::Controller (ConfigPage& page, ConfigModel& model, bool load_last) :
     connect(sigc::mem_fun(*this, &Controller::on_export));
   importbutton.signal_clicked().
     connect(sigc::mem_fun(*this, &Controller::on_import));
+  redrawbutton.signal_clicked().
+    connect(sigc::mem_fun(*this, &Controller::on_redraw));
 
   updatebutton.signal_clicked().
     connect(sigc::mem_fun(*this, &Controller::on_update));
@@ -163,5 +165,12 @@ void Controller::on_copy_name () {
   clippy->set_text(copyname.get_label());
 
   Misc::message("Copied to clipboard.");
+
+}
+
+
+void Controller::on_redraw () {
+
+  redraw();
 
 }
