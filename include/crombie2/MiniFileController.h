@@ -6,7 +6,6 @@
 #include <gtkmm/radiobutton.h>
 
 #include <crombie2/FileGroup.h>
-#include <crombie2/RemoveWrapper.h>
 
 
 namespace crombie2 {

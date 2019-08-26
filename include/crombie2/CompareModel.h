@@ -4,7 +4,6 @@
 
 #include <crombie2/Compare.h>
 #include <crombie2/CutModel.h>
-#include <crombie2/ListModel.h>
 #include <crombie2/PlotModel.h>
 
 

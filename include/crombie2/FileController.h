@@ -2,7 +2,6 @@
 #define CROMBIE2_FILECONTROLLER_H
 
 
-#include <crombie2/CrossSecDB.h>
 #include <crombie2/Controller.h>
 #include <crombie2/CrossSecDB.h>
 #include <crombie2/FileModel.h>
