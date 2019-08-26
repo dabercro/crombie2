@@ -3,7 +3,6 @@
 
 #include <crombie2/FileSystem.h>
 #include <crombie2/HistModel.h>
-#include <crombie2/Misc.h>
 
 
 using namespace crombie2;

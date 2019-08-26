@@ -1,5 +1,4 @@
 #include <crombie2/HistAnalyzer.h>
-#include <crombie2/Misc.h>
 
 
 using namespace crombie2;

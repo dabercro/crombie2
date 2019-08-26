@@ -2,7 +2,7 @@
 #define CROMBIE2_ONTHEFLYREWEIGHTER_H
 
 
-#include <crombie2/OnTheFlyModel.h>
+#include <crombie2/ReweightReader.h>
 #include <crombie2/Tree.h>
 
 

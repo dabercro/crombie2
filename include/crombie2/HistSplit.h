@@ -2,7 +2,6 @@
 #define CROMBIE2_HISTSPLIT_H
 
 
-#include <crombie2/FileGroup.h>
 #include <crombie2/Hist.h>
 
 
