@@ -123,7 +123,8 @@ void MainController::on_submit_job () {
       (not dodatacard.get_active() or datacardmodel.is_valid(cutmodel, plotmodel)) and
       checkdir(outdir) and
       checkdir(datadir) and
-      comparemodel.is_valid(cutmodel, plotmodel)
+      comparemodel.is_valid(cutmodel, plotmodel) and
+      (not doreweight.get_active() or reweightmodel.is_valid(plotmodel))
       ) {
 
     std::thread thread {

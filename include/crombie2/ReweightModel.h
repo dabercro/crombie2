@@ -3,7 +3,7 @@
 
 
 #include <crombie2/BoolConfigurable.h>
-#include <crombie2/Configurable.h>
+#include <crombie2/PlotModel.h>
 #include <crombie2/SimpleModel.h>
 
 
@@ -46,6 +46,8 @@ namespace crombie2 {
 
     /// Normalizes the MC to match Data yields before getting the reweight
     BoolConfigurable normalize {"Normalize Before Reweight"};
+
+    bool is_valid (const PlotModel& plots) const;
 
   };
 
