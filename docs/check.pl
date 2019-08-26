@@ -11,31 +11,36 @@ foreach my $infile (@ARGV) {
     push @lines, <$handle>;
     close $handle;
 
-    my @directly_included;
-    my %eventual_included;
+    my @directly_included = ();
+    my %eventual_included = ();
 
-    for (@lines) {
-        if (m|crombie2/(\w+)\.h|) {
-            if (! grep { /$1[^\.]/ } @lines) {
-                print "$infile doesn't need $_\n";
-            }
+    for (grep {/#include/} @lines) {
+        if (m|crombie2/(\w+).h| && ! grep {/$1[^\.]/} @lines) {
+            print "$infile doesn't need $_\n";
+        }
 
-            my @tocheck;
-            $eventual_included{$1}++;
-            push @directly_included, $1;
-            push @tocheck, $1;
+        my ($included_file) = m/#include\s.([\w\/\.]+)/;
 
-            while (scalar @tocheck) {
-                my $nextfile = pop @tocheck;
-                open (my $include_handle, '<', "include/crombie2/$nextfile.h");
-                for (<$include_handle>) {
-                    if (m|crombie2/(\w+)\.h|) {
+        my @tocheck = ();
+        $eventual_included{$included_file}++;
+        push @directly_included, $included_file;
+
+        if ($included_file =~ /crombie2\//) {
+            push @tocheck, $included_file;
+        }
+
+        while (scalar @tocheck) {
+            my $nextfile = pop @tocheck;
+            open (my $include_handle, '<', "include/$nextfile");
+            for (<$include_handle>) {
+                if (/#include .([\w\/]+\.h)/) {
+                    $eventual_included{$1}++;
+                    if (m|(crombie2/\w+\.h)|) {
                         push @tocheck, $1;
-                        $eventual_included{$1}++;
                     }
                 }
-                close $include_handle;
             }
+            close $include_handle;
         }
     }
 

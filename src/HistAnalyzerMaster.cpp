@@ -12,7 +12,6 @@
 #include "THStack.h"
 #include "TLatex.h"
 #include "TLegend.h"
-#include "TFile.h"
 
 
 using namespace crombie2;
