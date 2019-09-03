@@ -74,7 +74,9 @@ std::string ConfigModel::save () {
 
   auto file_name = filename();
 
-  save(file_name);
+  // For the hashed name, don't need to hit the disk
+  if (not FileSystem::exists(file_name))
+    save(file_name);
 
   return file_name;
 

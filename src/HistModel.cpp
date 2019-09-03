@@ -1,5 +1,6 @@
 #include <exception>
 #include <fstream>
+#include <unordered_map>
 
 #include <crombie2/FileSystem.h>
 #include <crombie2/HistModel.h>
@@ -90,6 +91,15 @@ HistSplit HistModel::get_histsplit () const {
 
   HistSplit output {legend_entries};
 
+  static std::unordered_map<std::string, std::vector<Hist>> cached_hists {};
+
+  auto cached_hist = cached_hists.find(cache_file);
+
+  if (cached_hist != cached_hists.end()) {
+    output.add(cached_hist->second);
+    return output;
+  }
+
   if (not cached) {
     // Merge analyzers
     for (auto& analyzer : analyzers)
@@ -144,6 +154,13 @@ HistSplit HistModel::get_histsplit () const {
     output.add(hists);
 
   }
+
+  std::vector<Hist> hists {};
+
+  for (auto& hist : output.get_hists())
+    hists.emplace_back(hist.second);
+
+  cached_hists.insert({cache_file, std::move(hists)});
 
   return output;
 
