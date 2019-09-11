@@ -86,6 +86,11 @@ void Runner::run (const RunConfig& config) {
   for (auto& thread : threads)
     thread.join();
 
+  if (progress.aborted()) {
+    progress.set_progress("Aborted");
+    return;
+  }
+
   progress.set_progress("Processing Output", 1.0);
 
   // Output histograms stuff
@@ -131,6 +136,11 @@ void Runner::run_thread () {
 
     if (queue.empty()) {
       job_lock.unlock();
+      break;
+    }
+
+    if (progress.aborted()) {
+      progress.set_progress("Aborting");
       break;
     }
 

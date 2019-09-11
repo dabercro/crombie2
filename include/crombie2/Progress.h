@@ -4,6 +4,7 @@
 
 #include <glibmm/dispatcher.h>
 #include <gtkmm/box.h>
+#include <gtkmm/button.h>
 #include <gtkmm/progressbar.h>
 
 
@@ -14,8 +15,14 @@ namespace crombie2 {
 
     void set_progress (const std::string& text, double frac = 0);
 
+    bool aborted ();
+
   private:
     void on_update_progress ();
+    void on_abort ();
+
+    bool abort {false};
+    Gtk::Button abort_button {"Abort"};
 
     Glib::Dispatcher emitter {};
     Gtk::ProgressBar bar {};
