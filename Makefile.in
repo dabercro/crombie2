@@ -107,8 +107,9 @@ am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigTable.$(OBJEXT) \
 	src/Cut.$(OBJEXT) src/CutModel.$(OBJEXT) \
 	src/CutString.$(OBJEXT) src/FileSystem.$(OBJEXT) \
 	src/GuiConfigurable.$(OBJEXT) src/JoinerConfigurable.$(OBJEXT) \
-	src/Misc.$(OBJEXT) src/Parse.$(OBJEXT) src/Selection.$(OBJEXT) \
-	src/TextConfigurable.$(OBJEXT)
+	src/Lock.$(OBJEXT) src/Misc.$(OBJEXT) src/Parse.$(OBJEXT) \
+	src/Selection.$(OBJEXT) src/TextConfigurable.$(OBJEXT) \
+	src/Tree.$(OBJEXT)
 am__objects_2 = $(am__objects_1) src/AllController.$(OBJEXT) \
 	src/AllModels.$(OBJEXT) src/BoolConfigurable.$(OBJEXT) \
 	src/Compare.$(OBJEXT) src/CompareModel.$(OBJEXT) \
@@ -127,9 +128,8 @@ am__objects_2 = $(am__objects_1) src/AllController.$(OBJEXT) \
 	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
 	src/JobSorter.$(OBJEXT) src/JSONAnalyzerMaster.$(OBJEXT) \
 	src/JSONAnalyzer.$(OBJEXT) src/JSONModel.$(OBJEXT) \
-	src/Lock.$(OBJEXT) src/LumiSelection.$(OBJEXT) \
-	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
-	src/MiniCutController.$(OBJEXT) \
+	src/LumiSelection.$(OBJEXT) src/MainController.$(OBJEXT) \
+	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) \
 	src/MiniFitController.$(OBJEXT) src/OnTheFlyModel.$(OBJEXT) \
 	src/OnTheFlyReweighter.$(OBJEXT) src/Plot.$(OBJEXT) \
@@ -137,8 +137,7 @@ am__objects_2 = $(am__objects_1) src/AllController.$(OBJEXT) \
 	src/Progress.$(OBJEXT) src/RateParams.$(OBJEXT) \
 	src/ReweightModel.$(OBJEXT) src/ReweightReader.$(OBJEXT) \
 	src/Runner.$(OBJEXT) src/SelectionDisplay.$(OBJEXT) \
-	src/SimpleController.$(OBJEXT) src/SimpleModel.$(OBJEXT) \
-	src/Tree.$(OBJEXT)
+	src/SimpleController.$(OBJEXT) src/SimpleModel.$(OBJEXT)
 am_crombie2_OBJECTS = $(am__objects_2) src/main.$(OBJEXT)
 crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
@@ -375,10 +374,12 @@ cutsrcs = \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GuiConfigurable.cpp \
 	$(srcdir)/src/JoinerConfigurable.cpp \
+	$(srcdir)/src/Lock.cpp \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/Selection.cpp \
-	$(srcdir)/src/TextConfigurable.cpp
+	$(srcdir)/src/TextConfigurable.cpp \
+	$(srcdir)/src/Tree.cpp
 
 allsrcs = $(cutsrcs) \
 	$(srcdir)/src/AllController.cpp \
@@ -414,7 +415,6 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/JSONAnalyzerMaster.cpp \
 	$(srcdir)/src/JSONAnalyzer.cpp \
 	$(srcdir)/src/JSONModel.cpp \
-	$(srcdir)/src/Lock.cpp \
 	$(srcdir)/src/LumiSelection.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
@@ -433,8 +433,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/SelectionDisplay.cpp \
 	$(srcdir)/src/SimpleController.cpp \
-	$(srcdir)/src/SimpleModel.cpp \
-	$(srcdir)/src/Tree.cpp
+	$(srcdir)/src/SimpleModel.cpp
 
 AUTOMAKE_OPTIONS = subdir-objects
 crombie2_SOURCES = $(allsrcs) \
@@ -567,12 +566,14 @@ src/GuiConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/JoinerConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/Lock.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/Misc.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/Parse.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/Selection.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/TextConfigurable.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/Tree.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/AllController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/AllModels.$(OBJEXT): src/$(am__dirstamp) \
@@ -637,7 +638,6 @@ src/JSONAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/JSONModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/Lock.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/LumiSelection.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MainController.$(OBJEXT): src/$(am__dirstamp) \
@@ -675,7 +675,6 @@ src/SimpleController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/SimpleModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/Tree.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/main.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 
 crombie2$(EXEEXT): $(crombie2_OBJECTS) $(crombie2_DEPENDENCIES) $(EXTRA_crombie2_DEPENDENCIES) 

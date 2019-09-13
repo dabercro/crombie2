@@ -9,10 +9,12 @@ cutsrcs = \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GuiConfigurable.cpp \
 	$(srcdir)/src/JoinerConfigurable.cpp \
+	$(srcdir)/src/Lock.cpp \
 	$(srcdir)/src/Misc.cpp \
 	$(srcdir)/src/Parse.cpp \
 	$(srcdir)/src/Selection.cpp \
-	$(srcdir)/src/TextConfigurable.cpp
+	$(srcdir)/src/TextConfigurable.cpp \
+	$(srcdir)/src/Tree.cpp
 
 allsrcs = $(cutsrcs) \
 	$(srcdir)/src/AllController.cpp \
@@ -48,7 +50,6 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/JSONAnalyzerMaster.cpp \
 	$(srcdir)/src/JSONAnalyzer.cpp \
 	$(srcdir)/src/JSONModel.cpp \
-	$(srcdir)/src/Lock.cpp \
 	$(srcdir)/src/LumiSelection.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
@@ -67,8 +68,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/Runner.cpp \
 	$(srcdir)/src/SelectionDisplay.cpp \
 	$(srcdir)/src/SimpleController.cpp \
-	$(srcdir)/src/SimpleModel.cpp \
-	$(srcdir)/src/Tree.cpp
+	$(srcdir)/src/SimpleModel.cpp
 
 AUTOMAKE_OPTIONS = subdir-objects
 

@@ -4,6 +4,7 @@
 
 #include <crombie2/FileGroup.h>
 #include <crombie2/GlobalModel.h>
+#include <crombie2/Tree.h>
 
 
 namespace crombie2 {
@@ -38,6 +39,8 @@ namespace crombie2 {
     std::vector<std::string> get_datacard_names (FileGroup::FileType type) const;
 
     bool is_valid (const GlobalModel& globalmodel) const;
+
+    Tree get_one (const GlobalModel& globalmodel) const;
 
   private:
 

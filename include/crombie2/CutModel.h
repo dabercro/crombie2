@@ -5,6 +5,7 @@
 #include <crombie2/ConfigModel.h>
 #include <crombie2/CutString.h>
 #include <crombie2/Selection.h>
+#include <crombie2/Tree.h>
 #include <crombie2/RemoveList.h>
 
 
@@ -32,6 +33,7 @@ namespace crombie2 {
     RemoveList<Selection> selections {};
 
     bool is_valid () const override;
+    bool is_valid (Tree& tree) const;
 
     /**
        @param label Is the cut to get the cutflow cuts for

@@ -163,6 +163,24 @@ bool CutModel::is_valid () const {
 
 }
 
+bool CutModel::is_valid (Tree& tree) const {
+
+  try {
+    for (auto& selection : selections) {
+      if (not tree.is_valid(expand(selection.cut)) or
+          not tree.is_valid(expand(selection.data_weight)) or
+          not tree.is_valid(expand(selection.mc_weight)))
+        return false;
+    }
+  }
+  catch (const std::exception& e) {
+    return false;
+  }
+
+  return true;
+
+}
+
 
 std::vector<std::string> CutModel::cutflow (const std::string& label) const {
 

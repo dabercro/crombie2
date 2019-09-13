@@ -11,26 +11,23 @@ FileEntry::FileEntry (const FileEntry& other) :
   xs {other.xs} {}
 
 
-Types::strings& FileEntry::files (const std::string& inputdir) {
+Types::strings FileEntry::files (const std::string& inputdir) const {
 
-  if (last_listing == inputdir)
-    return files_cache;
+  Types::strings output {};
 
   auto entry = name.get();
 
-  last_listing = inputdir + "/" + entry;
-
   auto single = entry + ".root";
   if (FileSystem::exists(inputdir + "/" + single))
-    files_cache.push_back(single);
+    output.push_back(single);
 
   else {
     entry += '/';
-    files_cache = Misc::comprehension<std::string>
-      (FileSystem::list(last_listing, true, false),
+    output = Misc::comprehension<std::string>
+      (FileSystem::list(inputdir + "/" + entry, true, false),
        [&entry] (auto& ele) { return entry + ele; });
   }
 
-  return files_cache;
+  return output;
 
 }

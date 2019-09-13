@@ -77,3 +77,10 @@ double Tree::max (const std::string& branch) {
   return tree->GetMaximum(branch.data());
 
 }
+
+
+bool Tree::is_valid (const std::string& expr) {
+
+  return get_formula(expr)->GetNdim();
+
+}

@@ -108,11 +108,18 @@ void MainController::on_submit_job () {
     return not dir.size() or FileSystem::confirm_overwrite(dir);
   };
 
+  if (not filemodel.is_valid(globalmodel)) {
+    progress.set_progress(std::string("Aborted"));
+    return;
+  }
+
+  auto checkfile = filemodel.get_one(globalmodel);
+
   // Check if everything is okay
   if (globalmodel.is_valid() and
-      filemodel.is_valid(globalmodel) and
       ontheflymodel.is_valid() and
-      cutmodel.is_valid() and
+      plotmodel.is_valid(checkfile) and
+      cutmodel.is_valid(checkfile) and
       (not dodatacard.get_active() or datacardmodel.is_valid(cutmodel, plotmodel)) and
       checkdir(outdir) and
       checkdir(datadir) and

@@ -179,6 +179,45 @@ bool FileModel::is_valid (const GlobalModel& globalmodel) const {
       }
     }
   }
+
+  // Next check that MC and Data branches match, if both used
+  Types::strings mc_branches {};
+  Types::strings data_branches {};
+
+  auto getbranches = [&globalmodel] (const auto& entry) {
+
+    Types::strings output {};
+    Tree infile {entry.files(globalmodel.inputdir).front(), globalmodel.tree};
+
+    for (auto* branch : *(infile.get<TTree>(globalmodel.tree.get())->GetListOfBranches()))
+      output.emplace_back(branch->GetName());
+
+    return output;
+
+  };
+
+  for (auto& group : filegroups) {
+    if (group.type == FileGroup::FileType::DATA and not data_branches.size())
+      data_branches = getbranches(group.files.front());
+    if ((group.type == FileGroup::FileType::MC or group.type == FileGroup::FileType::SIGNAL)
+        and not mc_branches.size())
+      mc_branches = getbranches(group.files.front());
+  }
+
+  // size() == 0 if we're not using both MC and Data
+  if (data_branches.size() and mc_branches.size() and data_branches != mc_branches) {
+    Misc::message("Data and MC branches do not match!");
+    return false;
+  }
+
   return true;
+
+}
+
+
+Tree FileModel::get_one (const GlobalModel& globalmodel) const {
+
+  auto& entry = filegroups.front().files.front();
+  return Tree(entry.files(globalmodel.inputdir).front(), globalmodel.tree);
 
 }

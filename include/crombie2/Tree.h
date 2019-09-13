@@ -57,6 +57,8 @@ namespace crombie2 {
 
     std::shared_ptr<TTreeFormula> get_formula (const std::string& expr);
 
+    bool is_valid (const std::string& expr);
+
   private:
 
     TFile* file;          ///< The TFile that is being read

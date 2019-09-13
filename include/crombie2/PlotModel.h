@@ -3,6 +3,7 @@
 
 
 #include <crombie2/ListModel.h>
+#include <crombie2/Tree.h>
 #include <crombie2/Plot.h>
 
 
@@ -14,6 +15,8 @@ namespace crombie2 {
 
   public:
     std::string get_name () const override;
+
+    bool is_valid (Tree& tree) const;
 
   private:
     void read (const Types::strings& config) override;

@@ -57,3 +57,17 @@ std::list<std::string> PlotModel::serialize () const {
   return output;
 
 }
+
+
+bool PlotModel::is_valid (Tree& tree) const {
+
+  for (auto& plot : list) {
+    if (not tree.is_valid(plot.expr(FileGroup::FileType::DATA)) or
+        not tree.is_valid(plot.expr(FileGroup::FileType::MC)) or
+        not tree.is_valid(plot.expr(FileGroup::FileType::SIGNAL)))
+      return false;
+  }
+
+  return true;
+
+}

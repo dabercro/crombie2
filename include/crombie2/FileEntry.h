@@ -26,11 +26,7 @@ namespace crombie2 {
     /**
        Get the full list of files
     */
-    Types::strings& files (const std::string& inputdir);
-
-  private:
-    std::string last_listing {};    ///< Variable that holds the last directory that was listed
-    Types::strings files_cache {};  ///< A cache of the last listing results
+    Types::strings files (const std::string& inputdir) const;
 
   };
 }
