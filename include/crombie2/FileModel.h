@@ -2,8 +2,8 @@
 #define CROMBIE2_FILEMODEL_H
 
 
-#include <crombie2/ConfigModel.h>
 #include <crombie2/FileGroup.h>
+#include <crombie2/GlobalModel.h>
 
 
 namespace crombie2 {
@@ -36,6 +36,8 @@ namespace crombie2 {
 
     /// Get the datacard process names for a given type of file
     std::vector<std::string> get_datacard_names (FileGroup::FileType type) const;
+
+    bool is_valid (const GlobalModel& globalmodel) const;
 
   private:
 

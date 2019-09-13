@@ -110,6 +110,7 @@ void Runner::run (const RunConfig& config) {
       std::string cut = selection.cut;
       histanalyzers.get_analysis_histograms(cut).
         reweight(reweightmodel.normalize, reweightmodel.output, cut + "_reweight");
+      allmodels.save(Misc::replace(reweightmodel.output, "\\.root", ".cnf"));
     }
   }
 

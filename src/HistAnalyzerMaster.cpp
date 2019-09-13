@@ -665,6 +665,12 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   // Get the columns for the data yields
 
   std::vector<double> bin_contents {};
+
+  bool print {globalmodel.printdatacardview};
+
+  if (print)
+    std::cout << std::left << std::setw(15) << " ";
+
   for (auto& hist : datacardmodel.hists) {
     auto& bin = bin_proc_hist.at(hist.selection);
     double value = 0;
@@ -673,13 +679,23 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
       value += hist.integral();
     }
     bin_contents.push_back(value);
-    datacard << std::left << std::setw(15) << hist.selection.get();
+
+    auto selection = hist.selection.get();
+
+    datacard << std::left << std::setw(15) << selection;
+    if (print)
+      std::cout << std::right << std::setw(15) << selection;
   }
 
   datacard << std::endl << std::left << std::setw(25) << "observation";
+  if (print)
+    std::cout << std::endl << std::left << std::setw(15) << "Data";
 
-  for (auto value : bin_contents)
+  for (auto value : bin_contents) {
     datacard << std::left << std::setw(15) << std::setprecision(1) << std::fixed << value;
+    if (print)
+      std::cout << std::right << std::setw(15) << std::setprecision(1) << std::fixed << value;
+  }
 
   datacard << std::endl << "------------------------------" << std::endl;
 
@@ -721,6 +737,21 @@ void HistAnalyzerMaster::dumpdatacard (const std::string& datadir,
   mcline("process", &MCColumn::processname);
   mcline("process", &MCColumn::processnum);
   mcline("rate", &MCColumn::obs);
+
+  if (print) {
+    std::string lastprocess = "";
+    for (auto& column : columns) {
+      if (column.processname != lastprocess) {
+        std::cout << std::endl << std::left << std::setw(15) << column.processname;
+        lastprocess = column.processname;
+      }
+
+      std::cout << std::right << std::setw(15)
+                << std::setprecision(6) << std::fixed
+                << column.obs;
+    }
+    std::cout << std::endl;
+  }
 
   datacard << "------------------------------" << std::endl;
 

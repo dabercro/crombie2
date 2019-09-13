@@ -2,6 +2,8 @@
 #include <exception>
 
 #include <crombie2/FileModel.h>
+#include <crombie2/FileSystem.h>
+#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
@@ -160,5 +162,23 @@ std::vector<std::string> FileModel::get_datacard_names (FileGroup::FileType type
   }
 
   return output;
+
+}
+
+
+bool FileModel::is_valid (const GlobalModel& globalmodel) const {
+
+  auto inputdir = globalmodel.inputdir.get() + "/";
+
+  for (auto& group : filegroups) {
+    for (auto& entry : group.files) {
+      auto tryname = inputdir + entry.name.get();
+      if (not (FileSystem::exists(tryname) or FileSystem::exists(tryname + ".root"))) {
+        Misc::message(tryname + " does not exist!");
+        return false;
+      }
+    }
+  }
+  return true;
 
 }

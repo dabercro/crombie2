@@ -3,6 +3,7 @@
 
 
 #include <crombie2/SimpleModel.h>
+#include <crombie2/BoolConfigurable.h>
 #include <crombie2/Configurable.h>
 
 
@@ -37,6 +38,9 @@ namespace crombie2 {
 
     /// The weights to read to normalize MC
     Configurable<std::string> normhist {"Weight Hist", "hSumW"};
+
+    /// If true, dump a nicer datacard table when making datacards
+    BoolConfigurable printdatacardview {"Print Datacard Table"};
 
   };
 

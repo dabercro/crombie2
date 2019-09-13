@@ -93,15 +93,7 @@ void MainController::setup_controls (Gtk::HBox& box, Gtk::Widget& to_add) {
 
 void MainController::on_submit_job () {
 
-  auto num_files = filemodel.num_files(globalmodel.inputdir);
-
-  if (not num_files)
-    return;
-
   auto& progress = progresses.emplace_back(jobpage.box());
-
-  progress.set_progress(std::string("Setting up ") +
-                        std::to_string(num_files) + " files");
 
   std::string outdir = dohists.get_active()
     ? plotstylemodel.outplotdir.get() + "/" + histoutput.get_text()
@@ -118,6 +110,7 @@ void MainController::on_submit_job () {
 
   // Check if everything is okay
   if (globalmodel.is_valid() and
+      filemodel.is_valid(globalmodel) and
       ontheflymodel.is_valid() and
       cutmodel.is_valid() and
       (not dodatacard.get_active() or datacardmodel.is_valid(cutmodel, plotmodel)) and
@@ -126,6 +119,14 @@ void MainController::on_submit_job () {
       comparemodel.is_valid(cutmodel, plotmodel) and
       (not doreweight.get_active() or reweightmodel.is_valid(plotmodel))
       ) {
+
+    auto num_files = filemodel.num_files(globalmodel.inputdir);
+
+    if (not num_files)
+      return;
+
+    progress.set_progress(std::string("Setting up ") +
+                          std::to_string(num_files) + " files");
 
     std::thread thread {
       [num_files, &progress, outdir, datadir, this] () {
