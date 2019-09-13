@@ -6,6 +6,7 @@
 #include <crombie2/CutflowAnalyzerMaster.h>
 #include <crombie2/HistAnalyzerMaster.h>
 #include <crombie2/JSONAnalyzerMaster.h>
+#include <crombie2/Misc.h>
 #include <crombie2/Progress.h>
 #include <crombie2/Runner.h>
 

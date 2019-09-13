@@ -1,4 +1,5 @@
 #include <array>
+#include <iostream>
 #include <cstdlib>
 #include <exception>
 #include <iterator>
