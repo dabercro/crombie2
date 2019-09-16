@@ -17,7 +17,8 @@ PlotStyleModel::PlotStyleModel () :
     &forcetop,
     &maximum,
     &minimum,
-    &saveroot
+    &saveroot,
+    &usegloballumi
   } {}
 
 

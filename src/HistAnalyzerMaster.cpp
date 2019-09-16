@@ -489,7 +489,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   constexpr double toplocation = 0.96;
   latex.SetTextSize(0.035);
 
-  double currentlumi {globalmodel.luminosity * scale};
+  double currentlumi {globalmodel.luminosity * (plotstylemodel.usegloballumi ? 1.0 : scale)};
 
   if (currentlumi) {
     latex.SetTextAlign(31);

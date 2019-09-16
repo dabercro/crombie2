@@ -55,6 +55,9 @@ namespace crombie2 {
 
     BoolConfigurable saveroot {"Save .root file"};
 
+    /// If checked, use the global luminosity
+    BoolConfigurable usegloballumi {"Keep Global Luminosity"};
+
   };
 
 }

@@ -187,7 +187,11 @@ bool FileModel::is_valid (const GlobalModel& globalmodel) const {
   auto getbranches = [&globalmodel] (const auto& entry) {
 
     Types::strings output {};
-    Tree infile {entry.files(globalmodel.inputdir).front(), globalmodel.tree};
+
+    Tree infile {
+      globalmodel.inputdir.get() + "/" + entry.files(globalmodel.inputdir).front(),
+      globalmodel.tree
+    };
 
     for (auto* branch : *(infile.get<TTree>(globalmodel.tree.get())->GetListOfBranches()))
       output.emplace_back(branch->GetName());
@@ -218,6 +222,7 @@ bool FileModel::is_valid (const GlobalModel& globalmodel) const {
 Tree FileModel::get_one (const GlobalModel& globalmodel) const {
 
   auto& entry = filegroups.front().files.front();
-  return Tree(entry.files(globalmodel.inputdir).front(), globalmodel.tree);
+  return Tree(globalmodel.inputdir.get() + "/" + entry.files(globalmodel.inputdir).front(),
+              globalmodel.tree);
 
 }

@@ -44,6 +44,8 @@ void Progress::on_update_progress () {
 
   bar.set_text(newtext);
   bar.set_fraction(newfrac);
+  if (newfrac == 1.0)
+    abort_button.hide();
 
 }
 

@@ -1,6 +1,7 @@
 #include <regex>
 
 #include <crombie2/Lock.h>
+#include <crombie2/Misc.h>
 #include <crombie2/Tree.h>
 
 
@@ -81,6 +82,11 @@ double Tree::max (const std::string& branch) {
 
 bool Tree::is_valid (const std::string& expr) {
 
-  return get_formula(expr)->GetNdim();
+  if (not get_formula(expr)->GetNdim()) {
+    Misc::message(expr + ": Not a valid formula. Check terminal.");
+    return false;
+  }
+
+  return true;
 
 }
