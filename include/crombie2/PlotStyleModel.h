@@ -58,6 +58,9 @@ namespace crombie2 {
     /// If checked, use the global luminosity
     BoolConfigurable usegloballumi {"Keep Global Luminosity"};
 
+    /// If checked, use log scale for top pad
+    BoolConfigurable logy {"Use Log Scale on Y-axis"};
+
   };
 
 }

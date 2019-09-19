@@ -88,7 +88,7 @@ void Runner::run (const RunConfig& config) {
     thread.join();
 
   if (progress.aborted()) {
-    progress.set_progress("Aborted");
+    progress.set_progress("Aborted", 1.0);
     return;
   }
 

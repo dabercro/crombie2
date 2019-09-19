@@ -342,6 +342,10 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   TPad pad1{"pad1", "pad1", 0.0, bottom, 1.0, 1.0};
   pad1.SetBottomMargin(bottom ? 0.025 : 0.1);
+
+  if (plotstylemodel.logy)
+    pad1.SetLogy();
+
   pad1.Draw();
   pad1.cd();
 
@@ -514,7 +518,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   // Save everything
   FileSystem::mkdirs(outputdir);
 
-  const std::regex replace_expr {"/"};
+  const std::regex replace_expr {"/|\\*|\\+|-"};
 
   for (auto& suff : {".pdf", ".png", ".C"}) {
     auto outname = outputdir + "/" +
