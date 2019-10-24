@@ -62,16 +62,15 @@ namespace crombie2 {
   private:
     template <typename I>
       void add_table (I& item) {
+
       if (((drawn++) % unsigned(perrow)) == 0) {
         boxes.emplace_back();
         page.box().pack_start(boxes.back(), Gtk::PACK_SHRINK);
         boxes.back().show();
       }
       auto& box = boxes.back();
-      item.draw(box);
+      item.draw_removable(box);
 
-      box.pack_start(item.remove, Gtk::PACK_SHRINK);
-      item.remove.show();
     }
 
     void on_add () {

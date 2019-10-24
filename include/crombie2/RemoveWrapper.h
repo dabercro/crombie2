@@ -5,6 +5,7 @@
 #include <functional>
 #include <list>
 
+#include <gtkmm/box.h>
 #include <gtkmm/button.h>
 
 
@@ -29,6 +30,9 @@ namespace crombie2 {
     T {args ...}, list {list} {
       remove.signal_clicked().
         connect(sigc::mem_fun(*this, &RemoveWrapper<T>::on_remove));
+      copy.signal_clicked().
+        connect(sigc::mem_fun(*this, &RemoveWrapper<T>::on_copy));
+
     }
 
     /// Destructor must override to ensure that parent class has virtual destructor
@@ -39,10 +43,33 @@ namespace crombie2 {
       functions.push_back(function);
     };
 
+    void draw_removable (Gtk::Box& page) {
+      T::draw(page);
+
+      page.pack_start(button_box, Gtk::PACK_SHRINK);
+      button_box.show();
+
+      if (not buttoned) {
+        button_box.pack_start(remove, Gtk::PACK_SHRINK);
+        button_box.pack_start(copy, Gtk::PACK_SHRINK);
+        buttoned = true;
+      }
+
+      remove.show();
+      copy.show();
+    }
+
     /// Need to pack and show button
     Gtk::Button remove {"Remove"};
 
   private:
+    /// Copy an element to the end of the list
+    Gtk::Button copy {"Copy"};
+
+    Gtk::VBox button_box {};
+
+    bool buttoned {false};
+
     std::list<RemoveWrapper<T>>& list;
 
     std::list<std::function<void()>> functions {};
@@ -53,6 +80,15 @@ namespace crombie2 {
         function();
       list.remove_if([this] (auto& element) { return &element == this; });
     }
+
+    void on_copy () {
+      if (functions.size()) {
+        throw;
+      }
+
+      list.emplace_back(list, T(*this));
+    }
+
 
   };
 }
