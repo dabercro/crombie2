@@ -7,7 +7,7 @@
 #include <crombie2/FileModel.h>
 #include <crombie2/FitModel.h>
 #include <crombie2/HistAnalysis.h>
-#include <crombie2/HistModel.h>
+#include <crombie2/HistModelsWithLines.h>
 #include <crombie2/PlotStyleModel.h>
 #include <crombie2/ReweightModel.h>
 
@@ -43,7 +43,7 @@ namespace crombie2 {
     const std::string outputdir;
 
     /// Maps the output file and input directory or file to a histogram result
-    Types::map<Types::map<HistModel>> histmodels {};
+    Types::map<HistModelsWithLines> histmodels {};
 
     /// Maps the input file name to cross sections
     Types::map<double> xs {};
@@ -72,7 +72,8 @@ namespace crombie2 {
                    Types::map<Hist>& mc,
                    Types::map<Hist>& signal,
                    bool blinding,
-                   bool comparing) const;
+                   bool comparing,
+                   std::vector<double> lines = {}) const;
 
   };
 }

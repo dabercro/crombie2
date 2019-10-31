@@ -12,6 +12,7 @@
 #include "THStack.h"
 #include "TLatex.h"
 #include "TLegend.h"
+#include "TLine.h"
 
 
 using namespace crombie2;
@@ -71,10 +72,13 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
                                          ? selection.data_weight
                                          : selection.mc_weight);
 
-        histmodels[output_file].
-          insert({job.get_entry().name.get(),
-                  {job, globalmodel, plot, plot.expr(job.get_group().type), cutstr, weightstr, onthefly}}).
+        auto& model = histmodels[output_file];
+        model.insert({job.get_entry().name.get(),
+              {job, globalmodel, plot, plot.expr(job.get_group().type), cutstr, weightstr, onthefly}}).
           first->second.add_job(job);
+
+        if (not model.lines.size())
+          model.lines = plot.vert_lines();
 
         // If the selection is in the "shape" uncertainies, add a histogram
         for (auto& hist : datacardmodel.hists) {
@@ -154,7 +158,7 @@ void HistAnalyzerMaster::output () const {
     Lock lock {};
     draw_plot(key_output.first, datahists, mchists, signalhists,
               Misc::split(key_output.first, "_").front() == plotstylemodel.blind.get(),
-              false);
+              false, key_output.second.lines);
 
   }
 
@@ -263,7 +267,8 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
                                    Types::map<Hist>& mc,
                                    Types::map<Hist>& signal,
                                    bool blinding,
-                                   bool comparing) const {
+                                   bool comparing,
+                                   std::vector<double> lines) const {
 
   // Stores TH1D for this function
   std::list<TH1D> histstore {};
@@ -354,6 +359,10 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   TH1D* bkg_sum = nullptr;
 
+  // Verticle Lines
+
+  std::list<TLine> vlines {};
+
   if (mcvec.size()) {
 
     if (plotstylemodel.forcetop) {
@@ -383,6 +392,14 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
                   << std::endl << std::endl;
         fitstore.emplace_back(fit.fit_hist(bkg_sum));
       }
+    }
+
+    for (auto val : lines) {
+      auto& line = vlines.emplace_back(val, hs.GetMinimum(), val, hs.GetMaximum());
+      line.SetLineColor(kRed);
+      line.SetLineWidth(2);
+      line.SetLineStyle(2);
+      line.Draw("same");
     }
 
   }
@@ -467,6 +484,14 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
                                double(plotstylemodel.maxratio)));
     bhist->Draw("e2");
 
+    for (auto val : lines) {
+      auto& line = vlines.emplace_back(val, bhist->GetMinimum(), val, bhist->GetMaximum());
+      line.SetLineColor(kRed);
+      line.SetLineWidth(2);
+      line.SetLineStyle(2);
+      line.Draw("same");
+    }
+
     // All of the signals should be drawn separately...
     if (signal.size())
       styled(signal_ratio.roothist(&histstore), FileGroup::FileType::SIGNAL, 2, scale, comparing)->Draw("hist,same");
@@ -514,6 +539,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   latex.SetTextAlign(11);
 
   latex.DrawLatex(0.2, toplocation, std::string(plotstylemodel.plottype).data());
+
 
   // Save everything
   FileSystem::mkdirs(outputdir);
