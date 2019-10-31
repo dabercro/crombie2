@@ -5,7 +5,6 @@
 #include <vector>
 
 #include <crombie2/HistModel.h>
-#include <crombie2/Types.h>
 
 
 namespace crombie2 {
