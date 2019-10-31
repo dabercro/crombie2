@@ -1,3 +1,4 @@
+#include <crombie2/Misc.h>
 #include <crombie2/Plot.h>
 
 
@@ -20,5 +21,18 @@ std::string Plot::expr (FileGroup::FileType type) const {
     : mc_var;
 
   return cand.get().size() ? cand.get() : name.get();
+
+}
+
+
+std::vector<double> Plot::vert_lines() const {
+
+  std::vector <double> output {};
+
+  for (auto& string : Misc::tokenize(lines))
+    output.push_back(std::stod(string));
+
+  return output;
+
 
 }

@@ -14,10 +14,11 @@ std::string PlotModel::get_name () const {
 void PlotModel::read (const Types::strings& config) {
   list.clear();
 
-  std::regex expr {"'([^']+)',\\s*(\\d+),\\s*(-?[\\d\\.]+),\\s*(-?[\\d\\.]+),\\s*'([^']+)'(,\\s*'([^']+)',\\s*'([^']+)')?"};
+  std::regex expr {"'([^']+)',\\s*(\\d+),\\s*(-?[\\d\\.]+),\\s*(-?[\\d\\.]+),\\s*'([^']+)'(,\\s*'([^']+)',\\s*'([^']+)')?(\\s*\\|\\s*([\\d\\s\\.]+))?"};
   std::smatch matches;
 
   for (auto& line : config) {
+
     if (std::regex_match(line, matches, expr)) {
       auto& plot = add();
       for (unsigned imatch = 0; imatch < 5; imatch++)
@@ -25,7 +26,7 @@ void PlotModel::read (const Types::strings& config) {
 
       plot.data_var.set(matches[7]);
       plot.mc_var.set(matches[8]);
-
+      plot.lines.set(matches[10]);
     }
   }
 
@@ -51,6 +52,8 @@ std::list<std::string> PlotModel::serialize () const {
       line += std::string(", '") +
         plot.data_var.get() + "', '" +
         plot.mc_var.get() + "'";
+    if (plot.lines.get().size())
+      line += std::string (" | ") + plot.lines.get();
     output.push_back(line);
   }
 
