@@ -124,7 +124,8 @@ void MainController::on_submit_job () {
       checkdir(outdir) and
       checkdir(datadir) and
       comparemodel.is_valid(cutmodel, plotmodel) and
-      (not doreweight.get_active() or reweightmodel.is_valid(plotmodel))
+      (not doreweight.get_active() or reweightmodel.is_valid(plotmodel)) and
+      (not dolumi.get_active() or jsonmodel.is_valid(checkfile))
       ) {
 
     auto num_files = filemodel.num_files(globalmodel.inputdir);

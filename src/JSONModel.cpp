@@ -25,3 +25,10 @@ std::string JSONModel::get_name () const {
   return "json";
 
 }
+
+
+bool JSONModel::is_valid (Tree& tree) const {
+
+  return tree.is_valid(runnum) and tree.is_valid(luminum);
+
+}

@@ -4,6 +4,7 @@
 
 #include <crombie2/Configurable.h>
 #include <crombie2/SimpleModel.h>
+#include <crombie2/Tree.h>
 
 
 namespace crombie2 {
@@ -20,6 +21,8 @@ namespace crombie2 {
     Configurable<std::string> runnum {"Run Expression", "runNumber"};
 
     Configurable<std::string> luminum {"Lumi Expression", "lumiNumber"};
+
+    bool is_valid (Tree& tree) const;
 
   };
 
