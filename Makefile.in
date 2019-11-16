@@ -104,7 +104,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = src/ConfigModel.$(OBJEXT) src/ConfigTable.$(OBJEXT) \
-	src/Cut.$(OBJEXT) src/CutModel.$(OBJEXT) \
+	src/Cut.$(OBJEXT) src/CutModel.$(OBJEXT) src/Cuts.$(OBJEXT) \
 	src/CutString.$(OBJEXT) src/FileSystem.$(OBJEXT) \
 	src/GuiConfigurable.$(OBJEXT) src/JoinerConfigurable.$(OBJEXT) \
 	src/Lock.$(OBJEXT) src/Misc.$(OBJEXT) src/Parse.$(OBJEXT) \
@@ -115,21 +115,22 @@ am__objects_2 = $(am__objects_1) src/AllController.$(OBJEXT) \
 	src/Compare.$(OBJEXT) src/CompareModel.$(OBJEXT) \
 	src/ConfigPage.$(OBJEXT) src/Controller.$(OBJEXT) \
 	src/CrossSecDB.$(OBJEXT) src/CutController.$(OBJEXT) \
-	src/CutflowAnalyzer.$(OBJEXT) \
+	src/CutsController.$(OBJEXT) src/CutflowAnalyzer.$(OBJEXT) \
 	src/CutflowAnalyzerMaster.$(OBJEXT) \
 	src/DatacardController.$(OBJEXT) src/DatacardModel.$(OBJEXT) \
-	src/FileController.$(OBJEXT) src/FileEntry.$(OBJEXT) \
-	src/FileModel.$(OBJEXT) src/FitConfig.$(OBJEXT) \
-	src/FitController.$(OBJEXT) src/FitModel.$(OBJEXT) \
-	src/FlatUncertainty.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
-	src/Hist.$(OBJEXT) src/Hist2D.$(OBJEXT) \
-	src/HistAnalysis.$(OBJEXT) src/HistAnalyzer.$(OBJEXT) \
-	src/HistAnalyzerMaster.$(OBJEXT) src/HistModel.$(OBJEXT) \
-	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
-	src/JobSorter.$(OBJEXT) src/JSONAnalyzerMaster.$(OBJEXT) \
-	src/JSONAnalyzer.$(OBJEXT) src/JSONModel.$(OBJEXT) \
-	src/LumiSelection.$(OBJEXT) src/MainController.$(OBJEXT) \
-	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
+	src/EnvelopeModel.$(OBJEXT) src/FileController.$(OBJEXT) \
+	src/FileEntry.$(OBJEXT) src/FileModel.$(OBJEXT) \
+	src/FitConfig.$(OBJEXT) src/FitController.$(OBJEXT) \
+	src/FitModel.$(OBJEXT) src/FlatUncertainty.$(OBJEXT) \
+	src/GlobalModel.$(OBJEXT) src/Hist.$(OBJEXT) \
+	src/Hist2D.$(OBJEXT) src/HistAnalysis.$(OBJEXT) \
+	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
+	src/HistModel.$(OBJEXT) src/HistSplit.$(OBJEXT) \
+	src/Job.$(OBJEXT) src/JobSorter.$(OBJEXT) \
+	src/JSONAnalyzerMaster.$(OBJEXT) src/JSONAnalyzer.$(OBJEXT) \
+	src/JSONModel.$(OBJEXT) src/LumiSelection.$(OBJEXT) \
+	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
+	src/MiniCutController.$(OBJEXT) \
 	src/MiniFileController.$(OBJEXT) \
 	src/MiniFitController.$(OBJEXT) src/OnTheFlyModel.$(OBJEXT) \
 	src/OnTheFlyReweighter.$(OBJEXT) src/Plot.$(OBJEXT) \
@@ -179,16 +180,17 @@ am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	src/$(DEPDIR)/CrossSecDB.Po src/$(DEPDIR)/Cut.Po \
 	src/$(DEPDIR)/CutController.Po src/$(DEPDIR)/CutModel.Po \
 	src/$(DEPDIR)/CutString.Po src/$(DEPDIR)/CutflowAnalyzer.Po \
-	src/$(DEPDIR)/CutflowAnalyzerMaster.Po \
+	src/$(DEPDIR)/CutflowAnalyzerMaster.Po src/$(DEPDIR)/Cuts.Po \
+	src/$(DEPDIR)/CutsController.Po \
 	src/$(DEPDIR)/DatacardController.Po \
-	src/$(DEPDIR)/DatacardModel.Po src/$(DEPDIR)/FileController.Po \
-	src/$(DEPDIR)/FileEntry.Po src/$(DEPDIR)/FileModel.Po \
-	src/$(DEPDIR)/FileSystem.Po src/$(DEPDIR)/FitConfig.Po \
-	src/$(DEPDIR)/FitController.Po src/$(DEPDIR)/FitModel.Po \
-	src/$(DEPDIR)/FlatUncertainty.Po src/$(DEPDIR)/GlobalModel.Po \
-	src/$(DEPDIR)/GuiConfigurable.Po src/$(DEPDIR)/Hist.Po \
-	src/$(DEPDIR)/Hist2D.Po src/$(DEPDIR)/HistAnalysis.Po \
-	src/$(DEPDIR)/HistAnalyzer.Po \
+	src/$(DEPDIR)/DatacardModel.Po src/$(DEPDIR)/EnvelopeModel.Po \
+	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileEntry.Po \
+	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
+	src/$(DEPDIR)/FitConfig.Po src/$(DEPDIR)/FitController.Po \
+	src/$(DEPDIR)/FitModel.Po src/$(DEPDIR)/FlatUncertainty.Po \
+	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/GuiConfigurable.Po \
+	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/Hist2D.Po \
+	src/$(DEPDIR)/HistAnalysis.Po src/$(DEPDIR)/HistAnalyzer.Po \
 	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistModel.Po \
 	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/JSONAnalyzer.Po \
 	src/$(DEPDIR)/JSONAnalyzerMaster.Po src/$(DEPDIR)/JSONModel.Po \
@@ -300,6 +302,8 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EXEEXT = @EXEEXT@
+GTK_CFLAGS = @GTK_CFLAGS@
+GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -320,6 +324,9 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -371,6 +378,7 @@ cutsrcs = \
 	$(srcdir)/src/ConfigTable.cpp \
 	$(srcdir)/src/Cut.cpp \
 	$(srcdir)/src/CutModel.cpp \
+	$(srcdir)/src/Cuts.cpp \
 	$(srcdir)/src/CutString.cpp \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GuiConfigurable.cpp \
@@ -392,10 +400,12 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/CrossSecDB.cpp \
 	$(srcdir)/src/CutController.cpp \
+	$(srcdir)/src/CutsController.cpp \
 	$(srcdir)/src/CutflowAnalyzer.cpp \
 	$(srcdir)/src/CutflowAnalyzerMaster.cpp \
 	$(srcdir)/src/DatacardController.cpp \
 	$(srcdir)/src/DatacardModel.cpp \
+	$(srcdir)/src/EnvelopeModel.cpp \
 	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
@@ -560,6 +570,7 @@ src/ConfigTable.$(OBJEXT): src/$(am__dirstamp) \
 src/Cut.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/CutModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/Cuts.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/CutString.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/FileSystem.$(OBJEXT): src/$(am__dirstamp) \
@@ -594,6 +605,8 @@ src/CrossSecDB.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/CutController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/CutsController.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/CutflowAnalyzer.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/CutflowAnalyzerMaster.$(OBJEXT): src/$(am__dirstamp) \
@@ -601,6 +614,8 @@ src/CutflowAnalyzerMaster.$(OBJEXT): src/$(am__dirstamp) \
 src/DatacardController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/DatacardModel.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/EnvelopeModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/FileController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -757,8 +772,11 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutString.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutflowAnalyzer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutflowAnalyzerMaster.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Cuts.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/CutsController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/DatacardController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/DatacardModel.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/EnvelopeModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileEntry.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileModel.Po@am__quote@ # am--include-marker
@@ -1137,8 +1155,11 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/CutString.Po
 	-rm -f src/$(DEPDIR)/CutflowAnalyzer.Po
 	-rm -f src/$(DEPDIR)/CutflowAnalyzerMaster.Po
+	-rm -f src/$(DEPDIR)/Cuts.Po
+	-rm -f src/$(DEPDIR)/CutsController.Po
 	-rm -f src/$(DEPDIR)/DatacardController.Po
 	-rm -f src/$(DEPDIR)/DatacardModel.Po
+	-rm -f src/$(DEPDIR)/EnvelopeModel.Po
 	-rm -f src/$(DEPDIR)/FileController.Po
 	-rm -f src/$(DEPDIR)/FileEntry.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po
@@ -1269,8 +1290,11 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/CutString.Po
 	-rm -f src/$(DEPDIR)/CutflowAnalyzer.Po
 	-rm -f src/$(DEPDIR)/CutflowAnalyzerMaster.Po
+	-rm -f src/$(DEPDIR)/Cuts.Po
+	-rm -f src/$(DEPDIR)/CutsController.Po
 	-rm -f src/$(DEPDIR)/DatacardController.Po
 	-rm -f src/$(DEPDIR)/DatacardModel.Po
+	-rm -f src/$(DEPDIR)/EnvelopeModel.Po
 	-rm -f src/$(DEPDIR)/FileController.Po
 	-rm -f src/$(DEPDIR)/FileEntry.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po

@@ -5,33 +5,19 @@ using namespace crombie2;
 
 
 CutController::CutController (ConfigPage& page, CutModel& model) :
-  Controller {page, model},
-  cutmodel {model}
+  CutsController<CutModel> {page, model}
 {
 
-  buttonbox.pack_start(labelentry, Gtk::PACK_SHRINK);
-  buttonbox.pack_start(addcutbutton, Gtk::PACK_SHRINK);
   buttonbox.pack_start(addselectionbutton, Gtk::PACK_SHRINK);
-
-  addcutbutton.set_border_width(10);
   addselectionbutton.set_border_width(10);
-
-  labelentry.show();
-  addcutbutton.show();
   addselectionbutton.show();
-  buttonbox.show();
 
-  page.pack_start(buttonbox, Gtk::PACK_SHRINK);
-
-  addcutbutton.signal_clicked().
-    connect(sigc::mem_fun(*this, &CutController::on_add_cut));
   addselectionbutton.signal_clicked().
     connect(sigc::mem_fun(*this, &CutController::on_add_selection));
 
   page.box().pack_end(selectionbox, Gtk::PACK_SHRINK);
   selectionbox.show();
 
-  // Draws the stuff loaded by the Controller constructor
   redraw();
 
 }
@@ -49,30 +35,6 @@ void CutController::redraw () {
 
   for (auto& selection : cutmodel.selections)
     fill_selection(selection);
-
-}
-
-
-void CutController::add_cut (RemoveWrapper<CutString>& cutstring) {
-
-  if (((numcuts++) % 1) == 0)
-    page.draw(cutboxes.emplace_back());
-
-  auto& mini = minicontrollers.emplace_back(cutstring);
-  mini.draw(cutboxes.back());
-
-  cutstring.also_remove([&mini, this] () {
-      minicontrollers.remove_if([&mini] (auto& ele) {
-          return &mini == &ele;
-        });
-    });
-
-}
-
-
-void CutController::on_add_cut () {
-
-  add_cut(cutmodel.add_cutstring(labelentry.get_chars(0, -1)));
 
 }
 

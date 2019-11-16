@@ -6,7 +6,6 @@
 #include <crombie2/CutString.h>
 #include <crombie2/Selection.h>
 #include <crombie2/Tree.h>
-#include <crombie2/RemoveList.h>
 
 
 namespace crombie2 {
@@ -17,9 +16,11 @@ namespace crombie2 {
 
   public:
 
+    using cutstype = CutString;
+
     std::string get_name () const override;
 
-    RemoveWrapper<CutString>& add_cutstring (const std::string& label, const std::string& joiner = "&&");
+    RemoveWrapper<cutstype>& add_cutstring (const std::string& label, const std::string& joiner = "&&");
 
     /// Expands a cutstring for viewing
     std::string expand (const std::string& cutlabel) const;

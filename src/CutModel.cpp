@@ -42,9 +42,9 @@ void CutModel::read (const Types::strings& config) {
 }
 
 
-RemoveWrapper<CutString>& CutModel::add_cutstring (const std::string& label, const std::string& joiner) {
+RemoveWrapper<CutModel::cutstype>& CutModel::add_cutstring (const std::string& label, const std::string& joiner) {
 
-  return cutstrings.append(CutString(label, joiner));
+  return cutstrings.append(cutstype(label, joiner));
 
 }
 

@@ -5,6 +5,7 @@ cutsrcs = \
 	$(srcdir)/src/ConfigTable.cpp \
 	$(srcdir)/src/Cut.cpp \
 	$(srcdir)/src/CutModel.cpp \
+	$(srcdir)/src/Cuts.cpp \
 	$(srcdir)/src/CutString.cpp \
 	$(srcdir)/src/FileSystem.cpp \
 	$(srcdir)/src/GuiConfigurable.cpp \
@@ -26,10 +27,12 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/Controller.cpp \
 	$(srcdir)/src/CrossSecDB.cpp \
 	$(srcdir)/src/CutController.cpp \
+	$(srcdir)/src/CutsController.cpp \
 	$(srcdir)/src/CutflowAnalyzer.cpp \
 	$(srcdir)/src/CutflowAnalyzerMaster.cpp \
 	$(srcdir)/src/DatacardController.cpp \
 	$(srcdir)/src/DatacardModel.cpp \
+	$(srcdir)/src/EnvelopeModel.cpp \
 	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \

@@ -18,6 +18,7 @@ MainWindow::MainWindow ()
   add_page(pagemap.at("plots"));
   add_page(pagemap.at("files"));
   add_page(pagemap.at("plotstyle"));
+  add_page(pagemap.at("envelopes"));
   add_page(pagemap.at("datacards"));
   add_page(pagemap.at("fits"));
   add_page(pagemap.at("compare"));
@@ -48,6 +49,7 @@ std::map<std::string, ConfigPage> MainWindow::init_map () {
   output["plots"] = ConfigPage("Plots");
   output["compare"] = ConfigPage("Comparisons");
   output["selections"] = ConfigPage("Selections");
+  output["envelopes"] = ConfigPage("Envelopes");
   output["onthefly"] = ConfigPage("On The Fly Reweighting");
 
   return output;
