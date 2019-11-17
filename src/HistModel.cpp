@@ -49,9 +49,10 @@ HistModel::HistModel (Job& job,
     for (auto& env_type : envelope.list) {
       auto& model_list = envelope_models[env_type.name];
       for (auto& weight : env_type.get_cuts()) {
-        model_list.emplace_back(job, globalmodel, plot, var, cutstr,
-                                weightstr + " * " + weight.get(), reweight,
-                                EnvelopeModel()); // Need empty model to avoid recursion
+        if (weight.get().size())
+          model_list.emplace_back(job, globalmodel, plot, var, cutstr,
+                                  weightstr + " * " + weight.get(), reweight,
+                                  EnvelopeModel()); // Need empty model to avoid recursion
       }
     }
   }
