@@ -212,6 +212,8 @@ std::pair<HistSplit, HistSplit> HistModel::get_min_max_env_hist (const std::stri
     }
   }
 
+  return output;
+
 }
 
 
