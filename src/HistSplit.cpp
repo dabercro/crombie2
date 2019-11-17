@@ -40,3 +40,10 @@ std::vector<std::pair<std::string, Hist>>& HistSplit::get_hists () {
   return hists;
 
 }
+
+
+Hist& HistSplit::operator [] (unsigned i) {
+
+  return hists.at(i).second;
+
+}

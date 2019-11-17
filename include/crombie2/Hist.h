@@ -93,10 +93,15 @@ namespace crombie2 {
 
     double get_total () const;
     const std::vector<double>& get_contents () const;
+
+    /// Actually returns the sum of squared weights
     const std::vector<double>& get_errors () const;
 
     /// Get the sum of the bin contents
     double integral (bool overflow = false) const;
+
+    double get_bin (unsigned index) const;
+    void set_bin (unsigned index, double value);
 
   private:
 

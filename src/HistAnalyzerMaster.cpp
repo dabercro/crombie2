@@ -28,7 +28,8 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
                                         const OnTheFlyModel& onthefly,
                                         bool dofit,
                                         const FitModel& fitmodel,
-                                        const CompareModel& comparemodel) :
+                                        const CompareModel& comparemodel,
+                                        const EnvelopeModel& envelope) :
   outputdir {outdir},
   plotmodel {plotmodel},
   cutmodel {cutmodel},
@@ -74,8 +75,8 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
 
         auto& model = histmodels[output_file];
         model.insert({job.get_entry().name.get(),
-              {job, globalmodel, plot, plot.expr(job.get_group().type), cutstr, weightstr, onthefly}}).
-          first->second.add_job(job);
+              {job, globalmodel, plot, plot.expr(job.get_group().type), cutstr, weightstr, onthefly, envelope}}
+          ).first->second.add_job(job);
 
         if (not model.lines.size())
           model.lines = plot.vert_lines();
@@ -99,8 +100,7 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
                            Misc::uncertify(branchlist, plot.expr(job.get_group().type), unc.name, dir),
                            Misc::uncertify(branchlist, cutstr, unc.name, dir),
                            Misc::uncertify(branchlist, weightstr, unc.name, dir),
-                           onthefly}}).
-                    first->second.add_job(job);
+                           onthefly, EnvelopeModel()}}).first->second.add_job(job);
 
                 }
 
@@ -136,7 +136,7 @@ void HistAnalyzerMaster::output () const {
     // Scale all of the histograms
     for (auto& key_input : key_output.second) {
 
-      auto histsplit = scaled_split(key_input);
+      auto histsplit = scaled_split(key_input, true);
 
       auto type = types.at(key_input.first);
 
@@ -177,9 +177,11 @@ void HistAnalyzerMaster::output () const {
 }
 
 
-HistSplit HistAnalyzerMaster::scaled_split (const std::pair<std::string, HistModel>& histentry) const {
+HistSplit HistAnalyzerMaster::scaled_split (const std::pair<std::string, HistModel>& histentry, bool withenv) const {
 
-  auto histsplit = histentry.second.get_histsplit();
+  auto histsplit = (withenv
+                    ? histentry.second.get_histsplit_with_env()
+                    : histentry.second.get_histsplit());
 
   if (types.at(histentry.first) != FileGroup::FileType::DATA)
     histsplit.scale(globalmodel.luminosity, xs.at(histentry.first));

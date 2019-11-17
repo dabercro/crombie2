@@ -17,6 +17,8 @@ namespace crombie2 {
     /// First part of each element is the legend entry
     std::vector<std::pair<std::string, Hist>>& get_hists ();
 
+    Hist& operator [] (unsigned i);
+
   private:
     std::vector<std::pair<std::string, Hist>> hists {};
 

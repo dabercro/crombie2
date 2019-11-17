@@ -210,3 +210,16 @@ double Hist::integral (bool overflow) const {
   return output;
 
 }
+
+
+double Hist::get_bin (unsigned index) const {
+
+  return contents.at(index);
+
+}
+
+void Hist::set_bin (unsigned index, double value) {
+
+  contents.at(index) = value;
+
+}

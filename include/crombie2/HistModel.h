@@ -2,6 +2,7 @@
 #define CROMBIE2_HISTMODEL_H
 
 
+#include <crombie2/EnvelopeModel.h>
 #include <crombie2/HistAnalyzer.h>
 #include <crombie2/HistSplit.h>
 
@@ -15,11 +16,16 @@ namespace crombie2 {
                const std::string& var,
                const std::string& cutstr,
                const std::string& weightstr,
-               const OnTheFlyModel& reweight);
+               const OnTheFlyModel& reweight,
+               const EnvelopeModel& envelope);
 
     std::string get_name () const override;
 
     HistSplit get_histsplit () const;
+
+    HistSplit get_histsplit_with_env () const;
+
+    std::pair<HistSplit, HistSplit> get_min_max_env_hist (const std::string& envelope_name) const;
 
     void add_job (Job& job);
 
@@ -38,6 +44,9 @@ namespace crombie2 {
     std::string cache_file {};
     bool cached {false};
     std::list<HistAnalyzer> analyzers {};      ///< Analyzers are only needed when the hist isn't already cached
+
+    /// Map name of uncertainty to list of histograms to make envelope with
+    std::map<std::string, std::list<HistModel>> envelope_models {};
 
     // Saved in cache
 

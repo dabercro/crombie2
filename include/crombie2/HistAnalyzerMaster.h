@@ -27,7 +27,8 @@ namespace crombie2 {
                         const OnTheFlyModel& onthefly,
                         bool dofit,
                         const FitModel& fitmodel,
-                        const CompareModel& comparemodel);
+                        const CompareModel& comparemodel,
+                        const EnvelopeModel& envelope);
 
     HistAnalysis get_analysis_histograms (const std::string& selection) const;
 
@@ -64,7 +65,7 @@ namespace crombie2 {
     Types::map<short> styles {};
 
     /// Get the scaled (by cross section and luminosity) HistSplit
-    HistSplit scaled_split (const std::pair<std::string, HistModel>& histentry) const;
+    HistSplit scaled_split (const std::pair<std::string, HistModel>& histentry, bool withenv = false) const;
 
     /// Does the sorting and drawing for each individual plot
     void draw_plot(const std::string& output,
