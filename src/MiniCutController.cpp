@@ -10,3 +10,10 @@ template<> MiniCutController<CutString>::MiniCutController (RemoveWrapper<CutStr
 {
   init();
 };
+
+template<> MiniCutController<Cuts>::MiniCutController (RemoveWrapper<Cuts>& cutstring) :
+  cutstring {cutstring},
+  labeltable{&(cutstring.name)}
+{
+  init();
+};
