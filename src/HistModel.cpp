@@ -27,7 +27,8 @@ HistModel::HistModel (Job& job,
   weightstr {weightstr},
   reweight {reweight},
   label {plot.label},
-  analyzer_prototype {job, plot, var, cutstr, weightstr, globalmodel, reweight}
+  analyzer_prototype {job, plot, var, cutstr, weightstr, globalmodel, reweight},
+  no_stats{globalmodel.no_stats}
 
 {
 
@@ -227,6 +228,11 @@ HistSplit HistModel::get_histsplit_with_env () const {
     for (unsigned i_split = 0; i_split < output.get_hists().size(); i_split++) {
       auto& outhist = output[i_split];
       std::vector<double> weight2 = outhist.get_errors();
+
+      if (no_stats) {
+        for (auto& bin : weight2)
+          bin = 0;
+      }
 
       auto& min = minmax.first[i_split];
       auto& max = minmax.second[i_split];

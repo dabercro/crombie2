@@ -42,6 +42,8 @@ namespace crombie2 {
     /// If true, dump a nicer datacard table when making datacards
     BoolConfigurable printdatacardview {"Print Datacard Table"};
 
+    BoolConfigurable no_stats {"Don't plot stats"};
+
   };
 
 }

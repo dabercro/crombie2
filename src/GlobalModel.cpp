@@ -13,7 +13,8 @@ GlobalModel::GlobalModel () :
     &tree,
     &luminosity,
     &normhist,
-    &printdatacardview
+    &printdatacardview,
+    &no_stats
   } {}
 
 

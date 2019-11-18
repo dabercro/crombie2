@@ -73,6 +73,8 @@ namespace crombie2 {
 
     const HistAnalyzer analyzer_prototype;     ///< All other analyzers will just be copied from this
 
+    bool no_stats;
+
   };
 }
 
