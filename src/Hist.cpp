@@ -265,7 +265,7 @@ std::pair<Hist, Hist> Hist::get_minmax_env (const std::string& key) const {
     for (unsigned ibin = 0; ibin < contents.size(); ++ibin) {
 
       output.first.contents[ibin] = std::min(output.first.contents[ibin], hist.contents[ibin]);
-      output.second.contents[ibin] = std::max(output.first.contents[ibin], hist.contents[ibin]);
+      output.second.contents[ibin] = std::max(output.second.contents[ibin], hist.contents[ibin]);
 
     }
   }
