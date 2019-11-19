@@ -13,13 +13,16 @@ std::string EnvelopeModel::get_name () const {
 void EnvelopeModel::read (const Types::strings& config) {
   list.clear();
 
-  Cuts* cuts = nullptr;
+  cutstype* cuts = nullptr;
 
   for (auto& line : config) {
 
     if (line.back() == ':') {
       cuts = &add();
-      cuts->name.set(Misc::tokenize(line).front());
+      auto tokens = Misc::tokenize(line);
+      cuts->name.set(tokens.front());
+      if (tokens.size() == 3)
+        cuts->joiner.set("1");
     }
 
     else if (cuts and line.size())
@@ -35,7 +38,7 @@ std::list<std::string> EnvelopeModel::serialize () const {
   std::list<std::string> output {};
 
   for (const auto& cuts : list) {
-    output.emplace_back(cuts.name.get() + " :");
+    output.emplace_back(cuts.name.get() + (cuts.joiner ? " PROCESS" : "") + " :");
 
     for (const auto& cut : cuts.get_cuts())
       output.emplace_back(cut.get());

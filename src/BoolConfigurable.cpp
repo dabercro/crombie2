@@ -12,6 +12,15 @@ BoolConfigurable::BoolConfigurable (const std::string& label) :
 
 }
 
+BoolConfigurable::BoolConfigurable (const BoolConfigurable& other) :
+  BoolConfigurable {other.name}
+{
+
+  set(other.get());
+
+}
+
+
 
 std::string BoolConfigurable::label () const {
 

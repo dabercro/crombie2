@@ -188,60 +188,26 @@ HistSplit HistModel::get_histsplit () const {
 }
 
 
-std::pair<HistSplit, HistSplit> HistModel::get_min_max_env_hist (const std::string& envelope_name) const {
-
-  auto split = get_histsplit();
-  auto output = std::make_pair(split, split);
-
-  if (envelope_models.find(envelope_name) == envelope_models.end())
-    return output;
-
-  for (auto& histmodel : envelope_models.at(envelope_name)) {
-    // Min or Max for each bin
-    auto checksplit = histmodel.get_histsplit();
-    for (unsigned i_split = 0; i_split < split.get_hists().size(); i_split++) {
-
-      auto& hist = checksplit[i_split];
-      auto& minhist = output.first[i_split];
-      auto& maxhist = output.second[i_split];
-
-      for (unsigned i_bin = 0; i_bin < nbins + 2; i_bin++) {
-        minhist.set_bin(i_bin, std::min(minhist.get_bin(i_bin), hist.get_bin(i_bin)));
-        maxhist.set_bin(i_bin, std::max(maxhist.get_bin(i_bin), hist.get_bin(i_bin)));
-      }
-
-    }
-  }
-
-  return output;
-
-}
-
-
 HistSplit HistModel::get_histsplit_with_env () const {
 
   auto output = get_histsplit();
 
+  if (no_stats) {
+    for (auto& split : output.get_hists())
+      split.second.set_contents(split.second.get_contents(),
+                                std::vector<double>(nbins + 2));
+  }
+
   for (auto& [key, list] : envelope_models) {
-    auto minmax = get_min_max_env_hist(key);
 
-    for (unsigned i_split = 0; i_split < output.get_hists().size(); i_split++) {
-      auto& outhist = output[i_split];
-      std::vector<double> weight2 = outhist.get_errors();
+    for (auto& histmodel : list) {
 
-      if (no_stats) {
-        for (auto& bin : weight2)
-          bin = 0;
+      auto env_split = histmodel.get_histsplit();
+
+      for (unsigned i_split = 0; i_split < output.get_hists().size(); i_split++) {
+        auto& outhist = output[i_split];
+        outhist.add_env(key, env_split[i_split]);
       }
-
-      auto& min = minmax.first[i_split];
-      auto& max = minmax.second[i_split];
-
-      for (unsigned i_bin = 0; i_bin < nbins + 2; i_bin++)
-        weight2.at(i_bin) += std::pow((max.get_bin(i_bin) - min.get_bin(i_bin))/2, 2);
-
-      outhist.set_contents(outhist.get_contents(), weight2);
-
     }
 
   }

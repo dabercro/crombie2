@@ -25,8 +25,6 @@ namespace crombie2 {
 
     HistSplit get_histsplit_with_env () const;
 
-    std::pair<HistSplit, HistSplit> get_min_max_env_hist (const std::string& envelope_name) const;
-
     void add_job (Job& job);
 
   protected:

@@ -2,16 +2,16 @@
 #define CROMBIE2_ENVELOPEMODEL_H
 
 
-#include <crombie2/Cuts.h>
+#include <crombie2/Envelopes.h>
 #include <crombie2/ListModel.h>
 #include <crombie2/Tree.h>
 
 
 namespace crombie2 {
 
-  class EnvelopeModel : public ListModel<Cuts> {
+  class EnvelopeModel : public ListModel<Envelopes> {
   public:
-    using cutstype = Cuts;
+    using cutstype = Envelopes;
 
     std::string get_name () const override;
 

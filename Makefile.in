@@ -118,20 +118,19 @@ am__objects_2 = $(am__objects_1) src/AllController.$(OBJEXT) \
 	src/CutsController.$(OBJEXT) src/CutflowAnalyzer.$(OBJEXT) \
 	src/CutflowAnalyzerMaster.$(OBJEXT) \
 	src/DatacardController.$(OBJEXT) src/DatacardModel.$(OBJEXT) \
-	src/EnvelopeModel.$(OBJEXT) src/FileController.$(OBJEXT) \
-	src/FileEntry.$(OBJEXT) src/FileModel.$(OBJEXT) \
-	src/FitConfig.$(OBJEXT) src/FitController.$(OBJEXT) \
-	src/FitModel.$(OBJEXT) src/FlatUncertainty.$(OBJEXT) \
-	src/GlobalModel.$(OBJEXT) src/Hist.$(OBJEXT) \
-	src/Hist2D.$(OBJEXT) src/HistAnalysis.$(OBJEXT) \
-	src/HistAnalyzer.$(OBJEXT) src/HistAnalyzerMaster.$(OBJEXT) \
-	src/HistModel.$(OBJEXT) src/HistSplit.$(OBJEXT) \
-	src/Job.$(OBJEXT) src/JobSorter.$(OBJEXT) \
-	src/JSONAnalyzerMaster.$(OBJEXT) src/JSONAnalyzer.$(OBJEXT) \
-	src/JSONModel.$(OBJEXT) src/LumiSelection.$(OBJEXT) \
-	src/MainController.$(OBJEXT) src/MainWindow.$(OBJEXT) \
-	src/MiniCutController.$(OBJEXT) \
-	src/MiniFileController.$(OBJEXT) \
+	src/EnvelopeModel.$(OBJEXT) src/Envelopes.$(OBJEXT) \
+	src/FileController.$(OBJEXT) src/FileEntry.$(OBJEXT) \
+	src/FileModel.$(OBJEXT) src/FitConfig.$(OBJEXT) \
+	src/FitController.$(OBJEXT) src/FitModel.$(OBJEXT) \
+	src/FlatUncertainty.$(OBJEXT) src/GlobalModel.$(OBJEXT) \
+	src/Hist.$(OBJEXT) src/Hist2D.$(OBJEXT) \
+	src/HistAnalysis.$(OBJEXT) src/HistAnalyzer.$(OBJEXT) \
+	src/HistAnalyzerMaster.$(OBJEXT) src/HistModel.$(OBJEXT) \
+	src/HistSplit.$(OBJEXT) src/Job.$(OBJEXT) \
+	src/JobSorter.$(OBJEXT) src/JSONAnalyzerMaster.$(OBJEXT) \
+	src/JSONAnalyzer.$(OBJEXT) src/JSONModel.$(OBJEXT) \
+	src/LumiSelection.$(OBJEXT) src/MainController.$(OBJEXT) \
+	src/MainWindow.$(OBJEXT) src/MiniFileController.$(OBJEXT) \
 	src/MiniFitController.$(OBJEXT) src/OnTheFlyModel.$(OBJEXT) \
 	src/OnTheFlyReweighter.$(OBJEXT) src/Plot.$(OBJEXT) \
 	src/PlotModel.$(OBJEXT) src/PlotStyleModel.$(OBJEXT) \
@@ -144,7 +143,7 @@ crombie2_OBJECTS = $(am_crombie2_OBJECTS)
 crombie2_LDADD = $(LDADD)
 am_crombie2catch_OBJECTS = $(am__objects_2) \
 	test/test_configurable.$(OBJEXT) test/test_cutstring.$(OBJEXT) \
-	test/test_datacardmodel.$(OBJEXT) \
+	test/test_datacardmodel.$(OBJEXT) test/test_envmodel.$(OBJEXT) \
 	test/test_fileentry.$(OBJEXT) test/test_filemodel.$(OBJEXT) \
 	test/test_fit.$(OBJEXT) test/test_hist.$(OBJEXT) \
 	test/test_lumiselection.$(OBJEXT) test/test_misc.$(OBJEXT) \
@@ -184,20 +183,21 @@ am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	src/$(DEPDIR)/CutsController.Po \
 	src/$(DEPDIR)/DatacardController.Po \
 	src/$(DEPDIR)/DatacardModel.Po src/$(DEPDIR)/EnvelopeModel.Po \
-	src/$(DEPDIR)/FileController.Po src/$(DEPDIR)/FileEntry.Po \
-	src/$(DEPDIR)/FileModel.Po src/$(DEPDIR)/FileSystem.Po \
-	src/$(DEPDIR)/FitConfig.Po src/$(DEPDIR)/FitController.Po \
-	src/$(DEPDIR)/FitModel.Po src/$(DEPDIR)/FlatUncertainty.Po \
-	src/$(DEPDIR)/GlobalModel.Po src/$(DEPDIR)/GuiConfigurable.Po \
-	src/$(DEPDIR)/Hist.Po src/$(DEPDIR)/Hist2D.Po \
-	src/$(DEPDIR)/HistAnalysis.Po src/$(DEPDIR)/HistAnalyzer.Po \
+	src/$(DEPDIR)/Envelopes.Po src/$(DEPDIR)/FileController.Po \
+	src/$(DEPDIR)/FileEntry.Po src/$(DEPDIR)/FileModel.Po \
+	src/$(DEPDIR)/FileSystem.Po src/$(DEPDIR)/FitConfig.Po \
+	src/$(DEPDIR)/FitController.Po src/$(DEPDIR)/FitModel.Po \
+	src/$(DEPDIR)/FlatUncertainty.Po src/$(DEPDIR)/GlobalModel.Po \
+	src/$(DEPDIR)/GuiConfigurable.Po src/$(DEPDIR)/Hist.Po \
+	src/$(DEPDIR)/Hist2D.Po src/$(DEPDIR)/HistAnalysis.Po \
+	src/$(DEPDIR)/HistAnalyzer.Po \
 	src/$(DEPDIR)/HistAnalyzerMaster.Po src/$(DEPDIR)/HistModel.Po \
 	src/$(DEPDIR)/HistSplit.Po src/$(DEPDIR)/JSONAnalyzer.Po \
 	src/$(DEPDIR)/JSONAnalyzerMaster.Po src/$(DEPDIR)/JSONModel.Po \
 	src/$(DEPDIR)/Job.Po src/$(DEPDIR)/JobSorter.Po \
 	src/$(DEPDIR)/JoinerConfigurable.Po src/$(DEPDIR)/Lock.Po \
 	src/$(DEPDIR)/LumiSelection.Po src/$(DEPDIR)/MainController.Po \
-	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
+	src/$(DEPDIR)/MainWindow.Po \
 	src/$(DEPDIR)/MiniFileController.Po \
 	src/$(DEPDIR)/MiniFitController.Po src/$(DEPDIR)/Misc.Po \
 	src/$(DEPDIR)/OnTheFlyModel.Po \
@@ -213,6 +213,7 @@ am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	test/$(DEPDIR)/main.Po test/$(DEPDIR)/test_configurable.Po \
 	test/$(DEPDIR)/test_cutstring.Po \
 	test/$(DEPDIR)/test_datacardmodel.Po \
+	test/$(DEPDIR)/test_envmodel.Po \
 	test/$(DEPDIR)/test_fileentry.Po \
 	test/$(DEPDIR)/test_filemodel.Po test/$(DEPDIR)/test_fit.Po \
 	test/$(DEPDIR)/test_hist.Po \
@@ -302,8 +303,6 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EXEEXT = @EXEEXT@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_LIBS = @GTK_LIBS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -324,9 +323,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -406,6 +402,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/DatacardController.cpp \
 	$(srcdir)/src/DatacardModel.cpp \
 	$(srcdir)/src/EnvelopeModel.cpp \
+	$(srcdir)/src/Envelopes.cpp \
 	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
@@ -429,7 +426,6 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/LumiSelection.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
-	$(srcdir)/src/MiniCutController.cpp \
 	$(srcdir)/src/MiniFileController.cpp \
 	$(srcdir)/src/MiniFitController.cpp \
 	$(srcdir)/src/OnTheFlyModel.cpp \
@@ -454,6 +450,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_configurable.cpp \
 	$(srcdir)/test/test_cutstring.cpp \
 	$(srcdir)/test/test_datacardmodel.cpp \
+	$(srcdir)/test/test_envmodel.cpp \
 	$(srcdir)/test/test_fileentry.cpp \
 	$(srcdir)/test/test_filemodel.cpp \
 	$(srcdir)/test/test_fit.cpp \
@@ -617,6 +614,8 @@ src/DatacardModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/EnvelopeModel.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/Envelopes.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/FileController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/FileEntry.$(OBJEXT): src/$(am__dirstamp) \
@@ -660,8 +659,6 @@ src/LumiSelection.$(OBJEXT): src/$(am__dirstamp) \
 src/MainController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MainWindow.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
-src/MiniCutController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MiniFileController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -708,6 +705,8 @@ test/test_configurable.$(OBJEXT): test/$(am__dirstamp) \
 test/test_cutstring.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_datacardmodel.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+test/test_envmodel.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_fileentry.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
@@ -777,6 +776,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/DatacardController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/DatacardModel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/EnvelopeModel.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Envelopes.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileEntry.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/FileModel.Po@am__quote@ # am--include-marker
@@ -804,7 +804,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/LumiSelection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainWindow.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniCutController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniFileController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniFitController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Misc.Po@am__quote@ # am--include-marker
@@ -831,6 +830,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_configurable.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_cutstring.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_datacardmodel.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_envmodel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_fileentry.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_filemodel.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@test/$(DEPDIR)/test_fit.Po@am__quote@ # am--include-marker
@@ -1160,6 +1160,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/DatacardController.Po
 	-rm -f src/$(DEPDIR)/DatacardModel.Po
 	-rm -f src/$(DEPDIR)/EnvelopeModel.Po
+	-rm -f src/$(DEPDIR)/Envelopes.Po
 	-rm -f src/$(DEPDIR)/FileController.Po
 	-rm -f src/$(DEPDIR)/FileEntry.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po
@@ -1187,7 +1188,6 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/LumiSelection.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
-	-rm -f src/$(DEPDIR)/MiniCutController.Po
 	-rm -f src/$(DEPDIR)/MiniFileController.Po
 	-rm -f src/$(DEPDIR)/MiniFitController.Po
 	-rm -f src/$(DEPDIR)/Misc.Po
@@ -1214,6 +1214,7 @@ distclean: distclean-am
 	-rm -f test/$(DEPDIR)/test_configurable.Po
 	-rm -f test/$(DEPDIR)/test_cutstring.Po
 	-rm -f test/$(DEPDIR)/test_datacardmodel.Po
+	-rm -f test/$(DEPDIR)/test_envmodel.Po
 	-rm -f test/$(DEPDIR)/test_fileentry.Po
 	-rm -f test/$(DEPDIR)/test_filemodel.Po
 	-rm -f test/$(DEPDIR)/test_fit.Po
@@ -1295,6 +1296,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/DatacardController.Po
 	-rm -f src/$(DEPDIR)/DatacardModel.Po
 	-rm -f src/$(DEPDIR)/EnvelopeModel.Po
+	-rm -f src/$(DEPDIR)/Envelopes.Po
 	-rm -f src/$(DEPDIR)/FileController.Po
 	-rm -f src/$(DEPDIR)/FileEntry.Po
 	-rm -f src/$(DEPDIR)/FileModel.Po
@@ -1322,7 +1324,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/LumiSelection.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
-	-rm -f src/$(DEPDIR)/MiniCutController.Po
 	-rm -f src/$(DEPDIR)/MiniFileController.Po
 	-rm -f src/$(DEPDIR)/MiniFitController.Po
 	-rm -f src/$(DEPDIR)/Misc.Po
@@ -1349,6 +1350,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f test/$(DEPDIR)/test_configurable.Po
 	-rm -f test/$(DEPDIR)/test_cutstring.Po
 	-rm -f test/$(DEPDIR)/test_datacardmodel.Po
+	-rm -f test/$(DEPDIR)/test_envmodel.Po
 	-rm -f test/$(DEPDIR)/test_fileentry.Po
 	-rm -f test/$(DEPDIR)/test_filemodel.Po
 	-rm -f test/$(DEPDIR)/test_fit.Po

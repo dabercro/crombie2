@@ -8,6 +8,8 @@
 #include <list>
 #include <string>
 #include <vector>
+#include <map>
+#include <set>
 
 #include "TH1D.h"
 
@@ -39,7 +41,7 @@ namespace crombie2 {
 
 
     /// Adds another histogram's bin contents to this Hist
-    void add  (const Hist& other, double factor = 1.0);
+    void add (const Hist& other, double factor = 1.0);
 
 
     /// Scale this histogram by a direct scale factor
@@ -68,6 +70,9 @@ namespace crombie2 {
     */
     TH1D* roothist (std::list<TH1D>* storeptr = nullptr);
 
+    std::pair<Hist, Hist> get_minmax_env (const std::string& key) const;
+
+    Hist& merge_envs (const std::string& key);
 
     /// Sets the value of the total number of events, throws exception if total is already set
     void set_total (double newtotal);
@@ -103,6 +108,8 @@ namespace crombie2 {
     double get_bin (unsigned index) const;
     void set_bin (unsigned index, double value);
 
+    void add_env (const std::string& key, const Hist& env);
+
   private:
 
     std::string label {};
@@ -118,6 +125,11 @@ namespace crombie2 {
     std::list<TH1D> localstore;                  ///< Keep in mind, these TH1D have same scope as Hist
 
     double get_unc (unsigned bin) const;         ///< Find the full uncertainty from uncs hists and sumw2
+
+    /// Map envelopes to name
+    std::map<std::string, std::vector<Hist>> envs {};
+
+    std::set<std::string> merged {};
 
   };
 

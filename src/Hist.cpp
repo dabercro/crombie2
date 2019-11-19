@@ -48,6 +48,13 @@ void Hist::add(const Hist& other, double factor) {
         sumw2[ibin] += std::pow(factor, 2) * other.sumw2[ibin];
     }
 
+    for (auto& [key, histlist] : envs) {
+      auto& otherlist = other.envs.at(key);
+
+      for (unsigned i_env = 0; i_env < histlist.size(); i_env++)
+        histlist[i_env].add(otherlist[i_env], factor);
+    }
+
   }
 }
 
@@ -81,10 +88,12 @@ TH1D* Hist::roothist(std::list<TH1D>* storeptr) {
   auto title = std::string(";") + label + ";Events";
   histstore.emplace_back(std::to_string(plot++).data(), title.data(), static_cast<int>(nbins), min, max);
   auto& hist = histstore.back();
+
   for (unsigned ibin = 0; ibin < contents.size(); ++ibin) {
     hist.SetBinContent(ibin, contents[ibin]);
     hist.SetBinError(ibin, get_unc(ibin));
   }
+
   return &hist;
 
 }
@@ -218,8 +227,49 @@ double Hist::get_bin (unsigned index) const {
 
 }
 
+
 void Hist::set_bin (unsigned index, double value) {
 
   contents.at(index) = value;
+
+}
+
+
+void Hist::add_env (const std::string& key, const Hist& env) {
+
+  envs[key].emplace_back(env);
+
+}
+
+
+Hist& Hist::merge_envs (const std::string& key) {
+
+  if (not merged.insert(key).second)
+    throw std::logic_error(key + " envelope was merged twice on same hist.");
+
+  // Merge envelopes into sum of weights squared
+  auto minmax = get_minmax_env(key);
+  for (unsigned ibin = 0; ibin < contents.size(); ++ibin)
+    sumw2[ibin] += std::pow((minmax.second.contents[ibin] - minmax.first.contents[ibin])/2, 2);
+
+  return *this;
+
+}
+
+
+std::pair<Hist, Hist> Hist::get_minmax_env (const std::string& key) const {
+
+  auto output = std::make_pair(*this, *this);
+
+  for (auto& hist : envs.at(key)) {
+    for (unsigned ibin = 0; ibin < contents.size(); ++ibin) {
+
+      output.first.contents[ibin] = std::min(output.first.contents[ibin], hist.contents[ibin]);
+      output.second.contents[ibin] = std::max(output.first.contents[ibin], hist.contents[ibin]);
+
+    }
+  }
+
+  return output;
 
 }

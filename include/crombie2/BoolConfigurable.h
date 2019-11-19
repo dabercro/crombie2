@@ -14,6 +14,7 @@ namespace crombie2 {
   class BoolConfigurable : public GuiConfigurable {
   public:
     BoolConfigurable (const std::string& label);
+    BoolConfigurable (const BoolConfigurable& other);
 
     /// Get the label
     std::string label () const override;

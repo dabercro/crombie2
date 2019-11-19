@@ -33,6 +33,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/DatacardController.cpp \
 	$(srcdir)/src/DatacardModel.cpp \
 	$(srcdir)/src/EnvelopeModel.cpp \
+	$(srcdir)/src/Envelopes.cpp \
 	$(srcdir)/src/FileController.cpp \
 	$(srcdir)/src/FileEntry.cpp \
 	$(srcdir)/src/FileModel.cpp \
@@ -56,7 +57,6 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/LumiSelection.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
-	$(srcdir)/src/MiniCutController.cpp \
 	$(srcdir)/src/MiniFileController.cpp \
 	$(srcdir)/src/MiniFitController.cpp \
 	$(srcdir)/src/OnTheFlyModel.cpp \
@@ -84,6 +84,7 @@ crombie2catch_SOURCES = $(allsrcs) \
 	$(srcdir)/test/test_configurable.cpp \
 	$(srcdir)/test/test_cutstring.cpp \
 	$(srcdir)/test/test_datacardmodel.cpp \
+	$(srcdir)/test/test_envmodel.cpp \
 	$(srcdir)/test/test_fileentry.cpp \
 	$(srcdir)/test/test_filemodel.cpp \
 	$(srcdir)/test/test_fit.cpp \
