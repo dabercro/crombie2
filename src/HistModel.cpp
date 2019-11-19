@@ -28,7 +28,7 @@ HistModel::HistModel (Job& job,
   reweight {reweight},
   label {plot.label},
   analyzer_prototype {job, plot, var, cutstr, weightstr, globalmodel, reweight},
-  no_stats{globalmodel.no_stats}
+  no_stats{globalmodel.no_stats and job.get_group().type != FileGroup::FileType::DATA}
 
 {
 

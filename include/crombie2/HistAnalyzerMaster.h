@@ -57,6 +57,7 @@ namespace crombie2 {
     bool dofit;
     const FitModel& fitmodel;
     const CompareModel& comparemodel;
+    const EnvelopeModel& envmodel;
 
     /// Maps the input file name to type
     Types::map<FileGroup::FileType> types {};

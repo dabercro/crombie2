@@ -65,6 +65,12 @@ void Hist::scale(const double scale) {
     if (sumw2.size())
       sumw2[ibin] *= std::pow(scale, 2);
   }
+
+  for (auto& [key, histlist] : envs) {
+    for (auto& hist : histlist)
+      hist.scale(scale);
+  }
+
 }
 
 

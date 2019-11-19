@@ -35,15 +35,44 @@ TEST_CASE("Envelope Adding") {
   hist1.add_env("env", hist_up);
   hist1.add_env("env", hist_down);
 
-  auto minmax = hist1.get_minmax_env("env");
+  SECTION ("Envelope Results") {
 
-  REQUIRE(minmax.first.get_contents() == std::vector<double>{1, 1.5, 1.5, 1});
-  REQUIRE(minmax.second.get_contents() == std::vector<double>{3, 2.5, 2.5, 3});
+    auto minmax = hist1.get_minmax_env("env");
 
-  REQUIRE(hist1.get_errors() == sumw2);
+    REQUIRE(minmax.first.get_contents() == std::vector<double>{1, 1.5, 1.5, 1});
+    REQUIRE(minmax.second.get_contents() == std::vector<double>{3, 2.5, 2.5, 3});
 
-  hist1.merge_envs("env");
-  for (unsigned ibin = 0; ibin < 4; ++ibin)
-    REQUIRE(hist1.get_errors()[ibin] > sumw2[ibin]);
+    REQUIRE(hist1.get_errors() == sumw2);
+
+    hist1.merge_envs("env");
+    for (unsigned ibin = 0; ibin < 4; ++ibin)
+      REQUIRE(hist1.get_errors()[ibin] > sumw2[ibin]);
+
+    REQUIRE(hist1.get_errors()[0] == 2);
+    REQUIRE(hist1.get_errors()[3] == 2);
+
+  }
+
+  SECTION ("Envelope Errors") {
+
+    hist1.set_contents(contents, std::vector<double>(4));
+
+    hist1.merge_envs("env");
+
+    REQUIRE(hist1.get_errors()[0] == 1);
+    REQUIRE(hist1.get_errors()[3] == 1);
+
+  }
+
+  SECTION ("Scale") {
+
+    hist1.scale(2);
+
+    auto minmax = hist1.get_minmax_env("env");
+
+    REQUIRE(minmax.first.get_contents() == std::vector<double>{2, 3, 3, 2});
+    REQUIRE(minmax.second.get_contents() == std::vector<double>{6, 5, 5, 6});
+
+  }
 
 }

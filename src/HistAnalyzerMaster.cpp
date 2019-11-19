@@ -39,7 +39,8 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
   datacardmodel {datacardmodel},
   dofit {dofit},
   fitmodel {fitmodel},
-  comparemodel {comparemodel}
+  comparemodel {comparemodel},
+  envmodel {envelope}
 {
 
   // If no output directory, we are not going to make hist analyzers
@@ -277,6 +278,15 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   // Stores fit functions
   std::list<TF1> fitstore {};
 
+  for (auto& env : envmodel.list) {
+    // If process level, merge envelopes now.
+    // Otherwise, merge later
+    if (env.joiner) {
+      for (auto& [legend, hist] : mc)
+        hist.merge_envs(env.name);
+    }
+  }
+
   // Use this to store sums for ratios
   Hist data_hist {};
   Hist bkg_hist {};
@@ -298,6 +308,13 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     : 1.0;
 
   bkg_hist.scale(scale);
+
+  for (auto& env : envmodel.list) {
+    // If not process level, merge envelopes here
+    if (not env.joiner)
+      bkg_hist.merge_envs(env.name);
+  }
+
 
   const auto* max_hist = &bkg_hist;
 
