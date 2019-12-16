@@ -114,11 +114,13 @@ HistSplit HistModel::get_histsplit () const {
 
   static std::unordered_map<std::string, std::vector<Hist>> cached_hists {};
 
-  auto cached_hist = cached_hists.find(cache_file);
+  if (cache_file.size()) {
+    auto cached_hist = cached_hists.find(cache_file);
 
-  if (cached_hist != cached_hists.end()) {
-    output.add(cached_hist->second);
-    return output;
+    if (cached_hist != cached_hists.end()) {
+      output.add(cached_hist->second);
+      return output;
+    }
   }
 
   if (not cached) {
@@ -176,12 +178,14 @@ HistSplit HistModel::get_histsplit () const {
 
   }
 
-  std::vector<Hist> hists {};
+  if (cache_file.size()) {
+    std::vector<Hist> hists {};
 
-  for (auto& hist : output.get_hists())
-    hists.emplace_back(hist.second);
+    for (auto& hist : output.get_hists())
+      hists.emplace_back(hist.second);
 
-  cached_hists.insert({cache_file, std::move(hists)});
+    cached_hists.insert({cache_file, std::move(hists)});
+  }
 
   return output;
 

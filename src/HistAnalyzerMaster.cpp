@@ -128,9 +128,9 @@ void HistAnalyzerMaster::output () const {
   // Now make each output
   for (auto& key_output : histmodels) {
     // Merge them using legend entries
-    Types::map<Hist> datahists;
-    Types::map<Hist> mchists;
-    Types::map<Hist> signalhists;
+    Types::map<Hist> datahists {};
+    Types::map<Hist> mchists {};
+    Types::map<Hist> signalhists {};
 
     auto* compareuses = comparemodel.get(key_output.first);
 
