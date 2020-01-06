@@ -90,3 +90,11 @@ void ConfigPage::draw (Gtk::Widget& widget) {
   widget.show();
 
 }
+
+
+void ConfigPage::redraw () {
+
+  if (controller_ptr)
+    controller_ptr->redraw();
+
+}

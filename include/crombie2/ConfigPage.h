@@ -45,6 +45,9 @@ namespace crombie2 {
 
     void draw (Gtk::Widget& widget);
 
+    /// Redraws the Model through the controller, if it exists
+    void redraw ();
+
   private:
 
     std::string label;               ///< The label for the tab in the MainWindow

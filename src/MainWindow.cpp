@@ -68,6 +68,9 @@ bool MainWindow::on_key_press_event (GdkEventKey* event) {
         book.prev_page();
       else  // Assumes we have more than no pages
         book.set_current_page(book.get_n_pages() - 1);
+
+      current_page().redraw();
+
       return false;
 
     case GDK_KEY_Page_Down:
@@ -77,6 +80,9 @@ bool MainWindow::on_key_press_event (GdkEventKey* event) {
         book.next_page();
       else
         book.set_current_page(0);
+
+      current_page().redraw();
+
       return false;
 
     case GDK_KEY_q:
