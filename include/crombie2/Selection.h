@@ -29,6 +29,7 @@ namespace crombie2 {
     };
 
     std::string get_name () const;
+
   };
 
 }

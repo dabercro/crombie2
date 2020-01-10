@@ -93,3 +93,43 @@ TEST_CASE ("Empty") {
   REQUIRE (cutmodel.expand("unity") == "(1)");
 
 }
+
+
+TEST_CASE ("Labels") {
+
+  test_dir("labels");
+
+  crombie2::CutModel cutmodel {};
+  auto& cutstring = cutmodel.add_cutstring("jetpt");
+  cutstring.add_cut().set("'jetpt > 60'");
+  cutstring.label.set("p_T > 60 [GeV]");
+
+  auto& unity = cutmodel.add_cutstring("unity");
+  unity.add_cut().set("'1'");
+
+  std::string tag = "label_test";
+
+  cutmodel.selections.append("jetpt", "unity", "unity", "", "plotname");
+
+  cutmodel.save_tag(tag, true);
+
+  crombie2::CutModel cutmodel2 {};
+
+  cutmodel2.load_tag(tag);
+
+  REQUIRE(cutmodel.labels("jetpt").size() == 1);
+  REQUIRE(cutmodel.labels("jetpt").front() == "p_T > 60 [GeV]");
+  REQUIRE(cutmodel.labels("jetpt") == cutmodel2.labels("jetpt"));
+
+  unity.label.set("unity");
+  cutstring.add_cut().set("unity");
+
+  REQUIRE(cutmodel.labels("jetpt").size() == 2);
+  REQUIRE(cutmodel.labels("jetpt").back() == "unity");
+
+  crombie2::CutModel cutmodel3 {};
+  cutmodel3.load(cutmodel.save());
+
+  REQUIRE(cutmodel.labels("jetpt") == cutmodel3.labels("jetpt"));
+
+}

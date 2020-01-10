@@ -19,6 +19,9 @@ namespace crombie2 {
 
     /// The string that joins the list of Cut values.
     JoinerConfigurable joiner;
+
+    Configurable<std::string> label {"Plot Label", ""};
+
   };
 }
 

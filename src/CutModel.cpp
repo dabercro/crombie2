@@ -19,6 +19,10 @@ void CutModel::read (const Types::strings& config) {
 
   // This is used to select lines that describe a cut at the end
   std::regex selectionline{"^:\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s*([^\\s,]*)\\s*(,\\s*(\\S*))?\\s*$"};
+
+  // This is used to get a label for a cutstring
+  std::regex labelline{"^LABEL:\\s(.*)$"};
+
   // This is used to read all other (non-empty) lines
   std::regex expr{"^(\\S*)\\s*([^\\s\\']*)\\s+(\\S.*)$"};
 
@@ -29,6 +33,13 @@ void CutModel::read (const Types::strings& config) {
   for (auto& line : config) {
     if (std::regex_search(line, matches, selectionline))
       selections.append(matches[1], matches[2], matches[3], matches[4], matches[6]);
+
+    if (std::regex_search(line, matches, labelline)) {
+      if (not last_cutstring)
+        throw std::runtime_error {"Setting LABEL, but no cutstring yet!"};
+
+      last_cutstring->label.set(matches[1]);
+    }
 
     else if (std::regex_search(line, matches, expr)) {
       // Add a cutstring into the map and get a pointer to it
@@ -67,6 +78,9 @@ std::list<std::string> CutModel::serialize () const {
         line = "    ";
       }
     }
+
+    if (cutstring.label.get().size())
+      output.push_back(std::string("LABEL: ") + cutstring.label.get());
   }
 
   for (auto& selection : selections) {
@@ -238,5 +252,33 @@ RemoveWrapper<CutString>& CutModel::at (const std::string& label) {
       return cut;
 
   throw std::runtime_error {label + " does not exist in CutModel"};
+
+}
+
+
+std::vector<std::string> CutModel::labels (const std::string& label) const {
+
+  std::vector<std::string> output {};
+
+
+  // Need a recursive way to add
+  std::function<void(const std::string&)> add_to_output;
+
+  add_to_output = [this, &output, &add_to_output] (const std::string& nextlabel) {
+    auto& cutstring = at(nextlabel);
+    auto toadd = cutstring.label.get();
+    if (toadd.size())
+      output.emplace_back(toadd);
+
+    for (auto& cut : cutstring.get_cuts()) {
+      if (not cut.is_literal())
+        add_to_output(cut.get());
+    }
+
+  };
+
+  add_to_output(label);
+
+  return output;
 
 }

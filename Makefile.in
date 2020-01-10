@@ -130,7 +130,8 @@ am__objects_2 = $(am__objects_1) src/AllController.$(OBJEXT) \
 	src/JobSorter.$(OBJEXT) src/JSONAnalyzerMaster.$(OBJEXT) \
 	src/JSONAnalyzer.$(OBJEXT) src/JSONModel.$(OBJEXT) \
 	src/LumiSelection.$(OBJEXT) src/MainController.$(OBJEXT) \
-	src/MainWindow.$(OBJEXT) src/MiniFileController.$(OBJEXT) \
+	src/MainWindow.$(OBJEXT) src/MiniCutController.$(OBJEXT) \
+	src/MiniFileController.$(OBJEXT) \
 	src/MiniFitController.$(OBJEXT) src/OnTheFlyModel.$(OBJEXT) \
 	src/OnTheFlyReweighter.$(OBJEXT) src/Plot.$(OBJEXT) \
 	src/PlotModel.$(OBJEXT) src/PlotStyleModel.$(OBJEXT) \
@@ -197,7 +198,7 @@ am__depfiles_remade = src/$(DEPDIR)/AllController.Po \
 	src/$(DEPDIR)/Job.Po src/$(DEPDIR)/JobSorter.Po \
 	src/$(DEPDIR)/JoinerConfigurable.Po src/$(DEPDIR)/Lock.Po \
 	src/$(DEPDIR)/LumiSelection.Po src/$(DEPDIR)/MainController.Po \
-	src/$(DEPDIR)/MainWindow.Po \
+	src/$(DEPDIR)/MainWindow.Po src/$(DEPDIR)/MiniCutController.Po \
 	src/$(DEPDIR)/MiniFileController.Po \
 	src/$(DEPDIR)/MiniFitController.Po src/$(DEPDIR)/Misc.Po \
 	src/$(DEPDIR)/OnTheFlyModel.Po \
@@ -426,6 +427,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/LumiSelection.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
+	$(srcdir)/src/MiniCutController.cpp \
 	$(srcdir)/src/MiniFileController.cpp \
 	$(srcdir)/src/MiniFitController.cpp \
 	$(srcdir)/src/OnTheFlyModel.cpp \
@@ -660,6 +662,8 @@ src/MainController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MainWindow.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/MiniCutController.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/MiniFileController.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/MiniFitController.$(OBJEXT): src/$(am__dirstamp) \
@@ -804,6 +808,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/LumiSelection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MainWindow.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniCutController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniFileController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/MiniFitController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/Misc.Po@am__quote@ # am--include-marker
@@ -1188,6 +1193,7 @@ distclean: distclean-am
 	-rm -f src/$(DEPDIR)/LumiSelection.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
+	-rm -f src/$(DEPDIR)/MiniCutController.Po
 	-rm -f src/$(DEPDIR)/MiniFileController.Po
 	-rm -f src/$(DEPDIR)/MiniFitController.Po
 	-rm -f src/$(DEPDIR)/Misc.Po
@@ -1324,6 +1330,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/$(DEPDIR)/LumiSelection.Po
 	-rm -f src/$(DEPDIR)/MainController.Po
 	-rm -f src/$(DEPDIR)/MainWindow.Po
+	-rm -f src/$(DEPDIR)/MiniCutController.Po
 	-rm -f src/$(DEPDIR)/MiniFileController.Po
 	-rm -f src/$(DEPDIR)/MiniFitController.Po
 	-rm -f src/$(DEPDIR)/Misc.Po

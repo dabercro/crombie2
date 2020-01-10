@@ -42,6 +42,9 @@ namespace crombie2 {
     */
     std::vector<std::string> cutflow (const std::string& label) const;
 
+    /// Gets the labels for a plot
+    std::vector<std::string> labels (const std::string& label) const;
+
   private:
 
      RemoveWrapper<CutString>& at (const std::string& label);

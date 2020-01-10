@@ -57,6 +57,7 @@ allsrcs = $(cutsrcs) \
 	$(srcdir)/src/LumiSelection.cpp \
 	$(srcdir)/src/MainController.cpp \
 	$(srcdir)/src/MainWindow.cpp \
+	$(srcdir)/src/MiniCutController.cpp \
 	$(srcdir)/src/MiniFileController.cpp \
 	$(srcdir)/src/MiniFitController.cpp \
 	$(srcdir)/src/OnTheFlyModel.cpp \

@@ -3,7 +3,7 @@
 
 
 #include <crombie2/ConfigTable.h>
-#include <crombie2/CutString.h>
+#include <crombie2/RemoveWrapper.h>
 
 
 namespace crombie2 {
@@ -14,12 +14,7 @@ namespace crombie2 {
   class MiniCutController {
   public:
 
-    explicit MiniCutController (RemoveWrapper<C>& cutstring) :
-      cutstring {cutstring},
-      labeltable{&(cutstring.name), &(cutstring.joiner)}
-    {
-      init();
-    }
+    explicit MiniCutController (RemoveWrapper<C>& cutstring);
 
     void draw (Gtk::Box& page) {
 
