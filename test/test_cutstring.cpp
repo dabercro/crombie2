@@ -132,4 +132,12 @@ TEST_CASE ("Labels") {
 
   REQUIRE(cutmodel.labels("jetpt") == cutmodel3.labels("jetpt"));
 
+  auto& notunity = cutmodel2.add_cutstring("notunity");
+  notunity.add_cut().set("'0'");
+
+  notunity.label.set("not unity");
+  cutmodel2.get_cutstring("jetpt").add_cut().set("!notunity");
+
+  REQUIRE(cutmodel2.labels("jetpt").size() == 1);
+
 }

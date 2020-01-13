@@ -75,7 +75,8 @@ namespace crombie2 {
                    Types::map<Hist>& signal,
                    bool blinding,
                    bool comparing,
-                   std::vector<double> lines = {}) const;
+                   std::vector<double> lines = {},
+                   std::vector<std::string> labels = {}) const;
 
   };
 }

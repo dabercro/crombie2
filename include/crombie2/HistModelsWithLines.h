@@ -12,6 +12,7 @@ namespace crombie2 {
   class HistModelsWithLines : public Types::map<HistModel> {
   public:
     std::vector<double> lines {};
+    std::vector<std::string> labels {};
   };
 
 }

@@ -265,6 +265,9 @@ std::vector<std::string> CutModel::labels (const std::string& label) const {
   std::function<void(const std::string&)> add_to_output;
 
   add_to_output = [this, &output, &add_to_output] (const std::string& nextlabel) {
+    if (nextlabel.front() == '!')
+      return;
+
     auto& cutstring = at(nextlabel);
     auto toadd = cutstring.label.get();
     if (toadd.size())

@@ -81,6 +81,8 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
 
         if (not model.lines.size())
           model.lines = plot.vert_lines();
+        if (not model.labels.size())
+          model.labels = cutmodel.labels(selection.cut);
 
         // If the selection is in the "shape" uncertainies, add a histogram
         for (auto& hist : datacardmodel.hists) {
@@ -159,7 +161,7 @@ void HistAnalyzerMaster::output () const {
     Lock lock {};
     draw_plot(key_output.first, datahists, mchists, signalhists,
               Misc::split(key_output.first, "_").front() == plotstylemodel.blind.get(),
-              false, key_output.second.lines);
+              false, key_output.second.lines, key_output.second.labels);
 
   }
 
@@ -262,6 +264,20 @@ namespace {
     return leg;
   }
 
+  std::vector<TLatex> labels_maker (const std::vector<std::string>& labels, double legend_location) {
+    std::vector<TLatex> output {};
+
+    double left = legend_location < 0.5 ? 0.65 : 0.15;
+    double top = 0.875;
+
+    for (auto& label : labels) {
+      output.emplace_back(left, top, label.data());
+      top -= 0.075;
+    }
+
+    return output;
+  }
+
 }
 
 
@@ -271,7 +287,8 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
                                    Types::map<Hist>& signal,
                                    bool blinding,
                                    bool comparing,
-                                   std::vector<double> lines) const {
+                                   std::vector<double> lines,
+                                   std::vector<std::string> labels) const {
 
   // Stores TH1D for this function
   std::list<TH1D> histstore {};
@@ -559,6 +576,10 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
 
   latex.DrawLatex(0.2, toplocation, std::string(plotstylemodel.plottype).data());
 
+  auto labels_latex = labels_maker(labels, std::min(leg.GetX1(), leg.GetX2()));
+
+  for (auto& label_latex : labels_latex)
+    label_latex.Draw();
 
   // Save everything
   FileSystem::mkdirs(outputdir);
