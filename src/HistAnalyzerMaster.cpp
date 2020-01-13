@@ -267,12 +267,15 @@ namespace {
   std::vector<TLatex> labels_maker (const std::vector<std::string>& labels, double legend_location) {
     std::vector<TLatex> output {};
 
+    std::string wrapper = "#bf{";
+
     double left = legend_location < 0.5 ? 0.9 : 0.15;
     short align = legend_location < 0.5 ? 31 : 11;
     double top = 0.875;
 
     for (auto& label : labels) {
-      output.emplace_back(left, top, label.data());
+      std::string wrapped_label = wrapper + label + "}";
+      output.emplace_back(left, top, wrapped_label.data());
       output.back().SetTextAlign(align);
       top -= 0.075;
     }
