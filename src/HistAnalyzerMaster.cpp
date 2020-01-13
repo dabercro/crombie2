@@ -267,11 +267,13 @@ namespace {
   std::vector<TLatex> labels_maker (const std::vector<std::string>& labels, double legend_location) {
     std::vector<TLatex> output {};
 
-    double left = legend_location < 0.5 ? 0.65 : 0.15;
+    double left = legend_location < 0.5 ? 0.9 : 0.15;
+    short align = legend_location < 0.5 ? 31 : 11;
     double top = 0.875;
 
     for (auto& label : labels) {
       output.emplace_back(left, top, label.data());
+      output.back().SetTextAlign(align);
       top -= 0.075;
     }
 
@@ -351,7 +353,7 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
     }
   }
 
-  hs.SetMaximum(max);
+  hs.SetMaximum(max/std::max(1.0 - 0.1 * labels.size(), 0.5));
 
   // Need to add to stack in reverse order
   auto i_mc = mcvec.end();
