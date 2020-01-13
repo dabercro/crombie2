@@ -34,7 +34,7 @@ void CutModel::read (const Types::strings& config) {
     if (std::regex_search(line, matches, selectionline))
       selections.append(matches[1], matches[2], matches[3], matches[4], matches[6]);
 
-    if (std::regex_search(line, matches, labelline)) {
+    else if (std::regex_search(line, matches, labelline)) {
       if (not last_cutstring)
         throw std::runtime_error {"Setting LABEL, but no cutstring yet!"};
 
