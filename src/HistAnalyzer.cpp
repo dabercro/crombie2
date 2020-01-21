@@ -24,7 +24,7 @@ HistAnalyzer::HistAnalyzer (const Job& job, const Plot& plot,
 
   for (auto& entry : subs) {
     substrs.emplace_back(entry.cut);
-    hists.emplace_back(plot.label, plot.nbins, plot.min, plot.max);
+    hists.emplace_back(plot.title, plot.label, plot.nbins, plot.min, plot.max);
   }
 
 }

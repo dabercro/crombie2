@@ -10,6 +10,18 @@
 using namespace crombie2;
 
 
+Hist::Hist(const std::string& title,
+           const std::string& label,
+           unsigned nbins, double min, double max,
+           double total_events) :
+  Hist{label, nbins, min, max, total_events}
+{
+
+  hist_title = title;
+
+}
+
+
 Hist::Hist(const std::string& label,
            unsigned nbins, double min, double max,
            double total_events) :
@@ -91,7 +103,7 @@ TH1D* Hist::roothist(std::list<TH1D>* storeptr) {
   auto& histstore {storeptr ? *storeptr : localstore};
 
   static unsigned plot = 0;
-  auto title = std::string(";") + label + ";Events";
+  auto title = hist_title + ";" + label + ";Events";
   histstore.emplace_back(std::to_string(plot++).data(), title.data(), static_cast<int>(nbins), min, max);
   auto& hist = histstore.back();
 

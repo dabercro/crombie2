@@ -35,6 +35,10 @@ namespace crombie2 {
          unsigned nbins = 0, double min = 0, double max = 0,
          double total_events = 0);
 
+    Hist(const std::string& title,
+         const std::string& label = "",
+         unsigned nbins = 0, double min = 0, double max = 0,
+         double total_events = 0);
 
     /// Fills this histogram with some value and weight
     void fill (double val, double weight = 1.0);
@@ -112,6 +116,7 @@ namespace crombie2 {
 
   private:
 
+    std::string hist_title {};
     std::string label {};
     unsigned nbins {};
     double min {};

@@ -5,6 +5,20 @@
 using namespace crombie2;
 
 
+Plot::Plot () :
+  ConfigTable {
+    &name,
+    &nbins,
+    &min,
+    &max,
+    &label,
+    &data_var,
+    &mc_var,
+    &lines,
+    &title
+  } {}
+
+
 Plot::Plot (const Plot& other) :
   Plot()
 {

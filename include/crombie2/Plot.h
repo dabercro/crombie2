@@ -8,9 +8,7 @@
 namespace crombie2 {
   class Plot : public ConfigTable {
   public:
-    Plot () : ConfigTable {
-      &name, &nbins, &min, &max, &label, &data_var, &mc_var, &lines
-    } {}
+    Plot ();
     Plot (const Plot& other);
     virtual ~Plot () = default;
 
@@ -22,6 +20,7 @@ namespace crombie2 {
     Configurable<std::string> data_var {"Data Variable", ""};
     Configurable<std::string> mc_var {"MC Variable", ""};
     Configurable<std::string> lines {"Verticle Lines", ""};
+    Configurable<std::string> title {"Plot Title", ""};
 
     std::string expr (FileGroup::FileType type) const;
 

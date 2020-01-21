@@ -34,4 +34,28 @@ TEST_CASE("Test Plot Lines") {
   REQUIRE(plot2.name.get() == "test");
   REQUIRE(plot2.vert_lines() == expected);
 
+  REQUIRE(plot2.title.get() == "");
+
+}
+
+TEST_CASE("Test Plot Title") {
+
+  test_dir("testplottitle");
+
+  crombie2::PlotModel model {};
+
+  auto& plot = model.add();
+
+  plot.name.set("test");
+  plot.title.set("Test Plot");
+
+  crombie2::PlotModel model2 {};
+
+  model2.load(model.save());
+
+  const auto& plot2 = model2.list.front();
+
+  REQUIRE(plot2.name.get() == "test");
+  REQUIRE(plot2.title.get() == "Test Plot");
+
 }
