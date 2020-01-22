@@ -383,6 +383,8 @@ void HistAnalyzerMaster::draw_plot(const std::string& output,
   // Draw everything
   TCanvas canv{"canv", "canv", 600, 700};
   canv.cd();
+  canv.SetTitle(bkg_hist.get_title().data());
+
   // Top pad
   const double bottom = mcvec.size() ? 0.3 : 0.0;
 

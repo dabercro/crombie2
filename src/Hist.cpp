@@ -103,7 +103,7 @@ TH1D* Hist::roothist(std::list<TH1D>* storeptr) {
   auto& histstore {storeptr ? *storeptr : localstore};
 
   static unsigned plot = 0;
-  auto title = hist_title + ";" + label + ";Events";
+  auto title = std::string(";") + label + ";Events";
   histstore.emplace_back(std::to_string(plot++).data(), title.data(), static_cast<int>(nbins), min, max);
   auto& hist = histstore.back();
 
@@ -290,4 +290,9 @@ std::pair<Hist, Hist> Hist::get_minmax_env (const std::string& key) const {
 
   return output;
 
+}
+
+
+const std::string& Hist::get_title () const {
+  return hist_title;
 }

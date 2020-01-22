@@ -114,6 +114,8 @@ namespace crombie2 {
 
     void add_env (const std::string& key, const Hist& env);
 
+    const std::string& get_title () const;
+
   private:
 
     std::string hist_title {};
