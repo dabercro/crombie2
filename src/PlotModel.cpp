@@ -1,5 +1,6 @@
 #include <regex>
 
+#include <crombie2/Misc.h>
 #include <crombie2/PlotModel.h>
 
 
@@ -65,6 +66,28 @@ std::list<std::string> PlotModel::serialize () const {
 }
 
 
+bool PlotModel::is_valid (bool print) const {
+
+  for (auto& plot : list) {
+
+    if (not unsigned(plot.nbins) or (double(plot.min) >= double(plot.max))) {
+      if (print)
+        Misc::message("PlotModel not valid!",
+                      std::string("Suspicious plot:\n") +
+                      "Name: " + plot.name.get() +
+                      "NBin: " + plot.nbins.get() +
+                      "XMin: " + plot.min.get() +
+                      "XMax: " + plot.max.get());
+      return false;
+    }
+
+  }
+
+  return true;
+
+}
+
+
 bool PlotModel::is_valid (Tree& tree) const {
 
   for (auto& plot : list) {
@@ -74,6 +97,13 @@ bool PlotModel::is_valid (Tree& tree) const {
       return false;
   }
 
-  return true;
+  return is_valid(true);
+
+}
+
+
+bool PlotModel::is_valid () const {
+
+  return is_valid(false);
 
 }

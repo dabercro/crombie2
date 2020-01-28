@@ -59,3 +59,34 @@ TEST_CASE("Test Plot Title") {
   REQUIRE(plot2.title.get() == "Test Plot");
 
 }
+
+
+TEST_CASE("Test Blank is_valid") {
+
+  test_dir("testplotvalid");
+
+  crombie2::PlotModel model {};
+
+  auto& plot = model.add();
+
+  plot.nbins = 0;
+  plot.min = 1.0;
+  plot.max = 0.0;
+
+  REQUIRE(not model.is_valid());
+
+  plot.nbins = 4;
+
+  REQUIRE(not model.is_valid());
+
+  plot.nbins = 0;
+  plot.min = 0.0;
+  plot.max = 1.0;
+
+  REQUIRE(not model.is_valid());
+
+  plot.nbins = 4;
+
+  REQUIRE(model.is_valid());
+
+}

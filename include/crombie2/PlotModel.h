@@ -16,6 +16,9 @@ namespace crombie2 {
   public:
     std::string get_name () const override;
 
+    bool is_valid () const override;
+
+    bool is_valid (bool print) const;
     bool is_valid (Tree& tree) const;
 
   private:
