@@ -14,7 +14,8 @@ GlobalModel::GlobalModel () :
     &luminosity,
     &normhist,
     &printdatacardview,
-    &no_stats
+    &no_stats,
+    &skip_branch_check
   } {}
 
 

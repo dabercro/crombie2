@@ -46,6 +46,8 @@ namespace crombie2 {
     std::vector<OnTheFlyReweighter> reweighters {};
 
     const std::string total_str;
+
+    double get_total (Tree& tree) const;
   };
 }
 

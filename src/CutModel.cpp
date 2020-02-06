@@ -177,13 +177,13 @@ bool CutModel::is_valid () const {
 
 }
 
-bool CutModel::is_valid (Tree& tree) const {
+bool CutModel::is_valid (Tree& tree, bool skip_branch_check) const {
 
   try {
     for (auto& selection : selections) {
       if (not tree.is_valid(expand(selection.cut)) or
-          not tree.is_valid(expand(selection.data_weight)) or
-          not tree.is_valid(expand(selection.mc_weight)))
+          not (skip_branch_check or tree.is_valid(expand(selection.data_weight))) or
+          not (skip_branch_check or tree.is_valid(expand(selection.mc_weight))))
         return false;
     }
   }

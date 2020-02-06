@@ -34,7 +34,7 @@ namespace crombie2 {
     RemoveList<Selection> selections {};
 
     bool is_valid () const override;
-    bool is_valid (Tree& tree) const;
+    bool is_valid (Tree& tree, bool skip_branch_check = false) const;
 
     /**
        @param label Is the cut to get the cutflow cuts for

@@ -209,7 +209,7 @@ bool FileModel::is_valid (const GlobalModel& globalmodel) const {
   }
 
   // size() == 0 if we're not using both MC and Data
-  if (data_branches.size() and mc_branches.size() and data_branches != mc_branches) {
+  if (data_branches.size() and mc_branches.size() and data_branches != mc_branches and not globalmodel.skip_branch_check) {
     Misc::message("Data and MC branches do not match!");
     return false;
   }

@@ -1,4 +1,5 @@
 #include <crombie2/HistAnalyzer.h>
+#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
@@ -30,9 +31,10 @@ HistAnalyzer::HistAnalyzer (const Job& job, const Plot& plot,
 }
 
 
+
 void HistAnalyzer::make_requests (Tree& tree) {
 
-  auto total = tree.get<TH1>(total_str)->GetBinContent(1);
+  auto total = get_total(tree);
 
   for (auto& hist : hists)
     hist.set_total(total);
@@ -80,5 +82,32 @@ void HistAnalyzer::notify () {
 const std::vector<Hist>& HistAnalyzer::get_result () const {
 
   return hists;
+
+}
+
+
+double HistAnalyzer::get_total(Tree& tree) const {
+
+  auto tokens = Misc::tokenize(total_str);
+
+  if (tokens.front() == "BRANCH" and tokens.size() == 3) {
+
+    // If data, we won't find what we're looking for, and we don't care
+    if (type == FileGroup::FileType::DATA)
+      return 0;
+
+    auto* total_tree = tree.get<TTree>(tokens[1]);
+
+    Float16_t output = 0; // Xbb setup, apparently
+
+    total_tree->SetBranchAddress(tokens[2].data(), &output);
+
+    total_tree->GetEntry(0);
+
+    return output;
+  }
+
+  // Otherwise, we're looking at a histogram
+  return tree.get<TH1>(total_str)->GetBinContent(1);
 
 }

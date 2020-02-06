@@ -44,6 +44,9 @@ namespace crombie2 {
 
     BoolConfigurable no_stats {"Don't plot stats"};
 
+    BoolConfigurable skip_branch_check {"Don't check that Data and MC branches match"};
+
+
   };
 
 }

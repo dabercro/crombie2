@@ -120,7 +120,7 @@ void MainController::on_submit_job () {
   if (globalmodel.is_valid() and
       ontheflymodel.is_valid() and
       plotmodel.is_valid(checkfile) and
-      cutmodel.is_valid(checkfile) and
+      cutmodel.is_valid(checkfile, globalmodel.skip_branch_check) and
       (not dodatacard.get_active() or datacardmodel.is_valid(cutmodel, plotmodel)) and
       checkdir(outdir) and
       checkdir(datadir) and
