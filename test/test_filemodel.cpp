@@ -40,3 +40,33 @@ TEST_CASE("Test File Model legend to datacard") {
   REQUIRE(model.get_datacard_names(crombie2::FileGroup::FileType::SIGNAL) == std::vector<std::string>{});
 
 }
+
+
+TEST_CASE("Using Scientific Notation") {
+
+  test_dir("filescience");
+
+  crombie2::FileModel model {};
+
+  auto& group = model.add_files(crombie2::FileGroup::FileType::MC);
+
+  auto& entry = group.entries.append();
+
+  entry.datacard.set("mc");
+  entry.legend.set("MC");
+
+  // We really want the cross sections
+
+  auto& file = group.files.append();
+
+  file.name.set("filename");
+  file.xs.set("1.23e+07");
+
+  REQUIRE(model.filegroups.front().files.front().xs == 1.23e+07);
+
+  crombie2::FileModel model2 {};
+  model2.load(model.save());
+
+  REQUIRE(model2.filegroups.front().files.front().xs == 1.23e+07);
+
+}

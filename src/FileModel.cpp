@@ -44,7 +44,7 @@ void FileModel::read (const Types::strings& config) {
   RemoveList<FileEntry>* current_files {nullptr};
 
   std::regex legend_expr {"\\s*([^;]+);\\s*([^;]+);\\s*([^;]+);\\s*(\\d+)"};
-  std::regex file_expr {"\\s*(\\S+)\\s+\\{([\\d\\.]+)\\}"};
+  std::regex file_expr {"\\s*(\\S+)\\s+\\{([\\d\\.e\\+]+)\\}"};
   std::smatch matches;
 
   for (auto& line : config) {
