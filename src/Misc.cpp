@@ -77,7 +77,9 @@ bool Misc::confirm (const std::string& message) {
 
 std::string Misc::nminus1 (const std::string& var, const std::string& cut) {
 
-  std::regex expr{std::string("\\b") + var + "\\b\\s*[=<>]*\\s*-?[\\d\\.]+"};
+  std::regex special {R"([-[\]{}()*+?.,\^$|#\s])"};
+
+  std::regex expr{std::string("\\b") + std::regex_replace(var, special, R"(\$&)") + "\\s*[=<>]+\\s*-?[\\d\\.]+"};
   return std::regex_replace(cut, expr, "(1)");
 
 }

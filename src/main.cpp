@@ -5,14 +5,22 @@
 #include "TROOT.h"
 #include "TStyle.h"
 #include "TError.h"
-
+#include "TVector2.h"
 
 int main (int argc, char *argv[])
 {
-  if (argc > 1)
-    crombie2::ConfigModel::set_config_dir(argv[1]);
 
-  ROOT::EnableThreadSafety();
+  bool safe = true;
+
+  if (argc > 1) {
+    if (argv[1][0] == 'f') // for 'fast'
+      safe = false;
+    else
+      crombie2::ConfigModel::set_config_dir(argv[1]);
+  }
+
+  if (safe)
+    ROOT::EnableThreadSafety();
 
   // Some style stuff
   gStyle->SetOptStat(0);
