@@ -4,8 +4,9 @@
 using namespace crombie2;
 
 
-BoolConfigurable::BoolConfigurable (const std::string& label) :
-  name {label}
+BoolConfigurable::BoolConfigurable (const std::string& label, bool start) :
+  name {label},
+  value {start}
 {
 
   checkbox.signal_toggled().connect(sigc::mem_fun(*this, &BoolConfigurable::on_update));

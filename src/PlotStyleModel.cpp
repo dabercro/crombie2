@@ -19,7 +19,8 @@ PlotStyleModel::PlotStyleModel () :
     &minimum,
     &saveroot,
     &usegloballumi,
-    &logy
+    &logy,
+    &donminus1
   } {}
 
 

@@ -69,7 +69,10 @@ HistAnalyzerMaster::HistAnalyzerMaster (bool dohists,
       for (auto& selection : cutmodel.selections) {
         auto output_file = selection.get_name() + "_" + plot.name.get();
 
-        auto cutstr = Misc::nminus1(plot.expr(job.get_group().type), cutmodel.expand(selection.cut));
+        auto cutstr = plotstylemodel.donminus1
+          ? Misc::nminus1(plot.expr(job.get_group().type), cutmodel.expand(selection.cut))
+          : cutmodel.expand(selection.cut);
+
         auto weightstr = cutmodel.expand(job.get_group().type == FileGroup::FileType::DATA
                                          ? selection.data_weight
                                          : selection.mc_weight);

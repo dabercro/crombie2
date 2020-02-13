@@ -61,6 +61,8 @@ namespace crombie2 {
     /// If checked, use log scale for top pad
     BoolConfigurable logy {"Use Log Scale on Y-axis"};
 
+    BoolConfigurable donminus1 {"Do N-1 Plots", true};
+
   };
 
 }

@@ -13,7 +13,7 @@ namespace crombie2 {
   */
   class BoolConfigurable : public GuiConfigurable {
   public:
-    BoolConfigurable (const std::string& label);
+    BoolConfigurable (const std::string& label, bool start = false);
     BoolConfigurable (const BoolConfigurable& other);
 
     /// Get the label
@@ -39,7 +39,7 @@ namespace crombie2 {
 
     Gtk::CheckButton checkbox {};
 
-    bool value {false};
+    bool value;
 
     void on_update ();
 
