@@ -44,6 +44,16 @@ TEST_CASE ("Cutstring Expansions") {
 
   }
 
+  SECTION ("Infinite Recursion ") {
+    test.add_cut().set("test");
+    cutmodel.add_cutstring("unity").add_cut().set("'1'");
+
+    cutmodel.selections.append("test", "unity", "unity");
+
+    REQUIRE (cutmodel.is_valid() == false);
+
+  }
+
 }
 
 

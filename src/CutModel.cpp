@@ -120,6 +120,9 @@ std::string CutModel::expand (const std::string& cutlabel) const {
 
   for (auto& cut : cutstring->get_cuts()) {
 
+    if (cut.get() == label)
+      throw std::runtime_error {label + " is requiring itself."};
+
     // Skip over empty cuts
     if (cut.cut() == "1")
       continue;
