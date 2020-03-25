@@ -9,17 +9,18 @@
 namespace crombie2 {
   class CutflowAnalyzer : public Analyzer {
   public:
-    CutflowAnalyzer (const Types::strings& cutflow);
+    CutflowAnalyzer (const Types::strings& cutflow, const std::string& weight = "1");
 
     void make_requests (Tree& tree) override;
 
     void notify () override;
 
-    const std::vector<long>& get_result () const;
+    const std::vector<double>& get_result () const;
 
   private:
     Types::strings cuts;
-    std::vector<long> result;
+    const std::string weight;
+    std::vector<double> result;
     std::vector<CutflowRefs> refs {};
 
   };

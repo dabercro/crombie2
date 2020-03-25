@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include <crombie2/CutflowAnalyzerMaster.h>
+#include <crombie2/Misc.h>
 
 
 using namespace crombie2;
@@ -16,9 +17,14 @@ CutflowAnalyzerMaster::CutflowAnalyzerMaster (bool docutflow, std::vector<Job>& 
     for (auto& selection : model.selections) {
       auto& label = selection.cut;
       auto cutflow = model.cutflow(label);
+      auto datacut = model.expand(selection.data_weight);
+      auto mccut = model.expand(selection.mc_weight);
+
       for (auto& job : jobs) {
         if (job.get_group().type == FileGroup::FileType::DATA)
-          job.add_analyzer(&analyzers[label].emplace_back(cutflow));
+          job.add_analyzer(&analyzers[label.get() + " -- Data"].emplace_back(cutflow, datacut));
+        else
+          job.add_analyzer(&analyzers[label.get() + " -- " + job.get_entry().name.get()].emplace_back(cutflow, mccut));
       }
     }
   }
@@ -34,7 +40,7 @@ void CutflowAnalyzerMaster::output () {
               << label << std::endl
               << "-------------------" << std::endl;
 
-    auto cutflow = model.cutflow(label);
+    auto cutflow = model.cutflow(Misc::split(label, " -- ").front());
     std::vector<long> output (cutflow.size());
 
     for (auto& analyzer : selection.second) {

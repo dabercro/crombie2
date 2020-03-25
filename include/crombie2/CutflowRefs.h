@@ -9,9 +9,11 @@ namespace crombie2 {
   */
   class CutflowRefs {
   public:
-    CutflowRefs (double& cut) :
-      cut {cut} {}
+    CutflowRefs (double& cut, double& weight) :
+      cut {cut},
+      weight {weight} {}
     double& cut;
+    double& weight;
   };
 }
 
