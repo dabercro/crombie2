@@ -1,5 +1,10 @@
 #! /usr/bin/env perl
 
+# This script checks if there are headers included in a file
+# that are included already through another header.
+# This is to keep compilation times down and
+# to keep dependency graphs made by Doxygen clean
+
 use strict;
 use warnings;
 

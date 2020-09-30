@@ -26,6 +26,15 @@ namespace crombie2 {
     Configurable (const std::string& label, const C& value, const std::string& tooltip = "") :
       TextConfigurable {tooltip}, name {label}, value {value} {}
 
+    Configurable (const Configurable<C>& other) :
+      TextConfigurable {other}, name {other.name}, value {other.value} {}
+
+    Configurable& operator= (const Configurable<C>& other) {
+      name = other.name;
+      value = other.value;
+      return *this;
+    }
+
     /// Get the label to write on the table
     std::string label () const override {
       return name;
